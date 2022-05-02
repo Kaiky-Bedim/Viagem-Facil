@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro1</title>
+
+    <link rel="stylesheet" type="text/css" href="css/stylecadastro.css"/>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"/>
+   
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand">     
+                <img src="img/logo.jpg" width="140" height="80">
+                <font size="5"><b>Viagem Rápida</b> </font>             
+            </a>  
+        </div>         
+    </nav>
+    
+    <div class="modal modal-signin position-static d-block py-5" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content rounded-5 shadow">
+            <div class="modal-header p-5 pb-4 border-bottom-0 cor-form">
+              <!-- <h5 class="modal-title">Modal title</h5> -->
+              <h2 class="fw-bold mb-0 container">Cadastro</h2>
+            </div>
+      
+            <div class="modal-body p-5 pt-0 cor-form">
+              <form class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control rounded-4" id="txtnome" placeholder="Nome">
+                            <label for="txtnome">Nome</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control rounded-4" id="txtEmail" placeholder="Email">
+                            <label for="txtEmail">Email</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control rounded-4" id="txtCPF" placeholder="CPF">
+                            <label for="txtCPF">CPF</label>
+                        </div>                      
+                    </div>
+                    <div class="col-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control rounded-4" id="txtRG" placeholder="RG">
+                            <label for="txtRG">RG</label>
+                        </div>                       
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control rounded-4" id="txtUsuario" placeholder="Nome do Usuário">
+                            <label for="txtUsuario">Nome do Usuário</label>
+                        </div>
+                    </div>
+                </div>
+                
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control rounded-4" id="txtsenha" placeholder="Senha">
+                            <label for="txtsenha">Senha</label>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control rounded-4" id="txtconfirmar" placeholder="Confirmar">
+                            <label for="txtconfirmar">Confirmar</label>
+                        </div>
+                    </div>                
+                </div>
+
+                <div class="row">
+                    <!-- Caixa de Lista em Estado -->
+                    <div class="col-2">
+                        <div class="form-floating mb-3">
+                            <select class="form-control rounded-4" id="txtEstado" placeholder="Estado">
+                                <option selected>Escolher</option>
+                                <option>AC</option>
+                                <option>AL</option>
+                                <option>AP</option>
+                                <option>AM</option>
+                                <option>BA</option>
+                                <option>CE</option>
+                                <option>DF</option>
+                                <option>ES</option>
+                                <option>GO</option>
+                                <option>MA</option>
+                                <option>MT</option>
+                                <option>MS</option>
+                                <option>MG</option>
+                                <option>PA</option>
+                                <option>PB</option>
+                                <option>PR</option>
+                                <option>PE</option>
+                                <option>PI</option>
+                                <option>RJ</option>
+                                <option>RN</option>
+                                <option>RS</option>
+                                <option>RO</option>
+                                <option>RR</option>
+                                <option>SC</option>
+                                <option>SP</option>
+                                <option>SE</option>
+                                <option>TO</option>
+                            </select>
+                            <label for="txtEstado">Estado</label>
+                        </div>
+                    </div>   
+
+                    <div class="col-4">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control rounded-4" id="txtCidade" placeholder="Cidade">
+                            <label for="txtCidade">Cidade</label>
+                        </div>
+                    </div>
+                    
+                    <div class="col-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control rounded-4" id="txtRua" placeholder="Rua">
+                            <label for="txtRua">Rua</label>
+                        </div>
+                    </div>
+                    
+                                
+                </div>
+
+                
+
+                <div class="row">
+                    <div class="col-2">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control rounded-4" id="txtNumero" placeholder="Número">
+                            <label for="txtNumero">Número</label>
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control rounded-4" id="txtCEP" placeholder="CEP">
+                            <label for="txtCEP">CEP</label>
+                        </div>
+                    </div>
+
+                    <div class="col-7">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control rounded-4" id="txtComplemeto" placeholder="Complemento">
+                            <label for="txtComplemeto">Complemento</label>
+                        </div>
+                    </div>                        
+                </div>
+                
+
+          
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control rounded-4" id="txtTelefone1" placeholder="Telefone 1">
+                            <label for="txtTelefone1">Telefone 1</label>
+                        </div>
+                    </div>
+                    
+                    <div class="col-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control rounded-4" id="txtTelefone2" placeholder="Telefone 2">
+                            <label for="txtTelefone2">Telefone 2</label>
+                        </div>
+                    </div>
+                </div>
+                
+           
+             
+                   
+                <button class="btn btn-dark btn-lg"  style="float: left" type="submit">Voltar</button>
+                 
+                <button class="btn btn-primary btn-lg" style="float: right" type="submit">Cadastrar</button>
+
+                
+              </form>
+            </div>
+          </div>
+        </div>
+    </div>
+
+
+   <div class="container-fluid text-center margin parceiros">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-4">
+                  Renato
+              </div>
+              <div class="col-lg-4">
+                  Kaiky
+              </div>
+              <div class="col-lg-4">
+                  Dias
+              </div>
+          </div>
+      </div>
+   </div>
+    
+
+
+    
+
+
+</body>
+</html>
