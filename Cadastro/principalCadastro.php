@@ -23,7 +23,7 @@ $cadastro = new Cadastro($nome, $email, $cpf, $rg, $senha, $confirmSenha, $estad
                             $cidade, $rua, $numero, $cep, $complemento, $telefone1, $telefone2);
 $res = $cadastro->Cadastrar($con);
 
-if($res == 1){
+if($res == true){
     echo "Cadastro realizado com sucesso";
 }else{
     echo "Não foi possível realizar o cadastro";

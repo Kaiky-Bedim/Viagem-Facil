@@ -17,7 +17,7 @@ class Cadastro {
     public string $telefone2;
     public Conexao $conexao;
 
-    function Cadastro($nome, $email, $cpf,
+    public function Cadastro($nome, $email, $cpf,
                       $rg, $senha, $confirmSenha,
                       $estado, $cidade, $rua, $numero,
                       $cep, $complemento, $telefone1, $telefone2){
@@ -49,16 +49,21 @@ class Cadastro {
         }
     }
 
-    function Cadastrar(Conexao $con){
+    public function Cadastrar(Conexao $con){
         $this->conexao = $con;
 
         $sql = "insert into DadosCadastrais values('".$this->cpf."', '".$this->rg."', '".$this->nome."', '".$this->telefone1."', ".$this->telefone2.", '".$this->email."', 
         '".$this->estado."', '".$this->cidade."', '".$this->rua."', ".$this->complemento.", ".$this->numero.", '".$this->cep."');";
+        $resCadastro = mysqli_query($this->conexao->getConexao(), $sql);
 
-        $res = mysqli_query($con->getConexao(), $sql);
-        
+        $sql = "insert into Senhas values('".$this->cpf."', '".$this->senha."');";
+        $resSenha = mysqli_query($this->conexao->getConexao(), $sql);
+
         $this->conexao->FecharConexao();
-        return $res;
+        if($resCadastro != 1 || $resSenha != 1){
+            return false;
+        }
+        return true;
     }
 }
 
