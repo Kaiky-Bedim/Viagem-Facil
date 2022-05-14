@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamento</title>
+
+    <link rel="stylesheet" type="text/css" href="stylePagamento.css"/>
+    <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css"/>
+   
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+
+        <a href="#" class="navbar-brand mb-0 h1">
+            <img class="d-inline-block " src="../img/Logo_Final.jpeg" width="100" height="60"/>    
+        </a> 
+  
+        <button type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" class="navbar-toggler" aria-controls = "navbarNav" aria-expanded = "false" aria-label = "Toggle navigation">
+          <span class = "navbar-toggler-icon"></span>
+        </button>
+  
+          <div class = "collapse navbar-collapse"id="navbarNav">
+              <ul class = "navbar-nav ">
+                  <li class = "nav-item active">
+                      <a href = "tela_home.html" class = "nav-link active">
+                          <b>Tela Principal</b>
+                      </a>
+                  </li>
+                  <li class = "nav-item active">
+                      <a href = "#" class = "nav-link">
+                          <b>Passe</b>
+                      </a>
+                  </li>
+                  <li class = "nav-item active">
+                      <a href = "#" class = "nav-link">
+                          <b>Qr Code</b>
+                      </a>
+                  </li>
+              </ul>
+          </div>
+          <div class="collapse navbar-collapse d-lg-flex justify-content-end" id="navbarNav">
+              <ul class = "navbar-nav ">
+                  <li class = "nav-item dropdown">
+                      <a href = "#" class = "nav-link active dropdown-toggle" 
+                      id = "navbarDropdown" 
+                      role = "button" 
+                      data-bs-toggle = "dropdown"
+                      aria-expanded = "false"
+                      >
+                          
+                          <b>Opcões</b>
+                      </a>
+                      <ul class="dropdown-menu"
+                      aria-labelledby = "navbarDropdown">
+                          <li><a href = "#"
+                          class = "dropdown-item"> Opção 1</a></li>
+                          <li><a href = "#"
+                          class = "dropdown-item"> Opção 2</a></li>
+                          <li><a href = "#"
+                          class = "dropdown-item"> Opção 3</a></li>
+                      </ul>
+                  </li>
+              </ul>
+          </div>
+      </nav>
+
+    <div class="modal-dialog margin-meio" role="document">
+      <div class="modal-content rounded-5 shadow">
+          <div class="modal-header p-5 pb-4 border-bottom-0 cor-form">
+              <h2 class="fw-bold mb-0">Pagamento</h2>
+          </div>
+    
+        <div class="modal-body p-5 pt-0 cor-form">
+            <form class="cor-form">
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-floating mb-3">
+                            <select class="form-control rounded-4" id="txtPasse" placeholder="Passes Salvos">
+                                <option selected>...</option>
+                                <option>Passe 1</option>
+                                <option>Passe 2</option>
+                            </select>
+                            <label for="txtPasse">Passes Salvos</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-floating mb-3">
+                            <select class="form-control rounded-4" id="txtNomeCartao" placeholder="Nome do Cartão">
+                                <option selected>...</option>
+                                <option>MasterCard</option>
+                                <option>Visa</option>
+                                <option>Nubank</option>
+                            </select>
+                            <label for="txtNomeCartao">Nome do Cartão</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control rounded-4" id="txtNumCartao" placeholder="Número do Cartão">
+                            <label for="txtNumCartao">Número do Cartão</label>
+                        </div>
+                    </div>              
+                </div>
+                
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-floating mb-3">
+                            <input type="date" class="form-control rounded-4" id="txtDataExp" placeholder="Data de Expiração">
+                            <label for="txtDataExp">Data de Expiração</label>
+                        </div>
+                    </div>       
+                    <div class="col-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control rounded-4" id="txtCodigoSeg" maxlength="3" placeholder="Cód. CVV">
+                            <label for="txtCodigoSeg">Cód. CVV</label>
+                        </div>
+                    </div>             
+                </div>
+               
+                <!-- Fazer voltar e efetuar pagamento -->
+                <button class="btn btn-dark btn-lg"  style="float: left" type="submit">Voltar</button>
+                 
+                <button class="btn btn-primary btn-lg" style="float: right" type="submit">Pagar</button>        
+
+            </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid text-center margin parceiros">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-4">
+                  Renato
+              </div>
+              <div class="col-lg-4">
+                  Kaiky
+              </div>
+              <div class="col-lg-4">
+                  Dias
+              </div>
+          </div>
+      </div>
+   </div>
+
+
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>

@@ -1,0 +1,92 @@
+.navbar{
+    background-color: #00a0d7;
+}
+
+body{
+    font: Arial, 20px, sans-serif;
+}
+
+.nav-link{
+	color:black;
+}
+
+.cor{
+	
+	background-color: #817A80;
+}
+
+.margin-meio{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.cor-form{
+    background-color: #221b2e;
+}
+
+.cor-texto{
+	color: white;
+}
+
+.margin{
+    padding-top: 10px;
+    padding-bottom: 30px;
+}
+
+.parceiros{
+    background-color: #00a0d7;
+    color: black;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #fafafa;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cartao {
+  border-radius: 5px;
+  box-shadow: 7px 7px 13px 0px rgba(50, 50, 50, 0.22);
+  padding: 30px;
+  margin: 20px;
+  width: 400px;
+  transition: all 0.5s ease-out;
+  color: white;
+  border-color : red
+}
+
+.cartao:hover {
+  transform: translateY(-5px);
+  cursor: pointer;
+}
+
+.cartao p {
+  color: #a3a5ae;
+  font-size: 16px;
+}
+
+.image {
+  float: right;
+  max-width: 64px;
+  max-height: 64px;
+}
+
+.cinza {
+  border-left: 3px solid grey;
+  border-right: 3px solid grey;
+}
+
+.verde {
+  border-left: 3px solid #3bb54a;
+  border-right: 3px solid #3bb54a;
+}
+
+.amarelo {
+  border-left: 3px solid yellow;
+  border-right: 3px solid yellow;
+}
