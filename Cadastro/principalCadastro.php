@@ -1,6 +1,6 @@
 <?php
 
-require_once "../BD/conexao.php";
+require_once "../Infra/BD/conexao.php";
 include "cadastro.php";
 
 $nome = $_POST['Nome'];

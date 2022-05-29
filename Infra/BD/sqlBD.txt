@@ -1,0 +1,47 @@
+create database ViagemFacil_DB;
+use ViagemFacil_DB;
+
+create table Senhas(
+CPF varchar(11) PRIMARY KEY NOT NULL,
+Senha varchar(100) NOT NULL);
+
+create table DadosCadastrais(
+CPF varchar(11) PRIMARY KEY NOT NULL,
+RG varchar(9) NOT NULL,
+Nome varchar(50) NOT NULL,
+Telefone1 varchar(11) NOT NULL,
+Telefone2 varchar(11),
+Email varchar(50) NOT NULL,
+Estado varchar(5) not null,
+Cidade varchar(50) not null,
+Rua varchar(50) not null,
+Complemento varchar(50),
+Numero int not null,
+CEP varchar(10) not null
+);
+
+create table Cartao(
+NumeroSerie varchar(7) PRIMARY KEY NOT NULL,
+NumeroFabrica varchar(9) NOT NULL,
+CPFProprietario varchar(11) NOT NULL,
+Saldo double NOT NULL,
+FOREIGN KEY (CPFProprietario) REFERENCES DadosCadastrais (CPF)
+);
+
+create table Percursos(
+Id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+NumeroLinha int NOT NULL,
+Trecho varchar(50) NOT NULL,
+Veiculo varchar(50) NOT NULL);
+
+create table Movimentacoes(
+Id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+Valor double NOT NULL,
+DataMovimentacao datetime NOT NULL,
+TipoMovimentacao varchar(30) NOT NULL,
+NumeroSerieCartao varchar(7) NOT NULL,
+Id_Percurso int,
+FOREIGN KEY (NumeroSerieCartao) REFERENCES Cartao (NumeroSerie),
+FOREIGN KEY (Id_Percurso) REFERENCES Percursos (Id),
+CHECK (TipoMovimentacao <=> "Recarga" or TipoMovimentacao <=> "Utilização em ônibus")
+);
