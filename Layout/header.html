@@ -1,12 +1,72 @@
 <!DOCTYPE html>
     <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="styleLayout.css"/>
-    <nav class="navbar navbar-expand-lg navbar-light ">
-        <div class="container-fluid">
-            <a class="navbar-brand">
-                <img src="../img/Logo_Final.jpeg" width="140" height="80">
-                <font size="5"><b>Viagem Rápida</b></font>
-            </a>  
-        </div>         
-    </nav>
+    
+    <nav class="navbar navbar-expand-lg navbar-light   ">
+		<a 
+			href = "#"
+			class="navbar-brand mb-0 h1">
+				<img 
+				class="d-inline-block "
+				src="../img/Logo_Final.jpeg" 
+				width="100" height="70"/>
+            <font size="5"><b>Viagem Rápida</b></font>
+        </a> 
+		<button 
+		type="button"
+		data-bs-toggle="collapse"
+		data-bs-target="#navbarNav"
+		class="navbar-toggler"	
+		aria-controls = "navbarNav"
+		aria-expanded = "false"
+		aria-label = "Toggle navigation"
+		>
+			<span class = "navbar-toggler-icon"></span>
+		</button>
+		<div class = "collapse navbar-collapse"id="navbarNav">
+			<ul class = "navbar-nav ">
+				<li class = "nav-item active">
+					<a href = "#" class = "nav-link active">
+						Tela Principal
+					</a>
+				</li>
+				<li class = "nav-item active">
+					<a href = "#" class = "nav-link">
+						Passe
+					</a>
+				</li>
+				<li class = "nav-item active">
+					<a href = "#" class = "nav-link">
+						Qr Code
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="collapse navbar-collapse d-lg-flex justify-content-end" id="navbarNav">
+			<ul class = "navbar-nav ">
+				<li class = "nav-item dropdown">
+					<a href = "#" class = "nav-link active dropdown-toggle" 
+					id = "navbarDropdown" 
+					role = "button" 
+					data-bs-toggle = "dropdown"
+					aria-expanded = "false"
+					>
+						
+						Opcões
+					</a>
+					<ul class="dropdown-menu"
+					aria-labelledby = "navbarDropdown">
+						<li><a href = "#"
+						class = "dropdown-item"> Opção 1</a></li>
+						<li><a href = "#"
+						class = "dropdown-item"> Opção 2</a></li>
+						<li><a href = "#"
+						class = "dropdown-item"> Opção 3</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+			
+	</nav>
+
 </html>

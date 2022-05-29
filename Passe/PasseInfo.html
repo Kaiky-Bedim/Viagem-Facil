@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,400;0,600;1,200;1,400;1,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="stylePasse.css"/>
+    <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css"/>
+   
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light   ">
+		<a 
+			href = "#"
+			class="navbar-brand mb-0 h1">
+				<img 
+				class="d-inline-block "
+				src="../img/Logo_Final.jpeg" 
+				width="100" height="70"/>
+            <font size="5"><b>Viagem Rápida</b></font>
+        </a> 
+		<button 
+		type="button"
+		data-bs-toggle="collapse"
+		data-bs-target="#navbarNav"
+		class="navbar-toggler"	
+		aria-controls = "navbarNav"
+		aria-expanded = "false"
+		aria-label = "Toggle navigation"
+		>
+			<span class = "navbar-toggler-icon"></span>
+		</button>
+		<div class = "collapse navbar-collapse"id="navbarNav">
+			<ul class = "navbar-nav ">
+				<li class = "nav-item active">
+					<a href = "#" class = "nav-link active">
+						Tela Principal
+					</a>
+				</li>
+				<li class = "nav-item active">
+					<a href = "#" class = "nav-link">
+						Passe
+					</a>
+				</li>
+				<li class = "nav-item active">
+					<a href = "#" class = "nav-link">
+						Qr Code
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="collapse navbar-collapse d-lg-flex justify-content-end" id="navbarNav">
+			<ul class = "navbar-nav ">
+				<li class = "nav-item dropdown">
+					<a href = "#" class = "nav-link active dropdown-toggle" 
+					id = "navbarDropdown" 
+					role = "button" 
+					data-bs-toggle = "dropdown"
+					aria-expanded = "false"
+					>
+						
+						Opcões
+					</a>
+					<ul class="dropdown-menu"
+					aria-labelledby = "navbarDropdown">
+						<li><a href = "#"
+						class = "dropdown-item"> Opção 1</a></li>
+						<li><a href = "#"
+						class = "dropdown-item"> Opção 2</a></li>
+						<li><a href = "#"
+						class = "dropdown-item"> Opção 3</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+			
+
+	</nav>
+	
+	
+
+	<div class="bloco ">
+		<div class="card-bloco ">
+			<div class="front">
+				<div class="image">
+					<img src="../img/Logo_Final.jpeg" alt="">
+					<img src="../img/univap.png" alt="">
+				</div>
+				<div class="card-number-box">Numero Serial</div>
+				<div class="flexbox">
+					<div class="box">
+						<span>Nome:</span>
+						<div class="card-holder-name"></div>
+					</div>
+					<div class="box">
+						<span>Passe:</span>
+						<div class="expiration">
+							<span class="exp-month"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<form action="">
+			<div class = "flexbox">
+		
+				<div class="inputBox">
+					<span>Serial:</span>
+					<input type="text" maxlength="16" class="card-number-input">
+				</div>
+				<div class="inputBox">
+					<span>Dono Passe: </span>
+					<input type="text" class="card-holder-input">
+				</div>
+				<div class="inputBox">
+					<span>Tipo cartão</span>
+					<select name="" id="" class="month-input">
+						<option value="month" selected disabled></option>
+						<option value="Normal">Normal</option>
+						<option value="Estudantil">Estudantil</option>
+						<option value="Idoso">Idoso</option>
+					</select>
+				</div>
+            
+			</div>
+			<input type="submit" value="Cadastrar Passe" class="submit-btn">
+		</form>
+
+	</div>
+
+	<div class="container-fluid text-center margin parceiros">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4">
+					Renato
+				</div>
+				<div class="col-lg-4">
+					Kaiky
+				</div>
+				<div class="col-lg-4">
+					Dias
+				</div>
+			</div>
+		</div>
+	</div>
+
+<script>
+
+document.querySelector('.card-number-input').oninput = () =>{
+    document.querySelector('.card-number-box').innerText = document.querySelector('.card-number-input').value;
+}
+
+document.querySelector('.card-holder-input').oninput = () =>{
+    document.querySelector('.card-holder-name').innerText = document.querySelector('.card-holder-input').value;
+}
+
+document.querySelector('.month-input').oninput = () =>{
+    document.querySelector('.exp-month').innerText = document.querySelector('.month-input').value;
+}
+
+document.querySelector('.year-input').oninput = () =>{
+    document.querySelector('.exp-year').innerText = document.querySelector('.year-input').value;
+}
+
+document.querySelector('.cvv-input').oninput = () =>{
+    document.querySelector('.cvv-box').innerText = document.querySelector('.cvv-input').value;
+}
+
+</script>
+
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
+</html>

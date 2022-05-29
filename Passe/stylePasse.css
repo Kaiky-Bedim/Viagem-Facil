@@ -1,0 +1,202 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
+
+*{
+    font-family: 'Poppins', sans-serif;
+    margin:0; padding:0;
+    box-sizing: border-box;
+    outline: none; border: none;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.bloco{
+    min-height: 78.8vh;
+    background: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    padding-bottom: 60px;
+}
+
+.bloco form{
+    background: #817A87;
+    border-radius: 10px;
+    box-shadow: 0 10px 15px rgba(0,0,0,.1);
+    padding: 20px;
+    width: 900px;
+	height: 500px;
+    padding-top: 160px;
+}
+
+.bloco form .inputBox{
+    margin-top: 30px;
+}
+
+.bloco form .inputBox span{
+    display: block;
+    color:black;
+    padding-bottom: 5px;
+}
+
+.bloco form .inputBox input,
+.bloco form .inputBox select{
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border:1px solid rgba(0,0,0,.3);
+    color:#444;
+}
+
+.bloco form .flexbox{
+    display: flex;
+    gap:15px;
+}
+
+.bloco form .flexbox .inputBox{
+    flex:1 1 150px;
+}
+
+.bloco form .submit-btn{
+    width: 100%;
+    background:black;
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 20px;
+    color:#fff;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .2s linear;
+}
+
+.bloco form .submit-btn:hover{
+    letter-spacing: 2px;
+    opacity: .8;
+}
+
+.bloco .card-bloco{
+    margin-bottom: -150px;
+    position: relative;
+    height: 280px;
+    width: 500px;
+}
+
+.bloco .card-bloco .front{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0; left: 0;
+    background:#817A87;
+    border-radius: 5px;
+    backface-visibility: hidden;
+    box-shadow: 0 15px 25px rgba(0,0,0,.2);
+    padding:20px;
+    transform:perspective(1000px) rotateY(0deg);
+    transition:transform .4s ease-out;
+}
+
+.bloco .card-bloco .front .image{
+    display: flex;
+    align-items:center;
+    justify-content: space-between;
+    padding-top: 10px;
+}
+
+.bloco .card-bloco .front .image img{
+    height: 60px;
+}
+
+.bloco .card-bloco .front .card-number-box{
+    padding:30px 0;
+    font-size: 22px;
+    color:#fff;
+}
+
+.bloco .card-bloco .front .flexbox{
+    display: flex;
+}
+
+.bloco .card-bloco .front .flexbox .box:nth-child(1){
+    margin-right: auto;
+}
+
+.bloco .card-bloco .front .flexbox .box{
+    font-size: 15px;
+    color:#fff;
+}
+
+.bloco .card-bloco .back{
+    position: absolute;
+    top:0; left: 0;
+    height: 100%;
+    width: 100%;
+    background:black;
+    border-radius: 5px;
+    padding: 20px 0;
+    text-align: right;
+    backface-visibility: hidden;
+    box-shadow: 0 15px 25px rgba(0,0,0,.2);
+    transform:perspective(1000px) rotateY(180deg);
+    transition:transform .4s ease-out;
+}
+
+.bloco .card-bloco .back .stripe{
+    background: #000;
+    width: 100%;
+    margin: 10px 0;
+    height: 50px;
+}
+
+.bloco .card-bloco .back .box{
+    padding: 0 20px;
+}
+
+.bloco .card-bloco .back .box span{
+    color:#fff;
+    font-size: 15px;
+}
+
+.bloco .card-bloco .back .box .cvv-box{
+    height: 50px;
+    padding: 10px;
+    margin-top: 5px;
+    color:#333;
+    background: #fff;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.bloco .card-bloco .back .box img{
+    margin-top: 30px;
+    height: 30px;
+}
+
+
+
+
+.navbar{
+    background-color: #817A87;
+}
+
+body{
+    font: Arial, 20px, sans-serif;
+}
+
+.margin-meio{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.cor-form{
+    background-color: #817A87;
+}
+
+.margin{
+    padding-top: 20px;
+    padding-bottom: 68px;
+}
+
+.parceiros{
+    background-color: #817A87;
+    color: black;
+}
