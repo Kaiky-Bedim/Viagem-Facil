@@ -26,3 +26,24 @@ class Login{
     }
 }
 var login = new Login();
+
+ function carregarNavBar() {
+     const xhttp = new XMLHttpRequest();
+     xhttp.onload = function() {
+         document.getElementById("divNavBar").innerHTML = this.responseText;
+         }
+     xhttp.open("GET", "../Layout/head.html", true);
+     xhttp.send();
+ }
+
+function carregarFoot() {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {
+        document.getElementById("divFoot").innerHTML = this.responseText;
+        }
+    xhttp.open("GET", "../Layout/foot.html", true);
+    xhttp.send();
+}
+
+carregarNavBar();
+carregarFoot();
