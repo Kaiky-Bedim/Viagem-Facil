@@ -7,75 +7,11 @@
 
     <link rel="stylesheet" type="text/css" href="styleLogin.css"/>
     <link rel="stylesheet" type="text/css" href="../Infra/bootstrap/css/bootstrap.min.css"/>
-   
+    <script src="login.js"></script>
+
+	<iframe src="../Layout/head.html" frameborder="0" width="100%"></iframe>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light   ">
-		<a 
-			href = "#"
-			class="navbar-brand mb-0 h1">
-				<img 
-				class="d-inline-block "
-				src="../Infra/img/Logo_Final.jpeg" 
-				width="100" height="70"/>
-            <font size="5"><b>Viagem Rápida</b></font>
-        </a> 
-		<button 
-		type="button"
-		data-bs-toggle="collapse"
-		data-bs-target="#navbarNav"
-		class="navbar-toggler"	
-		aria-controls = "navbarNav"
-		aria-expanded = "false"
-		aria-label = "Toggle navigation"
-		>
-			<span class = "navbar-toggler-icon"></span>
-		</button>
-		<div class = "collapse navbar-collapse"id="navbarNav">
-			<ul class = "navbar-nav ">
-				<li class = "nav-item active">
-					<a href = "#" class = "nav-link active">
-						Tela Principal
-					</a>
-				</li>
-				<li class = "nav-item active">
-					<a href = "#" class = "nav-link">
-						Passe
-					</a>
-				</li>
-				<li class = "nav-item active">
-					<a href = "#" class = "nav-link">
-						Qr Code
-					</a>
-				</li>
-			</ul>
-		</div>
-		<div class="collapse navbar-collapse d-lg-flex justify-content-end" id="navbarNav">
-			<ul class = "navbar-nav ">
-				<li class = "nav-item dropdown">
-					<a href = "#" class = "nav-link active dropdown-toggle" 
-					id = "navbarDropdown" 
-					role = "button" 
-					data-bs-toggle = "dropdown"
-					aria-expanded = "false"
-					>
-						
-						Opcões
-					</a>
-					<ul class="dropdown-menu"
-					aria-labelledby = "navbarDropdown">
-						<li><a href = "#"
-						class = "dropdown-item"> Opção 1</a></li>
-						<li><a href = "#"
-						class = "dropdown-item"> Opção 2</a></li>
-						<li><a href = "#"
-						class = "dropdown-item"> Opção 3</a></li>
-					</ul>
-				</li>
-			</ul>
-		</div>
-			
-	</nav>
 
     <div class="modal-dialog margin-meio" role="document">
       <div class="modal-content rounded-5 shadow">
@@ -84,7 +20,6 @@
           </div>
     
         <div class="modal-body p-5 pt-0 cor-form">
-            <form class="cor-form" method="post" action="principalLogin.php">
 
                 <div class="form-floating mb-3">
                 <input type="text" class="form-control rounded-4" id="txtcpf" name="cpf" placeholder="CPF">
@@ -96,7 +31,7 @@
                 <label for="txtsenha">Senha</label>
                 </div>
 
-            <button class="w-100 mb-2 btn btn-lg rounded-4 btn-dark" type="submit">Fazer Login</button>         
+            <button class="w-100 mb-2 btn btn-lg rounded-4 btn-dark" onclick="login.validarFormulario()">Fazer Login</button>         
 
             </form>
         </div>
@@ -106,7 +41,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
     <footer>
-            <iframe src="../Layout/foot.html" frameborder="0" width="100%"></iframe>
-        </footer>
+        <iframe src="../Layout/foot.html" frameborder="0" width="100%"></iframe>
+    </footer>
 </body>
 </html>

@@ -1,11 +1,11 @@
 <?php
 
 class Login{
-    public string $cpf;
-    public string $senha;
-    public Conexao $conexao;
+    public $cpf;
+    public $senha;
+    public $conexao;
 
-    public function FazerLogin(string $cpf, string $senha, Conexao $con){
+    public function FazerLogin($cpf, $senha, $con){
         $this->conexao = $con;
         $this->cpf = $cpf;
         $this->senha = $senha;

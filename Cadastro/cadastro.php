@@ -1,21 +1,21 @@
 <?php
 
 class Cadastro {
-    public string $nome;
-    public string $email;
-    public string $cpf;
-    public string $rg;
-    public string $senha;
-    public string $confirmSenha;
-    public string $estado;
-    public string $cidade;
-    public string $rua;
-    public int $numero;
-    public string $cep;
-    public string $complemento;
-    public string $telefone1;
-    public string $telefone2;
-    public Conexao $conexao;
+    public $nome;
+    public $email;
+    public $cpf;
+    public $rg;
+    public $senha;
+    public $confirmSenha;
+    public $estado;
+    public $cidade;
+    public $rua;
+    public $numero;
+    public $cep;
+    public $complemento;
+    public $telefone1;
+    public $telefone2;
+    public $conexao;
 
     public function Cadastro($nome, $email, $cpf,
                       $rg, $senha, $confirmSenha,
@@ -49,7 +49,7 @@ class Cadastro {
         }
     }
 
-    public function Cadastrar(Conexao $con){
+    public function Cadastrar($con){
         $this->conexao = $con;
 
         $sql = "insert into DadosCadastrais values('".$this->cpf."', '".$this->rg."', '".$this->nome."', '".$this->telefone1."', ".$this->telefone2.", '".$this->email."', 

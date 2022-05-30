@@ -11,9 +11,9 @@ $login = new Login();
 
 $res = $login->FazerLogin($cpf, $senha, $con);
 if($res == false){
-    echo "Não foi possível logar";
+    echo "console.log('olá');";
 }else{
-    echo "Logado com sucesso";
+    echo "console.log('olá');";
 }
 
 ?>
