@@ -1,9 +1,15 @@
+import { Layout } from "../Layout/layout.js";
+
+//Classe Login, realiza as operações de Login e as requisições para o Banco
 class Login{
+    //Variáveis para realizar Login
     cpf;
     senha;
+    //XMLHttp é o objeto responsável por realizar requisições Ajax
     xmlHttp;
 
-    validarFormulario(){
+    //Método para realizar o Login via requisição Ajax - Não está funcional ainda
+    enviarFormulario(){
         this.cpf = document.getElementById("txtcpf").value;
         this.senha = document.getElementById("txtsenha").value;
 
@@ -25,25 +31,13 @@ class Login{
         console.log(resp);
     }
 }
+//Área "Main" da tela de Login, aqui criamos os objetos e os procedimentos que deverão ser executados na tela
+
+//Objeto Login
 var login = new Login();
+var layout = new Layout();
 
- function carregarNavBar() {
-     const xhttp = new XMLHttpRequest();
-     xhttp.onload = function() {
-         document.getElementById("divNavBar").innerHTML = this.responseText;
-         }
-     xhttp.open("GET", "../Layout/head.html", true);
-     xhttp.send();
- }
-
-function carregarFoot() {
-    const xhttp = new XMLHttpRequest();
-    xhttp.onload = function() {
-        document.getElementById("divFoot").innerHTML = this.responseText;
-        }
-    xhttp.open("GET", "../Layout/foot.html", true);
-    xhttp.send();
-}
-
-carregarNavBar();
-carregarFoot();
+//Esses métodos carregar NavBar e Foot recebem o caminho do head ou foot a partir do html desse script
+//e o caminho para o CSS do Layout a partir daqui
+layout.carregarNavBar("../Layout/head.html", "../Layout/styleLayout.css");
+layout.carregarFoot("../Layout/foot.html", "../Layout/styleLayout.css");
