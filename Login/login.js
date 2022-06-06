@@ -35,6 +35,12 @@ class Login{
 
 //Objeto Login
 var login = new Login();
+
+function logar(){
+    console.log("Deu");
+}
+
+//Objeto Layout
 var layout = new Layout();
 
 //Esses métodos carregar NavBar e Foot recebem o caminho do head ou foot a partir do html desse script
