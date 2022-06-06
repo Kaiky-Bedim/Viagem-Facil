@@ -1,3 +1,11 @@
+body{
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+    outline: none; border: none;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
 .navbar{
     background-color: #817A87;
 }
@@ -5,9 +13,12 @@
 .parceiros{
     background-color: #817A87;
     color: black;
-    height: 150px
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
 }
 
 b {
-    font-size: 30px
+    font-size: 30px;
 }
