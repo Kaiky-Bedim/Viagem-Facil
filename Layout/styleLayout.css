@@ -4,6 +4,7 @@
     outline: none; border: none;
     text-decoration: none;
     text-transform: uppercase;
+    position: relative;
 }
 
 .navbar{
