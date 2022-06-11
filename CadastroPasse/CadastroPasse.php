@@ -1,18 +1,26 @@
 <?php
 
 class Passe{
-    public $serial;
-    public $donoPasse;
-    public $tipoCartao;
+    public $numSerie;
+    public $numFabrica;
+    public $cpfPropretario;
+    public $saldo;
+    #faltando tipo do passe aqui e no banco
     public $conexao;
 
-    public function CadastrarPasse($serial, $donoPasse, $tipoCartao, $con){
+    public function SetPasse($numSerie, $numFabrica, $cpfPropretario, $saldo){
+        $this->numSerie = $numSerie;
+        $this->numFabrica = $numFabrica;
+        $this->cpfPropretario = $cpfPropretario;   
+        $this->saldo = $saldo;
+    }
+
+    public function CadastrarPasse($con){
         $this->conexao = $con;
-        $this->serial = $serial;
-        $this->donoPasse = $donoPasse;
-        $this->tipoCartao = $tipoCartao;
-        
-        
+        $sql = "insert into Cartao (NumeroSerie, NumeroFabrica, CPFProprietario, Saldo) values ('".$this->numSerie."',
+         '".$this->numFabrica."', '".$this->cpfPropretario."', '".$this->saldo."');";
+
+        $this->conexao->FecharConexao();
 
     }
 

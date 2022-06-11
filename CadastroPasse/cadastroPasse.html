@@ -39,20 +39,24 @@
 			</div>
 		</div>
 
+		<!-- Começo do Form -->
+
 		<form action="">
 			<div class = "flexbox">
-		
+	
+				<!-- Faltando numero de fábrica -->
 				<div class="inputBox">
 					<span>Serial:</span>
-					<input type="text" maxlength="16" class="card-number-input">
+					<input type="text" name="NumSerial" maxlength="16" class="card-number-input">
 				</div>
+				<!-- Nome do dono é descartável -->
 				<div class="inputBox">
 					<span>Dono Passe: </span>
-					<input type="text" class="card-holder-input">
+					<input type="text" name="DonoPasse" class="card-holder-input">
 				</div>
 				<div class="inputBox">
 					<span>Tipo cartão</span>
-					<select name="" id="" class="month-input">
+					<select name="TipoCartao" id="TipoCartao" class="month-input">
 						<option value="month" selected disabled></option>
 						<option value="Normal">Normal</option>
 						<option value="Estudantil">Estudantil</option>
@@ -63,6 +67,7 @@
 			</div>
 			<input type="submit" value="Cadastrar Passe" class="submit-btn">
 		</form>
+		<!-- Fim do Form -->
 	</div>
 	<!-- Div para o Footer -->
 	<div id="divFoot"></div>
