@@ -3,7 +3,8 @@ use ViagemFacil_DB;
 
 create table Senhas(
 CPF varchar(11) PRIMARY KEY NOT NULL,
-Senha varchar(100) NOT NULL);
+Senha varchar(100) NOT NULL
+);
 
 create table DadosCadastrais(
 CPF varchar(11) PRIMARY KEY NOT NULL,
@@ -23,16 +24,20 @@ CEP varchar(10) not null
 create table Cartao(
 NumeroSerie varchar(7) PRIMARY KEY NOT NULL,
 NumeroFabrica varchar(9) NOT NULL,
+TipoCartao varchar(50) NOT NULL,
+Bloqueado boolean NOT NULL,
 CPFProprietario varchar(11) NOT NULL,
 Saldo double NOT NULL,
-FOREIGN KEY (CPFProprietario) REFERENCES DadosCadastrais (CPF)
+FOREIGN KEY (CPFProprietario) REFERENCES DadosCadastrais (CPF),
+CHECK (TipoCartao <=> "Normal" or TipoCartao <=> "Estudantil" or TipoCartao <=> "Idoso")
 );
 
 create table Percursos(
 Id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
 NumeroLinha int NOT NULL,
 Trecho varchar(50) NOT NULL,
-Veiculo varchar(50) NOT NULL);
+Veiculo varchar(50) NOT NULL
+);
 
 create table Movimentacoes(
 Id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
