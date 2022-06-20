@@ -12,10 +12,11 @@ $con = new Conexao();
 $login = new Login();
 
 $res = $login->FazerLogin($cpf, $senha, $con);
+
 if($res == true){
     $_SESSION['login'] = $login;
     $_SESSION['senha'] = $senha;
-    header('location:../Principal/principal.html');
+    header('location:../Index/index.html');
 }else{
     unset ($_SESSION['login']);
     unset ($_SESSION['senha']);

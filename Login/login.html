@@ -14,22 +14,22 @@
 
     <div class="modal-dialog margin-meio" role="document">
       <div class="modal-content rounded-5 shadow">
-          <div class="modal-header p-5 pb-4 border-bottom-0 cor-form">
-              <h2 class="fw-bold mb-0">Login</h2>
-          </div>
+        <div class="modal-header p-5 pb-4 border-bottom-0 cor-form">
+            <h2 class="fw-bold mb-0">Login</h2>
+        </div>
     
         <div class="modal-body p-5 pt-0 cor-form">
-            <form action="controllerLogin.php">
+            <form action="controllerLogin.php" method="POST">
 
-                <div class="form-floating mb-3">
-                <input type="text" class="form-control rounded-4" id="txtcpf" name="cpf" placeholder="CPF">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control rounded-4" id="cpf" name="cpf" placeholder="CPF">
                 <label for="txtcpf">CPF</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                <input type="password" class="form-control rounded-4" id="txtsenha" name="senha" placeholder="Senha">
+                <input type="password" class="form-control rounded-4" id="senha" name="senha" placeholder="Senha">
                 <label for="txtsenha">Senha</label>
-                </div>
+            </div>
 
             <input type="submit" class="w-100 mb-2 btn btn-lg rounded-4 btn-dark"></input>         
 
