@@ -1,23 +1,43 @@
-.textoFormatado{
-    font-family: 'Poppins', sans-serif;
-    box-sizing: border-box;
-    outline: none; border: none;
-    text-decoration: none;
-    text-transform: uppercase;
-}
-
 .navbar{
     background-color: #817A87;
+}
+
+.nav-link{
+	color:black;
+}
+
+.cor{
+	background-color: #817A87;
+}
+
+.margin-meio{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #817A87;
+}
+
+.cor-form{
+    background-color: #221b2e;
+}
+
+.cor-texto{
+	color: white;
+}
+
+.margin{
+    padding-top: 10px;
+    padding-bottom: 30px;
 }
 
 .parceiros{
     background-color: #817A87;
     color: black;
-    width: 100.6%;
-    bottom: 0;
-    position: fixed;
 }
 
-b {
-    font-size: 30px;
+.body {
+  font-family: "Poppins", sans-serif;
+  background-color: #fafafa;
 }
+
+
+
