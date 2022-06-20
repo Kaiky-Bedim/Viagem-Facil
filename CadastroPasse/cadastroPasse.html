@@ -23,14 +23,21 @@
 					<img src="../Infra/img/Logo_Final.jpeg" alt="">
 					<img src="../Infra/img/univap.png" alt="">
 				</div>
-				<div class="card-number-box">Numero Serial</div>
+				
 				<div class="flexbox">
 					<div class="box">
-						<span>Nome:</span>
-						<div class="card-holder-name"></div>
+						<span>Numero Serial:</span>
+						<div class="card-holder-name"> </div>
 					</div>
+				
+				</div>
+				<div class="flexbox">
 					<div class="box">
-						<span>Passe:</span>
+						<span>Numero de Fabrica:</span>
+						<div class="card-number-box"></div>
+					</div>
+					<div class="box desce">
+						<span class="desce">Passe:</span>
 						<div class="expiration">
 							<span class="exp-month"></span>
 						</div>
@@ -46,14 +53,14 @@
 	
 				<!-- Faltando numero de fábrica -->
 				<div class="inputBox">
-					<span>Serial:</span>
-					<input type="text" name="NumSerial" maxlength="16" class="card-number-input">
+						<span>Serie </span>
+						<input type="text" name="DonoPasse" maxlength="12"  class="card-holder-input">
+					</div>
+				<div class="inputBox">
+					<span>Fabrica:</span>
+					<input type="text" name="NumSerial" maxlength="12	" class="card-number-input">
 				</div>
 				<!-- Nome do dono é descartável -->
-				<div class="inputBox">
-					<span>Dono Passe: </span>
-					<input type="text" name="DonoPasse" class="card-holder-input">
-				</div>
 				<div class="inputBox">
 					<span>Tipo cartão</span>
 					<select name="TipoCartao" id="TipoCartao" class="month-input">
