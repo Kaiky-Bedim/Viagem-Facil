@@ -20,6 +20,11 @@ class Login{
         }
 
     }
+
+    //Método get para utilizar no cadastro passe 
+    public function getCPF(){
+        return $this->cpf;
+    }
 }
 
 ?>

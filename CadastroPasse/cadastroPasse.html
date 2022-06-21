@@ -48,22 +48,19 @@
 
 		<!-- Começo do Form -->
 
-		<form action="">
-			<div class = "flexbox">
-	
-				<!-- Faltando numero de fábrica -->
+		<form method="post" action="controllerCadastroPasse.php">
+			<div class = "flexbox">		
 				<div class="inputBox">
-						<span>Serie </span>
-						<input type="text" name="DonoPasse" maxlength="12"  class="card-holder-input">
+						<span>Serie</span>
+						<input type="text" name="txtNumSerial" maxlength="12"  class="card-holder-input">
 					</div>
 				<div class="inputBox">
-					<span>Fabrica:</span>
-					<input type="text" name="NumSerial" maxlength="12	" class="card-number-input">
+					<span>Fabrica</span>
+					<input type="text" name="txtNumFabrica" maxlength="12" class="card-number-input">
 				</div>
-				<!-- Nome do dono é descartável -->
 				<div class="inputBox">
 					<span>Tipo cartão</span>
-					<select name="TipoCartao" id="TipoCartao" class="month-input">
+					<select name="txtTipoCartao" id="txtTipoCartao" class="month-input">
 						<option value="month" selected disabled></option>
 						<option value="Normal">Normal</option>
 						<option value="Estudantil">Estudantil</option>
