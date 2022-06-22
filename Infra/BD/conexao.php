@@ -9,7 +9,7 @@ class Conexao{
     private $db = "viagemfacil_db";
     private $con;
 
-    function Conexao(){
+    function __construct(){
         $this->con = mysqli_connect($this->host, $this->user, $this->pass, $this->db);
     }
 
