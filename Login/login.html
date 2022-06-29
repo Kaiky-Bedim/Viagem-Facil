@@ -22,16 +22,21 @@
             <form action="controllerLogin.php" method="POST">
 
             <div class="form-floating mb-3">
-                <input type="text" class="form-control rounded-4" id="cpf" name="cpf" placeholder="CPF">
-                <label for="txtcpf">CPF</label>
-                </div>
-
-                <div class="form-floating mb-3">
-                <input type="password" class="form-control rounded-4" id="senha" name="senha" placeholder="Senha">
-                <label for="txtsenha">Senha</label>
+                <!-- O atributo onkeypress possui uma função que garante que o usuário só possa digitar números no campo CPF -->
+                <input type="text" maxlength="11" minlength="11" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="form-control rounded-4" id="cpf" name="cpf" placeholder="CPF" required>
+                <label id="labelCpf" for="txtcpf">CPF</label>
             </div>
 
-            <input type="submit" class="w-100 mb-2 btn btn-lg rounded-4 btn-dark"></input>         
+            <span role="alert" id="cpfError" aria-hidden="true"></span>
+
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control rounded-4" id="senha" name="senha" placeholder="Senha" required>
+                <label id="labelSenha" for="txtsenha">Senha</label>
+            </div>
+
+            <span role="alert" id="cpfError" aria-hidden="true"></span>
+
+            <button id="submit" class="w-100 mb-2 btn btn-lg rounded-4 btn-dark">Enviar</button>
 
             </form>
         </div>

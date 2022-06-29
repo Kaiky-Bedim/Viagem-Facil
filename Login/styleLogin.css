@@ -1,3 +1,17 @@
+/*As próximas 3 classes são CSS utilizado nas mensagens de validação dos campos do formulário */
+#nameError {
+    display: none;
+    font-size: 0.8em;
+}
+
+#nameError.visible {
+    display: block;
+}
+
+input.invalid {
+    border-color: red;
+}
+
 body{
     font: Arial, 20px, sans-serif;
 }

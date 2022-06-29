@@ -1,9 +1,10 @@
 create database ViagemFacil_DB;
 use ViagemFacil_DB;
 
+#Vamos criptografar o CPF e a Senha, por isso os dois são varchar de 50, o SHA gera um Hash de 40 caracteres
 create table Senhas(
-CPF varchar(11) PRIMARY KEY NOT NULL,
-Senha varchar(100) NOT NULL
+CPF varchar(50) PRIMARY KEY NOT NULL,
+Senha varchar(50) NOT NULL
 );
 
 create table DadosCadastrais(
