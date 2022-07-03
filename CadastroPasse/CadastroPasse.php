@@ -9,7 +9,7 @@ class Passe{
     public $saldo;
     public $conexao;
 
-    public function CadastroPasse($numSerie, $numFabrica, $tipoCartao, $bloqueado, $cpfPropretario, $saldo){
+    function __construct($numSerie, $numFabrica, $tipoCartao, $bloqueado, $cpfPropretario, $saldo){
         $this->numSerie = $numSerie;
         $this->numFabrica = $numFabrica;
         $this->tipoCartao = $tipoCartao;
@@ -21,9 +21,8 @@ class Passe{
     public function CadastrarPasse($con){
         $this->conexao = $con;
         //insert into Cartao (NumeroSerie, NumeroFabrica, TipoCartao, Bloqueado, CPFProprietario, Saldo) values ('NumeroS', 'NumeroFab', 'Normal', false, '123', 120);
-        $sql = "insert into Cartao (NumeroSerie, NumeroFabrica, TipoCartao, Bloqueado, CPFProprietario, Saldo) values ('".$this->numSerie."',
-         '".$this->numFabrica."', '".$this->tipoCartao."', '".$this->bloqueado."', '".$this->cpfPropretario."', '".$this->saldo."');";
-
+        $sql = "insert into Cartao values ('".$this->numSerie."',
+         '".$this->numFabrica."', '".$this->tipoCartao."', ".$this->bloqueado.", '".$this->cpfPropretario."', ".$this->saldo.");";
         $resCadastroPasse = mysqli_query($this->conexao->getConexao(), $sql);
         $this->conexao->FecharConexao();
 
