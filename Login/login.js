@@ -85,7 +85,7 @@ form.addEventListener("submit", function(event){
 });
 
 function VerificaLogin(login){
-    if(login){
+    if(login == true){
         window.location.href = "../Index/index.html";
     }else{
         alert("O CPF ou a senha informados estão incorretos");
