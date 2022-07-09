@@ -9,32 +9,52 @@ layout.carregarNavBar("../Layout/head.html", "../Layout/styleLayout.css");
 layout.carregarFoot("../Layout/foot.html", "../Layout/styleLayout.css");
 
 //Códigos para validar o formulário
-document.getElementById('cpf').oninvalid = function() {
-    //Remove mensagens de erro antigas
-    this.setCustomValidity("");
-  
+
+//Recuperando os inputs do Form
+var cpf = document.getElementById('cpf');
+var senha = document.getElementById('senha');
+var button = document.getElementById("submit");
+var primeiraTentativa = true;
+
+//Função que valida o CPF
+function ValidaCPF(){
+    //Apaga as mensagens de erro anteriores
+    cpf.setCustomValidity("");
     //Reexecuta validação
-    if (!this.validity.valid) {
+    if (!cpf.validity.valid && !primeiraTentativa) {
         //Se inválido, coloca mensagem de erro
-        if(document.getElementById('cpf').value == ""){
+        if(cpf.value == ""){
             document.getElementById("labelCpf").innerHTML = "CPF*";
-            this.setCustomValidity("O campo CPF é obrigatório");
-        }else{
+            cpf.setCustomValidity("O campo CPF é obrigatório");
+        }else if(cpf.value.length > 0 && cpf.value.length < 11){
             document.getElementById("labelCpf").innerHTML = "CPF*";
-            this.setCustomValidity("Um CPF válido deve possuir 11 dígitos");
+            cpf.setCustomValidity("Um CPF válido deve possuir 11 dígitos");
         }
     }
-  };
+}
 
-  document.getElementById('senha').oninvalid = function() {
-    //Remove mensagens de erro antigas
-    this.setCustomValidity("");
-  
+function ValidaSenha(){
+    //Apaga as mensagens de erro anteriores
+    senha.setCustomValidity("");
     //Reexecuta validação
-    if (!this.validity.valid) {
+    if (!senha.validity.valid) {
         //Se inválido, coloca mensagem de erro
         document.getElementById("labelSenha").innerHTML = "Senha*";
-        this.setCustomValidity("O campo Senha é obrigatório");
+        senha.setCustomValidity("O campo Senha é obrigatório");
     }
-  };
-  //Códigos de validação dos formulários terminam aqui
+}
+
+cpf.oninput = function(){
+    ValidaCPF();
+}
+
+senha.oninput = function(){
+    ValidaSenha();
+}
+
+button.onclick = function(){
+    primeiraTentativa = false;
+    ValidaCPF();
+    ValidaSenha();
+};
+//Códigos de validação dos formulários terminam aqui
