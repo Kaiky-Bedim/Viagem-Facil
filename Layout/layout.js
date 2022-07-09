@@ -17,6 +17,7 @@ export class Layout{
        const xhttp = new XMLHttpRequest();
        xhttp.onload = function() {
            document.getElementById("divFoot").innerHTML = this.responseText;
+           document.getElementById("css").setAttribute("href", urlCSS);
            }
        xhttp.open("GET", urlFoot, true);
        xhttp.send();

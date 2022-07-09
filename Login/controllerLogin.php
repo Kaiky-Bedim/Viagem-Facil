@@ -19,10 +19,10 @@ $res = $login->FazerLogin($cpf, $senha, $con);
 //salvo na session, caso contrário ele não logou e não terá dado algum salvo na session
 if($res){
     $_SESSION['cpf'] = $cpf;
-    header('location:../Index/index.html');
+    echo true;
 }else{
     unset ($_SESSION['cpf']);
-    header('location:login.html');
+    echo false;
 }
 
 ?>

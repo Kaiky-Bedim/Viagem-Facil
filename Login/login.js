@@ -11,9 +11,9 @@ layout.carregarFoot("../Layout/foot.html", "../Layout/styleLayout.css");
 //Códigos para validar o formulário
 
 //Recuperando os inputs do Form
-var cpf = document.getElementById('cpf');
-var senha = document.getElementById('senha');
-var button = document.getElementById("submit");
+const cpf = document.getElementById('cpf');
+const senha = document.getElementById('senha');
+const button = document.getElementById("submit");
 var primeiraTentativa = true;
 
 //Função que valida o CPF
@@ -58,3 +58,38 @@ button.onclick = function(){
     ValidaSenha();
 };
 //Códigos de validação dos formulários terminam aqui
+
+//Fazendo o Login via AJAX
+//Recuperando o elemento Form
+const form = document.getElementById("form");
+
+//Colocando um listener para alterar o comportamento do Form
+form.addEventListener("submit", function(event){
+    event.preventDefault();
+
+    let data = new FormData(form);
+    let httpRequest = new XMLHttpRequest();
+
+    httpRequest.open("POST", "http://localhost/Viagem-Facil/Login/controllerLogin.php");
+    httpRequest.setRequestHeader("X-Content-Type-Options", "multipart/form-data");
+    httpRequest.send(data);
+    httpRequest.onreadystatechange = function(){
+        if(this.readyState == 4){
+            if(this.status == 200){
+                VerificaLogin(this.response);
+            }else{
+                alert("Ocorreu algum erro no processo");
+            }
+        }
+    }
+});
+
+function VerificaLogin(login){
+    if(login){
+        window.location.href = "../Index/index.html";
+    }else{
+        alert("O CPF ou a senha informados estão incorretos");
+        senha.value = "";
+        senha.focus();
+    }
+}
