@@ -6,12 +6,3 @@ var layout = new Layout();
 //e o caminho para o CSS do Layout a partir daqui
 layout.carregarNavBar("../Layout/head.html", "../Layout/styleLayout.css");
 layout.carregarFoot("../Layout/foot.html", "../Layout/styleLayout.css");
-
-
-$(document).ready(function() {
-    
-    $.post('qrCode.php', function(retorna){
-        $("#conteudo").html(retorna);
-    })
-
-});

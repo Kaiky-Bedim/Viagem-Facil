@@ -4,6 +4,7 @@ require_once "../Infra/BD/conexao.php";
 include "CadastroPasse.php";
 
 session_start();
+
 $numSerie = $_POST['txtNumSerial'];
 $numFabrica = $_POST['txtNumFabrica'];
 $tipoCartao = $_POST['txtTipoCartao'];

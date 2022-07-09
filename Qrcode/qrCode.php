@@ -1,21 +1,31 @@
 <?php
 
-require_once "../Infra/BD/conexao.php";
-//precisa do cpf, num de serie, num de fábrica e bloqueado
+class Qrcode{
+    private $cpf;
+    private $numSerie;
+    private $numFabrica;
+    private $bloqueado;
+    private $conexao;
+    private $qrcode;
 
-//consulta o banco de dados
-$sql = "select NumeroSerie, NumeroFabrica, Bloqueado from cartao where CPFProprietario = '12345678901' and NumeroSerie = '123';";
-$resultado_cartao = mysqli_query($this->conexao->getConexao(), $sql);
+    public function ImagemQrcode($cpf, $con){
+        $this->conexao = $con;
+        $this->cpf = $cpf;
 
-if(($resultado_cartao != 0) and ($resultado_cartao->num_rows != 0)){
-    while($row_cartao = mysqli_fetch_assoc($resultado_cartao)){
-        echo $row_cartao . "<br>";        
+        $sql = "select NumeroSerie,NumeroFabrica,Bloqueado from cartao where CPFProprietario = '".$this->cpf."';";
+        $res = mysqli_query($this->conexao->getConexao(), $sql);
+        while ($dado = $res->fetch_array()){
+            $this->numSerie = $dado["NumeroSerie"];
+            $this->numFabrica = $dado["NumeroFabrica"];
+            $this->bloqueado = $dado["Bloqueado"];
+        }
+
+        $qrcode = sha1("$this->cpf"."$this->numSerie"."$this->numFabrica");
+        if($this->bloqueado == 1){
+            return false;
+        }else{
+            return $qrcode;
+        }
     }
-}else{
-    echo"Sem nenhum dado";
 }
-
-
-
-
 ?>
