@@ -1,0 +1,14 @@
+{
+    "name": "renato/qrcode",
+    "description": "API",
+    "authors": [
+        {
+            "name": "Renato15767",
+            "email": "renatominoru46@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+		"chillerlan/php-qrcode": "dev-main"
+    }
+}

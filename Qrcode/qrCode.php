@@ -27,5 +27,7 @@ class Qrcode{
             return $qrcode;
         }
     }
+
+    
 }
 ?>
