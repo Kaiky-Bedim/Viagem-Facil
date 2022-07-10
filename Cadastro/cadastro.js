@@ -306,7 +306,7 @@ form.addEventListener("submit", function(event){
     let data = new FormData(form);
     let httpRequest = new XMLHttpRequest();
 
-    httpRequest.open("POST", "http://localhost/Viagem-Facil/Cadastro/controllerCadastro.php");
+    httpRequest.open("POST", "controllerCadastro.php");
     httpRequest.setRequestHeader("X-Content-Type-Options", "multipart/form-data");
     httpRequest.send(data);
     httpRequest.onreadystatechange = function(){

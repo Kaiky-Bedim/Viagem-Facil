@@ -69,7 +69,7 @@ form.addEventListener("submit", function(event){
     let data = new FormData(form);
     let httpRequest = new XMLHttpRequest();
 
-    httpRequest.open("POST", "http://localhost/Viagem-Facil/Login/controllerLogin.php");
+    httpRequest.open("POST", "controllerLogin.php");
     httpRequest.setRequestHeader("X-Content-Type-Options", "multipart/form-data");
     httpRequest.send(data);
     httpRequest.onreadystatechange = function(){

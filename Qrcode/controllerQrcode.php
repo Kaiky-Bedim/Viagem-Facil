@@ -27,13 +27,10 @@ $options = new QROptions([
 // invoke a fresh QRCode instance
 $qrcode = new QRCode($options);
 
-// and dump the output
-$qrcode->render($res);
-
 // ...with additional cache file
 $qrcode->render($res, 'imgQRCode/qrCode.svg');
 
-// echo "<img src='imgQRCode/qrCode.svg' width='500'>";
+echo "<img src='imgQRCode/qrCode.svg' width='500'>";
 
 
 ?>
