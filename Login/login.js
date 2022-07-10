@@ -23,11 +23,10 @@ function ValidaCPF(){
     //Reexecuta validação
     if (!cpf.validity.valid && !primeiraTentativa) {
         //Se inválido, coloca mensagem de erro
+        document.getElementById("labelCpf").innerHTML = "CPF*";
         if(cpf.value == ""){
-            document.getElementById("labelCpf").innerHTML = "CPF*";
             cpf.setCustomValidity("O campo CPF é obrigatório");
         }else if(cpf.value.length > 0 && cpf.value.length < 11){
-            document.getElementById("labelCpf").innerHTML = "CPF*";
             cpf.setCustomValidity("Um CPF válido deve possuir 11 dígitos");
         }
     }
@@ -37,9 +36,9 @@ function ValidaSenha(){
     //Apaga as mensagens de erro anteriores
     senha.setCustomValidity("");
     //Reexecuta validação
+    document.getElementById("labelSenha").innerHTML = "Senha*";
     if (!senha.validity.valid) {
         //Se inválido, coloca mensagem de erro
-        document.getElementById("labelSenha").innerHTML = "Senha*";
         senha.setCustomValidity("O campo Senha é obrigatório");
     }
 }
@@ -78,7 +77,8 @@ form.addEventListener("submit", function(event){
             if(this.status == 200){
                 VerificaLogin(this.response);
             }else{
-                alert("Ocorreu algum erro no processo");
+                alert("Não foi possível terminar a requisição");
+                ResetaSenha();
             }
         }
     }
@@ -86,10 +86,19 @@ form.addEventListener("submit", function(event){
 
 function VerificaLogin(login){
     if(login == true){
+        alert("Login realizado com sucesso");
         window.location.href = "../Index/index.html";
+    }else if(login.includes("Sem conexão com o servidor")){
+        alert("Ocorreu algum erro interno na requisição com o servidor");
+        ResetaSenha();
     }else{
         alert("O CPF ou a senha informados estão incorretos");
-        senha.value = "";
-        senha.focus();
+        ResetaSenha();
     }
 }
+
+function ResetaSenha(){
+    senha.value = "";
+    senha.focus();
+}
+//Código do Login via AJAX termina aqui

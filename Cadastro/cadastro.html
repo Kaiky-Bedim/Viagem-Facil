@@ -21,19 +21,19 @@
             </div>
       
             <div class="modal-body p-5 pt-0 cor-form">
-              <form class="container" method="post" action="controllerCadastro.php">
+              <form class="container" id="form">
                 <div class="row">
                     <div class="col-6">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control rounded-4" id="txtnome" name="Nome" placeholder="Nome">
-                            <label for="txtnome">Nome</label>
+                            <input type="text" maxlength="30" class="form-control rounded-4" id="txtNome" name="Nome" placeholder="Nome" required>
+                            <label id="labelNome" for="txtNome">Nome</label>
                         </div>
                     </div>
 
                     <div class="col-6">
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control rounded-4" id="txtEmail" name="Email" placeholder="Email">
-                            <label for="txtEmail">Email</label>
+                            <input type="email" class="form-control rounded-4" id="txtEmail" name="Email" placeholder="Email" required>
+                            <label id="labelEmail" for="txtEmail">Email</label>
                         </div>
                     </div>
                 </div>
@@ -41,28 +41,28 @@
                 <div class="row">
                     <div class="col-3">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control rounded-4" id="txtCPF" name="CPF" placeholder="CPF">
-                            <label for="txtCPF">CPF</label>
+                            <input type="text" minlength="11" maxlength="11" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="form-control rounded-4" id="txtCPF" name="CPF" placeholder="CPF" required>
+                            <label id="labelCPF" for="txtCPF">CPF</label>
                         </div>                      
                     </div>
 
                     <div class="col-3">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control rounded-4" id="txtRG" name="RG" placeholder="RG">
-                            <label for="txtRG">RG</label>
+                            <input type="text" minlength="9" maxlength="9" required class="form-control rounded-4" id="txtRG" name="RG" placeholder="RG">
+                            <label id="labelRG" for="txtRG">RG</label>
                         </div>                       
                     </div>
 
                     <div class="col-3">
                         <div class="form-floating mb-3">
-                            <input type="password" class="form-control rounded-4" id="txtsenha" name="Senha" placeholder="Senha">
-                            <label for="txtsenha">Senha</label>
+                            <input type="password" class="form-control rounded-4" id="txtSenha" name="Senha" placeholder="Senha" required>
+                            <label id="labelSenha" for="txtSenha">Senha</label>
                         </div>
                     </div>
                     <div class="col-3">
                         <div class="form-floating mb-3">
-                            <input type="password" class="form-control rounded-4" id="txtconfirmarsenha" name="ConfirmarSenha" placeholder="Confirmar Senha">
-                            <label for="txtconfirmar">Confirmar Senha</label>
+                            <input type="password" class="form-control rounded-4" id="txtConfirmarSenha" name="ConfirmarSenha" placeholder="Confirmar Senha" required>
+                            <label id="labelConfirmarSenha" for="txtConfirmarSenha">Confirmar Senha</label>
                         </div>
                     </div>  
                 </div>
@@ -71,8 +71,8 @@
                     <!-- Caixa de Lista em Estado -->
                     <div class="col-2">
                         <div class="form-floating mb-3">
-                            <select class="form-control rounded-4" id="txtEstado" name="Estado" placeholder="Estado">
-                                <option selected>Escolher</option>
+                            <select class="form-control rounded-4" id="txtEstado" name="Estado" placeholder="Estado" required>
+                                <option value="" data-default disabled selected>Escolher</option>
                                 <option value="AC">AC</option>
                                 <option value="AL">AL</option>
                                 <option value="AP">AP</option>
@@ -101,21 +101,21 @@
                                 <option value="SE">SE</option>
                                 <option value="TO">TO</option>
                             </select>
-                            <label for="txtEstado">Estado</label>
+                            <label id="labelEstado" for="txtEstado">Estado</label>
                         </div>
                     </div>   
 
                     <div class="col-4">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control rounded-4" id="txtCidade" name="Cidade" placeholder="Cidade">
-                            <label for="txtCidade">Cidade</label>
+                            <input type="text" class="form-control rounded-4" id="txtCidade" name="Cidade" placeholder="Cidade" required maxlength="30">
+                            <label id="labelCidade" for="txtCidade">Cidade</label>
                         </div>
                     </div>
                     
                     <div class="col-6">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control rounded-4" id="txtRua" name="Rua" placeholder="Rua">
-                            <label for="txtRua">Rua</label>
+                            <input type="text" class="form-control rounded-4" id="txtRua" name="Rua" placeholder="Rua" required maxlength="30">
+                            <label id="labelRua" for="txtRua">Rua</label>
                         </div>
                     </div>
                     
@@ -125,22 +125,22 @@
                 <div class="row">
                     <div class="col-2">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control rounded-4" id="txtNumero" name="Numero" placeholder="Número">
-                            <label for="txtNumero">Número</label>
+                            <input type="text" class="form-control rounded-4" id="txtNumero" name="Numero" placeholder="Número" maxlength="7" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required>
+                            <label id="labelNumero" for="txtNumero">Número</label>
                         </div>
                     </div>
 
                     <div class="col-3">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control rounded-4" id="txtCEP" name="CEP" placeholder="CEP">
-                            <label for="txtCEP">CEP</label>
+                            <input type="text" class="form-control rounded-4" id="txtCEP" name="CEP" placeholder="CEP" maxlength="10" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required>
+                            <label id="labelCEP" for="txtCEP">CEP</label>
                         </div>
                     </div>
 
                     <div class="col-7">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control rounded-4" id="txtComplemeto" name="Complemento" placeholder="Complemento">
-                            <label for="txtComplemeto">Complemento</label>
+                            <input type="text" class="form-control rounded-4" id="txtComplemeto" name="Complemento" placeholder="Complemento" maxlength="30">
+                            <label id="labelComplemento" for="txtComplemeto">Complemento</label>
                         </div>
                     </div>                        
                 </div>
@@ -148,22 +148,22 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control rounded-4" id="txtTelefone1" name="Telefone1" placeholder="Telefone 1">
-                            <label for="txtTelefone1">Telefone 1</label>
+                            <input type="text" class="form-control rounded-4" id="txtTelefone1" name="Telefone1" placeholder="Telefone 1" required maxlength="11" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                            <label id="labelTelefone1" for="txtTelefone1">Telefone 1</label>
                         </div>
                     </div>
                     
                     <div class="col-6">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control rounded-4" id="txtTelefone2" name="Telefone2" placeholder="Telefone 2">
-                            <label for="txtTelefone2">Telefone 2</label>
+                            <input type="text" class="form-control rounded-4" id="txtTelefone2" name="Telefone2" placeholder="Telefone 2" maxlength="11" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                            <label id="labelTelefone2" for="txtTelefone2">Telefone 2</label>
                         </div>
                     </div>
                 </div>
                    
-                <button class="btn btn-dark btn-lg"  style="float: left" type="submit">Voltar</button>
+                <button class="btn btn-dark btn-lg" id="voltar" style="float: left" type="submit">Voltar</button>
                  
-                <button class="btn btn-primary btn-lg" style="float: right" type="submit">Cadastrar</button>
+                <button class="btn btn-primary btn-lg" id="enviar" style="float: right" type="submit">Cadastrar</button>
                 
               </form>
             </div>

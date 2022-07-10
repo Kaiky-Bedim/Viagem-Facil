@@ -3,6 +3,9 @@
 require_once "../Infra/BD/conexao.php";
 include "cadastro.php";
 
+//Iniciando a Session
+session_start();
+
 $nome = $_POST['Nome'];
 $email = $_POST['Email'];
 $cpf = $_POST['CPF'];
@@ -24,9 +27,11 @@ $cadastro = new Cadastro($nome, $email, $cpf, $rg, $senha, $confirmSenha, $estad
 $res = $cadastro->Cadastrar($con);
 
 if($res == true){
-    echo "Cadastro realizado com sucesso";
+    $_SESSION['cpf'] = $cpf;
+    echo true;
 }else{
-    echo "Não foi possível realizar o cadastro";
+    unset ($_SESSION['cpf']);
+    echo false;
 }
 
 ?>
