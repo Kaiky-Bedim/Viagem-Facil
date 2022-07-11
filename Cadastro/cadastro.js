@@ -348,3 +348,9 @@ function VerificaCadastro(cadastro){
     }
 }
 //Código do Login via AJAX termina aqui
+
+//Função para retornar para a tela de Login
+const buttonVoltarLogin = document.getElementById("irParaLogin");
+buttonVoltarLogin.addEventListener("click", function(){
+    window.location.href = "../Login/login.html"
+});
