@@ -21,9 +21,7 @@ const cidade = document.getElementById("txtCidade");
 const rua = document.getElementById("txtRua");
 const numero = document.getElementById("txtNumero");
 const cep = document.getElementById("txtCEP");
-const complemeto = document.getElementById("txtComplemeto");
 const telefone1 = document.getElementById("txtTelefone1");
-const telefone2 = document.getElementById("txtTelefone2");
 const button = document.getElementById("enviar");
 var primeiraTentativa = true;
 
@@ -40,7 +38,9 @@ function ValidaNome(){
             if(nome.value == ""){
                 nome.setCustomValidity("O campo Nome é obrigatório");
             }
+            return;
         }
+        document.getElementById("labelNome").innerHTML = "Nome";
     }
 }
 
@@ -57,7 +57,9 @@ function ValidaEmail(){
             }else if(email.value.length > 0){
                 email.setCustomValidity("Utilize um formato de Email válido, como @gmail ou @hotmail");
             }
+            return;
         }
+        document.getElementById("labelEmail").innerHTML = "Email";
     }
 }
 
@@ -74,7 +76,9 @@ function ValidaCPF(){
             }else if(cpf.value.length > 0 && cpf.value.length < 11){
                 cpf.setCustomValidity("Um CPF válido deve possuir 11 dígitos");
             }
+            return;
         }
+        document.getElementById("labelCPF").innerHTML = "CPF";
     }
 }
 
@@ -91,7 +95,9 @@ function ValidaRG(){
             }else if(rg.value.length > 0 && rg.value.length < 9){
                 rg.setCustomValidity("Um RG válido deve possuir 9 dígitos");
             }
+            return;
         }
+        document.getElementById("labelRG").innerHTML = "RG";
     }
 }
 
@@ -106,7 +112,9 @@ function ValidaSenha(){
             if(senha.value == ""){
                 senha.setCustomValidity("O campo Senha é obrigatório");
             }
+            return;
         }
+        document.getElementById("labelSenha").innerHTML = "Senha";
     }
 }
 
@@ -121,7 +129,9 @@ function ValidaConfirmarSenha(){
             if(confirmarSenha.value == ""){
                 confirmarSenha.setCustomValidity("O campo Confirmar Senha é obrigatório");
             }
+            return;
         }
+        document.getElementById("labelConfirmarSenha").innerHTML = "Confirmar Senha";
     }
 }
 
@@ -136,7 +146,9 @@ function ValidaEstado(){
             if(estado.value == ""){
                 estado.setCustomValidity("O campo Estado é obrigatório");
             }
+            return;
         }
+        document.getElementById("labelEstado").innerHTML = "Estado";
     }
 }
 
@@ -151,7 +163,9 @@ function ValidaCidade(){
             if(cidade.value == ""){
                 cidade.setCustomValidity("O campo Cidade é obrigatório");
             }
+            return;
         }
+        document.getElementById("labelCidade").innerHTML = "Cidade";
     }
 }
 
@@ -166,7 +180,9 @@ function ValidaRua(){
             if(rua.value == ""){
                 rua.setCustomValidity("O campo Rua é obrigatório");
             }
+            return;
         }
+        document.getElementById("labelRua").innerHTML = "Rua";
     }
 }
 
@@ -181,7 +197,9 @@ function ValidaNumero(){
             if(numero.value == ""){
                 numero.setCustomValidity("O campo Número é obrigatório");
             }
+            return;
         }
+        document.getElementById("labelNumero").innerHTML = "Número";
     }
 }
 
@@ -196,7 +214,9 @@ function ValidaCEP(){
             if(cep.value == ""){
                 cep.setCustomValidity("O campo CEP é obrigatório");
             }
+            return;
         }
+        document.getElementById("labelCEP").innerHTML = "CEP";
     }
 }
 
@@ -211,7 +231,9 @@ function ValidaTelefone1(){
             if(telefone1.value == ""){
                 telefone1.setCustomValidity("O campo Telefone 1 é obrigatório");
             }
+            return;
         }
+        document.getElementById("labelTelefone1").innerHTML = "Telefone 1";
     }
 }
 
@@ -230,13 +252,6 @@ button.onclick = function(){
     ValidaNumero();
     ValidaCEP();
     ValidaTelefone1();
-}
-
-function SenhasBatem(){
-    if(senha.value != confirmarSenha.value){
-        return false;
-    }
-    return true;
 }
 
 nome.oninput = function(){
@@ -300,6 +315,8 @@ form.addEventListener("submit", function(event){
         alert("Os campos senhas não são iguais");
         senha.value = "";
         confirmarSenha.value = "";
+        document.getElementById("labelSenha").innerHTML = "Senha*";
+        document.getElementById("labelConfirmarSenha").innerHTML = "Confirmar Senha*";
         return;
     }
 
@@ -323,7 +340,7 @@ form.addEventListener("submit", function(event){
 function VerificaCadastro(cadastro){
     if(cadastro == true){
         alert("Cadastro realizado com sucesso");
-        window.location.href = "../Index/index.html";
+        window.location.href = "../Main/main.html";
     }else if(cadastro.includes("Sem conexão com o servidor")){
         alert("Ocorreu algum erro interno na requisição com o servidor");
     }else{
