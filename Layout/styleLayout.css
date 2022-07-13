@@ -55,4 +55,7 @@ html, body {
     left: 0;
     }
 
-
+/* Classe usada para esconder elementos da NavBar */
+.escondido{
+    display: none;
+}

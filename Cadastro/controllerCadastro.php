@@ -30,7 +30,6 @@ if($res == true){
     $_SESSION['cpf'] = $cpf;
     echo true;
 }else{
-    unset ($_SESSION['cpf']);
     echo false;
 }
 

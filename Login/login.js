@@ -90,7 +90,9 @@ form.addEventListener("submit", function(event){
 
 function VerificaLogin(login){
     if(login == true){
+        //Código executado, caso o Login seja bem sucedido
         alert("Login realizado com sucesso");
+        window.sessionStorage.setItem('autenticado', "true");
         window.location.href = "../Main/main.html";
     }else if(login.includes("Sem conexão com o servidor")){
         alert("Ocorreu algum erro interno na requisição com o servidor");
