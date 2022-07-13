@@ -1,5 +1,5 @@
- <!DOCTYPE html>
-<head>
+<!DOCTYPE html>
+  <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,209 +11,132 @@
     />
     <link rel="stylesheet" type="text/css" href="stylePasse.css"/>
     <link rel="stylesheet" type="text/css" href="../Infra/bootstrap/css/bootstrap.min.css"/>
-   
-</head>
-<body>
-    <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light">
-    <!-- Imagem -->
-    <a href = "#" class="navbar-brand mb-0 h1">
-      <img class="d-inline-block " src="../Infra/img/Logo_Final.jpeg" width="100" height="60"/>    
-    </a> 
-    
-    <button type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" class="navbar-toggler" aria-controls = "navbarNav" aria-expanded = "false" aria-label = "Toggle navigation">
-      <span class = "navbar-toggler-icon"></span>
-    </button>
+  </head>
+    <body>
+        <div id="divNavBar"></div>
 
-    <div class = "collapse navbar-collapse"id="navbarNav">
-      <ul class = "navbar-nav">
-        <li class = "nav-item active">
-          <a href = "#" class = "nav-link">
-            <b>QRCode</b>
-          </a>
-        </li>
-        <li class = "nav-item active">
-          <a href = "#" class = "nav-link">
-            <b>Pagamento</b>
-          </a>
-        </li>
-        <li class = "nav-item active">
-          <a href = "#" class = "nav-link">
-            <b>Passe</b>
-          </a>
-        </li>
-      </ul>
-    </div>
-    <!-- Passes que serão escolhidos -->
-    <div class="collapse navbar-collapse d-lg-flex justify-content-end" id="navbarNav">
-      <ul class = "navbar-nav ">
-        <li class = "nav-item dropdown">
-          <a href = "#" class = "nav-link active dropdown-toggle" 
-            id = "navbarDropdown" 
-            role = "button" 
-            data-bs-toggle = "dropdown"
-            aria-expanded = "false"
-          >
-              
-            <b>Passes</b>
-
-          </a>
-          <ul class="dropdown-menu"
-          aria-labelledby = "navbarDropdown">
-            <li><a href = "#"
-            class = "dropdown-item"> Passe 1</a></li>
-            <li><a href = "#"
-            class = "dropdown-item"> Passe 2</a></li>
-            <li><a href = "#"
-            class = "dropdown-item"> Passe 3</a></li>
-            <li><a href = "#"
-              class = "dropdown-item">Adicionar </a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </nav>
-
-
-    <!-- Separação -->
-    <!-- Conteúdo Site -->
-
-
-    <div class="container-fluid cor">
-      <br/>
-      <h1>Dados do Passe</h1>
-        <div class="modal modal-signin position-static d-block " tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-xl" role="document">
-                <div class="modal-content rounded-5 shadow">
-                    <div class="modal-header p-5 pb-4 border-bottom-0 cor-form">
-                    <!-- Passe que está escolhido -->
-                    <h2 class="fw-bold mb-0 container cor-texto">Passe 1</h2>
-                    </div>
-      
-                    <div class="modal-body p-5 pt-0 cor-form">
-                      <!-- Cabeça do form -->
-			                <form class="container">
-                        <div class="row">
-                          <div class="col-6">
-                            <div class="form-floating mb-3">
-							                <h3 class="fw-bold mb-0 container cor-texto">Saldo: R$ 00,00 </h3>
-                            </div>
-                          </div>
-
-                          <div class="col-6">
-                            <div class="form-floating mb-3">
-                              <h3 class="fw-bold mb-0 container cor-texto">Passes: 0</h3>
-                            </div>
-                          </div>
-                        </div>
+        <div id="wrapper">
+            <div class="container-fluid ">
+                <br><br/>
+                <div class="modal modal-signin position-static d-block " tabindex="-1" role="dialog">
+                    <div class="modal-dialog modal-xl" role="document">
                         
-                      <!-- Começo do contéudo do form -->
-                      <!-- Dados do passe -->
-                        
-                        <div class="row">
-                          <div class="col-6">
-                            <div class="form-floating mb-3">
-                              <h3 class="fw-bold mb-0 container cor-texto">Nome: Renato Minoru Silva Nishikawa</h3>
+                        <h1>Dados do Passe</h1>
+                        <div class="modal-content rounded-5 shadow">
+                            <div class="modal-header p-5 pb-4 border-bottom-0 cor-form">
+                                <!-- Passe que está escolhido -->
+                                <h2 class="fw-bold mb-0 container">Passe 1</h2>
                             </div>
-                          </div>
+                
+                            <div class="modal-body p-5 pt-0 cor-form">
+                                <!-- Cabeça do form -->
+                                <form class="container">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-floating mb-3">
+                                                <h3 class="fw-bold mb-0 container ">Saldo: R$ 00,00 </h3>
+                                            </div>
+                                        </div>
 
-                          <div class="col-6">
-                            <div class="form-floating mb-3">
-							                <h3 class="fw-bold mb-0 container cor-texto">Número de Série: 1234567</h3>
+                                        <div class="col-6">
+                                            <div class="form-floating mb-3">
+                                                <h3 class="fw-bold mb-0 container">Passes: 0</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                                    <!-- Começo do contéudo do form -->
+                                    <!-- Dados do passe -->
+                                
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-floating mb-3">
+                                                <h3 class="fw-bold mb-0 container">Nome: Renato Minoru Silva Nishikawa</h3>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-6">
+                                            <div class="form-floating mb-3">
+                                                <h3 class="fw-bold mb-0 container">Número de Série: 1234567</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-floating mb-3">
+                                                <h3 class="fw-bold mb-0 container">CPF: 12345678901</h3>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-6">
+                                            <div class="form-floating mb-3">
+                                                <h3 class="fw-bold mb-0 container">Bloqueado: Não</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <br/><br/>  
+
+                                    <button class="btn btn-primary btn-lg" style="float: right" type="submit">Cadastrar novo Passe</button>
+                                    <button class="btn btn-primary btn-lg" style="float: left" type="submit">Deletar Passe</button>
+                                
+                                </form>
                             </div>
-                          </div>
                         </div>
-
-                        <div class="row">
-                          <div class="col-6">
-                            <div class="form-floating mb-3">
-							                <h3 class="fw-bold mb-0 container cor-texto">CPF: 12345678901</h3>
-                            </div>
-                          </div>
-
-                          <div class="col-6">
-                            <div class="form-floating mb-3">
-                              <h3 class="fw-bold mb-0 container cor-texto">Bloqueado: Não</h3>
-                            </div>
-                          </div>
-                        </div>
+                        <br></br>
                         
-
-				              </form>
-                      <!-- Fim da cabeça do form -->
-				              
-                      <br/><br/>
-                     
-                      <!-- Fim do conteúdo do form -->
-                      <button class="btn btn-primary btn-lg" style="float: right" type="submit">Cadastrar novo Passe</button>
-                      <button class="btn btn-primary btn-lg" style="float: left" type="submit">Deletar Passe</button>
+                        <!--Codigo da Tabela -->
+                        <h1>Histórico</h1>
+                        <div class="container-fluid margin-meio">
+                            
+                            <table class="table table-striped table-dark">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Valor</th>
+                                        <th scope="col">Data da Movimentação</th>
+                                        <th scope="col">Tipo da Movimentação</th>
+                                        <th scope="col">Número de Série do Cartão</th>
+                                        <th scope="col">Id Percurso</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>5,05</td>
+                                        <td>05/01/2022</td>
+                                        <td>Efetiva</td>
+                                        <td>123456778</td>
+                                        <td>5114</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>5,05</td>
+                                        <td>05/01/2022</td>
+                                        <td>Efetiva</td>
+                                        <td>123456778</td>
+                                        <td>5114</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>5,05</td>
+                                        <td>05/01/2022</td>
+                                        <td>Efetiva</td>
+                                        <td>123456778</td>
+                                        <td>5114</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="container-fluid margin-meio">
-      <h1>Histórico</h1>
-      <table class="table table-striped table-dark">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Valor</th>
-            <th scope="col">Data da Movimentação</th>
-            <th scope="col">Tipo da Movimentação</th>
-            <th scope="col">Número de Série do Cartão</th>
-            <th scope="col">Id Percurso</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>5,05</td>
-            <td>05/01/2022</td>
-            <td>Efetiva</td>
-            <td>123456778</td>
-            <td>5114</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>5,05</td>
-            <td>05/01/2022</td>
-            <td>Efetiva</td>
-            <td>123456778</td>
-            <td>5114</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>5,05</td>
-            <td>05/01/2022</td>
-            <td>Efetiva</td>
-            <td>123456778</td>
-            <td>5114</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    
-    
 
-    <footer><div class="container-fluid text-center margin parceiros">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4">
-                    Renato
-                </div>
-                <div class="col-lg-4">
-                    Kaiky
-                </div>
-                <div class="col-lg-4">
-                    Dias
-                </div>
-            </div>
+            <div id="divFoot"></div>
         </div>
-    </div>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
-    
-</body>
+    </body>
 </html>
+<!-- Scripts de JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script type="module" src="passe.js"></script>
