@@ -1,43 +1,17 @@
-.navbar{
-    background-color: #00a0d7;
+body{
+    font: Arial, 20px, sans-serif;
 }
 
-.nav-link{
-	color:black;
+.cor-form{
+   background-color: #817A87;
 }
 
-.cor{
-	background-color: #0842c098;
+.margin{
+    padding-top: 10px;
+    padding-bottom: 60px;
 }
 
 .margin-meio{
     padding-top: 20px;
     padding-bottom: 20px;
-    background-color: #0842c098;
 }
-
-.cor-form{
-    background-color: #221b2e;
-}
-
-.cor-texto{
-	color: white;
-}
-
-.margin{
-    padding-top: 10px;
-    padding-bottom: 30px;
-}
-
-.parceiros{
-    background-color: #00a0d7;
-    color: black;
-}
-
-.body {
-  font-family: "Poppins", sans-serif;
-  background-color: #fafafa;
-}
-
-
-

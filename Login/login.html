@@ -1,54 +1,54 @@
 <!DOCTYPE html>
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login</title>
 
-    <link rel="stylesheet" type="text/css" href="styleLogin.css"/>
-    <link rel="stylesheet" type="text/css" href="../Infra/bootstrap/css/bootstrap.min.css">
-</head>
-<body>
-    <!-- Div da NavBar -->
-    <div id="divNavBar"></div>
-    <div id="wrapper">
-    <div class="modal-dialog margin-meio" role="document">
-      <div class="modal-content rounded-5 shadow">
-        <div class="modal-header p-5 pb-4 border-bottom-0 cor-form">
-            <h2 class="fw-bold mb-0">Login</h2>
-        </div>
+        <link rel="stylesheet" type="text/css" href="styleLogin.css"/>
+        <link rel="stylesheet" type="text/css" href="../Infra/bootstrap/css/bootstrap.min.css">
+    </head>
+    <body>
+        <!-- Div da NavBar -->
+        <div id="divNavBar"></div>
+
+        <div id="wrapper">
+            <div class="modal-dialog margin-meio" role="document">
+                <div class="modal-content rounded-5 shadow">
+                    <div class="modal-header p-5 pb-4 border-bottom-0 cor-form">
+                        <h2 class="fw-bold mb-0">Login</h2>
+                    </div>
+        
+                    <div class="modal-body p-5 pt-0 cor-form">
+                        <form id="form">
+                            <div class="form-floating mb-3">
+                                <!-- O atributo onkeypress possui uma função que garante que o usuário só possa digitar números no campo CPF -->
+                                <input type="text" minlength="11" maxlength="11" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="form-control rounded-4" id="cpf" name="cpf" placeholder="CPF" required>
+                                <label id="labelCpf" for="txtcpf">CPF</label>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control rounded-4" id="senha" name="senha" placeholder="Senha" required>
+                                <label id="labelSenha" for="txtsenha">Senha</label>
+                            </div>
+
+                            <button id="submit" class="w-100 mb-2 btn btn-lg rounded-4 btn-dark">Enviar</button>
+
+                            <div class="row">
+                                <a href="../Cadastro/cadastro.html" class="links col-md-6">Não possui conta ?</a>
+                                <a href="#" class="links recuperar-senha col-md-6">Esqueceu sua senha ?</a>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
     
-        <div class="modal-body p-5 pt-0 cor-form">
-            <form id="form">
-
-            <div class="form-floating mb-3">
-                <!-- O atributo onkeypress possui uma função que garante que o usuário só possa digitar números no campo CPF -->
-                <input type="text" minlength="11" maxlength="11" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="form-control rounded-4" id="cpf" name="cpf" placeholder="CPF" required>
-                <label id="labelCpf" for="txtcpf">CPF</label>
-            </div>
-
-            <div class="form-floating mb-3">
-                <input type="password" class="form-control rounded-4" id="senha" name="senha" placeholder="Senha" required>
-                <label id="labelSenha" for="txtsenha">Senha</label>
-            </div>
-
-            <button id="submit" class="w-100 mb-2 btn btn-lg rounded-4 btn-dark">Enviar</button>
-
-            <div class="row">
-                <a href="../Cadastro/cadastro.html" class="links col-md-6">Não possui conta ?</a>
-                <a href="#" class="links recuperar-senha col-md-6">Esqueceu sua senha ?</a>
-            </div>
-
-            </form>
+            <!-- Div para o Footer -->
+            <div id="divFoot"></div>
         </div>
-      </div>
-    </div>
-
- 
-    <!-- Div para o Footer -->
-    <div id="divFoot"></div>
-    </div>
-</body>
+    </body>
 </html>
 
 <!-- Scripts de JavaScript -->
