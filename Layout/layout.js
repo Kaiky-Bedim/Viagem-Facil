@@ -14,6 +14,7 @@ export class Layout{
                 document.getElementById("aQrCode").className = " escondido";
                 document.getElementById("aPagamento").className = " escondido";
                 document.getElementById("aPasse").className = " escondido";
+                document.getElementById("btnLogout").className = " escondido";
                 document.getElementById("divButtonDropdown").className = " escondido";
             }
             }
@@ -22,10 +23,11 @@ export class Layout{
     }
    
     //Método que carrega o Foot no local da Div com id = divFoot
-   carregarFoot(urlFoot) {
+   carregarFoot(urlFoot, urlCSS) {
        const xhttp = new XMLHttpRequest();
        xhttp.onload = function() {
            document.getElementById("divFoot").innerHTML = this.responseText;
+           document.getElementById("css").setAttribute("href", urlCSS);
            }
        xhttp.open("GET", urlFoot, true);
        xhttp.send();

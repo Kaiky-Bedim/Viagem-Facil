@@ -9,66 +9,86 @@
 			<a 
 				href = "../Main/main.html"
 				class="navbar-brand mb-0 h1">
-					<img 
+				<img 
 					class="d-inline-block "
 					src="../Infra/img/Logo_Final.jpeg" 
 					width="100" height="70"/>
 				<b>Viagem Fácil</b>
-				</a> 
-				<button 
-				type="button"
-				data-bs-toggle="collapse"
-				data-bs-target="#navbarNav"
-				class="navbar-toggler"	
-				aria-controls = "navbarNav"
-				aria-expanded = "false"
-				aria-label = "Toggle navigation"
-				>
-					<span class = "navbar-toggler-icon"></span>
-				</button>
-				
-				<div class = "collapse navbar-collapse d-lg-flex" id="navbarNav">
-					<ul class = "navbar-nav ">
-						<li class = "nav-item active">
-							<a id="aQrCode" href = "../Qrcode/qrcode.html" class = "nav-link">
-								Qr Code's
-							</a>
-						</li>
-						<li class = "nav-item active">
-							<a id="aPagamento" href = "../Pagamento/pagamento.html" class = "nav-link">
-								Aquisição de Créditos
-							</a>
-						</li>
-						<li class = "nav-item active">
-							<a id="aPasse" href = "../Passe/passe.html" class = "nav-link">
-								Controle de Passes
-							</a>
-						</li>
-					</ul>
-				</div>
+			</a> 
+			<button 
+			type="button"
+			data-bs-toggle="collapse"
+			data-bs-target="#navbarNav"
+			class="navbar-toggler"	
+			aria-controls = "navbarNav"
+			aria-expanded = "false"
+			aria-label = "Toggle navigation">
 
-				<div class = "collapse navbar-collapse d-lg-flex justify-content-end" id="navbarNav">
-					<ul class = "navbar-nav ">
-						<!-- Default dropstart button -->
-						<div class="btn-group dropstart" id="divButtonDropdown">
-							<button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-								Passes
-							</button>
-							<ul class="dropdown-menu">
-								<!-- Dropdown menu links -->
-								<li><a class="dropdown-item" href="#">Passe 1</a></li>
-								<li><a class="dropdown-item" href="#">Passe 2</a></li>
-								<li><a class="dropdown-item" href="#">Passe 3</a></li>
-								<li><hr class="dropdown-divider"></li>
-								<li><a class="dropdown-item" href="../CadastroPasse/cadastroPasse.html">Adicionar Passe</a></li>
-							</ul>
-						</div>
-					</ul>
-				</div>
-			</div>	
-			<input type="hidden" id="autenticado" name="autenticado" value=false>	
+			<span class = "navbar-toggler-icon"></span>
+			</button>
+			
+			<div class = "collapse navbar-collapse d-lg-flex" id="navbarNav">
+				<ul class = "navbar-nav ">
+					<li class = "nav-item active">
+						<a id="aQrCode" href = "../Qrcode/qrcode.html" class = "nav-link">
+							Qr Code's
+						</a>
+					</li>
+					<li class = "nav-item active">
+						<a id="aPagamento" href = "../Pagamento/pagamento.html" class = "nav-link">
+							Aquisição de Créditos
+						</a>
+					</li>
+					<li class = "nav-item active">
+						<a id="aPasse" href = "../Passe/passe.html" class = "nav-link">
+							Controle de Passes
+						</a>
+					</li>
+					<li class = "nav-item active">
+						<button type="button" id="btnLogout" class="cor-texto btn-dark btn" onclick="
+						let httpRequest = new XMLHttpRequest();
+						httpRequest.open('GET', '../Infra/Autenticacao/controllerLogout.php');
+						httpRequest.send();
+						httpRequest.onreadystatechange = function(){
+							if(this.readyState == 4){
+								if(this.status == 200){
+									if(this.response == 'Sucesso'){
+										//Removendo as sessions no lado do navegador
+										window.sessionStorage.setItem('autenticado', 'false');
+										window.location.href = '../Login/login.html';
+									}else{
+										alert(this.response);
+									}
+								}else{
+									alert('Não foi possível terminar a requisição');
+								}
+							}
+						}">
+							Logout
+						</button>
+					</li>
+				</ul>
+			</div>
+
+			<div class = "collapse navbar-collapse d-lg-flex justify-content-end" id="navbarNav">
+				<ul class = "navbar-nav ">
+					<!-- Default dropstart button -->
+					<div class="btn-group dropstart" id="divButtonDropdown">
+						<button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+							Passes
+						</button>
+						<ul class="dropdown-menu">
+							<!-- Dropdown menu links -->
+							<li><a class="dropdown-item" href="#">Passe 1</a></li>
+							<li><a class="dropdown-item" href="#">Passe 2</a></li>
+							<li><a class="dropdown-item" href="#">Passe 3</a></li>
+							<li><hr class="dropdown-divider"></li>
+							<li><a class="dropdown-item" href="../CadastroPasse/cadastroPasse.html">Adicionar Passe</a></li>
+						</ul>
+					</div>
+				</ul>
+			</div>
 		</nav>
 	</div>
-
 </body>
 </html>

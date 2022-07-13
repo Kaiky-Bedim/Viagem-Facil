@@ -1,4 +1,9 @@
 import { Layout } from "../Layout/layout.js";
+import { Autenticador } from "../Infra/Autenticacao/autenticador.js";
+
+var autenticador = new Autenticador();
+//Mátodo que garante a autenticação do nosso usuário
+autenticador.garantirAutenticacao("../Infra/Autenticacao/controllerAutenticacao.php", "../Login/login.html");
 
 //Código para realizar os preenchimentos do cartão com animação
 function PreencheCartaoAnimacao(){
