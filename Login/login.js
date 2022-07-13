@@ -29,18 +29,22 @@ function ValidaCPF(){
         }else if(cpf.value.length > 0 && cpf.value.length < 11){
             cpf.setCustomValidity("Um CPF válido deve possuir 11 dígitos");
         }
+        return;
     }
+    document.getElementById("labelCpf").innerHTML = "CPF";
 }
 
 function ValidaSenha(){
     //Apaga as mensagens de erro anteriores
     senha.setCustomValidity("");
     //Reexecuta validação
-    document.getElementById("labelSenha").innerHTML = "Senha*";
     if (!senha.validity.valid) {
         //Se inválido, coloca mensagem de erro
+        document.getElementById("labelSenha").innerHTML = "Senha*";
         senha.setCustomValidity("O campo Senha é obrigatório");
+        return;
     }
+    document.getElementById("labelSenha").innerHTML = "Senha";
 }
 
 cpf.oninput = function(){
@@ -87,7 +91,7 @@ form.addEventListener("submit", function(event){
 function VerificaLogin(login){
     if(login == true){
         alert("Login realizado com sucesso");
-        window.location.href = "../Index/index.html";
+        window.location.href = "../Main/main.html";
     }else if(login.includes("Sem conexão com o servidor")){
         alert("Ocorreu algum erro interno na requisição com o servidor");
         ResetaSenha();
@@ -100,5 +104,7 @@ function VerificaLogin(login){
 function ResetaSenha(){
     senha.value = "";
     senha.focus();
+    document.getElementById("labelCpf").innerHTML = "CPF";
+    document.getElementById("labelSenha").innerHTML = "Senha";
 }
 //Código do Login via AJAX termina aqui
