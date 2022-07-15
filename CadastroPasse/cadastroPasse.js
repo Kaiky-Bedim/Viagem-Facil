@@ -37,3 +37,4 @@ layout.carregarFoot("../Layout/foot.html", "../Layout/styleLayout.css");
 
 //Chamando o código para preencher o cartão com animação
 PreencheCartaoAnimacao();
+

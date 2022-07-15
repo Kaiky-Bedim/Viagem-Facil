@@ -32,7 +32,14 @@
 							</a>
 						</li>
 						<li class = "nav-item active">
-							<button type="button" id="btnLogout" class="cor-texto btn-dark btn" onclick="
+							
+						</li>
+					</ul>
+				</div>
+
+				<div class = "collapse navbar-collapse d-lg-flex justify-content-end" id="navbarNav">
+					<ul class = "navbar-nav ">
+						<button type="button" id="btnLogout" class="cor-texto btn-dark btn" onclick="
 							let httpRequest = new XMLHttpRequest();
 							httpRequest.open('GET', '../Infra/Autenticacao/controllerLogout.php');
 							httpRequest.send();
@@ -52,27 +59,7 @@
 								}
 							}">
 								Logout
-							</button>
-						</li>
-					</ul>
-				</div>
-
-				<div class = "collapse navbar-collapse d-lg-flex justify-content-end" id="navbarNav">
-					<ul class = "navbar-nav ">
-						<!-- Default dropstart button -->
-						<div class="btn-group dropstart" id="divButtonDropdown">
-							<button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-								Passes
-							</button>
-							<ul class="dropdown-menu">
-								<!-- Dropdown menu links -->
-								<li><a class="dropdown-item" href="#">Passe 1</a></li>
-								<li><a class="dropdown-item" href="#">Passe 2</a></li>
-								<li><a class="dropdown-item" href="#">Passe 3</a></li>
-								<li><hr class="dropdown-divider"></li>
-								<li><a class="dropdown-item" href="../CadastroPasse/cadastroPasse.html">Adicionar Passe</a></li>
-							</ul>
-						</div>
+						</button>
 					</ul>
 				</div>
 			</nav>

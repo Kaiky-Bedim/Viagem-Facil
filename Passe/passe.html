@@ -12,11 +12,11 @@
         <link rel="stylesheet" type="text/css" href="stylePasse.css"/>
         <link rel="stylesheet" type="text/css" href="../Infra/bootstrap/css/bootstrap.min.css"/>
     </head>
-    <body>
+    <body onLoad="Evt_onLoad()">
         <div id="divNavBar"></div>
 
         <div id="wrapper">
-            <div class="container-fluid ">
+            <div class="container-fluid">
                 <br><br/>
                 <div class="modal modal-signin position-static d-block " tabindex="-1" role="dialog">
                     <div class="modal-dialog modal-xl" role="document">
@@ -77,9 +77,23 @@
                                     </div>
 
                                     <br/><br/>  
+                                    <!--VAI TOMA NO CU DESSES BOTAO (ARRUMAR ALINHAMENTO)-->
+                                    <div class="form-group">
+                                        <button class="btn btn-primary btn-lg float-left" type="submit">Deletar Passe</button>
+   
+                                        <div class="btn-toolbar float-center" role="toolbar" aria-label="Toolbar with button groups">
+                                            <!--Id opcoesPasse-->
+                                            <div class="btn-group me-2 text-center" role="group" id="OpcoesPasse" aria-label="Meio grupo">
+                                                <!--<button type="button" class="btn btn-secondary">1</button>-->
+                                                
+                                            </div>
+             
+                                        </div>
+                                        <!--NÃO VAI PARA A TELA CADASTROPASSE.HTML-->
+                                        <button class="btn btn-primary btn-lg float-right" id="CadastrarPasse">Cadastrar novo Passe</button>
+                                    </div>
 
-                                    <button class="btn btn-primary btn-lg" style="float: right" type="submit">Cadastrar novo Passe</button>
-                                    <button class="btn btn-primary btn-lg" style="float: left" type="submit">Deletar Passe</button>
+           
                                 
                                 </form>
                             </div>

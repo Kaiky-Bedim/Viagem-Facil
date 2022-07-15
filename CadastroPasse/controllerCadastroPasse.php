@@ -18,6 +18,7 @@ $res = $cadastroPasse->CadastrarPasse($con);
 
 if($res == true){
     echo "Cadastro realizado com sucesso";
+    header('Location: cadastroPasse.html');
 }else{
     echo "Não foi possível realizar o cadastro";
 }
