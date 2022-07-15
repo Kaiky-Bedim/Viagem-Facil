@@ -59,3 +59,17 @@ html, body {
 .escondido{
     display: none;
 }
+
+.margin-span{
+    margin-top: 6%;
+    margin-left: -19%;
+}
+
+.margin-logout{
+    margin-right: -8%;
+    margin-left: 8%;
+}
+
+.margin-logo{
+    margin-left: 1%;
+}

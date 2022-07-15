@@ -1,12 +1,12 @@
 <!DOCTYPE html>
     <link rel="stylesheet" type="text/css" href="../Infra/bootstrap/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="styleLayout.css" id="css"/>
+    <link rel="stylesheet" type="text/css" href="" id="css"/>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 	
 	<body>
 		<div class="textoFormatado">
 			<nav class="navbar navbar-expand-lg navbar-light textoFormatado">
-				<a href = "../Main/main.html" class="navbar-brand mb-0 h1">
+				<a href = "../Main/main.html" class="navbar-brand mb-0 h1 margin-logo">
 					<img class="d-inline-block " src="../Infra/img/Logo_Final.jpeg" width="100" height="70"/>
 					<b>Viagem Fácil</b>
 				</a> 
@@ -31,15 +31,13 @@
 								Controle de Passes
 							</a>
 						</li>
-						<li class = "nav-item active">
-							
-						</li>
 					</ul>
 				</div>
 
 				<div class = "collapse navbar-collapse d-lg-flex justify-content-end" id="navbarNav">
 					<ul class = "navbar-nav ">
-						<button type="button" id="btnLogout" class="cor-texto btn-dark btn" onclick="
+						<div class="margin-span" id="divCumprimento"></div>
+						<button type="button" id="btnLogout" class="cor-texto btn-dark btn margin-logout" onclick="
 							let httpRequest = new XMLHttpRequest();
 							httpRequest.open('GET', '../Infra/Autenticacao/controllerLogout.php');
 							httpRequest.send();

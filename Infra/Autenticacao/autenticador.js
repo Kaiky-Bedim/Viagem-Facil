@@ -13,7 +13,6 @@ export class Autenticador{
                 if(this.status == 200){
                     if(!this.responseText){
                         window.sessionStorage.setItem("autenticado", "false");
-                        alert("Usuário não autenticado !")
                         window.location.href = pathLogin;
                         return;
                     }

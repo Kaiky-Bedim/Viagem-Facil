@@ -2,7 +2,7 @@
 //como a NavBar e o Footer
 export class Layout{
     //Método que carrega a NavBar no local da Div com id = divNavBar
-    carregarNavBar(urlHead, urlCSS) {
+     async carregarNavBar(urlHead, urlCSS) {
         const xhttp = new XMLHttpRequest();
         xhttp.onload = function() {
             document.getElementById("divNavBar").innerHTML = this.responseText;
@@ -15,7 +15,8 @@ export class Layout{
                 document.getElementById("aPagamento").className = " escondido";
                 document.getElementById("aPasse").className = " escondido";
                 document.getElementById("btnLogout").className = " escondido";
-                document.getElementById("divButtonDropdown").className = " escondido";
+            }else{
+                
             }
             }
         xhttp.open("GET", urlHead, true);
@@ -23,7 +24,7 @@ export class Layout{
     }
    
     //Método que carrega o Foot no local da Div com id = divFoot
-   carregarFoot(urlFoot, urlCSS) {
+   async carregarFoot(urlFoot, urlCSS) {
        const xhttp = new XMLHttpRequest();
        xhttp.onload = function() {
            document.getElementById("divFoot").innerHTML = this.responseText;
