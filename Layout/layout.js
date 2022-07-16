@@ -1,8 +1,12 @@
+import { UsuarioManager } from "../Infra/ContaManager/UsuarioManager/usuarioManager.js";
+
 //Classe Layout, aqui podemos definir todas as interfaces que serão usadas por várias telas,
 //como a NavBar e o Footer
 export class Layout{
+
     //Método que carrega a NavBar no local da Div com id = divNavBar
-     async carregarNavBar(urlHead, urlCSS) {
+    carregarNavBar(urlHead, urlCSS) {
+        var usuarioManager = new UsuarioManager();
         const xhttp = new XMLHttpRequest();
         xhttp.onload = function() {
             document.getElementById("divNavBar").innerHTML = this.responseText;
@@ -16,15 +20,19 @@ export class Layout{
                 document.getElementById("aPasse").className = " escondido";
                 document.getElementById("btnLogout").className = " escondido";
             }else{
-                
+                //O código abaixo trabalha com promises e com requisições assíncronas !!!
+                usuarioManager.buscarDadosUsuario("nome", "../Infra/ContaManager/UsuarioManager/controllerUsuarioManager.php")
+                .then(nome => {
+                    document.getElementById("divCumprimento").innerText = "Olá, " + nome + " !";
+                });
             }
-            }
+        }
         xhttp.open("GET", urlHead, true);
         xhttp.send();
     }
    
     //Método que carrega o Foot no local da Div com id = divFoot
-   async carregarFoot(urlFoot, urlCSS) {
+    carregarFoot(urlFoot, urlCSS) {
        const xhttp = new XMLHttpRequest();
        xhttp.onload = function() {
            document.getElementById("divFoot").innerHTML = this.responseText;
