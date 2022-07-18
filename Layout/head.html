@@ -40,6 +40,9 @@
 					<ul class = "navbar-nav ">
 						<div class="margin-span" id="divCumprimento"></div>
 						<button type="button" id="btnLogout" class="cor-texto btn-dark btn margin-logout" onclick="
+							import { PopUp } from '../Pop-Ups/popUp.js';
+
+							var popUp = new PopUp();
 							let httpRequest = new XMLHttpRequest();
 							httpRequest.open('GET', '../Infra/Autenticacao/controllerLogout.php');
 							httpRequest.send();
@@ -51,10 +54,10 @@
 											window.sessionStorage.setItem('autenticado', 'false');
 											window.location.href = '../Login/login.html';
 										}else{
-											alert(this.response);
+                							popUp.imprimirPopUp('../Pop-Ups/popUp.html', '../Pop-Ups/stylePopUp.css', 'divPopUp', this.response);
 										}
 									}else{
-										alert('Não foi possível terminar a requisição');
+										popUp.imprimirPopUp('../Pop-Ups/popUp.html', '../Pop-Ups/stylePopUp.css', 'divPopUp', 'Não foi possível terminar a requisição');
 									}
 								}
 							}">

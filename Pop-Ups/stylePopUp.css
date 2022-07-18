@@ -1,0 +1,61 @@
+.janela{
+    box-shadow: 10px 10px 19px 0px rgba(29, 28, 28, 0.5);
+}
+
+#content{
+    width: 120%;
+    height: 200px;
+}
+
+.buttonX{
+    background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat;
+    width: 30px;
+    height: 30px;
+    background-color: rgb(255, 0, 0);
+    border-radius: 5px;
+    box-shadow: 7px 7px 13px 0px rgba(50, 50, 50, 0.22);
+    border-width: 0.5px;
+    border-color: rgb(255, 255, 255);
+}
+
+.buttonX:hover{
+    background-color: rgb(235, 13, 13);
+    border-color: rgb(230, 18, 18);
+}
+
+.buttonOK{
+    color: rgb(255, 255, 255);
+    width: 30%;
+    height: 30px;
+    border-radius: 5px;
+    background-color: #0d6efd;
+    border-width: 0.5px;
+    border-color: rgb(255, 255, 255);
+}
+
+.buttonOK:hover {
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+}
+
+#headerPopUp{
+    background-color: #817A87;
+    border-bottom-width: 2px;
+}
+
+#footerPopUp{
+    border-top-width: 2px;
+    background-color: #817A87;
+}
+
+.divPopUp{
+    position: fixed; 
+    z-index: 1; 
+    width: 100%; 
+    margin-left: -3.75%;
+    opacity: 1 !important;
+}
+
+.restantePagina{
+    opacity: 0.5;
+}

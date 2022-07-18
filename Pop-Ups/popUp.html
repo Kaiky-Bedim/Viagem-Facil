@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- O href do css pode ser vazio ou ../Pop-Ups/stylePopUp.css, adicionar o caminho não gera grandes problemas, pq ele é rescrito
+	depois para ser exibido, mas antes disso ele manda uma mensagem de erro chata se for qualquer outra coisa -->
+    <link rel="stylesheet" type="text/css" href="" id="cssPopUp"/>
+    <link rel="stylesheet" type="text/css" href="../Infra/bootstrap/css/bootstrap.min.css"/>
+</head>
+<html>
+    <body>
+        <div class="modal-dialog">
+            <div class="modal-content janela" id="contentPopUp">
+    
+                <div class="modal-header d-flex justify-content-end" id="headerPopUp">
+                    <button type="button" class="buttonX" data-bs-dismiss="modal" id="buttonX"></button>
+                </div>
+                <div class="modal-body" id="textoPopUp"></div>
+                <div class="modal-footer d-flex justify-content-center" id="footerPopUp">
+                    <button type="button" id="buttonFechar" class="buttonOK">OK</button>
+                </div>
+    
+            </div>
+        </div>
+    </body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

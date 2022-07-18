@@ -1,3 +1,5 @@
+import { PopUp } from "../Pop-Ups/popUp.js";
+
 //Essa classe é a responsável por fazer as requisições AJAX para o controller
 //de usuárioManager, recuperando os dados do BD sobre o usuário logado
 
@@ -13,7 +15,8 @@ export class UsuarioManager{
             .then(data => {
                 return data
             }).catch(erro => {
-                alert("Ocorreu um erro inesperado");
+                var popUp = new PopUp();
+                popUp.imprimirPopUp("../../../Pop-Ups/popUp.html", "../../../Pop-Ups/stylePopUp.css", "divPopUp", "Ocorreu um erro inesperado");
                 console.log(erro);
             });
     }

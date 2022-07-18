@@ -89,4 +89,5 @@ if($action == "cartaoJson"){
     echo json_encode($cartao);
 }
 
+$con->FecharConexao();
 ?>

@@ -1,7 +1,11 @@
 import { Layout } from "../Layout/layout.js";
+import { PopUp } from "../Pop-Ups/popUp.js";
 
 //Objeto Layout
 var layout = new Layout();
+
+//Objeto PopUp
+var popUp = new PopUp();
 
 //Esses métodos carregar NavBar e Foot recebem o caminho do head ou foot a partir do html desse script
 //e o caminho para o CSS do Layout a partir daqui
@@ -81,7 +85,7 @@ form.addEventListener("submit", function(event){
             if(this.status == 200){
                 VerificaLogin(this.response);
             }else{
-                alert("Não foi possível terminar a requisição");
+                popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Não foi possível terminar a requisição");
                 ResetaSenha();
             }
         }
@@ -94,10 +98,10 @@ function VerificaLogin(login){
         window.sessionStorage.setItem('autenticado', "true");
         window.location.href = "../Main/main.html";
     }else if(login.includes("Sem conexão com o servidor")){
-        alert("Ocorreu algum erro interno na requisição com o servidor");
+        popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Ocorreu algum erro interno na requisição com o servidor");
         ResetaSenha();
     }else{
-        alert("O CPF ou a senha informados estão incorretos");
+        popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "O CPF ou a senha informados estão incorretos");
         ResetaSenha();
     }
 }

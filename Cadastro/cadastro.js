@@ -1,6 +1,8 @@
 import { Layout } from "../Layout/layout.js";
+import { PopUp } from "../Pop-Ups/popUp.js";
 
 var layout = new Layout();
+var popUp = new PopUp();
 
 //Esses métodos carregar NavBar e Foot recebem o caminho do head ou foot a partir do html desse script
 //e o caminho para o CSS do Layout a partir daqui
@@ -312,7 +314,7 @@ form.addEventListener("submit", function(event){
     event.preventDefault();
 
     if(senha.value != confirmarSenha.value){
-        alert("Os campos senhas não são iguais");
+        popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Os campos senhas não são iguais");
         senha.value = "";
         confirmarSenha.value = "";
         document.getElementById("labelSenha").innerHTML = "Senha*";
@@ -331,7 +333,7 @@ form.addEventListener("submit", function(event){
             if(this.status == 200){
                 VerificaCadastro(this.response);
             }else{
-                alert("Não foi possível terminar a requisição");
+                popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Não foi possível terminar a requisição");
             }
         }
     }
@@ -339,12 +341,12 @@ form.addEventListener("submit", function(event){
 
 function VerificaCadastro(cadastro){
     if(cadastro == true){
-        alert("Cadastro realizado com sucesso");
+        popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Cadastro realizado com sucesso");
         window.location.href = "../Main/main.html";
     }else if(cadastro.includes("Sem conexão com o servidor")){
-        alert("Ocorreu algum erro interno na requisição com o servidor");
+        popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Ocorreu algum erro interno na requisição com o servidor");
     }else{
-        alert("O CPF ou a senha informados estão incorretos");
+        popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "O CPF informado já possui um cadastro no sistema");
     }
 }
 //Código do Login via AJAX termina aqui

@@ -1,3 +1,5 @@
+import { PopUp } from "../Pop-Ups/popUp.js";
+
 //Classe Autenticador, ela basicamente dece estar presente em todas as telas e chamar um
 //método simples que só vai enviar uma requisição para o controllerAutenticacao, que verificará
 //se o usuário está logado, se não estiver, ele será direcionado para a tela de Login
@@ -18,7 +20,8 @@ export class Autenticador{
                     }
                     window.sessionStorage.setItem("autenticado", "true");
                 }else{
-                    alert("Estamos com problemas com a sua autenticação");
+                    var popUp = new PopUp();
+                    popUp.imprimirPopUp("../../Pop-Ups/popUp.html", "../../Pop-Ups/stylePopUp.css", "divPopUp", "Estamos com problemas com a sua autenticação");
                     window.sessionStorage.setItem("autenticado", "false");
                     window.location.href = pathLogin;
                 }

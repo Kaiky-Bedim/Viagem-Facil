@@ -65,4 +65,7 @@ if($action == "cep"){
 if($action == "usuarioJson"){
     echo json_encode($usuario);
 }
+
+$con->FecharConexao();
+
 ?>

@@ -13,6 +13,7 @@ class Login{
         $sql = "select cpf, senha from Senhas where cpf = sha('".$this->cpf."') and senha = sha('".$this->senha."');";
         $res = mysqli_query($this->conexao->getConexao(), $sql);
 
+        $this->conexao->FecharConexao();
         if(mysqli_num_rows($res) != 1){
             return false;
         }else{
