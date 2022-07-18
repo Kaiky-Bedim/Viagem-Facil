@@ -30,15 +30,17 @@
 						<div class="flexbox">
 							<div class="box">
 								<span>Numero Serial:</span>
-								<div class="card-holder-name"> </div>
+								<div id="card-holder-name"> </div>
 							</div>
 						</div>
 						
 						<div class="flexbox">
+							
 							<div class="box">
 								<span>Numero de Fabrica:</span>
-								<div class="card-number-box"></div>
+								<div id="card-number-box"></div>
 							</div>
+
 							<div class="box desce">
 								<span class="desce">Passe:</span>
 								<div class="expiration">
@@ -51,16 +53,8 @@
 
 				<!-- Começo do Form -->
 
-				<form method="post" action="controllerCadastroPasse.php">
-					<div class = "flexbox">		
-						<div class="inputBox">
-							<span>Serie</span>
-							<input type="text" name="txtNumSerial" maxlength="12"  class="card-holder-input">
-						</div>
-						<div class="inputBox">
-							<span>Fabrica</span>
-							<input type="text" name="txtNumFabrica" maxlength="12" class="card-number-input">
-						</div>
+				<form id="form">
+					<div class = "flexbox">				
 						<div class="inputBox">
 							<span>Tipo cartão</span>
 							<select name="txtTipoCartao" id="txtTipoCartao" class="month-input">
@@ -72,7 +66,7 @@
 						</div>
 				
 					</div>
-					<input type="submit" value="Cadastrar Passe" id="AdicionarPasse" class="submit-btn">
+					<input type="submit" id value="Cadastrar Passe" id="submit" class="submit-btn">
 				</form>
 				<!-- Fim do Form -->
 				<br></br>

@@ -2,29 +2,17 @@ import { Layout } from "../Layout/layout.js";
 import { Autenticador } from "../Infra/Autenticacao/autenticador.js";
 
 var autenticador = new Autenticador();
+var numeroSerie = Math.floor(Math.random() * (9999999 - 1000000)) + 1000000;
+var numeroFabrica = Math.floor(Math.random() * (999999999 - 100000000)) + 100000000;
 //Mátodo que garante a autenticação do nosso usuário
 autenticador.garantirAutenticacao("../Infra/Autenticacao/controllerAutenticacao.php", "../Login/login.html");
 
 //Código para realizar os preenchimentos do cartão com animação
 function PreencheCartaoAnimacao(){
-    document.querySelector(".card-number-input").oninput = () =>{
-        document.querySelector('.card-number-box').innerText = document.querySelector('.card-number-input').value;
-    }
-    
-    document.querySelector(".card-holder-input").oninput = () =>{
-        document.querySelector('.card-holder-name').innerText = document.querySelector('.card-holder-input').value;
-    }
-    
-    document.querySelector(".month-input").oninput = () =>{
-        document.querySelector('.exp-month').innerText = document.querySelector('.month-input').value;
-    }
-    
-    document.querySelector(".year-input").oninput = () =>{
-        document.querySelector('.exp-year').innerText = document.querySelector('.year-input').value;
-    }
-    
-    document.querySelector(".cvv-input").oninput = () =>{
-        document.querySelector('.cvv-box').innerText = document.querySelector('.cvv-input').value;
+        document.getElementById("card-holder-name").innerHTML = numeroSerie;
+        document.getElementById("card-number-box").innerHTML = numeroFabrica;
+        document.querySelector(".month-input").oninput = () =>{
+            document.querySelector('.exp-month').innerText = document.querySelector('.month-input').value;
     }
 }
 
@@ -38,3 +26,27 @@ layout.carregarFoot("../Layout/foot.html", "../Layout/styleLayout.css");
 //Chamando o código para preencher o cartão com animação
 PreencheCartaoAnimacao();
 
+
+const form = document.getElementById("form");
+
+//Colocando um listener para alterar o comportamento do Form
+form.addEventListener("submit", function(event){
+    event.preventDefault();
+
+    let data = new FormData(form);
+    let httpRequest = new XMLHttpRequest();
+
+    httpRequest.open("POST", "controllerCadastroPasse.php");
+    httpRequest.setRequestHeader("X-Content-Type-Options", "multipart/form-data");
+    httpRequest.send(data);
+    httpRequest.onreadystatechange = function(){
+        if(this.readyState == 4){
+            if(this.status == 200){
+                VerificaLogin(this.response);
+            }else{
+                alert("Não foi possível terminar a requisição");
+                ResetaSenha();
+            }
+        }
+    }
+});

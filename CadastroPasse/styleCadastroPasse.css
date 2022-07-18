@@ -29,14 +29,15 @@
 
 .bloco form .inputBox input,
 .bloco form .inputBox select{
-    width: 100%;
+    width: 50%;
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 30px;
     border:1px solid rgba(0,0,0,.3);
     color:#444;
 }
 
 .bloco form .flexbox{
+    text-align: center;
     display: flex;
     gap:15px;
 }

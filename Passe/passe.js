@@ -1,5 +1,6 @@
 import { Autenticador } from "../Infra/Autenticacao/autenticador.js";
 import { Layout } from "../Layout/layout.js";
+import { PopUp } from "../Pop-Ups/popUp.js";
 
 var autenticador = new Autenticador();
 //Mátodo que garante a autenticação do nosso usuário
