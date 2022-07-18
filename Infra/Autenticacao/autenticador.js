@@ -1,4 +1,4 @@
-import { PopUp } from "../Pop-Ups/popUp.js";
+import { PopUp } from "../../Pop-Ups/popUp.js";
 
 //Classe Autenticador, ela basicamente dece estar presente em todas as telas e chamar um
 //método simples que só vai enviar uma requisição para o controllerAutenticacao, que verificará

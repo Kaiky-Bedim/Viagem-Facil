@@ -39,29 +39,8 @@
 				<div class = "collapse navbar-collapse d-lg-flex justify-content-end" id="navbarNav">
 					<ul class = "navbar-nav ">
 						<div class="margin-span" id="divCumprimento"></div>
-						<button type="button" id="btnLogout" class="cor-texto btn-dark btn margin-logout" onclick="
-							import { PopUp } from '../Pop-Ups/popUp.js';
-
-							var popUp = new PopUp();
-							let httpRequest = new XMLHttpRequest();
-							httpRequest.open('GET', '../Infra/Autenticacao/controllerLogout.php');
-							httpRequest.send();
-							httpRequest.onreadystatechange = function(){
-								if(this.readyState == 4){
-									if(this.status == 200){
-										if(this.response == 'Sucesso'){
-											//Removendo as sessions no lado do navegador
-											window.sessionStorage.setItem('autenticado', 'false');
-											window.location.href = '../Login/login.html';
-										}else{
-                							popUp.imprimirPopUp('../Pop-Ups/popUp.html', '../Pop-Ups/stylePopUp.css', 'divPopUp', this.response);
-										}
-									}else{
-										popUp.imprimirPopUp('../Pop-Ups/popUp.html', '../Pop-Ups/stylePopUp.css', 'divPopUp', 'Não foi possível terminar a requisição');
-									}
-								}
-							}">
-								Logout
+						<button type="button" id="btnLogout" class="cor-texto btn-dark btn margin-logout">
+							Logout
 						</button>
 					</ul>
 				</div>

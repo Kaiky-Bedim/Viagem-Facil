@@ -1,4 +1,4 @@
-import { PopUp } from "../Pop-Ups/popUp.js";
+import { PopUp } from "../../../Pop-Ups/popUp.js";
 
 //Essa classe é a responsável por fazer as requisições AJAX para o controller
 //de cartoesManager, recuperando os dados do BD sobre os cartões do usuário logado

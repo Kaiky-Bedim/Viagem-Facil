@@ -1,4 +1,5 @@
 import { UsuarioManager } from "../Infra/ContaManager/UsuarioManager/usuarioManager.js";
+import { PopUp } from '../Pop-Ups/popUp.js';
 
 //Classe Layout, aqui podemos definir todas as interfaces que serão usadas por várias telas,
 //como a NavBar e o Footer
@@ -24,6 +25,29 @@ export class Layout{
                 usuarioManager.buscarDadosUsuario("nome", "../Infra/ContaManager/UsuarioManager/controllerUsuarioManager.php")
                 .then(nome => {
                     document.getElementById("divCumprimento").innerText = "Olá, " + nome + " !";
+                });
+
+                //Código para o botão LogOut
+                var popUp = new PopUp();
+                document.getElementById("btnLogout").addEventListener("click", function(){
+                    let httpRequest = new XMLHttpRequest();
+                    httpRequest.open('GET', '../Infra/Autenticacao/controllerLogout.php');
+                    httpRequest.send();
+                    httpRequest.onreadystatechange = function(){
+                        if(this.readyState == 4){
+                            if(this.status == 200){
+                                if(this.response == 'Sucesso'){
+                                    //Removendo as sessions no lado do navegador
+                                    window.sessionStorage.setItem('autenticado', 'false');
+                                    window.location.href = '../Login/login.html';
+                                }else{
+                                    popUp.imprimirPopUp('../Pop-Ups/popUp.html', '../Pop-Ups/stylePopUp.css', 'divPopUp', this.response);
+                                }
+                            }else{
+                                popUp.imprimirPopUp('../Pop-Ups/popUp.html', '../Pop-Ups/stylePopUp.css', 'divPopUp', 'Não foi possível terminar a requisição');
+                            }
+                        }
+                    }
                 });
             }
         }
