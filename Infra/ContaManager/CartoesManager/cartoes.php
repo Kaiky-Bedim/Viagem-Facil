@@ -2,9 +2,12 @@
 
 class Cartoes implements JsonSerializable{
     private $qtdCartoes;
+
     private $numeroSerie;
     private $numeroFabrica;
     private $tipoCartao;
+    private $situacao;
+    private $empresa;
     private $bloqueado;
     private $cpfProprietario;
     private $saldo;
@@ -25,11 +28,17 @@ class Cartoes implements JsonSerializable{
             $this->numeroSerie[$index] = $row['NumeroSerie'];
             $this->numeroFabrica[$index] = $row['NumeroFabrica'];
             $this->tipoCartao[$index] = $row['TipoCartao'];
+            $this->situacao[$index] = $row['Situacao'];
+            $this->empresa[$index] = $row['Empresa'];
             $this->bloqueado[$index] = $row['Bloqueado'];
             $this->cpfProprietario = $row['CPFProprietario'];
             $this->saldo[$index] = $row['Saldo'];
             $index++;
         }
+    }
+
+    public function GetQtdCartoes(){
+        return $this->qtdCartoes;
     }
 
     //Métodos que retornam os valores dos campos de um único cartão
@@ -43,6 +52,14 @@ class Cartoes implements JsonSerializable{
 
     public function GetTipoCartao($index){
         return $this->tipoCartao[$index];
+    }
+
+    public function GetSituacao($index){
+        return $this->situacao[$index];
+    }
+
+    public function GetEmpresa($index){
+        return $this->empresa[$index];
     }
 
     public function GetBloqueado($index){
@@ -70,6 +87,14 @@ class Cartoes implements JsonSerializable{
         return json_encode($this->tipoCartao);
     }
 
+    public function GetSituacoes(){
+        return json_encode($this->situacao);
+    }
+
+    public function GetEmpresas(){
+        return json_encode($this->empresa);
+    }
+
     public function GetBloqueados(){
         return json_encode($this->bloqueado);
     }
@@ -84,6 +109,8 @@ class Cartoes implements JsonSerializable{
             'numeroSerie' => $this->GetNumeroSeries(),
             'numeroFabrica' => $this->GetNumeroFabricas(),
             'tipoCartao' => $this->GetTipoCartoes(),
+            'situacao' => $this->GetSituacoes(),
+            'empresa' => $this->GetEmpresas(),
             'bloqueado' => $this->GetBloqueados(),
             'CPFProprietario' => $this->GetCPFProprietario(),
             'saldo' => $this->GetSaldos(),

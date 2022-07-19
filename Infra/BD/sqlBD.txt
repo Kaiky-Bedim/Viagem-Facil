@@ -11,6 +11,7 @@ create table DadosCadastrais(
 CPF varchar(11) PRIMARY KEY NOT NULL,
 RG varchar(9) NOT NULL,
 Nome varchar(50) NOT NULL,
+DataNascimento varchar(10) NOT NULL,
 Telefone1 varchar(11) NOT NULL,
 Telefone2 varchar(11),
 Email varchar(50) NOT NULL,
@@ -26,11 +27,15 @@ create table Cartao(
 NumeroSerie varchar(7) PRIMARY KEY NOT NULL,
 NumeroFabrica varchar(9) NOT NULL,
 TipoCartao varchar(50) NOT NULL,
+Situacao varchar(30) NOT NULL,
+Empresa varchar(30) NOT NULL,
 Bloqueado boolean NOT NULL,
 CPFProprietario varchar(11) NOT NULL,
 Saldo double NOT NULL,
 FOREIGN KEY (CPFProprietario) REFERENCES DadosCadastrais (CPF),
-CHECK (TipoCartao <=> "Normal" or TipoCartao <=> "Estudantil" or TipoCartao <=> "Idoso")
+CHECK (TipoCartao <=> "Normal" or TipoCartao <=> "Estudantil" or TipoCartao <=> "Idoso"),
+CHECK (Situacao <=> "Aprovado" or Situacao <=> "Reprovado" or Situacao <=> "Aguardando"),
+CHECK (Empresa <=> "Maringá do Vale" or Empresa <=> "Viação Jacareí")
 );
 
 create table Percursos(

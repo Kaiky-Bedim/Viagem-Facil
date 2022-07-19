@@ -16,6 +16,7 @@ const nome = document.getElementById("txtNome");
 const email = document.getElementById("txtEmail");
 const cpf = document.getElementById("txtCPF");
 const rg = document.getElementById("txtRG");
+const dataNascimento = document.getElementById("txtDataNascimento");
 const senha = document.getElementById("txtSenha");
 const confirmarSenha = document.getElementById("txtConfirmarSenha");
 const estado = document.getElementById("txtEstado");
@@ -100,6 +101,25 @@ function ValidaRG(){
             return;
         }
         document.getElementById("labelRG").innerHTML = "RG";
+    }
+}
+
+function ValidaDataNascimento(){
+    dataNascimento.setCustomValidity("");
+
+    if(!primeiraTentativa){
+        //Reexecuta validação
+        if (!dataNascimento.validity.valid) {
+            //Se inválido, coloca mensagem de erro
+            document.getElementById("labelDataNascimento").innerHTML = "Data Nascimento*";
+            if(dataNascimento.value == ""){
+                dataNascimento.setCustomValidity("O campo Data Nascimento é obrigatório");
+            }else{
+                dataNascimento.setCustomValidity("Uma data válida deve estar entre 01/01/1900 e 01/01/2022");
+            }
+            return;
+        }
+        document.getElementById("labelDataNascimento").innerHTML = "Data Nascimento";
     }
 }
 
@@ -246,6 +266,7 @@ button.onclick = function(){
     ValidaEmail();
     ValidaCPF();
     ValidaRG();
+    ValidaDataNascimento();
     ValidaSenha();
     ValidaConfirmarSenha();
     ValidaEstado();
@@ -270,6 +291,10 @@ cpf.oninput = function(){
 
 rg.oninput = function(){
     ValidaRG();
+}
+
+dataNascimento.oninput = function(){
+    ValidaDataNascimento();
 }
 
 senha.oninput = function(){
@@ -331,6 +356,7 @@ form.addEventListener("submit", function(event){
     httpRequest.onreadystatechange = function(){
         if(this.readyState == 4){
             if(this.status == 200){
+                console.log(this.response);
                 VerificaCadastro(this.response);
             }else{
                 popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Não foi possível terminar a requisição");

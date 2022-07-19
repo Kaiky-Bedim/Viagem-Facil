@@ -17,6 +17,10 @@ $con = new Conexao();
 $cartao = new Cartoes();
 $cartao->SetAtributosCartoes($con);
 
+if($action == "qtdCartoes"){
+    echo $cartao->GetQtdCartoes();
+}
+
 //Criei vários métodos, que seriam as ações que se pode tomar neste controller e os dados que se pode recuperar do usuário
 //Métodos para recuperar os valores de um único cartão
 if($action == "numeroSerie"){
@@ -38,6 +42,22 @@ if($action == "numeroFabrica"){
 if($action == "tipoCartao"){
     if(isset($index)){
         echo $cartao->GetTipoCartao($index);
+    }else{
+        echo "Informe o índice do cartão na requisição";
+    }
+}
+
+if($action == "situacao"){
+    if(isset($index)){
+        echo $cartao->GetSituacao($index);
+    }else{
+        echo "Informe o índice do cartão na requisição";
+    }
+}
+
+if($action == "empresa"){
+    if(isset($index)){
+        echo $cartao->GetEmpresa($index);
     }else{
         echo "Informe o índice do cartão na requisição";
     }
@@ -74,6 +94,14 @@ if($action == "numeroFabricas"){
 
 if($action == "tipoCartoes"){
     echo $cartao->GetTipoCartoes();
+}
+
+if($action == "situacoes"){
+    echo $cartao->GetSituacoes();
+}
+
+if($action == "empresas"){
+    echo $cartao->GetEmpresas();
 }
 
 if($action == "bloqueados"){

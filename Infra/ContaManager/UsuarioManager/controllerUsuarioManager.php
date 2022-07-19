@@ -26,6 +26,10 @@ if($action == "nome"){
     echo $usuario->GetNome();
 }
 
+if($action == "dataNascimento"){
+    echo $usuario->GetDataNascimento();
+}
+
 if($action == "telefone1"){
     echo $usuario->GetTelefone1();
 }

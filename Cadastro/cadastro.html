@@ -41,20 +41,30 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-3">
+                                    <div class="col-4">
                                         <div class="form-floating mb-3">
                                             <input type="text" minlength="11" maxlength="11" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="form-control rounded-4" id="txtCPF" name="CPF" placeholder="CPF" required>
                                             <label id="labelCPF" for="txtCPF">CPF</label>
                                         </div>                      
                                     </div>
 
-                                    <div class="col-3">
+                                    <div class="col-4">
                                         <div class="form-floating mb-3">
                                             <input type="text" minlength="9" maxlength="9" required class="form-control rounded-4" id="txtRG" name="RG" placeholder="RG">
                                             <label id="labelRG" for="txtRG">RG</label>
                                         </div>                       
                                     </div>
 
+                                    <div class="col-4">
+                                        <div class="form-floating mb-3">
+                                            <input type="date" required class="form-control rounded-4" id="txtDataNascimento" name="DataNascimento" placeholder="Data Nascimento" max="2022-01-01" min="1900-01-01">
+                                            <label id="labelDataNascimento" for="txtDataNascimento">Data Nascimento</label>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
                                     <div class="col-3">
                                         <div class="form-floating mb-3">
                                             <input type="password" class="form-control rounded-4" id="txtSenha" name="Senha" placeholder="Senha" required>
@@ -68,9 +78,7 @@
                                             <label id="labelConfirmarSenha" for="txtConfirmarSenha">Confirmar Senha</label>
                                         </div>
                                     </div>  
-                                </div>
 
-                                <div class="row">
                                     <!-- Caixa de Lista em Estado -->
                                     <div class="col-2">
                                         <div class="form-floating mb-3">
@@ -114,18 +122,18 @@
                                             <label id="labelCidade" for="txtCidade">Cidade</label>
                                         </div>
                                     </div>
-                                    
+                                </div>
+
+                                <div class="row">
+
                                     <div class="col-6">
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control rounded-4" id="txtRua" name="Rua" placeholder="Rua" required maxlength="30">
                                             <label id="labelRua" for="txtRua">Rua</label>
                                         </div>
                                     </div>
-                    
-                                </div>
 
-                                <div class="row">
-                                    <div class="col-2">
+                                    <div class="col-3">
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control rounded-4" id="txtNumero" name="Numero" placeholder="Número" maxlength="7" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required>
                                             <label id="labelNumero" for="txtNumero">Número</label>
@@ -139,23 +147,24 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-7">
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-6">
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control rounded-4" id="txtComplemeto" name="Complemento" placeholder="Complemento" maxlength="30">
                                             <label id="labelComplemento" for="txtComplemeto">Complemento</label>
                                         </div>
-                                    </div>                        
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-6">
+                                    </div>             
+                                    <div class="col-3">
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control rounded-4" id="txtTelefone1" name="Telefone1" placeholder="Telefone 1" required maxlength="11" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                                             <label id="labelTelefone1" for="txtTelefone1">Telefone 1</label>
                                         </div>
                                     </div>
                                     
-                                    <div class="col-6">
+                                    <div class="col-3">
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control rounded-4" id="txtTelefone2" name="Telefone2" placeholder="Telefone 2" maxlength="11" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                                             <label id="labelTelefone2" for="txtTelefone2">Telefone 2</label>

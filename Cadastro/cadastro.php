@@ -1,24 +1,25 @@
 <?php
 
 class Cadastro {
-    public $nome;
-    public $email;
-    public $cpf;
-    public $rg;
-    public $senha;
-    public $confirmSenha;
-    public $estado;
-    public $cidade;
-    public $rua;
-    public $numero;
-    public $cep;
-    public $complemento;
-    public $telefone1;
-    public $telefone2;
-    public $conexao;
+    private $nome;
+    private $email;
+    private $cpf;
+    private $rg;
+    private $dataNascimento;
+    private $senha;
+    private $confirmSenha;
+    private $estado;
+    private $cidade;
+    private $rua;
+    private $numero;
+    private $cep;
+    private $complemento;
+    private $telefone1;
+    private $telefone2;
+    private $conexao;
 
     function __construct($nome, $email, $cpf,
-                      $rg, $senha, $confirmSenha,
+                      $rg, $dataNascimento, $senha, $confirmSenha,
                       $estado, $cidade, $rua, $numero,
                       $cep, $complemento, $telefone1, $telefone2){
 
@@ -26,6 +27,7 @@ class Cadastro {
         $this->email = $email;
         $this->cpf = $cpf;
         $this->rg = $rg;
+        $this->dataNascimento = $dataNascimento;
         $this->senha = $senha;
         $this->confirmSenha = $confirmSenha;
         $this->estado = $estado;
@@ -47,7 +49,7 @@ class Cadastro {
     public function Cadastrar($con){
         $this->conexao = $con;
 
-        $sql = "insert into DadosCadastrais values('".$this->cpf."', '".$this->rg."', '".$this->nome."', '".$this->telefone1."', '".$this->telefone2."', '".$this->email."', 
+        $sql = "insert into DadosCadastrais values('".$this->cpf."', '".$this->rg."', '".$this->nome."', '".$this->dataNascimento."', '".$this->telefone1."', '".$this->telefone2."', '".$this->email."', 
         '".$this->estado."', '".$this->cidade."', '".$this->rua."', '".$this->complemento."', ".$this->numero.", '".$this->cep."');";
         $resCadastro = mysqli_query($this->conexao->getConexao(), $sql);
 

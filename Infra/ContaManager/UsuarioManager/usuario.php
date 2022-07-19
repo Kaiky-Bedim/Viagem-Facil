@@ -4,6 +4,7 @@ class Usuario implements JsonSerializable{
     private $cpf;
     private $rg;
     private $nome;
+    private $dataNascimento;
     private $telefone1;
     private $telefone2;
     private $email;
@@ -25,6 +26,7 @@ class Usuario implements JsonSerializable{
         $row = mysqli_fetch_assoc($res);
         $this->rg = $row['RG'];
         $this->nome = $row['Nome'];
+        $this->dataNascimento = $row['DataNascimento'];
         $this->telefone1 = $row['Telefone1'];
         $this->telefone2 = $row['Telefone2'];
         $this->email = $row['Email'];
@@ -46,6 +48,10 @@ class Usuario implements JsonSerializable{
 
     public function GetNome(){
         return $this->nome;
+    }
+
+    public function GetDataNascimento(){
+        return $this->dataNascimento;
     }
 
     public function GetTelefone1(){
@@ -90,6 +96,7 @@ class Usuario implements JsonSerializable{
             'cpf' => $this->GetCPF(),
             'rg' => $this->GetRG(),
             'nome' => $this->GetNome(),
+            'dataNascimento' => $this->GetDataNascimento(),
             'telefone1' => $this->GetTelefone1(),
             'telefone2' => $this->GetTelefone2(),
             'email' => $this->GetEmail(),

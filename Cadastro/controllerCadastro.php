@@ -10,6 +10,7 @@ $nome = $_POST['Nome'];
 $email = $_POST['Email'];
 $cpf = $_POST['CPF'];
 $rg = $_POST['RG'];
+$dataNascimento = $_POST['DataNascimento'];
 $senha = $_POST['Senha'];
 $confirmSenha = $_POST['ConfirmarSenha'];
 $estado = $_POST['Estado'];
@@ -22,7 +23,7 @@ $telefone1 = $_POST['Telefone1'];
 $telefone2 = $_POST['Telefone2'];
 
 $con = new Conexao();
-$cadastro = new Cadastro($nome, $email, $cpf, $rg, $senha, $confirmSenha, $estado,
+$cadastro = new Cadastro($nome, $email, $cpf, $rg, $dataNascimento, $senha, $confirmSenha, $estado,
                             $cidade, $rua, $numero, $cep, $complemento, $telefone1, $telefone2);
 $res = $cadastro->Cadastrar($con);
 
