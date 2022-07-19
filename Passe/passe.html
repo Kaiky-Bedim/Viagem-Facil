@@ -12,134 +12,147 @@
         <link rel="stylesheet" type="text/css" href="stylePasse.css"/>
         <link rel="stylesheet" type="text/css" href="../Infra/bootstrap/css/bootstrap.min.css"/>
     </head>
-    <body onLoad="Evt_onLoad()">
+    <body>
         <div id="divNavBar"></div>
         <!-- Div dos Pop-Ups -->
         <div id="divPopUp"></div>
 
         <div id="wrapper">
-            <div class="container-fluid">
-                <br><br/>
-                <div class="modal modal-signin position-static d-block " tabindex="-1" role="dialog">
-                    <div class="modal-dialog modal-xl" role="document">
-                        
-                        <h1>Dados do Passe</h1>
-                        <div class="modal-content rounded-5 shadow">
-                            <div class="modal-header p-5 pb-4 border-bottom-0 cor-form">
-                                <!-- Passe que está escolhido -->
-                                <h2 class="fw-bold mb-0 container">Passe 1</h2>
-                            </div>
+            <div class="bloco ">
+                <br>
+				<div class="card-bloco ">
+					<div class="front">
+						<div class="image">
+							<img src="../Infra/img/Logo_Final.jpeg" alt="">
+							<img src="../Infra/img/univap.png" alt="">
+						</div>
+					
+						<div class="flexbox">
+							<div class="box">
+								<span>Numero Serial:</span>                            
+								<div id="card-holder-name"> </div>
+
+							</div>
+						</div>
+						
+						<div class="flexbox">
+							
+							<div class="box">
+								<span>Numero de Fabrica:</span>
+								<div id="card-number-box"></div>  
+
+							</div>
+
+							<div class="box desce">
+								<span class="desce">Passe:</span>
+								<div class="expiration">
+									<!--<span class="exp-month"></span>-->
+                                    Normal
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Começo do Form -->
+
+				<form id="form">
+                    <table class="table table-striped table-dark">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Num. Série</th>
+                                <th scope="col">Num. Fábrica</th>
+                                <th scope="col">Tipo</th>
+                                <th scope="col">Saldo</th>
+                                <th scope="col">Opção 1</th>
+                                <th scope="col">Opção 2</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>8842087</td>
+                                <td>595437188</td>
+                                <td>Efetiva</td>
+                                <td>R$ 120</td>
+                                <td><button class="btn btn-primary btn-sm" type="button">Vizualizar</button></td>
+                                <td><button class="btn btn-danger btn-sm" type="button">Deletar</button></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>2151318</td>
+                                <td>133539667</td>
+                                <td>Efetiva</td>
+                                <td>R$ 120</td>
+                                <td><button class="btn btn-primary btn-sm" type="button">Vizualizar</button></td>
+                                <td><button class="btn btn-danger btn-sm" type="button">Deletar</button></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>2151318</td>
+                                <td>133539667</td>
+                                <td>Efetiva</td>
+                                <td>R$ 120</td>
+                                <td><button class="btn btn-primary btn-sm" type="button">Vizualizar</button></td>
+                                <td><button class="btn btn-danger btn-sm" type="button">Deletar</button></td>
+                            </tr>
+                          
+                        </tbody>
+                    </table>
+					
+				</form>
+				<!-- Fim do Form -->
+
+				<br>
+			</div>
+
+                <!--Codigo da Tabela -->
                 
-                            <div class="modal-body p-5 pt-0 cor-form">
-                                <!-- Cabeça do form -->
-                                <form class="container">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <div class="form-floating mb-3">
-                                                <h3 class="fw-bold mb-0 container ">Saldo: R$ 00,00 </h3>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-6">
-                                            <div class="form-floating mb-3">
-                                                <h3 class="fw-bold mb-0 container">Passes: 0</h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                
-                                    <!-- Começo do contéudo do form -->
-                                    <!-- Dados do passe -->
-                                
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <div class="form-floating mb-3">
-                                                <h3 class="fw-bold mb-0 container">Nome: Renato Minoru Silva Nishikawa</h3>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-6">
-                                            <div class="form-floating mb-3">
-                                                <h3 class="fw-bold mb-0 container">Número de Série: 1234567</h3>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <div class="form-floating mb-3">
-                                                <h3 class="fw-bold mb-0 container">CPF: 12345678901</h3>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-6">
-                                            <div class="form-floating mb-3">
-                                                <h3 class="fw-bold mb-0 container">Bloqueado: Não</h3>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <br/><br/>  
-                                    <!--VAI TOMA NO CU DESSES BOTAO (ARRUMAR ALINHAMENTO)-->
-                                    
-                                    <button class="btn btn-primary btn-lg float-left" type="submit">Deletar Passe</button>
-   
-                                    <button type = "button" class="btn btn-primary btn-lg float-right"  style="padding-top:10px">Cadastrar novo Passe</button>
-                                
-                                  
-
-           
-                                
-                                </form>
-                            </div>
-                        </div>
-                        <br></br>
-                        
-                        <!--Codigo da Tabela -->
-                        <h1>Histórico</h1>
-                        <div class="container-fluid margin-meio">
-                            
-                            <table class="table table-striped table-dark">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Valor</th>
-                                        <th scope="col">Data da Movimentação</th>
-                                        <th scope="col">Tipo da Movimentação</th>
-                                        <th scope="col">Número de Série do Cartão</th>
-                                        <th scope="col">Id Percurso</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>5,05</td>
-                                        <td>05/01/2022</td>
-                                        <td>Efetiva</td>
-                                        <td>123456778</td>
-                                        <td>5114</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>5,05</td>
-                                        <td>05/01/2022</td>
-                                        <td>Efetiva</td>
-                                        <td>123456778</td>
-                                        <td>5114</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>5,05</td>
-                                        <td>05/01/2022</td>
-                                        <td>Efetiva</td>
-                                        <td>123456778</td>
-                                        <td>5114</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                <div class="container margin-meio">
+                    <h1>Histórico</h1>
+                    <table class="table table-striped table-dark">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Valor</th>
+                                <th scope="col">Data da Movimentação</th>
+                                <th scope="col">Tipo da Movimentação</th>
+                                <th scope="col">Número de Série do Cartão</th>
+                                <th scope="col">Id Percurso</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>5,05</td>
+                                <td>05/01/2022</td>
+                                <td>Efetiva</td>
+                                <td>123456778</td>
+                                <td>5114</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>5,05</td>
+                                <td>05/01/2022</td>
+                                <td>Efetiva</td>
+                                <td>123456778</td>
+                                <td>5114</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>5,05</td>
+                                <td>05/01/2022</td>
+                                <td>Efetiva</td>
+                                <td>123456778</td>
+                                <td>5114</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br><br><br>
                 </div>
-            </div>
+
+            
 
             <div id="divFoot"></div>
         </div>
@@ -148,3 +161,19 @@
 <!-- Scripts de JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script type="module" src="passe.js"></script>
+
+
+<!--VAI TOMA NO CU DESSES BOTAO (ARRUMAR ALINHAMENTO)
+                    <div class="form-group">
+                            <button class="btn btn-primary btn-lg float-left" type="submit">Deletar Passe</button>
+                                    <div class="btn-toolbar float-center" role="toolbar" aria-label="Toolbar with button groups">
+                                    <--Id opcoesPasse->
+                                    <div class="btn-group me-2 text-center" role="group" id="OpcoesPasse" aria-label="Meio grupo">
+                                        <--<button type="button" class="btn btn-secondary">1</button>->
+                                        
+                                          </div>
+         
+                                    </div>
+                                    <-NÃO VAI PARA A TELA CADASTROPASSE.HTML->
+                                    <button class="btn btn-primary btn-lg float-right" id="CadastrarPasse">Cadastrar novo Passe</button>
+                    </div>-->
