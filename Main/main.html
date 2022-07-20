@@ -19,22 +19,24 @@
 				<div class="modal-dialog modal-xl" role="document">
 					<div class="modal-content rounded-5 shadow">
 						<div class="modal-header p-5 pb-4 border-bottom-0 cor-form">
-							<h2 class="fw-bold mb-0 container cor-texto" value="">Olá, <?php echo _SESSION['get']; ?></h2>
+							<h2 class="fw-bold mb-0 container cor-texto" value="">Bem vindo gerenciador dos cartões de transporte público !</br></br></br></h2>
 						</div>
-		
+
 						<div class="modal-body p-5 pt-0 cor-form">
 							<form class="container">
 								<div class="row">
 									<div class="col-6">
 										<div class="form-floating mb-3">
-											<h3 class="fw-bold mb-0 container cor-texto">Saldo: R$ 00,00 </h3>
+											<h3 class="fw-bold mb-0 container cor-texto">Saldo: R$ 00,00</h3>
+											<h3 class="fw-bold mb-0 container cor-texto">Última movimentação: XX/YY/ZZ</h3>
 										</div>
 									</div>
 
 									<div class="col-6">
 										<div class="form-floating mb-3">
-											<h3 class="fw-bold mb-0 container cor-texto">Passes: 0</h3>
-											<h6 class="fw-bold mb-0 container cor-texto">(Equivalente ao saldo) </h6>
+											<h3 class="fw-bold mb-0 container cor-texto">Passes ativos possuídos: 0</h3>
+											<h3 class="fw-bold mb-0 container cor-texto">Passes bloqueados possuídos: 0</h3>
+											<!-- <h6 class="fw-bold mb-0 container cor-texto">(Equivalente ao saldo) </h6> -->
 										</div>
 									</div>
 								</div>
@@ -42,20 +44,20 @@
 							<br></br><br></br><br>
 							<div class="container row align-items-center cor-card">
 								<a href= "../Qrcode/qrcode.html"  class="cartao cinza col">	
-									<h2>Qr-Code</h2>
-									<p>De Forma Totalmente Online</p>
+									<h2>Qr-Code's</h2>
+									<p>Utilize seus Passes via Qr-Code</p>
 									<img class="image" src="../Infra/img/qrcode.png" alt="" />
 								</a>
 
 								<a href= "../Pagamento/pagamento.html" class="cartao verde col">
-									<h2>Pagamento</h2>
-									<p>Seus Métodos de Comprar Passes</p>
+									<h2>Adquirir Créditos</h2>
+									<p>Aumente o saldo de seus Passes</p>
 									<img class="image" src="../Infra/img/money.png" alt="" />
 								</a>
 
 								<a href= "../Passe/passe.html" class="cartao amarelo col">
-									<h2>Passe</h2>
-									<p>Veja as informações do Passe</p>
+									<h2>Passes</h2>
+									<p>Gerencie e visualize seus Passes</p>
 									<img class="image" src="../Infra/img/passe.png" alt="" />
 									<br></br>
 								</a>

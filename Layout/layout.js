@@ -16,6 +16,7 @@ export class Layout{
 
             //Verifica se o usuário já está autenticado, caso não esteja, limita os links da navBar
             if(autenticado != "true"){
+                document.getElementById("aImg").setAttribute("href", "");
                 document.getElementById("aQrCode").className = " escondido";
                 document.getElementById("aPagamento").className = " escondido";
                 document.getElementById("aPasse").className = " escondido";
