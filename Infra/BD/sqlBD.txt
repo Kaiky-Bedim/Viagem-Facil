@@ -24,7 +24,7 @@ CEP varchar(10) not null
 );
 
 create table Cartao(
-NumeroSerie varchar(7) PRIMARY KEY NOT NULL,
+NumeroSerie varchar(7) NOT NULL,
 NumeroFabrica varchar(9) NOT NULL,
 TipoCartao varchar(50) NOT NULL,
 Situacao varchar(30) NOT NULL,
@@ -35,7 +35,8 @@ Saldo double NOT NULL,
 FOREIGN KEY (CPFProprietario) REFERENCES DadosCadastrais (CPF),
 CHECK (TipoCartao <=> "Normal" or TipoCartao <=> "Estudantil" or TipoCartao <=> "Idoso"),
 CHECK (Situacao <=> "Aprovado" or Situacao <=> "Reprovado" or Situacao <=> "Aguardando"),
-CHECK (Empresa <=> "Maringá do Vale" or Empresa <=> "Viação Jacareí")
+CHECK (Empresa <=> "Maringá do Vale" or Empresa <=> "Viação Jacareí"),
+CONSTRAINT AssinaturaCartao PRIMARY KEY(NumeroSerie, Empresa)
 );
 
 create table Percursos(

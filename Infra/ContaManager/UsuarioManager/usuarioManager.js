@@ -9,14 +9,18 @@ export class UsuarioManager{
     //controller a partir da classe que estiver chamando este método. Este método é assícrono, por isso, onde ele
     //for chamado deve ser seguido de then()
     async buscarDadosUsuario(action, pathController){
+        var popUp = new PopUp();
         var urlCompleta = pathController+"?action="+action;
         return fetch(urlCompleta)
             .then(response =>response.text())
             .then(data => {
+                if(data.includes("Sem conexão com o servidor")){
+                    popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Não foi possível se conectar ao servidor");
+                    return "Erro de servidor";
+                }
                 return data
             }).catch(erro => {
-                var popUp = new PopUp();
-                popUp.imprimirPopUp("../../../Pop-Ups/popUp.html", "../../../Pop-Ups/stylePopUp.css", "divPopUp", "Ocorreu um erro inesperado");
+                popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Ocorreu um erro inesperado");
                 console.log(erro);
             });
     }
