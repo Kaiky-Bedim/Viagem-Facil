@@ -33,10 +33,11 @@ Bloqueado boolean NOT NULL,
 CPFProprietario varchar(11) NOT NULL,
 Saldo double NOT NULL,
 FOREIGN KEY (CPFProprietario) REFERENCES DadosCadastrais (CPF),
-CHECK (TipoCartao <=> "Normal" or TipoCartao <=> "Estudantil" or TipoCartao <=> "Idoso"),
+CHECK (TipoCartao <=> "Comum" or TipoCartao <=> "Estudantil" or TipoCartao <=> "Idoso"),
 CHECK (Situacao <=> "Aprovado" or Situacao <=> "Reprovado" or Situacao <=> "Aguardando"),
 CHECK (Empresa <=> "Maringá do Vale" or Empresa <=> "Viação Jacareí"),
-CONSTRAINT AssinaturaCartao PRIMARY KEY(NumeroSerie, Empresa)
+CONSTRAINT AssinaturaCartao PRIMARY KEY(NumeroSerie, Empresa),
+CONSTRAINT NumerosCartao UNIQUE (NumeroFabrica, Empresa)
 );
 
 create table Percursos(
@@ -57,3 +58,14 @@ FOREIGN KEY (NumeroSerieCartao) REFERENCES Cartao (NumeroSerie),
 FOREIGN KEY (Id_Percurso) REFERENCES Percursos (Id),
 CHECK (TipoMovimentacao <=> "Recarga" or TipoMovimentacao <=> "Utilização em ônibus")
 );
+
+create table Identificadores(
+Id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+NumeroSerie varchar(7) NOT NULL,
+NumeroFabrica varchar(9) NOT NULL,
+Empresa varchar(30) NOT NULL
+);
+
+#Não removam os dois insert abaixo, eles impedem a geração de ID's repetidos para os cartões dos Usuários
+insert into Identificadores values(1, "1500385", "390880200", "Maringá do Vale");
+insert into Identificadores values(2, "7804500", "900120855", "Viação Jacareí");

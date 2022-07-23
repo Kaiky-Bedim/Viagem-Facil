@@ -1,3 +1,4 @@
+/* CSS para a tela de Passe fora a Janela de Cadastro de Cartão */
 body{
     font: Arial, 20px, sans-serif;
 }
@@ -16,10 +17,13 @@ body{
     padding-bottom: 20px;
 }
 
-
-
-
-
+.historico{
+    background: #817A87;
+    border-radius: 10px;
+    box-shadow: 0 10px 15px rgba(0,0,0,.1);
+    margin-bottom: 5%;
+    margin-top: -3%;
+}
 
 .bloco{
     min-height: 78.8vh;
@@ -52,7 +56,7 @@ body{
 
 .bloco form .inputBox input,
 .bloco form .inputBox select{
-    width: 50%;
+    width: 80%;
     padding: 10px;
     border-radius: 30px;
     border:1px solid rgba(0,0,0,.3);
@@ -89,8 +93,8 @@ body{
 .bloco .card-bloco{
     margin-bottom: -150px;
     position: relative;
-    height: 280px;
-    width: 500px;
+    height: 300px;
+    width: 550px;
     font-family: 'Poppins', sans-serif;
     box-sizing: border-box;
     outline: none; border: none;
@@ -120,7 +124,8 @@ body{
 }
 
 .bloco .card-bloco .front .image img{
-    height: 60px;
+    height: 40px;
+    width: 250px;
 }
 
 .bloco .card-bloco .front .card-number-box{
@@ -153,4 +158,150 @@ body{
     padding:30px 0;
     font-size: 18px;
     color:#fff;
+}
+
+/* CSS para a janela de Cadastro de Cartões */
+#btnCadastrarNovoPasse{
+    height: 100px;
+    position: relative;
+    margin-top: 16%;
+    margin-bottom: -21.5%;
+    margin-left: 57.5%;
+}
+
+.cadastroCartaoModal{
+    position: fixed;
+    z-index: 1;
+    margin-left: 16.7%;
+    margin-top: 8%;
+}
+
+.buttonX{
+    background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat;
+    width: 50px;
+    height: 50px;
+    background-color: rgb(255, 0, 0);
+    border-radius: 5px;
+    box-shadow: 7px 7px 13px 0px rgba(50, 50, 50, 0.22);
+    border-width: 0.5px;
+    border-color: rgb(255, 255, 255);
+    position: absolute;
+    margin-left: 93.3%;
+    margin-top: 1%;
+}
+
+.buttonX:hover{
+    background-color: rgb(235, 13, 13);
+    border-color: rgb(230, 18, 18);
+}
+
+.restantePagina{
+    opacity: 0.5;
+}
+
+.janela{
+    height: 450px;
+}
+
+.aPasses{
+    letter-spacing: .6px;
+    font-size: 14.5px;
+    box-shadow: 0 3px transparent;
+    width: 170px;
+    height: 50px;
+    text-align: center;
+    border-radius: 5px;
+    border-width: 0.5px;
+}
+
+.aPasses:hover {
+    background: rgb(160, 160, 160);
+    border-color: rgb(240, 240, 240);
+    border-width: 2px;
+    letter-spacing: 1.4px;
+}
+
+.desactiveBtn{
+    background: rgb(245, 245, 245);
+    border-color: rgb(214, 214, 214);
+}
+
+.activeBtn{
+    background: rgb(150, 150, 150);
+    border-color: rgb(130, 130, 130);
+}
+
+.alinhamento{
+    margin-top: -12%;
+    position: absolute;
+    z-index: 1;
+}
+
+.fonte{
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.tmnNum{
+    font-size: 16px;
+}
+
+.espNum{
+    letter-spacing: 1px;
+}
+
+.cartao{
+    height: 950px;
+    width: 800px;
+}
+
+#form{
+    width: 1000px;
+}
+
+.tipo{
+    color:#fff;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 25px !important;
+}
+
+.fixaTipoCadastro{
+    position: absolute;
+    margin-top: 47%;
+    margin-left: 2%;
+}
+
+.numFixo{
+    position: absolute;
+}
+
+.cpf{
+    color:#fff;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 23px;
+}
+
+.nome{
+    font-size: 16px !important;
+}
+
+.saldo{
+    font-size: 30px !important;
+    padding: 8px 10px !important
+}
+
+.cartaoAlinhamento{
+    position: absolute;
+    margin-bottom: 70%;
+}
+
+.cartaoIdoso{
+    background-color: rgb(237, 28, 36) !important;
+}
+
+.cartaoEstudantil{
+    background-color: rgb(255, 242, 0) !important;
+}
+
+.cartaoComum{
+    background-color: rgb(34, 177, 76) !important;
 }

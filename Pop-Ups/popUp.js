@@ -15,7 +15,7 @@ export class PopUp{
 
             var restantePagina = document.querySelectorAll("body>div:not(.divPopUp)");
             restantePagina.forEach(element => {
-                element.className = "restantePagina";
+                element.classList.add("restantePaginaPopUp");
             });
 
             document.getElementById(idDiv).innerHTML = html;
@@ -31,20 +31,23 @@ export class PopUp{
                 if(event.target.innerHTML != content && event.target.innerHTML != header
                      && event.target.innerHTML != texto && event.target.innerHTML != footer){
                     document.getElementById(idDiv).innerHTML = "";
+                    restantePagina.forEach(element => {
+                        element.classList.remove("restantePaginaPopUp"); 
+                    });
                 }
             }
 
             document.getElementById("buttonX").addEventListener("click", function(){
                 document.getElementById(idDiv).innerHTML = "";
                 restantePagina.forEach(element => {
-                    element.classList.remove("restantePagina"); 
+                    element.classList.remove("restantePaginaPopUp"); 
                 });
             })
 
             document.getElementById("buttonFechar").addEventListener("click", function(){
                 document.getElementById(idDiv).innerHTML = "";
                 restantePagina.forEach(element => {
-                    element.classList.remove("restantePagina"); 
+                    element.classList.remove("restantePaginaPopUp"); 
                 });
             })
         })
