@@ -28,6 +28,14 @@ class Qrcode{
         }
     }
 
+    /*public function Chama($cpf, $con){
+        $this->conexao = $con;
+        $this->cpf = $cpf;
+
+        $sql = "select NumeroSerie from Cartao where CPFProprietario = '".$cpf."';";
+        $res = mysqli_query($this->conexao->getConexao(), $sql);
+    }*/
+
     
 }
 ?>

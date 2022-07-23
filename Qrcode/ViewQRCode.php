@@ -8,7 +8,7 @@
     $qrcode = new Qrcode();
 
     $sql = "select NumeroSerie from Cartao where CPFProprietario = '".$cpf."';";
-    $resp = mysqli_query($con, $sql);
+    $resp = mysqli_query($con->getConexao(), $sql);
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +31,7 @@
             <div class="container">
                 <br>
                 Selecione o Passe que será gerado o QRCode:
-                <select class="form-select" aria-label="Default select example">
+                <select class="form-select" aria-label="Default select example" id="OpcaoPasse" onchange="selectPasse()">
                     <?php while($rows = mysqli_fetch_array($resp)){
                         ?>
                         <option value=" <?php echo $rows['NumeroSerie']; ?> " ><?php echo $rows['NumeroSerie']; ?></option>
@@ -59,4 +59,4 @@
 </html>
 <!-- Scripts de JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-<script type="module" src="qrcode.js"></script>
+<script type="text/javascript" src="qrcode.js"></script>

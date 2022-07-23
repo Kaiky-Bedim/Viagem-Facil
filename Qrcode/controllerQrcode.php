@@ -1,7 +1,7 @@
 <?php
 
 require_once "../Infra/BD/conexao.php";
-include "qrcode.php";
+include "qrCode.php";
 
 session_start();
 
