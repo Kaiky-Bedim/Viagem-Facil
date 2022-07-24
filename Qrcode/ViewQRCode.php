@@ -28,19 +28,44 @@
         <div id="divPopUp"></div>
 
         <div id="wrapper">
-            <div class="container">
-                <br>
-                Selecione o Passe que será gerado o QRCode:
-                <select class="form-select" aria-label="Default select example" id="OpcaoPasse" onchange="selectPasse()">
-                    <?php while($rows = mysqli_fetch_array($resp)){
-                        ?>
-                        <option value=" <?php echo $rows['NumeroSerie']; ?> " ><?php echo $rows['NumeroSerie']; ?></option>
+            <div class="modal-dialog margin-meio" role="document">
+                <div class="modal-content rounded-5 shadow">
+                    <div class="modal-header p-5 pb-4 border-bottom-0 cor-form">
+                        <h2 class="fw-bold mb-0">Passes</h2>
+                    </div>
+        
+                    <div class="modal-body p-5 pt-0 cor-form">
+                        <form class="cor-form" method="POST" action="controllerQrcode.php">
+                            <div class="row">
+                                <div class="col-12">
 
-                    <?php
-                    }
-                    ?>
-                </select>
+                                    <div class="form-floating mb-3">
+
+                                        <select class="form-control rounded-4" name="txtOpcaoPasse" aria-label="Default select example" id="OpcaoPasse" 
+                                        onchange="selectPasse()" placeholder="Passes Salvos">
+                                            <option selected>...</option>
+                                            <?php while($rows = mysqli_fetch_array($resp)){
+                                            ?>
+                                            <option value=" <?php echo $rows['NumeroSerie']; ?> " ><?php echo $rows['NumeroSerie']; ?></option>
+
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
+                                        <label for="OpcaoPasse">Passes Salvos</label>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <button class="btn btn-primary btn-lg" style="float: right" type="submit">Gerar</button>        
+
+                        </form>
+                    </div>
+                </div>
             </div>
+
             
             <div class="modal modal-signin position-static d-block margin-meio" tabindex="-1" role="dialog">
                 <div class="modal-dialog modal-md" role="document">

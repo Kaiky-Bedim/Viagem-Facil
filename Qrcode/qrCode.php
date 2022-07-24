@@ -8,19 +8,21 @@ class Qrcode{
     private $conexao;
     private $qrcode;
 
-    public function ImagemQrcode($cpf, $con){
+    public function ImagemQrcode($cpf, $numSerie, $con){
         $this->conexao = $con;
         $this->cpf = $cpf;
+        $this->numSerie = $numSerie;
 
-        $sql = "select NumeroSerie,NumeroFabrica,Bloqueado from cartao where CPFProprietario = '".$this->cpf."';";
+        $sql = "select NumeroFabrica, Bloqueado from cartao where CPFProprietario = '".$this->cpf."' and NumeroSerie = '".$this->numSerie."';";
         $res = mysqli_query($this->conexao->getConexao(), $sql);
         while ($dado = $res->fetch_array()){
-            $this->numSerie = $dado["NumeroSerie"];
             $this->numFabrica = $dado["NumeroFabrica"];
             $this->bloqueado = $dado["Bloqueado"];
         }
-
+        #Os valores vem vazios!!!
+        #Os valores estão com espaços
         $qrcode = sha1("$this->cpf"."$this->numSerie"."$this->numFabrica");
+        #$qrcode = $this->cpf.$this->numSerie.$this->numFabrica;
         if($this->bloqueado == 1){
             return false;
         }else{
@@ -28,14 +30,7 @@ class Qrcode{
         }
     }
 
-    /*public function Chama($cpf, $con){
-        $this->conexao = $con;
-        $this->cpf = $cpf;
-
-        $sql = "select NumeroSerie from Cartao where CPFProprietario = '".$cpf."';";
-        $res = mysqli_query($this->conexao->getConexao(), $sql);
-    }*/
-
+    
     
 }
 ?>

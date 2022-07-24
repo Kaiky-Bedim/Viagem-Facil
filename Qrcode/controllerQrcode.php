@@ -9,7 +9,10 @@ $con = new Conexao();
 $qrcode = new Qrcode();
 $cpf = $_SESSION['cpf'];
 
-$res = $qrcode->ImagemQrcode($cpf, $con);
+$numSerie = $_POST['txtOpcaoPasse'];
+
+$res = $qrcode->ImagemQrcode($cpf, $numSerie, $con);
+echo $res;
 
 //QRCODE
 use chillerlan\QRCode\{QRCode, QROptions};
@@ -31,6 +34,9 @@ $qrcode = new QRCode($options);
 $qrcode->render($res, 'imgQRCode/qrCode.svg');
 
 echo "<img src='imgQRCode/qrCode.svg' width='500'>";
+
+
+
 
 
 ?>
