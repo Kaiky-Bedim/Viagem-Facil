@@ -15,7 +15,7 @@ class Qrcode{
 
         $sql = "select NumeroFabrica, Bloqueado from cartao where CPFProprietario = '".$this->cpf."' and NumeroSerie = '".$this->numSerie."';";
         $res = mysqli_query($this->conexao->getConexao(), $sql);
-        while ($dado = $res->fetch_array()){
+        while ($dado = mysqli_fetch_assoc($res)){
             $this->numFabrica = $dado["NumeroFabrica"];
             $this->bloqueado = $dado["Bloqueado"];
         }
