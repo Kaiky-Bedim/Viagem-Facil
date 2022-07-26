@@ -33,8 +33,8 @@ $qrcode = new QRCode($options);
 // ...with additional cache file
 $qrcode->render($res, 'imgQRCode/qrCode.svg');
 
-echo "<img src='imgQRCode/qrCode.svg' width='500'>";
-
+#echo "<img src='imgQRCode/qrCode.svg' width='500'>";
+header('Location: ViewQRCode.php');
 
 
 

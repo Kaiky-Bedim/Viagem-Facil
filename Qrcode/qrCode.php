@@ -8,10 +8,16 @@ class Qrcode{
     private $conexao;
     private $qrcode;
 
+    //Falta gets e sets
+
     public function ImagemQrcode($cpf, $numSerie, $con){
         $this->conexao = $con;
         $this->cpf = $cpf;
-        $this->numSerie = $numSerie;
+
+        $espaco = " ";
+        $subs = "";
+        $numSerieFinal = str_replace($espaco, $subs, $numSerie);
+        $this->numSerie = $numSerieFinal;
 
         $sql = "select NumeroFabrica, Bloqueado from cartao where CPFProprietario = '".$this->cpf."' and NumeroSerie = '".$this->numSerie."';";
         $res = mysqli_query($this->conexao->getConexao(), $sql);
@@ -19,16 +25,19 @@ class Qrcode{
             $this->numFabrica = $dado["NumeroFabrica"];
             $this->bloqueado = $dado["Bloqueado"];
         }
-        #Os valores vem vazios!!!
-        #Os valores estão com espaços
+        
+        #Tudo certo agora
         $qrcode = sha1("$this->cpf"."$this->numSerie"."$this->numFabrica");
-        #$qrcode = $this->cpf.$this->numSerie.$this->numFabrica;
+        
         if($this->bloqueado == 1){
-            return false;
+            $qrcode = sha1("Bloqueado");
+            return $qrcode;
         }else{
             return $qrcode;
         }
     }
+
+    #Colocar sets e gets
 
     
     

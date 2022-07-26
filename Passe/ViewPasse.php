@@ -179,10 +179,11 @@
                                 <th scope="col">Num. Série</th>
                                 <th scope="col">Num. Fábrica</th>
                                 <th scope="col">Tipo</th>
-                                <th scope="col">Situação</th>
+                                <th scope="col">Status</th>
                                 <th scope="col">Saldo</th>
                                 <th scope="col">Opção 1</th>
                                 <th scope="col">Opção 2</th>
+                                <th scope="col">Opção 3</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -194,9 +195,14 @@
                                     echo "<td>" .$dado['NumeroSerie']. "</td>";
                                     echo "<td>" .$dado['NumeroFabrica']. "</td>";
                                     echo "<td>" .$dado['TipoCartao']. "</td>";
-                                    echo "<td>" .$dado['Situacao']. "</td>";
+                                    if($dado['Bloqueado'] == true){
+                                        echo "<td>Bloq.</td>";
+                                    }else{
+                                        echo "<td>Desbloq.</td>";
+                                    }
                                     echo "<td>" .$dado['Saldo']. "</td>";
                                     echo "<td><button class='btn btn-primary btn-sm' type='button' value=" .$dado['NumeroSerie']. ">Vizualizar</button></td>";
+                                    echo "<td><button class='btn btn-dark btn-sm' type='button' value=" .$dado['NumeroSerie']. ">Bloq/Des</button></td>";
                                     echo "<td><button class='btn btn-danger btn-sm' type='button' value=" .$dado['NumeroSerie']. ">Deletar</button></td>";
                                     echo "</tr>";
 
