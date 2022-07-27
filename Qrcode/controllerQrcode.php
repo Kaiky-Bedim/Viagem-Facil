@@ -12,7 +12,7 @@ $cpf = $_SESSION['cpf'];
 $numSerie = $_POST['txtOpcaoPasse'];
 
 $res = $qrcode->ImagemQrcode($cpf, $numSerie, $con);
-echo $res;
+#echo $res;
 
 //QRCODE
 use chillerlan\QRCode\{QRCode, QROptions};

@@ -46,7 +46,7 @@
                                             <option selected>...</option>
                                             <?php while($rows = mysqli_fetch_array($resp)){
                                             ?>
-                                            <option value=" <?php echo $rows['NumeroSerie']; ?> " ><?php echo $rows['NumeroSerie']; ?></option>
+                                            <option value="<?php echo $rows['NumeroSerie']; ?>" ><?php echo $rows['NumeroSerie']; ?></option>
 
                                             <?php
                                             }
@@ -70,7 +70,10 @@
             <div class="modal modal-signin position-static d-block margin-meio" tabindex="-1" role="dialog">
                 <div class="modal-dialog modal-md" role="document">
                     <div class="modal-content rounded-5 shadow cor-form">
-                        <img src="./imgQRCode/qrCode.svg" class="img-fluid tamanho-imagem">
+                        <?php
+                        echo "<img src='imgQRCode/qrCode.svg' width='500'>";
+                        ?>
+                        <!--<img src="./imgQRCode/qrCode.svg" class="img-fluid tamanho-imagem">-->
                     </div>
                     <br><br>
                 </div>

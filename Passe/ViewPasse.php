@@ -190,21 +190,28 @@
                             <?php 
                                 $x = 1;
                                 while($dado = mysqli_fetch_assoc($resp)){
+                                    $NumSerie = $dado['NumeroSerie'];
+
                                     echo "<tr>";
                                     echo "<th scope='row'>".$x."</th>";
-                                    echo "<td>" .$dado['NumeroSerie']. "</td>";
-                                    echo "<td>" .$dado['NumeroFabrica']. "</td>";
-                                    echo "<td>" .$dado['TipoCartao']. "</td>";
+                                    echo "<td>" .$dado['NumeroSerie']. "</td> \n";
+                                    echo "<td>" .$dado['NumeroFabrica']. "</td> \n";
+                                    echo "<td>" .$dado['TipoCartao']. "</td> \n";
                                     if($dado['Bloqueado'] == true){
-                                        echo "<td>Bloq.</td>";
+                                        echo "<td>Bloq.</td> \n";
                                     }else{
-                                        echo "<td>Desbloq.</td>";
+                                        echo "<td>Desbloq.</td> \n";
                                     }
-                                    echo "<td>" .$dado['Saldo']. "</td>";
-                                    echo "<td><button class='btn btn-primary btn-sm' type='button' value=" .$dado['NumeroSerie']. ">Vizualizar</button></td>";
-                                    echo "<td><button class='btn btn-dark btn-sm' type='button' value=" .$dado['NumeroSerie']. ">Bloq/Des</button></td>";
-                                    echo "<td><button class='btn btn-danger btn-sm' type='button' value=" .$dado['NumeroSerie']. ">Deletar</button></td>";
-                                    echo "</tr>";
+                                    echo "<td>" .$dado['Saldo']. "</td> \n";
+                                    
+                                    //Não ta dando certo (não chama a função)
+                                    echo "<td><button class='btn btn-primary btn-sm' type='button'>Vizualizar</button></td> \n";
+                                    
+                                    echo "<td><button class='btn btn-dark btn-sm' type='button'>Bloq/Des</button></td> \n";
+                                    
+                                    echo "<td><button id='$NumSerie' onclick='ApagarPasse($NumSerie)' class='btn btn-danger btn-sm' value='$NumSerie' type='button'>Deletar</button></td> \n";
+
+                                    echo "</tr> \n";
 
                                     $x = $x + 1;
                                 }
