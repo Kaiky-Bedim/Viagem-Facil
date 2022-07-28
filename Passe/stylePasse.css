@@ -40,7 +40,7 @@ body{
     box-shadow: 0 10px 15px rgba(0,0,0,.1);
     padding: 20px;
     width: 900px;
-	height: 500px;
+	height: auto;
     padding-top: 160px;
 }
 
@@ -90,14 +90,15 @@ body{
     opacity: .8;
 }
 
-.bloco .card-bloco{
-    margin-bottom: -150px;
+.bloco .card-bloco {
+    margin-bottom: -130px;
     position: relative;
     height: 300px;
     width: 550px;
     font-family: 'Poppins', sans-serif;
     box-sizing: border-box;
-    outline: none; border: none;
+    outline: none;
+    border: none;
     text-decoration: none;
     text-transform: uppercase;
 }
@@ -110,7 +111,7 @@ body{
     background:#817A87;
     border-radius: 5px;
     backface-visibility: hidden;
-    box-shadow: 0 15px 25px rgba(0,0,0,.2);
+    box-shadow: 8px 8px rgba(56, 56, 56, 0.452);
     padding:20px;
     transform:perspective(1000px) rotateY(0deg);
     transition:transform .4s ease-out;
@@ -161,11 +162,11 @@ body{
 }
 
 /* CSS para a janela de Cadastro de Cartões */
-#btnCadastrarNovoPasse{
+#btnCadastrarNovoPasse {
     height: 100px;
     position: relative;
-    margin-top: 16%;
-    margin-bottom: -21.5%;
+    margin-top: 19%;
+    margin-bottom: -24.5%;
     margin-left: 57.5%;
 }
 
@@ -274,6 +275,10 @@ body{
     position: absolute;
 }
 
+.dtFixa{
+    margin-left: 72.6%;
+}
+
 .cpf{
     color:#fff;
     font-family: 'Times New Roman', Times, serif;
@@ -304,4 +309,71 @@ body{
 
 .cartaoComum{
     background-color: rgb(34, 177, 76) !important;
+}
+
+/* CSS para customizar a tela de Passes em si, não afeta a Janela de Cadastro de Passes */
+.bloco-sem-card {
+    background-color: rgb(235, 235, 235);
+    position: relative;
+    margin-right: 15%;
+    margin-bottom: -21%;
+    width: 55%;
+    height: 295px;
+    border-radius: 5px;
+    box-shadow: 8px 8px rgb(56 56 56 / 45%);
+    text-align: center;
+}
+
+.sem-card{
+    position: initial;
+    width: 32%;
+    height: 75%;
+}
+
+.sem-card-selecionado{
+    position: initial;
+    width: 40%;
+    height: 72%;
+    margin-bottom: 1%;
+    margin-top: 2%;
+}
+
+.bloco-sem-card > div{
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+}
+
+.inputPagina{
+    width: 40px;
+    text-align: center;
+    border-radius: 5px;
+    border-color: rgb(0, 0, 0);
+    border-width: 1px;
+}
+
+.estiloLetras > *{
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+}
+
+.estiloLetras > button{
+    font-weight: 900;
+}
+
+.btnDesabilitado{
+    background-color: rgb(170, 170, 170);
+}
+
+.mensagemQtdCartoes{
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    margin-right: auto;
+}
+
+.cartaoPresionado{
+    background-color: #043b8f !important;
+    border-color: #001e4b !important;
+    border-width: 1px !important;
 }

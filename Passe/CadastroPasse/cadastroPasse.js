@@ -23,6 +23,13 @@ document.getElementById("btnCadastrarNovoPasse").addEventListener("click", funct
             document.getElementById("spanNomeCartao").innerHTML = nome;
         });
 
+    //Atribuindo a data atual para o campo Data Expedição
+    var data = new Date();
+    var dia = String(data.getDate()).padStart(2, '0');
+    var mes = String(data.getMonth() + 1).padStart(2, '0');
+    var ano = data.getFullYear();
+    document.getElementById("divDataExpedicaoCartao").innerHTML = dia + '/' + mes + '/' + ano;
+
     //Reatribuindo a Função que verifica se o usuário clicou fora do cartão para o ducumentElement.onclick
     document.documentElement.onclick = function(event){
         VerificaSeUsuarioClicouFora(event);
@@ -143,12 +150,20 @@ const selectTipoCartao = document.getElementById("selectTipoCartao");
 const btnCadastrarNovoPasse = document.getElementById("AdicionarPasse");
 const divNumSerie = document.getElementById("divSerieCartao");
 const divNumFabrica = document.getElementById("divFabricaCartao");
-const imgLogoEmpresa = document.getElementById("imgLogoEmpresa");
+const imgLogoEmpresa = document.getElementById("imgLogoEmpresaCartao");
 var primeiraTentativa = true;
 
 //Códigos para alterar o Número de Série e de Fábrica do Cartão dinamicamente
+inputSerie.onkeydown = function(){
+    divNumSerie.innerHTML = inputSerie.value;
+}
+
 inputSerie.onkeyup = function(){
     divNumSerie.innerHTML = inputSerie.value;
+}
+
+inputFabrica.onkeydown = function(){
+    divNumFabrica.innerHTML = inputFabrica.value;
 }
 
 inputFabrica.onkeyup = function(){
@@ -333,6 +348,7 @@ form.addEventListener("submit", function(event){
     httpRequest.onreadystatechange = function(){
         if(this.readyState == 4){
             if(this.status == 200 && !this.responseText.includes("Fatal error")){
+                document.getElementById("inputAtualizaLista").value = "Desatualizada";
                 popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", this.responseText);
             }else{
                 popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", this.responseText);

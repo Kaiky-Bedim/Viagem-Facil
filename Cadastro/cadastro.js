@@ -368,7 +368,9 @@ form.addEventListener("submit", function(event){
 function VerificaCadastro(cadastro){
     if(cadastro == true){
         popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Cadastro realizado com sucesso");
-        window.location.href = "../Main/main.html";
+        setTimeout(function(){
+            window.location.href = "../Main/main.html";
+        },1500);
     }else if(cadastro.includes("Sem conexão com o servidor")){
         popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Ocorreu algum erro interno na requisição com o servidor");
     }else{

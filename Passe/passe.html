@@ -33,7 +33,7 @@
                         <div class="card-bloco">
                             <div class="front fonte cartaoComum" id="divCartaoInteiro">
                                 <div class="image">
-                                    <img src="../Infra/img/LogosEmpresas/LOGO_MARINGA_DO_VALE.png" id="imgLogoEmpresa">
+                                    <img src="../Infra/img/LogosEmpresas/LOGO_MARINGA_DO_VALE.png" id="imgLogoEmpresaCartao">
                                         <span class="cpf" id="spanCpfCartao"> </span>
                                 </div>
                             
@@ -53,6 +53,10 @@
                                     <div class="box numFixo">
                                         <span class="tmnNum">Número de Fábrica:</span>
                                         <div id="divFabricaCartao" class="tmnNum espNum">XXXXXXXXX</div>  
+                                    </div>
+                                    <div class="box dtFixa">
+                                        <span class="tmnNum">Data Expedição:</span>
+                                        <div id="divDataExpedicaoCartao" class="tmnNum"></div>
                                     </div>
                                 </div>
                             </div>
@@ -116,43 +120,60 @@
         <!-- Bloco sobre a lista de Passes e o Histórico -->
         <div id="wrapper">
             <div class="bloco">
+                <input type="hidden" id="inputAtualizaLista" value="Atualizada"/>
 
                 <!-- Botão para abrir a janela de Cadastro de Passes -->
                 <button type="button" class="btn btn-primary" id="btnCadastrarNovoPasse">Cadastrar Novo Passe</button>
                 <br>
 
+                <!-- Caso o usuário não tenha nenhum Cartão, é mostrado o bloco abaixo -->
+                <div class="bloco-sem-card" id="divSemCartao" hidden>
+                    <img src="../Infra/img/Assets/semCartao.png" class="sem-card">
+                    <div>Você não possui nenhum Cartão Cadastrado em nosso sistema !</div>
+                </div>
+
+                <!-- Caso nenhum cartão tenha sido selecionado para ser mostrado, essa mensagem é mostrada -->
+                <div class="bloco-sem-card" id="divSemCartaoSelecionado" hidden>
+                    <img src="../Infra/img/Assets/cartaoInterrogacao.png" class="sem-card-selecionado">
+                    <div>Nenhum cartão da lista abaixo selecionado !</div>
+                </div>
+
                 <!-- Bloco do Cartão que aparece em cima da Lista -->
 				<div class="card-bloco">
-					<div class="front fonte cartaoComum">
+					<div class="front fonte cartaoComum" id="divCartaoExposto" hidden>
 						<div class="image">
-							<img src="../Infra/img/LogosEmpresas/LOGO_MARINGA_DO_VALE.png" id="imgLogoEmpresa">
-                                <span class="cpf" id="spanCpf">379.368.268-78</span>
+							<img src="" id="imgLogoEmpresa">
+                                <span class="cpf" id="spanCpf"></span>
 						</div>
 					
 						<div class="flexbox">
 							<div class="box">
 								<span class="tmnNum">Número de Série:</span>                            
-								<div id="divSerie" class="tmnNum espNum">1234567</div>
+								<div id="divSerieExposta" class="tmnNum espNum"></div>
 							</div>
                             <div class="box">
-                                <span id="spanNome" class="nome">Kaiky Augusto Bedim</span>
+                                <span id="spanNome" class="nome"></span>
                             </div>
 						</div>
 						
 						<div class="flexbox">
 							<div class="box">
 								<span class="tmnNum">Número de Fábrica:</span>
-								<div id="divFabrica" class="tmnNum espNum">123456789</div>  
+								<div id="divFabricaExposta" class="tmnNum espNum"></div>  
 							</div>
+                            <div class="box">
+                                <span class="tmnNum">Data Expedição:</span>
+                                <div id="divDataExpedicao" class="tmnNum"></div>
+                            </div>
 						</div>
 
                         <div class="flexbox">
                             <div class="box">
-								<span id="spanTipoCartao" class="tipo">Comum</span>
+								<span id="spanTipoCartaoExposto" class="tipo"></span>
 							</div>
                             <div class="box saldo">
                                 <span>Saldo: R$</span>
-                                <span id="spanSaldo">1000</span>
+                                <span id="spanSaldo"></span>
 							</div>
                         </div>
 					</div>
@@ -163,46 +184,31 @@
                     <table class="table table-striped table-light">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
                                 <th scope="col">Num. Série</th>
-                                <th scope="col">Num. Fábrica</th>
+                                <th scope="col">Situação</th>
                                 <th scope="col">Tipo</th>
+                                <th scope="col">Empresa</th>
                                 <th scope="col">Saldo</th>
                                 <th scope="col">Opção 1</th>
                                 <th scope="col">Opção 2</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>8842087</td>
-                                <td>595437188</td>
-                                <td>Efetiva</td>
-                                <td>R$ 120</td>
-                                <td><button class="btn btn-primary btn-sm" type="button">Vizualizar</button></td>
-                                <td><button class="btn btn-danger btn-sm" type="button">Deletar</button></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>2151318</td>
-                                <td>133539667</td>
-                                <td>Efetiva</td>
-                                <td>R$ 120</td>
-                                <td><button class="btn btn-primary btn-sm" type="button">Vizualizar</button></td>
-                                <td><button class="btn btn-danger btn-sm" type="button">Deletar</button></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>2151318</td>
-                                <td>133539667</td>
-                                <td>Efetiva</td>
-                                <td>R$ 120</td>
-                                <td><button class="btn btn-primary btn-sm" type="button">Vizualizar</button></td>
-                                <td><button class="btn btn-danger btn-sm" type="button">Deletar</button></td>
-                            </tr>
-                          
+                        <!-- Esta tabela está vazia, pois os cartões que nela aparecem são preenchidos automaticamente -->
+                        <tbody id="tableCartoes">
                         </tbody>
                     </table>
+
+                    <!-- HTML para controlar a Paginação dos cartões -->
+                    <div class="flexbox">
+                        <div class="box mensagemQtdCartoes">
+                            Total: <span id="spanMensagem2">0</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Mostrando Cartões de <span id="spanMensagem1">0</span> a <span id="spanMensagem3" >0</span>
+                        </div>
+                        <div class="box estiloLetras">
+                            <button type="button" class="btnDesabilitado" id="btnAnterior" disabled><</button>
+                            <input id="inputPagina" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="inputPagina" readonly value="1">
+                            <button type="button" class="btnDesabilitado" id="btnProximo" disabled>></button>
+                        </div>
+                    </div>
 				</form>
 				<!-- Fim do Form que compõe a Lista -->
 				<br>

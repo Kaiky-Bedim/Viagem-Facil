@@ -17,6 +17,9 @@ export class UsuarioManager{
                 if(data.includes("Sem conexão com o servidor")){
                     popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Não foi possível se conectar ao servidor");
                     return "Erro de servidor";
+                }else if(data.includes("Trying to access array offset on value of type null")){
+                    popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Não foi possível recuperar suas informações");
+                    return "Erro de servidor";
                 }
                 return data
             }).catch(erro => {

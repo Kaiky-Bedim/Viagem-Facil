@@ -13,7 +13,7 @@ if(isset($_GET['index'])){
 
 $con = new Conexao();
 
-//Criando objeto usuario
+//Criando objeto cartao
 $cartao = new Cartoes();
 $cartao->SetAtributosCartoes($con);
 
@@ -83,6 +83,14 @@ if($action == "saldo"){
     }
 }
 
+if($action == "dataExpedicao"){
+    if(isset($index)){
+        echo $cartao->GetDataExpedicao($index);
+    }else{
+        echo "Informe o índice do cartão na requisição";
+    }
+}
+
 //Métodos para recuperar os valores de todos os cartões
 if($action == "numeroSeries"){
     echo $cartao->GetNumeroSeries();
@@ -112,9 +120,19 @@ if($action == "saldos"){
     echo $cartao->GetSaldos();
 }
 
+if($action == "dataExpedicoes"){
+    echo $cartao->GetDataExpedicoes();
+}
+
 //Método para recuperar um JSON com todos os valores de todos os cartões
 if($action == "cartaoJson"){
-    echo json_encode($cartao);
+    $json = json_encode($cartao);
+    //Estes replaces servem para substituir caracteres Unicode que são trazidos no json_encode e que ele não converte para UTF8
+    $jsonFormatado = str_replace("\\\u00e1", "á", $json);
+    $jsonFormatado = str_replace("\\\u00e7", "ç", $jsonFormatado);
+    $jsonFormatado = str_replace("\\\u00e3", "ã", $jsonFormatado);
+    $jsonFormatado = str_replace("\\\u00ed", "í", $jsonFormatado);
+    echo $jsonFormatado;
 }
 
 $con->FecharConexao();

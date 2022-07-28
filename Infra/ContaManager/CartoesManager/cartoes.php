@@ -11,6 +11,7 @@ class Cartoes implements JsonSerializable{
     private $bloqueado;
     private $cpfProprietario;
     private $saldo;
+    private $dataExpedicao;
 
     public function __construct()
     {
@@ -18,7 +19,8 @@ class Cartoes implements JsonSerializable{
     }
 
     public function SetAtributosCartoes($con){
-        $sql = "select * from cartao where cpfproprietario = '".$this->cpfProprietario."';";
+        //Estou ordenando os resultados da consulta pela Data de Expedição, em ordem crescente, cartões mais novos vem primeiro
+        $sql = "select * from cartao where cpfproprietario = '".$this->cpfProprietario."' ORDER BY dataexpedicao DESC;";
         $res = mysqli_query($con->getConexao(), $sql);
         $rows = mysqli_fetch_all($res, MYSQLI_ASSOC);
         $this->qtdCartoes = count($rows);
@@ -33,6 +35,7 @@ class Cartoes implements JsonSerializable{
             $this->bloqueado[$index] = $row['Bloqueado'];
             $this->cpfProprietario = $row['CPFProprietario'];
             $this->saldo[$index] = $row['Saldo'];
+            $this->dataExpedicao[$index] = $row['DataExpedicao'];
             $index++;
         }
     }
@@ -74,6 +77,10 @@ class Cartoes implements JsonSerializable{
         return $this->saldo[$index];
     }
 
+    public function GetDataExpedicao($index){
+        return $this->dataExpedicao[$index];
+    }
+
     //Métodos que retornam os valores dos campos de todos os cartões
     public function GetNumeroSeries(){
         return json_encode($this->numeroSerie);
@@ -103,6 +110,10 @@ class Cartoes implements JsonSerializable{
         return json_encode($this->saldo);
     }
 
+    public function GetDataExpedicoes(){
+        return json_encode($this->dataExpedicao);
+    }
+
     //Este método vem da Interface que essa classe implementa, ele permite que convertamos objetos Usuario em JSON
     public function jsonSerialize() {
         return [
@@ -114,6 +125,7 @@ class Cartoes implements JsonSerializable{
             'bloqueado' => $this->GetBloqueados(),
             'CPFProprietario' => $this->GetCPFProprietario(),
             'saldo' => $this->GetSaldos(),
+            'dataExpedicao' => $this->GetDataExpedicoes(),
         ];
     }
 }

@@ -23,9 +23,11 @@ class CadastroPasse{
     //Método que realiza o Cadastro do Cartão no BD em si
     public function CadastrarPasseJaExistente($con){
         $this->conexao = $con;
+        date_default_timezone_set("America/Sao_Paulo");
+        $dateTime = date('Y-m-d H:i:s', time());
 
         $sql = "insert into Cartao values ('".$this->numSerie."','".$this->numFabrica."', '".$this->tipoCartao."', 
-                'Aprovado', '".$this->empresa."', false, '".$this->cpfProprietario."', 0);";
+                'Aprovado', '".$this->empresa."', false, '".$this->cpfProprietario."', 0, '".$dateTime."');";
 
         $resCadastroPasse = mysqli_query($this->conexao->getConexao(), $sql);
 
@@ -48,6 +50,8 @@ class CadastroPasse{
     //Método que realiza o Cadastro do Cartão no BD em si
     public function CadastrarNovoPasse($con){
         $this->conexao = $con;
+        date_default_timezone_set("America/Sao_Paulo");
+        $dateTime = date('Y-m-d H:i:s', time());
 
         //Realizando a lógica de recuperar um Id único para o Usuário
         if($this->empresa == "Maringá do Vale"){
@@ -72,7 +76,7 @@ class CadastroPasse{
 
             //Fazendo a Query em si e Cadastrando um novo Passe
             $sql = "insert into Cartao values ('".$BDNumSerie."', '".$BDNumFabrica."', '".$this->tipoCartao."', 
-                    'Aprovado', '".$this->empresa."', false, '".$this->cpfProprietario."', 0);";
+                    'Aprovado', '".$this->empresa."', false, '".$this->cpfProprietario."', 0, '".$dateTime."');";
 
             $resCadastroPasse = mysqli_query($this->conexao->getConexao(), $sql);
         }while($resCadastroPasse != 1);
