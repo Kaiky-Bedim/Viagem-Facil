@@ -1,3 +1,16 @@
+<?php
+    require_once "../Infra/BD/conexao.php";
+    include "qrCode.php";
+
+    session_start();
+    $cpf = $_SESSION['cpf'];
+    $con = new Conexao();
+    $qrcode = new Qrcode();
+
+    $sql = "select NumeroSerie from Cartao where CPFProprietario = '".$cpf."';";
+    $resp = mysqli_query($con, $sql);
+?>
+
 <!DOCTYPE html>
     <head>
         <meta charset="UTF-8">
@@ -14,12 +27,29 @@
         <!-- Div dos Pop-Ups -->
         <div id="divPopUp"></div>
 
+        <!-- ATENÇÃO MACACOS O HTML NÃO COMPILA O PHP ENTÃO CRIEI UM ARQUIVO PHP IGUAL A ESSE -->
+
         <div id="wrapper">
+            <div class="container">
+                <br>
+                Selecione o Passe que será gerado o QRCode:
+                <select class="form-select" aria-label="Default select example">
+                    <?php while($rows = mysqli_fetch_array($resp)){
+                        ?>
+                        <option value=" <?php echo $rows['NumeroSerie']; ?> " ><?php echo $rows['NumeroSerie']; ?></option>
+
+                    <?php
+                    }
+                    ?>
+                </select>
+            </div>
+            
             <div class="modal modal-signin position-static d-block margin-meio" tabindex="-1" role="dialog">
                 <div class="modal-dialog modal-md" role="document">
                     <div class="modal-content rounded-5 shadow cor-form">
                         <img src="./imgQRCode/qrCode.svg" class="img-fluid tamanho-imagem">
                     </div>
+                    <br><br>
                 </div>
             </div>
             

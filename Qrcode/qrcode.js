@@ -7,6 +7,12 @@ autenticador.garantirAutenticacao("../Infra/Autenticacao/controllerAutenticacao.
 
 var layout = new Layout();
 
+
+function selectPasse(){
+    alert("Pinto");
+}
+
+
 //Esses métodos carregar NavBar e Foot recebem o caminho do head ou foot a partir do html desse script
 //e o caminho para o CSS do Layout a partir daqui
 layout.carregarNavBar("../Layout/head.html", "../Layout/styleLayout.css");
