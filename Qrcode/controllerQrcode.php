@@ -12,13 +12,12 @@ $cpf = $_SESSION['cpf'];
 $numSerie = $_POST['txtOpcaoPasse'];
 
 $res = $qrcode->ImagemQrcode($cpf, $numSerie, $con);
-#echo $res;
 
 //QRCODE
 use chillerlan\QRCode\{QRCode, QROptions};
 use chillerlan\QRCode\Data\QRMatrix;
 use chillerlan\QRCode\Common\EccLevel;
-include './vendor/autoload.php';
+include '../Infra/qrCode/vendor/autoload.php';
 
 
 $options = new QROptions([
@@ -29,14 +28,12 @@ $options = new QROptions([
 
 // invoke a fresh QRCode instance
 $qrcode = new QRCode($options);
+$diretorio = ('imgQRcode/qrCode'.$numSerie.'.svg');
+$diretorio = str_replace(" ", "", $diretorio);
 
 // ...with additional cache file
-$qrcode->render($res, 'imgQRCode/qrCode.svg');
+$qrcode->render($res, $diretorio);
 
-#echo "<img src='imgQRCode/qrCode.svg' width='500'>";
-header('Location: ViewQRCode.php');
-
-
-
+echo "<img src='imgQRCode/qrCode.svg' width='100'>";
 
 ?>

@@ -28,60 +28,53 @@
         <div id="divPopUp"></div>
 
         <div id="wrapper">
-            <div class="modal-dialog margin-meio" role="document">
-                <div class="modal-content rounded-5 shadow">
-                    <div class="modal-header p-5 pb-4 border-bottom-0 cor-form">
-                        <h2 class="fw-bold mb-0">Passes</h2>
-                    </div>
+            <div class="modal modal-signin position-static d-block margin-meio" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content rounded-5 shadow">
+
+                        <div class="modal-header p-5 pb-4 border-bottom-0 cor-form">
+                            <h2 class="fw-bold mb-0">Passes</h2>
+                        </div>
         
-                    <div class="modal-body p-5 pt-0 cor-form">
-                        <form class="cor-form" method="POST" action="controllerQrcode.php">
-                            <div class="row">
-                                <div class="col-12">
+                        <div class="modal-body p-5 pt-0 cor-form">
+                            <form class="cor-form" id="form">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="form-floating mb-3">
+                                            <select class="form-control rounded-4" name="txtOpcaoPasse" aria-label="Default select example" id="OpcaoPasse" placeholder="Passes Salvos">
+                                                <option selected>...</option>
+                                                <?php while($rows = mysqli_fetch_array($resp)){
+                                                ?>
+                                                <option value="<?php echo $rows['NumeroSerie']; ?>" ><?php echo $rows['NumeroSerie']; ?></option>
 
-                                    <div class="form-floating mb-3">
 
-                                        <select class="form-control rounded-4" name="txtOpcaoPasse" aria-label="Default select example" id="OpcaoPasse" 
-                                        onchange="selectPasse()" placeholder="Passes Salvos">
-                                            <option selected>...</option>
-                                            <?php while($rows = mysqli_fetch_array($resp)){
-                                            ?>
-                                            <option value="<?php echo $rows['NumeroSerie']; ?>" ><?php echo $rows['NumeroSerie']; ?></option>
-
-                                            <?php
-                                            }
-                                            ?>
-                                        </select>
-                                        <label for="OpcaoPasse">Passes Salvos</label>
-
+                                                <?php
+                                                }
+                                                ?>
+                                            </select>
+                                            <label for="OpcaoPasse">Passes Salvos</label>
+                                        </div>
                                     </div>
 
+                                    <div class="col-8">
+                                    <div class="modal-dialog modal-md cor" role="document">
+                                        <div class="modal-content rounded-5 shadow">
+                                            <img src="./imgQRCode/qrCode.svg" class="rounded mx-auto d-block tamanho-imagem"  id="imgqrcode">
+                                        </div>
+                                    </div>
+                                    </div>
                                 </div>
-                            </div>
-
-                            <button class="btn btn-primary btn-lg" style="float: right" type="submit">Gerar</button>        
-
-                        </form>
+                            </form>
+                            
+                        </div>      
                     </div>
                 </div>
             </div>
+            <br></br>
 
-            
-            <div class="modal modal-signin position-static d-block margin-meio" tabindex="-1" role="dialog">
-                <div class="modal-dialog modal-md" role="document">
-                    <div class="modal-content rounded-5 shadow cor-form">
-                        <?php
-                        echo "<img src='imgQRCode/qrCode.svg' width='500'>";
-                        ?>
-                        <!--<img src="./imgQRCode/qrCode.svg" class="img-fluid tamanho-imagem">-->
-                    </div>
-                    <br><br>
-                </div>
-            </div>
-            
             <!-- Div para o Footer -->
             <div id="divFoot"></div>
-            
+    
         </div>
     </body>
 </html>

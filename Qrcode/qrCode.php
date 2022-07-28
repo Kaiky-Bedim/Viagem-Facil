@@ -14,9 +14,8 @@ class Qrcode{
         $this->conexao = $con;
         $this->cpf = $cpf;
 
-        $espaco = " ";
-        $subs = "";
-        $numSerieFinal = str_replace($espaco, $subs, $numSerie);
+        
+        $numSerieFinal = str_replace(" ", "", $numSerie);
         $this->numSerie = $numSerieFinal;
 
         $sql = "select NumeroFabrica, Bloqueado from cartao where CPFProprietario = '".$this->cpf."' and NumeroSerie = '".$this->numSerie."';";
