@@ -60,10 +60,41 @@ export class Layout{
     carregarFoot(urlFoot, urlCSS) {
        const xhttp = new XMLHttpRequest();
        xhttp.onload = function() {
-           document.getElementById("divFoot").innerHTML = this.responseText;
-           document.getElementById("css").setAttribute("href", urlCSS);
-           }
-       xhttp.open("GET", urlFoot, true);
-       xhttp.send();
+            document.getElementById("divFoot").innerHTML = this.responseText;
+            document.getElementById("css").setAttribute("href", urlCSS);
+
+            function sizeOfThings(){
+                let body = document.body, html = document.documentElement;
+                let docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+
+                if(docHeight > 680){
+                    document.getElementById("divMainFooter").classList.remove("divContentFootAbsolute");
+                    document.getElementById("rowFooter").classList.add("divContentFootRelative");
+                }
+            };
+            sizeOfThings();
+
+            var observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    // if(mutation.type == "attributes" && mutation.attributeName == "innerHTML"){
+                        console.log("Gay");
+                    // }
+                    });
+                });
+   
+            var body = document.documentElement;
+            observer.observe(body, {attributes: true});
+            document.addEventListener("*", function(){
+                console.log("Gay");
+            })
+
+            //   window.addEventListener('resize', function(){
+            //       sizeOfThings();
+            //   });
+
+        }
+
+    xhttp.open("GET", urlFoot, true);
+    xhttp.send();
    }
 }
