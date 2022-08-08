@@ -35,10 +35,6 @@ html, body {
     height: 100%;
 }
 
-#wrapper{
-    position: relative;
-}
-
 div.body-content{
     /** Altura do rodapé tem que ser igual a isso aqui e vice-versa **/
     padding-bottom: 50px;
