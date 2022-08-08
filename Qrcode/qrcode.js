@@ -40,7 +40,11 @@ select.addEventListener("change", function(event){
         if(this.readyState == 4){
             if(this.status == 200){
                 var numSerie = select.value;
-                document.getElementById("imgqrcode").setAttribute("src","./imgQRCode/qrCode"+numSerie+".svg")
+                if (!(numSerie == "...")){
+                    document.getElementById("imgqrcode").setAttribute("src","./imgQRCode/qrCode"+numSerie+".svg")
+                }else{
+                    document.getElementById("imgqrcode").setAttribute("src","./imgQRCode/fundobranco.png")
+                }
             }
         }
     }

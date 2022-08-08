@@ -59,7 +59,7 @@
                                     <div class="col-8">
                                     <div class="modal-dialog modal-md cor" role="document">
                                         <div class="modal-content rounded-5 shadow">
-                                            <img src="./imgQRCode/qrCode.svg" class="rounded mx-auto d-block tamanho-imagem"  id="imgqrcode">
+                                            <img src="./imgQRCode/fundobranco.png" class="rounded  d-block tamanho-imagem"  id="imgqrcode">
                                         </div>
                                     </div>
                                     </div>

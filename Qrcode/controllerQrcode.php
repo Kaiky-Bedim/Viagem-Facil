@@ -34,6 +34,6 @@ $diretorio = str_replace(" ", "", $diretorio);
 // ...with additional cache file
 $qrcode->render($res, $diretorio);
 
-echo "<img src='imgQRCode/qrCode.svg' width='100'>";
+
 
 ?>
