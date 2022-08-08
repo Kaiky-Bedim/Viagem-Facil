@@ -63,34 +63,37 @@ export class Layout{
             document.getElementById("divFoot").innerHTML = this.responseText;
             document.getElementById("css").setAttribute("href", urlCSS);
 
+            //Este código abaixo deixa o Footer Responsivo, o observer fica de olho para ver se houve mudanças no HTML,
+            //se isso ocorrer, ele vê o tamanho da página e posiciona o Footer de acordo
             function sizeOfThings(){
                 let body = document.body, html = document.documentElement;
                 let docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
 
-                if(docHeight > 680){
-                    document.getElementById("divMainFooter").classList.remove("divContentFootAbsolute");
-                    document.getElementById("rowFooter").classList.add("divContentFootRelative");
+                const divMainFooter = document.getElementById("divMainFooter");
+                const rowFooter = document.getElementById("rowFooter");
+
+                //Verifica o tamanho da tela para decidir a situação do Footer
+                if(docHeight > 680 && !rowFooter.classList.contains("divContentFootRelative")){
+                    divMainFooter.classList.remove("divContentFootAbsolute");
+                    rowFooter.classList.add("divContentFootRelative");
+                }
+
+                if(docHeight < 680 && rowFooter.classList.contains("divContentFootRelative")){
+                    divMainFooter.classList.add("divContentFootAbsolute");
+                    rowFooter.classList.remove("divContentFootRelative");
                 }
             };
             sizeOfThings();
+            
+            //Este é o observer que vigia o HTML.Body
+            var observer = new MutationObserver(function(mutations, observer) {
+                sizeOfThings();
+            });
 
-            var observer = new MutationObserver(function(mutations) {
-                mutations.forEach(function(mutation) {
-                    // if(mutation.type == "attributes" && mutation.attributeName == "innerHTML"){
-                        console.log("Gay");
-                    // }
-                    });
-                });
-   
-            var body = document.documentElement;
-            observer.observe(body, {attributes: true});
-            document.addEventListener("*", function(){
-                console.log("Gay");
-            })
-
-            //   window.addEventListener('resize', function(){
-            //       sizeOfThings();
-            //   });
+            observer.observe(document.body, {
+            subtree: true,
+            attributes: true
+            });
 
         }
 
