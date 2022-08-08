@@ -14,7 +14,72 @@
         <div id="divNavBar"></div>
         <!-- Div dos Pop-Ups -->
         <div id="divPopUp"></div>
-        <input type="text" id="inputTeste"/>
+
+        <div id="wrapper">
+            <div class="modal-dialog margin-meio" role="document">
+                <div class="modal-content rounded-5 shadow janela">
+                    <div class="modal-header p-5 pb-4 border-bottom-0 cor-form">
+                        <h2 class="fw-bold mb-0">Pagamento</h2>
+                    </div>
+        
+                    <div class="modal-body p-5 pt-0 cor-form">
+                        <form class="cor-form" method="POST" action="pagamentoController.php">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-floating mb-3">
+                                        <select class="form-control rounded-4" id="txtPasse" name="txtPasse" placeholder="Passes Salvos">
+                                            <option selected>...</option>
+                                        </select>
+                                        <label for="txtPasse">Passes Salvos</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-floating mb-3">
+                                        <select class="form-control rounded-4" id="txtNomeCartao" placeholder="Nome do Cartão">
+                                            <option selected>...</option>
+                                            <option>MasterCard</option>
+                                            <option>Visa</option>
+                                            <option>Nubank</option>
+                                        </select>
+                                        <label for="txtNomeCartao">Nome do Cartão</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control rounded-4" name="txtSaldo" id="txtSaldo" placeholder="Saldo">
+                                        <label for="txtSaldo">Saldo</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-floating mb-3">
+                                        <input type="date" class="form-control rounded-4" id="txtDataExp" placeholder="Data de Expiração">
+                                        <label for="txtDataExp">Data de Expiração</label>
+                                    </div>
+                                </div>       
+                                <div class="col-6">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control rounded-4" id="txtCodigoSeg" maxlength="3" placeholder="Cód. CVV">
+                                        <label for="txtCodigoSeg">Cód. CVV</label>
+                                    </div>
+                                </div>             
+                            </div>
+                
+                            <!-- Fazer voltar e efetuar pagamento -->
+                        
+                            <button class="btn btn-primary btn-lg" style="float: right" type="submit">Pagar</button>        
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
         
         <!-- Div para o Footer -->
         <div id="divFoot"></div>
