@@ -16,13 +16,16 @@ $leitor->setNumSerie($numSerie);
 
 $resp = $leitor->DescontarPasse();
 
-if($resp == true){
+if($resp == false){
+    echo "Saldo Insuficiente!!!";
+    
+}else{
     echo "Passe Aprovado!!!";
 
     $idPercurso = $leitor->GerarPercurso();
-    #Falta o Histórico
-}else{
-    echo "Saldo Insuficiente!!!";
+    #Falta a Movimentação
+    $leitor->GerarMovimentacao($idPercurso, $resp);
+
 }
 
 

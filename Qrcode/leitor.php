@@ -32,9 +32,12 @@ class Leitor{
     }
 
     #METODOS
+
+    #DESCONTO
     public function DescontarPasse(){
         $saldoAntigo;
         $tipoCartao;
+        $desconto;
 
         $sql = "select Saldo, TipoCartao from Cartao where CPFProprietario = '".$this->cpf."' and NumeroSerie = '".$this->numSerie."';";
         $res = mysqli_query($this->conexao->getConexao(), $sql);
@@ -51,24 +54,26 @@ class Leitor{
         }else{
             if($tipoCartao == "Idoso"){
                 $saldoNovo = $saldoAntigo;
+                $desconto = 0;
     
             }else if($tipoCartao == "Estudantil"){
                 $saldoNovo = $saldoAntigo - 2.25;
+                $desconto = 2.25;
     
             }else if($tipoCartao == "Comum"){
                 $saldoNovo = $saldoAntigo - 4.50;
+                $desconto = 4.50;
     
             }
     
             $sql = "update Cartao set Saldo = '".$saldoNovo."' where CPFProprietario = '".$this->cpf."' and NumeroSerie = '".$this->numSerie."';";
             $res = mysqli_query($this->conexao->getConexao(), $sql);
 
-            $resp = true;
-            #Retornar um vetor ???
-            return $resp;
+            return $desconto;
         }
     }
 
+    #PERCURSO
     public function GerarPercurso(){
         $numLinha = rand(100, 999);
         $trecho = "Jacareí";
@@ -86,22 +91,14 @@ class Leitor{
         return $id;
     }
 
-    public function GerarMovimentacao(){
-        $numLinha = rand(100, 999);
-        $trecho = "Jacareí";
-        $veiculo = "Parati Quadrado";
 
-        $sql = "insert into Percursos (NumeroLinha, Trecho, Veiculo) values ('".$numLinha."', '".$trecho."', '".$veiculo."');";
+    #MOVIMENTAÇÃO
+    public function GerarMovimentacao($id, $desconto){
+        $data = date('d/m/Y H:i');
+
+        $sql = "insert into Movimentacoes (Valor, DataMovimentacao, TipoMovimentacao, NumeroSerieCartao, Id_Percurso) values 
+        ('".$desconto."', '".$data."', 'Utilização em ônibus', '".$this->numSerie."', '".$id."');";
         $res = mysqli_query($this->conexao->getConexao(), $sql);
-        
-        $sql = "select MAX(Id) as id from Percursos";
-        $res = mysqli_query($this->conexao->getConexao(), $sql);
-
-        $dado = mysqli_fetch_assoc($res);
-        $id = $dado['id'];
-        
-        return $id;
-
     }
 
 
