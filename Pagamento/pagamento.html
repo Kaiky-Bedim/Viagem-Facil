@@ -16,65 +16,94 @@
         <div id="divPopUp"></div>
 
         <div id="wrapper">
-            <div class="modal-dialog margin-meio" role="document">
+            <div class="margin-meio" role="document">
                 <div class="modal-content rounded-5 shadow janela">
                     <div class="modal-header p-5 pb-4 border-bottom-0 cor-form">
-                        <h2 class="fw-bold mb-0">Pagamento</h2>
+                        <h2 class="fw-bold mb-0">Adquirir Créditos</h2>
                     </div>
         
+                    <!-- Este bloco é tudo o que está dentro do Modal Cinza da Página -->
                     <div class="modal-body p-5 pt-0 cor-form">
-                        <form class="cor-form" method="POST" action="pagamentoController.php">
-                            <div class="row">
-                                <div class="col-12">
+                        <form class="cor-form" method="POST" id="formPagamento">
+                            
+                            <!-- Caso o usuário não tenha nenhum Cartão, é mostrado o bloco abaixo -->
+                            <div id="divSemCartaoCadastrado" hidden>
+                                <div class="bloco-sem-card" id="divSemCartao">
+                                    <img src="../Infra/img/Assets/semCartao.png" class="sem-card">
+                                    <div>Você não possui nenhum Cartão Cadastrado em nosso sistema !</div>
+                                </div>
+    
+                                <a href="../Passe/passe.html" class="aBtnCadastrarPasse">
+                                    <input type="button" value="Cadastrar Passe" class="btn btn-dark btn-lg" id="btnCadastraPasses"/>
+                                </a>
+                            </div>
+
+                            <!-- Caso o usuário tenha cartões Cadastrados, esse bloco de código é mostrado -->
+                            <div class="row" id="divForm" hidden>
+                                <div class="col-8">
+
+                                    <!-- Esta é a tabela dos Cartões que estão sendo mostrados na Tela -->
+                                    <table class="table table-striped table-light">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Num. Série</th>
+                                                <th scope="col">Empresa</th>
+                                                <th scope="col">Tipo</th>
+                                                <th scope="col">Saldo</th>
+                                                <th scope="col">Opção 1</th>
+                                            </tr>
+                                        </thead>
+                                        <!-- Esta tabela está vazia, pois os cartões que nela aparecem são preenchidos automaticamente -->
+                                        <tbody id="tableCartoes">
+                                        </tbody>
+                                    </table>
+
+                                    <!-- HTML para controlar a Paginação dos cartões -->
+                                    <div class="flexbox controllerPaginacao">
+                                        <div class="box mensagemQtdCartoes">
+                                            Total: <span id="spanMensagem2">0</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Mostrando Cartões de <span id="spanMensagem1">0</span> a <span id="spanMensagem3" >0</span>
+                                        </div>
+                                        <div class="box estiloLetras">
+                                            <button type="button" class="btnDesabilitado" id="btnAnterior" disabled><</button>
+                                            <input id="inputPagina" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="inputPagina" readonly value="1">
+                                            <button type="button" class="btnDesabilitado" id="btnProximo" disabled>></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <!-- Este é o formulário para comprar novos passes -->
                                     <div class="form-floating mb-3">
-                                        <select class="form-control rounded-4" id="txtPasse" name="txtPasse" placeholder="Passes Salvos">
-                                            <option selected>...</option>
+                                        <input type="text" readonly class="form-control rounded-4" id="txtPasse" name="txtPasse" placeholder="Passes Salvos" required/>
+                                        <label for="txtPasse" id="labelPasseSelecionado">Passe Selecionado</label>
+                                    </div>
+
+                                    <div class="form-floating mb-3">
+                                        <input type="text" readonly required maxlength="4" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode == 46" class="form-control rounded-4" name="txtSaldoAdicionado" id="txtSaldoAdicionado" placeholder="Saldo a ser Adicionado">
+                                        <label for="txtSaldoAdicionado" id="labelSaldoAdicionado">Saldo a ser Adicionado</label>
+                                    </div>
+
+                                    <div class="form-floating mb-3">
+                                        <input type="text" readonly class="form-control rounded-4" name="txtNovoSaldo" id="txtNovoSaldo" placeholder="Novo Saldo Total">
+                                        <label for="txtNovoSaldo">Novo Saldo Total</label>
+                                    </div>
+
+                                    <div class="form-floating mb-3 mensagemQtdCartoes">
+                                        <span class="alinhaEsquerda" id="spanFormaPagamento">Forma de Pagamento</span>
+                                        <select class="form-select selectFormaPagamento" id="selectFormaPagamento">
+                                            <option value="" data-default selected disabled></option>
+                                            <option value="1">Cartão de Crédito</option>
+                                            <option value="2">Boleto</option>
+                                            <option value="3">PayPal</option>
+                                            <option value="4">PIX</option>
                                         </select>
-                                        <label for="txtPasse">Passes Salvos</label>
+                                    </div><br>
+
+                                    <div class="form-floating mb-3 alinhaMeio">
+                                        <!-- Este é o Button para comprar os Créditos -->
+                                        <button class="btn btn-danger textFormatadoBtn btn-lg btnPagar" id="btnPagar" style="float: right" type="submit">Pagar</button>        
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="form-floating mb-3">
-                                        <select class="form-control rounded-4" id="txtNomeCartao" placeholder="Nome do Cartão">
-                                            <option selected>...</option>
-                                            <option>MasterCard</option>
-                                            <option>Visa</option>
-                                            <option>Nubank</option>
-                                        </select>
-                                        <label for="txtNomeCartao">Nome do Cartão</label>
-                                    </div>
-                                </div>
-
-                                <div class="col-6">
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control rounded-4" name="txtSaldo" id="txtSaldo" placeholder="Saldo">
-                                        <label for="txtSaldo">Saldo</label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="form-floating mb-3">
-                                        <input type="date" class="form-control rounded-4" id="txtDataExp" placeholder="Data de Expiração">
-                                        <label for="txtDataExp">Data de Expiração</label>
-                                    </div>
-                                </div>       
-                                <div class="col-6">
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control rounded-4" id="txtCodigoSeg" maxlength="3" placeholder="Cód. CVV">
-                                        <label for="txtCodigoSeg">Cód. CVV</label>
-                                    </div>
-                                </div>             
-                            </div>
-                
-                            <!-- Fazer voltar e efetuar pagamento -->
-                        
-                            <button class="btn btn-primary btn-lg" style="float: right" type="submit">Pagar</button>        
-
                         </form>
                     </div>
                 </div>

@@ -33,8 +33,8 @@ window.onload = function(){
 
 async function RenderizarPagina(){
     qtdCartoes = await SetQuantidadeCartoes();
-
-    if(qtdCartoes == 0){                
+    console.log(qtdCartoes);
+    if(qtdCartoes == 0 || qtdCartoes == "Erro de servidor"){                
         MostrarDivSemCartao();
     }else{
         document.getElementById("divSemCartao").setAttribute("hidden", "true");
@@ -329,6 +329,9 @@ function ClicaBtnLista(cont){
         btnVisualizar.setAttribute("aria-pressed", "false");
         btnVisualizar.classList.remove("cartaoPresionado");
         divNenhumCartaoSelecionado.removeAttribute("hidden");
+
+        //Apagando a referência do Cartão que estava selecionado
+        numSerieCartaoSelecionado = "";
     }
 
     //Setando a nova referência para o último button clicado
