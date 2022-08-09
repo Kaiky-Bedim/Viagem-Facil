@@ -4,6 +4,7 @@ import { PopUp } from "../Pop-Ups/popUp.js";
 import { CartoesManager } from "../Infra/ContaManager/CartoesManager/cartoesManager.js";
 import { UsuarioManager } from "../Infra/ContaManager/UsuarioManager/usuarioManager.js";
 
+
 var autenticador = new Autenticador();
 var layout = new Layout();
 var cartoesManager = new CartoesManager();
@@ -220,8 +221,11 @@ function PreencheLinhasTabela(pagina, linhas){
         document.getElementById("tdEmpresa" + cont).innerHTML = cartoes.empresa[cont - aux];
         document.getElementById("tdSaldo" + cont).innerHTML = cartoes.saldo[cont - aux];
         document.getElementById("tdBtnVisualizar" + cont).innerHTML = "<button class='btn btn-primary btn-sm' aria-pressed='false' id='btnVisualizar" + cont + "' type='button'>Vizualizar</button>";
-        document.getElementById("tdBtnBloquear" + cont).innerHTML = "<button class='btn btn-danger btn-sm' id='btnBloquear" + cont + "' type='button'>Bloquear</button>";
-        
+        if(cartoes.bloqueado[cont-aux] == 0){
+            document.getElementById("tdBtnBloquear" + cont).innerHTML = "<button class='btn btn-danger btn-sm' id='btnBloquear" + cont + "' type='button'>Bloquear</button>";
+        }else if(cartoes.bloqueado[cont-aux] == 1){
+            document.getElementById("tdBtnBloquear" + cont).innerHTML = "<button class='btn btn-danger btn-sm' id='btnBloquear" + cont + "' type='button'>Desbloquear</button>";
+        }
         switch(cont) {
             case 1:
                 document.getElementById("btnVisualizar1").onclick = function() { ClicaBtnLista(1) };
@@ -237,6 +241,26 @@ function PreencheLinhasTabela(pagina, linhas){
                 break;
             case 5:
                 document.getElementById("btnVisualizar5").onclick = function() { ClicaBtnLista(5) };
+                break;
+            default:
+                popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Ocorreu um erro inesperado na paginação");
+        }
+
+        switch(cont) {
+            case 1:
+                document.getElementById("btnBloquear1").onclick = function() { BloquearPasse(1) };
+                break;
+            case 2:
+                document.getElementById("btnBloquear2").onclick = function() { BloquearPasse(2) };
+                break;
+            case 3:
+                document.getElementById("btnBloquear3").onclick = function() { BloquearPasse(3) };
+                break;
+            case 4:
+                document.getElementById("btnBloquear4").onclick = function() { BloquearPasse(4) };
+                break;
+            case 5:
+                document.getElementById("btnBloquear5").onclick = function() { BloquearPasse(5) };
                 break;
             default:
                 popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Ocorreu um erro inesperado na paginação");
@@ -333,6 +357,29 @@ function ClicaBtnLista(cont){
 
     //Setando a nova referência para o último button clicado
     ultimoButtonClicado = btnVisualizar;
+}
+
+function BloquearPasse(cont){
+
+    var indice = ((paginaAtual - 1) * 5 + cont) - 1;
+
+    var numSerie = cartoes.numeroSerie[indice];
+    var numFabrica = cartoes.numeroFabrica[indice];
+    var bloqueado = cartoes.bloqueado[indice];
+
+    var data = {'numSerie': numSerie, 'numFabrica': numFabrica, 'bloqueado': bloqueado};
+
+    let httpRequest = new XMLHttpRequest();
+    httpRequest.open("POST", "BloqueioPasse/controllerBloqueioPasse.php");
+    httpRequest.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+    httpRequest.send(JSON.stringify(data));
+    httpRequest.onreadystatechange = function(){
+        if(this.readyState == 4){
+            if(this.status == 200){
+                popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Alterado com Sucesso a Situação do Cartão");
+            }
+        }
+    }
 }
 
 //Esta função é executada toda vez que o button Próximo é clicado

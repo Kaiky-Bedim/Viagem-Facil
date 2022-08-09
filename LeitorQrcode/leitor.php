@@ -1,14 +1,14 @@
 <?php
 class Leitor{
     private $cpf;
-    private $conexao;
+    private $con;
     private $qrcode;
     private $numSerie;
     private $numFabrica;
     private $bloqueado;
 
     public function LerQrcode($cpf,$con,$qrcode){
-        $this->conexao = $conexao;
+        $this->con = $con;
         $this->cpf = $cpf;
         $this->qrcode = $qrcode;
 
@@ -43,6 +43,8 @@ class Leitor{
 
             $sql = "update Cartao set Saldo = '".$saldoNovo."' where CPFProprietario = '".$this->cpf."' and NumeroSerie = '".$this->numSerie."';";
             $res = mysqli_query($this->con->getConexao(), $sql);
+
+            
         }
     }
 
