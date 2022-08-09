@@ -22,11 +22,10 @@ class Qrcode{
         $res = mysqli_query($this->conexao->getConexao(), $sql);
         while ($dado = mysqli_fetch_assoc($res)){
             $this->numFabrica = $dado["NumeroFabrica"];
-            $this->bloqueado = $dado["Bloqueado"];
         }
         
         #Tudo certo agora
-        $qrcode = sha1("$this->cpf"."$this->numSerie"."$this->numFabrica");
+        $qrcode = "http://192.168.0.4/Viagem-Facil/Qrcode/controllerLeitor.php?NumSerie=".$this->numSerie;
         
         if($this->bloqueado == 1){
             $qrcode = sha1("Bloqueado");

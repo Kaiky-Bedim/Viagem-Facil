@@ -3,10 +3,10 @@
 class Pagamento{
     private $saldo;
     private $numSerie;
-    private $cpf;
+    private $empresa;
     private $con;
 
-    #Gets
+    //Estas são as funções Get's que podem ser usadas para recuperar as informações do Pagamento
     public function getSaldo(){
         return $this->saldo;
     }
@@ -15,15 +15,15 @@ class Pagamento{
         return $this->numSerie;
     }
 
-    public function getCpf(){
-        return $this->cpf;
+    public function getEmpresa(){
+        return $this->empresa;
     }
 
     public function getCon(){
         return $this->con;
     }
 
-    #Sets
+    //Estas são as funções Set's que devem ser utilizadas antes de alterarmos o Saldo do Passe informado
     public function setSaldo($saldo){
         $saldoFinal = (double) $saldo;
         $this->saldo = $saldoFinal;
@@ -36,36 +36,20 @@ class Pagamento{
         $this->numSerie = $numSerieFinal;
     }
 
-    public function setCpf($cpf){
-        $this->cpf = $cpf;
+    public function setEmpresa($empresa){
+        $this->empresa = $empresa;
     }
 
     public function setCon($conexao){
         $this->con = $conexao;
     }
 
-    #Funções
-    public function AlterarSaldo(){      
-        $saldoAntigo = 0.0;
-
-        $sql = "select Saldo from cartao where CPFProprietario = '".$this->cpf."' and NumeroSerie = '".$this->numSerie."';";
+    //Esta função é responsável por Alterar o Saldo do Cartão com base nas informações que foram Setadas antes
+    public function AlterarSaldo(){
+        $sql = "update Cartao set Saldo = '".$this->saldo."' where NumeroSerie = '".$this->numSerie."' and Empresa = '".$this->empresa."';";
         $res = mysqli_query($this->con->getConexao(), $sql);
-        while ($dado = mysqli_fetch_assoc($res)){
-            $saldoAntigo = $dado["Saldo"];
-        }
-
-        $saldoNovo = $this->saldo + $saldoAntigo;
-
-        $sql = "update Cartao set Saldo = '".$saldoNovo."' where CPFProprietario = '".$this->cpf."' and NumeroSerie = '".$this->numSerie."';";
-        $res = mysqli_query($this->con->getConexao(), $sql);
-
+        return $res;
     }
-    
-
 }
-
-
-
-
 
 ?>
