@@ -7,7 +7,7 @@
     $con = new Conexao();
     $qrcode = new Qrcode();
 
-    $sql = "select NumeroSerie from Cartao where CPFProprietario = '".$cpf."';";
+    $sql = "select NumeroSerie from Cartao where CPFProprietario = '".$cpf."' and Bloqueado = 0;";
     $resp = mysqli_query($con->getConexao(), $sql);
 ?>
 
