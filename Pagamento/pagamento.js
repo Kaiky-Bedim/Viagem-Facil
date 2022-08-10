@@ -438,20 +438,15 @@ formElement.addEventListener("submit", function(event){
     httpRequest.open("POST", "controllerPagamento.php");
     httpRequest.setRequestHeader("Content-type", "application/json");
     httpRequest.send(data);
-    httpRequest.onreadystatechange = function(){
+    httpRequest.onreadystatechange = async function(){
         if(this.readyState == 4){
             if(this.status == 200){
                 popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", this.responseText);
                 if(this.responseText.includes("Sucesso")){
-                    //A página mostrada retorna para a primeira página
-                    btnProximo.classList.replace("btn-light", "btnDesabilitado");
-                    btnProximo.setAttribute("disabled", "true");
-                    btnAnterior.classList.replace("btn-light", "btnDesabilitado");
-                    btnAnterior.setAttribute("disabled", "true");
-                    paginaAtual = 1;
-                    inputPagina.value = paginaAtual;
-                    ResetaListaMostrada();
-                    PrepararListaCartoes();
+                    //Caso tudo tenha dado certo, ele atualiza a lista em tempo real
+                    var json = await cartoesManager.buscarDadosCartoes("../Infra/ContaManager/CartoesManager/controllerCartoesManager.php", "cartaoJson");
+                    cartoes = DeserializarJsonCartoes(json);
+                    PreencheLinhasTabela(paginaAtual, qtdCartoes - ((paginaAtual - 1) * 5));
                 }else if(this.responseText.includes("Sem conexão") || this.responseText.includes("Fatal erro")){
                     popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Não foi possível terminar a requisição");    
                 }
@@ -512,6 +507,18 @@ function AtualizaNovoSaldo(){
         inputNovoSaldo.value = cartoes.saldo[indice];
         return;
     }
-
-    inputNovoSaldo.value = parseFloat(cartoes.saldo[indice]) + parseFloat(inputSaldoAdicionado.value);
+    //Os saldos são recuperados do Form e do Cartão no Banco
+    var saldoAtual = parseFloat(cartoes.saldo[indice]).toFixed(2);
+    var saldoAdicionado = parseFloat(inputSaldoAdicionado.value).toFixed(2);
+    var novoSaldo = parseFloat(saldoAtual) + parseFloat(saldoAdicionado);
+    
+    inputNovoSaldo.value = novoSaldo;
 }
+
+inputSaldoAdicionado.addEventListener("keyup", function(){
+    AtualizaNovoSaldo();
+});
+
+inputSaldoAdicionado.addEventListener("keydown", function(){
+    AtualizaNovoSaldo();
+});
