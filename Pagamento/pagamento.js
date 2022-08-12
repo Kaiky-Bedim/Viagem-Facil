@@ -417,7 +417,7 @@ formaPagamento.oninput = function(){
 var novoMaxLength = false;
 
 //Esta função é responsável por interceptar o envio do Form e garantir seu sucesso
-formElement.addEventListener("submit", function(event){
+formElement.addEventListener("submit", async function(event){
     event.preventDefault();
     //Caso nenhum passe tenha sido selecionado, é mostrado um Pop-Up pedindo para que o usuário escolha
     if(passeSelecionado.value == ""){
@@ -425,36 +425,65 @@ formElement.addEventListener("submit", function(event){
         return;
     }
 
-    let httpRequest = new XMLHttpRequest();
+    //Verificando se o usuário digitou um valor válido para a compra
+    if(parseFloat(inputSaldoAdicionado.value) < 1){
+        popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "O valor comprado deve ser maior do que 1");
+        return;
+    }
 
-    let data = `
-        {
-          "numeroSerie": "${cartoes.numeroSerie[indice]}",
-          "empresa": "${cartoes.empresa[indice]}",
-          "saldoAtual": "${cartoes.saldo[indice]}",
-          "saldoComprado": "${inputSaldoAdicionado.value}"
-        }`;
+    //Imprimindo o PopUp para confirmar a compra do usuário
+    await popUp.imprimirPopUpConfirmacao("../Pop-Ups/popUpConfirmacao.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Deseja mesmo realizar esta compra ?");
 
-    httpRequest.open("POST", "controllerPagamento.php");
-    httpRequest.setRequestHeader("Content-type", "application/json");
-    httpRequest.send(data);
-    httpRequest.onreadystatechange = async function(){
-        if(this.readyState == 4){
-            if(this.status == 200){
-                popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", this.responseText);
-                if(this.responseText.includes("Sucesso")){
-                    //Caso tudo tenha dado certo, ele atualiza a lista em tempo real
-                    var json = await cartoesManager.buscarDadosCartoes("../Infra/ContaManager/CartoesManager/controllerCartoesManager.php", "cartaoJson");
-                    cartoes = DeserializarJsonCartoes(json);
-                    PreencheLinhasTabela(paginaAtual, qtdCartoes - ((paginaAtual - 1) * 5));
-                }else if(this.responseText.includes("Sem conexão") || this.responseText.includes("Fatal erro")){
-                    popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Não foi possível terminar a requisição");    
+    const btnConfirmar = document.getElementById("buttonConfirmar");
+    btnConfirmar.addEventListener("confirmacao", function(){    
+        let httpRequest = new XMLHttpRequest();
+
+        let data = `
+            {
+            "numeroSerie": "${cartoes.numeroSerie[indice]}",
+            "empresa": "${cartoes.empresa[indice]}",
+            "saldoAtual": "${cartoes.saldo[indice]}",
+            "saldoComprado": "${inputSaldoAdicionado.value}"
+            }`;
+
+        httpRequest.open("POST", "controllerPagamento.php");
+        httpRequest.setRequestHeader("Content-type", "application/json");
+        httpRequest.send(data);
+        httpRequest.onreadystatechange = async function(){
+            if(this.readyState == 4){
+                if(this.status == 200){
+                    if(this.responseText.includes("Sucesso")){
+                        popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", this.responseText);
+
+                        //Caso tudo tenha dado certo, ele atualiza a lista em tempo real
+                        var json = await cartoesManager.buscarDadosCartoes("../Infra/ContaManager/CartoesManager/controllerCartoesManager.php", "cartaoJson");
+                        cartoes = DeserializarJsonCartoes(json);
+
+                        //Atualizando a lista em tempo real
+                        if(paginaAtual < totalPaginas){
+                            var i = 5;
+                        }else{
+                            var i = qtdCartoes - ((paginaAtual - 1) * 5);
+                        }
+
+                        PreencheLinhasTabela(paginaAtual, i);
+
+                        //Código para limpar o formulário após a compra
+                        ultimoButtonClicado.setAttribute("aria-pressed", "false");
+                        ultimoButtonClicado.classList.remove("cartaoPresionado");
+                        numSerieCartaoSelecionado = "";
+                        passeSelecionado.value = "";
+                        saldoAdicionado.value = "";
+                        inputNovoSaldo.value = "";
+                    }else if(this.responseText.includes("Sem conexão") || this.responseText.includes("Fatal erro")){
+                        popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Não foi possível terminar a requisição");    
+                    }
+                }else{
+                    popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Não foi possível terminar a requisição");
                 }
-            }else{
-                popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Não foi possível terminar a requisição");
             }
         }
-    }
+    });
 });
 
 //Este Listener vai garantir que o usuário digite valores corretos no Input do Saldo a ser Adicionado

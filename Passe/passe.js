@@ -4,7 +4,6 @@ import { PopUp } from "../Pop-Ups/popUp.js";
 import { CartoesManager } from "../Infra/ContaManager/CartoesManager/cartoesManager.js";
 import { UsuarioManager } from "../Infra/ContaManager/UsuarioManager/usuarioManager.js";
 
-
 var autenticador = new Autenticador();
 var layout = new Layout();
 var cartoesManager = new CartoesManager();
@@ -13,12 +12,6 @@ var popUp = new PopUp();
 
 //Mátodo que garante a autenticação do nosso usuário
 autenticador.garantirAutenticacao("../Infra/Autenticacao/controllerAutenticacao.php", "../Login/login.html");
-
-//NÃO FUNCIONAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-async function ApagarPasse(NumSerie){
-    console.log("Acessou aa: " + NumSerie);
-}
-
 
 //Esses métodos carregar NavBar e Foot recebem o caminho do head ou foot a partir do html desse script
 //e o caminho para o CSS do Layout a partir daqui
@@ -34,7 +27,6 @@ window.onload = function(){
 
 async function RenderizarPagina(){
     qtdCartoes = await SetQuantidadeCartoes();
-    console.log(qtdCartoes);
     if(qtdCartoes == 0 || qtdCartoes == "Erro de servidor"){                
         MostrarDivSemCartao();
     }else{
@@ -246,6 +238,7 @@ function PreencheLinhasTabela(pagina, linhas){
                 popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Ocorreu um erro inesperado na paginação");
         }
 
+        //Setando as funções para os Buttons de Bloquear
         switch(cont) {
             case 1:
                 document.getElementById("btnBloquear1").onclick = function() { BloquearPasse(1) };
@@ -362,27 +355,60 @@ function ClicaBtnLista(cont){
     ultimoButtonClicado = btnVisualizar;
 }
 
-function BloquearPasse(cont){
-
+//Função responsável por bloquear o Cartão clicado
+async function BloquearPasse(cont){
+    //Descobrindo o indice das informações do cartão
     var indice = ((paginaAtual - 1) * 5 + cont) - 1;
-
-    var numSerie = cartoes.numeroSerie[indice];
-    var numFabrica = cartoes.numeroFabrica[indice];
     var bloqueado = cartoes.bloqueado[indice];
 
-    var data = {'numSerie': numSerie, 'numFabrica': numFabrica, 'bloqueado': bloqueado};
+    //Imprimindo o PopUp para confirmação do pedido de bloqueio
+    if(bloqueado == 0){
+        await popUp.imprimirPopUpConfirmacao("../Pop-Ups/popUpConfirmacao.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Deseja mesmo bloquear este Cartão ?");
+    }else if(bloqueado == 1){
+        await popUp.imprimirPopUpConfirmacao("../Pop-Ups/popUpConfirmacao.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Deseja mesmo desbloquear este Cartão ?");
+    }
 
-    let httpRequest = new XMLHttpRequest();
-    httpRequest.open("POST", "BloqueioPasse/controllerBloqueioPasse.php");
-    httpRequest.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-    httpRequest.send(JSON.stringify(data));
-    httpRequest.onreadystatechange = function(){
-        if(this.readyState == 4){
-            if(this.status == 200){
-                popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Alterado com Sucesso a Situação do Cartão");
+    const btnConfirmar = document.getElementById("buttonConfirmar");
+    btnConfirmar.addEventListener("confirmacao", function(){    
+        var indice = ((paginaAtual - 1) * 5 + cont) - 1;
+
+        //Recuperando as informações do Cartão
+        var numSerie = cartoes.numeroSerie[indice];
+        var numFabrica = cartoes.numeroFabrica[indice];
+        var bloqueado = cartoes.bloqueado[indice];
+
+        var data = {'numSerie': numSerie, 'numFabrica': numFabrica, 'bloqueado': bloqueado};
+
+        //Realizando o Post com o Json
+        let httpRequest = new XMLHttpRequest();
+        httpRequest.open("POST", "BloqueioPasse/controllerBloqueioPasse.php");
+        httpRequest.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+        httpRequest.send(JSON.stringify(data));
+        httpRequest.onreadystatechange = function(){
+            if(this.readyState == 4){
+                if(this.status == 200  && !this.responseText.includes("Fatal error")){
+                    popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", this.responseText);
+                    //Atualizando os valores do Array Cartões
+                    if(bloqueado == 0){
+                        cartoes.bloqueado[indice] = 1;
+                    }else if(bloqueado == 1){
+                        cartoes.bloqueado[indice] = 0;
+                    }
+
+                    //Atualizando a lista em tempo real
+                    if(paginaAtual < totalPaginas){
+                        var i = 5;
+                    }else{
+                        var i = qtdCartoes - ((paginaAtual - 1) * 5);
+                    }
+
+                    PreencheLinhasTabela(paginaAtual, i);
+                }else{
+                    popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", this.responseText);
+                }
             }
         }
-    }
+    });
 }
 
 //Esta função é executada toda vez que o button Próximo é clicado
