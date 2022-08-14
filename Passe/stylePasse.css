@@ -162,19 +162,19 @@ body{
 }
 
 /* CSS para a janela de Cadastro de Cartões */
-#btnCadastrarNovoPasse {
+#btnCadastrarNovoPasse{
     height: 100px;
     position: relative;
-    margin-top: 19%;
-    margin-bottom: -24.5%;
-    margin-left: 57.5%;
+    margin-top: 256px;
+    margin-bottom: -328px;
+    margin-left: 775px;
 }
 
 .cadastroCartaoModal{
     position: fixed;
     z-index: 1;
-    margin-left: 16.7%;
-    margin-top: 8%;
+    width: 100%;
+    margin-top: 225px;
 }
 
 .buttonX{
@@ -186,9 +186,13 @@ body{
     box-shadow: 7px 7px 13px 0px rgba(50, 50, 50, 0.22);
     border-width: 0.5px;
     border-color: rgb(255, 255, 255);
+    position: relative;
+}
+
+.divBtnX{
     position: absolute;
-    margin-left: 93.3%;
-    margin-top: 1%;
+    margin-left: 810px;
+    margin-bottom: 310px;
 }
 
 .buttonX:hover{
@@ -233,7 +237,7 @@ body{
 }
 
 .alinhamento{
-    margin-top: -12%;
+    margin-top: -80px;
     position: absolute;
     z-index: 1;
 }
@@ -296,7 +300,7 @@ body{
 
 .cartaoAlinhamento{
     position: absolute;
-    margin-bottom: 70%;
+    margin-bottom: 600px;
 }
 
 .cartaoIdoso{
@@ -315,9 +319,9 @@ body{
 .bloco-sem-card {
     background-color: rgb(235, 235, 235);
     position: relative;
-    margin-right: 15%;
-    margin-bottom: -21%;
-    width: 55%;
+    margin-right: 200px;
+    margin-bottom: -285px;
+    width: 745px;
     height: 295px;
     border-radius: 5px;
     box-shadow: 8px 8px rgb(56 56 56 / 45%);

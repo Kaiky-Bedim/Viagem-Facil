@@ -21,16 +21,16 @@
 
         <!-- Bloco sobre a janela de Cadastro de Passes -->
         <div id="cadastroCartaoModal" class="cadastroCartaoModal" hidden>
-            <div id="wrapper">
-
-                <!-- Botão de X para sair da Janela -->
-                <button type="button" class="buttonX" id="buttonX"></button>
-
+            <div id="wrapper">            
                 <div class="bloco janela">
+                    <div class="divBtnX">
+                        <!-- Botão de X para sair da Janela -->
+                        <button type="button" class="buttonX" id="buttonX"></button>
+                    </div>
 
                     <!-- Bloco do Cartão na janela de Cadastro -->
                     <div class="cartaoAlinhamento">
-                        <div class="card-bloco">
+                        <div class="card-bloco" id="cardCartao">
                             <div class="front fonte cartaoComum" id="divCartaoInteiro">
                                 <div class="image">
                                     <img src="../Infra/img/LogosEmpresas/LOGO_MARINGA_DO_VALE.png" id="imgLogoEmpresaCartao">
@@ -258,10 +258,9 @@
                 <br><br><br>
             </div>
             <br>
-
-            <!-- Div para o Footer -->
-            <div id="divFoot"></div>
         </div>
+        <!-- Div para o Footer -->
+        <div id="divFoot"></div>
     </body>
 </html>
 <!-- Scripts de JavaScript -->

@@ -1,5 +1,6 @@
 .navbar{
     background-color: #817A87;
+    max-height: 96px;
 }
 
 .nav-link{
@@ -40,21 +41,20 @@ div.body-content{
     padding-bottom: 50px;
 }
 
-#wrapperFoot{
+html{
+    height: 100% !important;
+    min-height: 100% !important;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
     min-height: 100%;
-    position: relative;
-    height: 1px;
 }
 
-.divContentFootRelative{
-    width: 100%;
+#divFoot{
+    margin-top: auto !important;
     position: relative;
-}
-
-.divContentFootAbsolute{
-    width: 100%;
-    position: static;
-    bottom: 0;
 }
 
 /* Classe usada para esconder elementos da NavBar */

@@ -62,39 +62,6 @@ export class Layout{
        xhttp.onload = function() {
             document.getElementById("divFoot").innerHTML = this.responseText;
             document.getElementById("css").setAttribute("href", urlCSS);
-
-            //Este código abaixo deixa o Footer Responsivo, o observer fica de olho para ver se houve mudanças no HTML,
-            //se isso ocorrer, ele vê o tamanho da página e posiciona o Footer de acordo
-            function sizeOfThings(){
-                let body = document.body, html = document.documentElement;
-                let docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
-
-                const divMainFooter = document.getElementById("divMainFooter");
-                const rowFooter = document.getElementById("rowFooter");
-
-                //Verifica o tamanho da tela para decidir a situação do Footer
-                if(docHeight > 680 && !rowFooter.classList.contains("divContentFootRelative")){
-                    divMainFooter.classList.remove("divContentFootAbsolute");
-                    rowFooter.classList.add("divContentFootRelative");
-                }
-
-                if(docHeight < 680 && rowFooter.classList.contains("divContentFootRelative")){
-                    divMainFooter.classList.add("divContentFootAbsolute");
-                    rowFooter.classList.remove("divContentFootRelative");
-                }
-            };
-            sizeOfThings();
-            
-            //Este é o observer que vigia o HTML.Body
-            var observer = new MutationObserver(function(mutations, observer) {
-                sizeOfThings();
-            });
-
-            observer.observe(document.body, {
-            subtree: true,
-            attributes: true
-            });
-
         }
 
     xhttp.open("GET", urlFoot, true);
