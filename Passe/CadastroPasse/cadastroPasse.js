@@ -56,9 +56,11 @@ document.documentElement.onclick = function(event){
 //listener do document.documentElement.onclick
 function VerificaSeUsuarioClicouFora(event){
     if(document.getElementById("cadastroCartaoModal").getAttribute("hidden") == null){
+        console.log(event.target.innerHTML);
         var formVerificacao = document.getElementById("formCadastroPasse").innerHTML;
         var card = document.getElementById("cardCartao").innerHTML;
-        if(!formVerificacao.includes(event.target.innerHTML) && !card.includes(event.target.innerHTML) && event.target.innerHTML != "Cadastrar Novo Passe"){
+        if(!formVerificacao.includes(event.target.innerHTML) && !card.includes(event.target.innerHTML) && event.target.innerHTML != "Cadastrar Novo Passe" && event.target.innerHTML != "Novo Passe"
+                && event.target.innerHTML != "Passe já Existente"){
             document.getElementById("cadastroCartaoModal").setAttribute("hidden", "true");
             var restantePagina = document.querySelectorAll("body>div:not(.cadastroCartaoModal)");
             restantePagina.forEach(element => {

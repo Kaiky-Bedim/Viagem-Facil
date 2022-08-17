@@ -17,7 +17,7 @@ layout.carregarNavBar("../Layout/head.html", "../Layout/styleLayout.css");
 layout.carregarFoot("../Layout/foot.html", "../Layout/styleLayout.css");
 
 //O código abaixo verificará se o usuário possui algum cartão Cadastrado, caso não, será mostrada a Div Sem Cartão
-const qtdCartoes = await cartoesManager.buscarDadosCartoes("../Infra/ContaManager/CartoesManager/controllerCartoesManager.php", "qtdCartoes");
+var qtdCartoes = await cartoesManager.buscarDadosCartoes("../Infra/ContaManager/CartoesManager/controllerCartoesManager.php", "qtdCartoes");
 const form = document.getElementById("divForm");
 const divSemCartao = document.getElementById("divSemCartaoCadastrado");
 var paginaAtual = 1;
@@ -47,6 +47,7 @@ async function PrepararListaCartoes(){
     var json = await cartoesManager.buscarDadosCartoes("../Infra/ContaManager/CartoesManager/controllerCartoesManager.php", "cartaoJson");
     
     cartoes = DeserializarJsonCartoes(json);
+    console.log(cartoes);
     
     //Alterando a mensagem mostrada embaixo da lista
     document.getElementById("spanMensagem2").innerHTML = qtdCartoes
@@ -136,7 +137,30 @@ function DeserializarJsonCartoes(data){
     cartoes.saldo = arraySaldos;
     cartoes.dataExpedicao = arrayDatasExpedicao;
 
-    return cartoes;
+    var cartoesFinais = {
+        numeroSerie: [],
+        numeroFabrica: [],
+        tipoCartao: [],
+        situacao: [],
+        empresa: [],
+        saldo: [],
+        dataExpedicao: []
+    };
+
+    for(var i = 0; i < cartoes.numeroSerie.length; i++){
+        if(cartoes.bloqueado[i] == 0){
+            cartoesFinais.numeroSerie.push(cartoes.numeroSerie[i]);
+            cartoesFinais.numeroFabrica.push(cartoes.numeroFabrica[i]);
+            cartoesFinais.tipoCartao.push(cartoes.tipoCartao[i]);
+            cartoesFinais.situacao.push(cartoes.situacao[i]);
+            cartoesFinais.empresa.push(cartoes.empresa[i]);
+            cartoesFinais.saldo.push(cartoes.saldo[i]);
+            cartoesFinais.dataExpedicao.push(cartoes.dataExpedicao[i]);
+        }else{
+            qtdCartoes--;
+        }
+    }
+    return cartoesFinais;
 }
 
 //Função responsável por Criar os Campos da tabela de cartões
@@ -537,9 +561,9 @@ function AtualizaNovoSaldo(){
         return;
     }
     //Os saldos são recuperados do Form e do Cartão no Banco
-    var saldoAtual = parseFloat(cartoes.saldo[indice]).toFixed(2);
-    var saldoAdicionado = parseFloat(inputSaldoAdicionado.value).toFixed(2);
-    var novoSaldo = parseFloat(saldoAtual) + parseFloat(saldoAdicionado);
+    var saldoAtual = parseFloat(cartoes.saldo[indice]);
+    var saldoAdicionado = parseFloat(inputSaldoAdicionado.value);
+    var novoSaldo = (parseFloat(saldoAtual) + parseFloat(saldoAdicionado)).toFixed(2);
     
     inputNovoSaldo.value = novoSaldo;
 }
