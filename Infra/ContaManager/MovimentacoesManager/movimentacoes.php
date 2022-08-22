@@ -7,11 +7,12 @@ class Movimentacoes implements JsonSerializable{
     private $tipoMovimentacao;
     private $numeroSerie;
     private $empresaCartao;
+    private $cpfProprietario;
     private $idPercurso;
 
-    //Esta propriedade recupera os dados do Cartão Solicitado e atribui as propriedades do Objeto
-    public function SetAtributosMovimentacoes($con, $numeroSerie, $empresaCartao){
-        $sql = "select * from Movimentacoes where numeroSerieCartao = '".$numeroSerie."' && empresaCartao = '".$empresaCartao."';";
+    //Esta função recupera os dados do Cartão Solicitado e atribui as propriedades do Objeto
+    public function SetAtributosMovimentacoesCartao($con, $numeroSerie, $empresaCartao){
+        $sql = "select * from Movimentacoes where numeroSerieCartao = '".$numeroSerie."' && empresaCartao = '".$empresaCartao."' ORDER BY DataMovimentacao DESC;";
         $res = mysqli_query($con->getConexao(), $sql);
         $rows = mysqli_fetch_all($res, MYSQLI_ASSOC);
         $index = 0;
@@ -23,6 +24,28 @@ class Movimentacoes implements JsonSerializable{
             $this->tipoMovimentacao[$index] = $row['TipoMovimentacao'];
             $this->numeroSerie = $numeroSerie;
             $this->empresaCartao = $empresaCartao;
+            $this->idPercurso[$index] = $row['Id_Percurso'];
+            $index++;
+        }
+    }
+
+    //Esta função recupera todo o histórico de todos os cartões do Usuário ordenados por ordem de data
+    public function SetAtributosTodasAsMovimentacoes($con){
+        //Atribuindo o cpf do Usuário logado a propriedade CPF da classe
+        $this->cpfProprietario = $_SESSION['cpf'];
+
+        $sql = "select * from Movimentacoes where cpfproprietario = '".$this->cpfProprietario."' ORDER BY DataMovimentacao DESC;";
+        $res = mysqli_query($con->getConexao(), $sql);
+        $rows = mysqli_fetch_all($res, MYSQLI_ASSOC);
+        $index = 0;
+
+        //Setando os valores do Objeto nos arrays
+        foreach($rows as $row){
+            $this->valor[$index] = $row['Valor'];
+            $this->dataMovimentacao[$index] = $row['DataMovimentacao'];
+            $this->tipoMovimentacao[$index] = $row['TipoMovimentacao'];
+            $this->numeroSerie[$index] = $row['NumeroSerieCartao'];
+            $this->empresaCartao[$index] = $row['EmpresaCartao'];
             $this->idPercurso[$index] = $row['Id_Percurso'];
             $index++;
         }
@@ -47,10 +70,16 @@ class Movimentacoes implements JsonSerializable{
 
     //Métodos para recuperar informações básicas do cartão cujas Movimentações estão atribuidas aqui
     public function GetNumeroSerie(){
+        if(is_array($this->numeroSerie)){
+            return json_encode($this->numeroSerie);
+        }
         return $this->numeroSerie;
     }
 
     public function GetEmpresaCartao(){
+        if(is_array($this->empresaCartao)){
+            return json_encode(($this->empresaCartao));
+        }
         return $this->empresaCartao;
     }
 
@@ -60,8 +89,8 @@ class Movimentacoes implements JsonSerializable{
             'valor' => $this->GetValores(),
             'dataMovimentacao' => $this->GetDataMovimentacoes(),
             'tipoMovimentacao' => $this->GetTipoMovimentacoes(),
-            'numeroSerieCartao' => $this->numeroSerie,
-            'empresaCartao' => $this->empresaCartao,
+            'numeroSerieCartao' => $this->GetNumeroSerie(),
+            'empresaCartao' => $this->GetEmpresaCartao(),
             'idPercurso' => $this->GetIdPercursos(),
         ];
     }

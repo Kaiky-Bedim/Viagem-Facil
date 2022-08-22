@@ -15,5 +15,5 @@ layout.carregarFoot("../Layout/foot.html", "../Layout/styleLayout.css");
 
 var mov = new MovimentacoesManager();
 
-var teste = await mov.buscarDadosCartoes("../Infra/ContaManager/MovimentacoesManager/controllerMovimentacoesManager.php", "movimentacaoJson", "7804501", "Viação Jacareí");
+var teste = await mov.buscarDadosCartoes("../Infra/ContaManager/MovimentacoesManager/controllerMovimentacoesManager.php", "movimentacaoJson");
 console.log(teste);

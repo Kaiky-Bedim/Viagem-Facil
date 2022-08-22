@@ -11,7 +11,11 @@ export class MovimentacoesManager{
         var popUp = new PopUp();
 
         //Montando a Url completa para a consulta
-        var urlCompleta = pathController+"?action="+action+"&numeroSerie="+numeroSerie+"&empresa="+empresaCartao;    
+        if(numeroSerie == undefined && empresaCartao == undefined){
+            var urlCompleta = pathController+"?action="+action;
+        }else{
+            var urlCompleta = pathController+"?action="+action+"&numeroSerie="+numeroSerie+"&empresa="+empresaCartao;
+        }
 
         return fetch(urlCompleta)
             .then(response =>response.text())

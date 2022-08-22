@@ -35,10 +35,6 @@ class Leitor{
 
     #DESCONTO
     public function DescontarPasse(){
-        $saldoAntigo;
-        $tipoCartao;
-        $desconto;
-
         $sql = "select Saldo, TipoCartao from Cartao where CPFProprietario = '".$this->cpf."' and NumeroSerie = '".$this->numSerie."';";
         $res = mysqli_query($this->conexao->getConexao(), $sql);
 
@@ -96,8 +92,8 @@ class Leitor{
     public function GerarMovimentacao($id, $desconto){
         $data = date('d/m/Y H:i');
 
-        $sql = "insert into Movimentacoes (Valor, DataMovimentacao, TipoMovimentacao, NumeroSerieCartao, Id_Percurso) values 
-        ('".$desconto."', '".$data."', 'Utilização em ônibus', '".$this->numSerie."', '".$id."');";
+        $sql = "insert into Movimentacoes (Valor, DataMovimentacao, TipoMovimentacao, NumeroSerieCartao, CPFProprietario, Id_Percurso) values 
+        ('".$desconto."', '".$data."', 'Utilização em ônibus', '".$this->numSerie."', '".$this->cpf."','".$id."');";
         $res = mysqli_query($this->conexao->getConexao(), $sql);
     }
 

@@ -5,6 +5,7 @@ class Pagamento{
     private $numSerie;
     private $empresa;
     private $valor;
+    private $cpf;
     private $con;
 
     //Estas são as funções Get's que podem ser usadas para recuperar as informações do Pagamento
@@ -63,9 +64,13 @@ class Pagamento{
 
     //Esta função é responsável por Cadastrar a Movimentação gerada no BD
     public function CadastraMovimentacao(){
+        //Recuperando a data exata da Movimentação e o CPF do usuário que a gerou
         date_default_timezone_set("America/Sao_Paulo");
         $dateTime = date('Y-m-d H:i:s', time());
-        $sql = "insert into Movimentacoes values (0, ".$this->valor.", '".$dateTime."', 'Recarga', '".$this->numSerie."', '".$this->empresa."', null);";
+
+        $this->cpf = $_SESSION['cpf'];
+
+        $sql = "insert into Movimentacoes values (0, ".$this->valor.", '".$dateTime."', 'Recarga', '".$this->numSerie."', '".$this->empresa."', '".$this->cpf."',null);";
         $res = mysqli_query($this->con->getConexao(), $sql);
         return $res;
     }

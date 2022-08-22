@@ -3,17 +3,33 @@
 require_once "../../BD/conexao.php";
 include "movimentacoes.php";
 
+//Iniciando as Sessions para uso
+session_start();
+
 //Recuperando os dados do cartão para poder indentificá-lo
 $action = $_GET['action'];
-$numeroSerie = $_GET['numeroSerie'];
-$empresa = $_GET['empresa'];
+
+//Verificando se foram passados os parâmetros abaixo para que eles sejam setados
+if(isset($_GET['numeroSerie'])){
+    $numeroSerie = $_GET['numeroSerie'];
+}
+
+if(isset($_GET['empresa'])){
+    $empresa = $_GET['empresa'];
+}
 
 //Criando o objeto Conexão
 $con = new Conexao();
 
 //Criando objeto Movimentacoes
 $movimentacoes = new Movimentacoes();
-$movimentacoes->SetAtributosMovimentacoes($con, $numeroSerie, $empresa);
+
+//Verificando qual a action que foi chamada
+if(isset($numeroSerie) && isset($empresa)){
+    $movimentacoes->SetAtributosMovimentacoesCartao($con, $numeroSerie, $empresa);
+}else{
+    $movimentacoes->SetAtributosTodasAsMovimentacoes($con);
+}
 
 //Métodos para recuperar dados específicos das Movimentações de um Cartão
 if($action == "valores"){

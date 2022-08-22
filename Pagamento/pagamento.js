@@ -47,7 +47,6 @@ async function PrepararListaCartoes(){
     var json = await cartoesManager.buscarDadosCartoes("../Infra/ContaManager/CartoesManager/controllerCartoesManager.php", "cartaoJson");
     
     cartoes = DeserializarJsonCartoes(json);
-    console.log(cartoes);
     
     //Alterando a mensagem mostrada embaixo da lista
     document.getElementById("spanMensagem2").innerHTML = qtdCartoes
