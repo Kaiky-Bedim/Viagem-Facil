@@ -1,13 +1,14 @@
 <?php
 
 class Pagamento{
-    private $saldo;
+    private $novoSaldo;
     private $numSerie;
     private $empresa;
+    private $valor;
     private $con;
 
     //Estas são as funções Get's que podem ser usadas para recuperar as informações do Pagamento
-    public function getSaldo(){
+    public function getNovoSaldo(){
         return $this->saldo;
     }
 
@@ -19,14 +20,19 @@ class Pagamento{
         return $this->empresa;
     }
 
+    //Este getValor recupera apenas quanto foi adicionado ao saldo e não o novo saldo após a Compra
+    public function getValor(){
+        return $this->valor;
+    }
+
     public function getCon(){
         return $this->con;
     }
 
     //Estas são as funções Set's que devem ser utilizadas antes de alterarmos o Saldo do Passe informado
-    public function setSaldo($saldo){
+    public function setNovoSaldo($saldo){
         $saldoFinal = (double) $saldo;
-        $this->saldo = $saldoFinal;
+        $this->novoSaldo = $saldoFinal;
     }
 
     public function setNumSerie($numSerie){
@@ -40,13 +46,26 @@ class Pagamento{
         $this->empresa = $empresa;
     }
 
+    public function setValor($valor){
+        $this->valor = $valor;
+    }
+
     public function setCon($conexao){
         $this->con = $conexao;
     }
 
     //Esta função é responsável por Alterar o Saldo do Cartão com base nas informações que foram Setadas antes
     public function AlterarSaldo(){
-        $sql = "update Cartao set Saldo = '".$this->saldo."' where NumeroSerie = '".$this->numSerie."' and Empresa = '".$this->empresa."';";
+        $sql = "update Cartao set Saldo = '".$this->novoSaldo."' where NumeroSerie = '".$this->numSerie."' and Empresa = '".$this->empresa."';";
+        $res = mysqli_query($this->con->getConexao(), $sql);
+        return $res;
+    }
+
+    //Esta função é responsável por Cadastrar a Movimentação gerada no BD
+    public function CadastraMovimentacao(){
+        date_default_timezone_set("America/Sao_Paulo");
+        $dateTime = date('Y-m-d H:i:s', time());
+        $sql = "insert into Movimentacoes values (0, ".$this->valor.", '".$dateTime."', 'Recarga', '".$this->numSerie."', '".$this->empresa."', null);";
         $res = mysqli_query($this->con->getConexao(), $sql);
         return $res;
     }

@@ -1,5 +1,6 @@
 <?php
 
+//Classe para recuperar os dados da Movimentação de um Cartão Específico
 class Movimentacoes{
     private $valor;
     private $dataMovimentacao;
@@ -8,23 +9,21 @@ class Movimentacoes{
     private $empresaCartao;
     private $idPercurso;
 
+    //Esta propriedade recupera os dados do Cartão Solicitado e atribui as propriedades do Objeto
     public function SetAtributosMovimentacoes($con, $numeroSerie, $empresaCartao){
         $sql = "select * from Movimentacoes where numeroSerieCartao = '".$numeroSerie."' && empresaCartao = '".$empresaCartao."';";
         $res = mysqli_query($con->getConexao(), $sql);
         $row = mysqli_fetch_assoc($res);
-        var_dump($row);
-        // $this->rg = $row['RG'];
-        // $this->nome = $row['Nome'];
-        // $this->dataNascimento = $row['DataNascimento'];
-        // $this->telefone1 = $row['Telefone1'];
-        // $this->telefone2 = $row['Telefone2'];
-        // $this->email = $row['Email'];
-        // $this->estado = $row['Estado'];
-        // $this->cidade = $row['Cidade'];
-        // $this->rua = $row['Rua'];
-        // $this->complemento = $row['Complemento'];
-        // $this->numero = $row['Numero'];
-        // $this->cep = $row['CEP'];
+        
+        //Setando os valores do Objeto
+        $this->valor = $row['Valor'];
+        $this->dataMovimentacao = $row['DataMovimentacao'];
+        $this->tipoMovimentacao = $row['TipoMovimentacao'];
+        $this->numeroSerie = $numeroSerie;
+        $this->empresaCartao = $empresaCartao;
+        $this->idPercurso = $row['Id_Percurso'];
+
+        var_dump($this);
     }
 }
 

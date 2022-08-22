@@ -501,6 +501,8 @@ formElement.addEventListener("submit", async function(event){
                         inputNovoSaldo.value = "";
                     }else if(this.responseText.includes("Sem conexão") || this.responseText.includes("Fatal erro")){
                         popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Não foi possível terminar a requisição");    
+                    }else if(this.responseText.includes("erro inesperado")){
+                        popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", this.responseText);    
                     }
                 }else{
                     popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Não foi possível terminar a requisição");

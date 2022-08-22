@@ -1,4 +1,3 @@
-drop database ViagemFacil_DB;
 create database ViagemFacil_DB;
 use ViagemFacil_DB;
 
@@ -72,3 +71,9 @@ Empresa varchar(30) NOT NULL
 #Não removam os dois insert abaixo, eles impedem a geração de ID's repetidos para os cartões dos Usuários
 insert into Identificadores values(1, "1500385", "390880200", "Maringá do Vale");
 insert into Identificadores values(2, "7804500", "900120855", "Viação Jacareí");
+
+#Não removam os inserts abaixo, eles geram alguns percursos para uso em testes
+insert into Percursos values (0, 308, "Bosque dos Eucaliptos", "Ônibus");
+insert into Percursos values (0, 307, "Morumbi", "Ônibus");
+insert into Percursos values (0, 240, "Novo Horizonte", "Ônibus");
+insert into Percursos values (0, 315, "Interlagos", "Ônibus");

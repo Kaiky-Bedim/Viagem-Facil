@@ -20,8 +20,18 @@ $saldoComprado = $data['saldoComprado'];
 //Setando os valores recuperados da requisição nos objetos criados acima
 $pagamento->setNumSerie($numSerie);
 $pagamento->setEmpresa($empresa);
-$pagamento->setSaldo($saldoAtual + $saldoComprado);
+$pagamento->setValor($saldoComprado);
+$pagamento->setNovoSaldo($saldoAtual + $saldoComprado);
 $pagamento->setCon($con);
+
+//Esta chamada de função é responsável por cadastrar a Movimentação do Cartão no BD, se ocorrer tudo bem
+//a compra é realizada propriamente
+$res = $pagamento->CadastraMovimentacao();
+
+if($res != 1){
+    echo "Não foi possível cadastrar a sua compra devido a um erro inesperado";
+    return;
+}
 
 //Executando o método responsável por alterar realmente o saldo do Cartão do usuário
 $res = $pagamento->AlterarSaldo();
