@@ -1,3 +1,4 @@
+drop database ViagemFacil_DB;
 create database ViagemFacil_DB;
 use ViagemFacil_DB;
 
@@ -54,8 +55,9 @@ Valor double NOT NULL,
 DataMovimentacao datetime NOT NULL,
 TipoMovimentacao varchar(30) NOT NULL,
 NumeroSerieCartao varchar(7) NOT NULL,
+EmpresaCartao varchar(50) NOT NULL,
 Id_Percurso int,
-FOREIGN KEY (NumeroSerieCartao) REFERENCES Cartao (NumeroSerie),
+FOREIGN KEY (NumeroSerieCartao, EmpresaCartao) REFERENCES Cartao (NumeroSerie, Empresa),
 FOREIGN KEY (Id_Percurso) REFERENCES Percursos (Id),
 CHECK (TipoMovimentacao <=> "Recarga" or TipoMovimentacao <=> "Utilização em ônibus")
 );
