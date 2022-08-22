@@ -28,6 +28,9 @@ if($bloqueado == 0){
 //Chamando o método responsável por bloquear o Cartão
 $response = $bloquear->BloquearPasse($cpf, $numSerie, $numFabrica, $bloqueado, $con);
 
+//Fechando a conexão do BD
+$con->FecharConexao();
+
 echo $response;
 
 ?>

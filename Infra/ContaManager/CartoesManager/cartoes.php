@@ -114,7 +114,7 @@ class Cartoes implements JsonSerializable{
         return json_encode($this->dataExpedicao);
     }
 
-    //Este método vem da Interface que essa classe implementa, ele permite que convertamos objetos Usuario em JSON
+    //Este método vem da Interface que essa classe implementa, ele permite que convertamos objetos Cartoes em JSON
     public function jsonSerialize() {
         return [
             'numeroSerie' => $this->GetNumeroSeries(),

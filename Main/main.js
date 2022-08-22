@@ -1,5 +1,6 @@
 import { Layout } from "../Layout/layout.js";
 import { Autenticador } from "../Infra/Autenticacao/autenticador.js";
+import { MovimentacoesManager } from "../Infra/ContaManager/MovimentacoesManager/movimentacoesManager.js"
 
 var autenticador = new Autenticador();
 //Mátodo que garante a autenticação do nosso usuário
@@ -11,3 +12,8 @@ var layout = new Layout();
 //e o caminho para o CSS do Layout a partir daqui
 layout.carregarNavBar("../Layout/head.html", "../Layout/styleLayout.css");
 layout.carregarFoot("../Layout/foot.html", "../Layout/styleLayout.css");
+
+var mov = new MovimentacoesManager();
+
+var teste = await mov.buscarDadosCartoes("../Infra/ContaManager/MovimentacoesManager/controllerMovimentacoesManager.php", "movimentacaoJson", "7804501", "Viação Jacareí");
+console.log(teste);

@@ -36,6 +36,9 @@ if($res != 1){
 //Executando o método responsável por alterar realmente o saldo do Cartão do usuário
 $res = $pagamento->AlterarSaldo();
 
+//Fechando a conexão do BD
+$con->FecharConexao();
+
 //É retornada uma mensagem de sucesso ou fracasso para o Usuário de acordo com o que procedeu da requisição
 if($res == 1){
     echo "Sua compra de créditos foi realizada com Sucesso !";

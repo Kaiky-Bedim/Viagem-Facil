@@ -23,6 +23,9 @@ if($tipoCadastro == "Passe já existente"){
     $cadastroPasse->SetInformacoesPasseJaExistente($numSerie, $numFabrica, $tipoCartao, $empresa);
     $res = $cadastroPasse->CadastrarPasseJaExistente($con);
 
+    //Fechando a conexão do BD
+    $con->FecharConexao();
+
     if($res == true){
         echo "Seu pedido para o cadastro do Cartão foi enviado com Sucesso";
     }else{
@@ -32,6 +35,9 @@ if($tipoCadastro == "Passe já existente"){
     $cadastroPasse->SetInformacoesNovoPasse($tipoCartao, $empresa);
     
     $res = $cadastroPasse->CadastrarNovoPasse($con);
+
+    //Fechando a conexão do BD
+    $con->FecharConexao();
 
     if($res == true){
         echo "Seu pedido para o cadastro do Cartão foi enviado com Sucesso";
