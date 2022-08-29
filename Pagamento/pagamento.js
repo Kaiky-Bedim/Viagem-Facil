@@ -498,6 +498,7 @@ formElement.addEventListener("submit", async function(event){
                         passeSelecionado.value = "";
                         saldoAdicionado.value = "";
                         inputNovoSaldo.value = "";
+                        saldoAdicionado.setAttribute("readonly", "true");
                     }else if(this.responseText.includes("Sem conexão") || this.responseText.includes("Fatal erro")){
                         popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Não foi possível terminar a requisição");    
                     }else if(this.responseText.includes("erro inesperado")){
@@ -557,10 +558,15 @@ saldoAdicionado.addEventListener("keyup" , function(event){
 
 //Esta função atualiza o campo Novo Saldo
 function AtualizaNovoSaldo(){
+    if(passeSelecionado.value == ""){
+        return;
+    }
+
     if(inputSaldoAdicionado.value == ""){
         inputNovoSaldo.value = cartoes.saldo[indice];
         return;
     }
+
     //Os saldos são recuperados do Form e do Cartão no Banco
     var saldoAtual = parseFloat(cartoes.saldo[indice]);
     var saldoAdicionado = parseFloat(inputSaldoAdicionado.value);

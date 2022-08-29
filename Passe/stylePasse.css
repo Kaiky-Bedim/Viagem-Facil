@@ -381,3 +381,12 @@ body{
     border-color: #001e4b !important;
     border-width: 1px !important;
 }
+
+/* CSS para a tabela de Histórico e suas dependências */
+.alinhamentoHistorico{
+    display: flex;
+}
+
+#btnMostrarTodoHistorico{
+    border-radius: 5px;
+}
