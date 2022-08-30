@@ -69,6 +69,12 @@ body{
     gap:15px;
 }
 
+.historico .flexbox{
+    text-align: center;
+    display: flex;
+    gap:15px;
+}
+
 .bloco form .flexbox .inputBox{
     flex:1 1 150px;
 }
@@ -389,4 +395,17 @@ body{
 
 #btnMostrarTodoHistorico{
     border-radius: 5px;
+    margin-left: auto;
+    margin-bottom: 10px;
+    height: 50px;
+}
+
+#btnMostrarTodoHistorico:hover{
+    background-color: rgb(200, 200, 200);
+    border-color: rgb(150, 150, 150);
+}
+
+.btnMostrarTodoHistoricoApertado{
+    background-color: rgb(170, 170, 170) !important;
+    border-color: rgb(130, 130, 130) !important;
 }

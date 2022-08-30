@@ -172,7 +172,6 @@
 								<span id="spanTipoCartaoExposto" class="tipo"></span>
 							</div>
                             <div class="box saldo">
-                                <span>Saldo: R$</span>
                                 <span id="spanSaldo"></span>
 							</div>
                         </div>
@@ -220,50 +219,40 @@
                         <h1>Histórico</h1>
 
                         <!-- Button para consultar o Histórico de todos os Cartões -->
-                        <input type="button" id="" value="Exibir todo o Histórico" class=""/>
+                        <input type="button" id="btnMostrarTodoHistorico" value="Exibir todo o Histórico" class="btn-light" aria-pressed="false"/>
                 </div>
 
                 <table class="table table-striped table-dark">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
                             <th scope="col">Valor</th>
                             <th scope="col">Data da Movimentação</th>
                             <th scope="col">Tipo da Movimentação</th>
-                            <th scope="col">Número de Série do Cartão</th>
+                            <th scope="col">Num. Série</th>
+                            <th scope="col">Empresa</th>
                             <th scope="col">Id Percurso</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>5,05</td>
-                            <td>05/01/2022</td>
-                            <td>Efetiva</td>
-                            <td>123456778</td>
-                            <td>5114</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>5,05</td>
-                            <td>05/01/2022</td>
-                            <td>Efetiva</td>
-                            <td>123456778</td>
-                            <td>5114</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>5,05</td>
-                            <td>05/01/2022</td>
-                            <td>Efetiva</td>
-                            <td>123456778</td>
-                            <td>5114</td>
-                        </tr>
+                    <!-- Este tbody é atualizado em tempo real com o Histórico -->
+                    <tbody id="tableHistorico">
                     </tbody>
                 </table>
-                <br><br><br>
+
+                <!-- Estas são as setinhas de controle da paginação -->
+                <div class="flexbox">
+                    <div class="box mensagemQtdCartoes">
+                        Mostrando Registros de <span id="spanMensagem4">0</span> a <span id="spanMensagem5">0</span>
+                    </div>
+                    <div class="box estiloLetras">
+                        <button type="button" class="btnDesabilitado" id="btnAnteriorHistorico" disabled><</button>
+                        <input id="inputPaginaHistorico" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="inputPagina" readonly value="1">
+                        <button type="button" class="btnDesabilitado" id="btnProximoHistorico" disabled>></button>
+                    </div>
+                </div>
             </div>
             <br>
+            <!-- Scripts para a lógica de Histórico -->
+            <script src="Historico/historico.js" type="module"></script>
         </div>
         <!-- Div para o Footer -->
         <div id="divFoot"></div>

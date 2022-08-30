@@ -202,7 +202,7 @@ function PreencheLinhasTabela(pagina, linhas){
         document.getElementById("tdNumSerie" + cont).innerHTML = cartoes.numeroSerie[cont - aux];
         document.getElementById("tdEmpresa" + cont).innerHTML = cartoes.empresa[cont - aux];
         document.getElementById("tdTipoCartao" + cont).innerHTML = cartoes.tipoCartao[cont - aux];
-        document.getElementById("tdSaldo" + cont).innerHTML = cartoes.saldo[cont - aux];
+        document.getElementById("tdSaldo" + cont).innerHTML = "R$ " + parseFloat(cartoes.saldo[cont - aux]).toFixed(2);
         document.getElementById("tdBtnSelecionar" + cont).innerHTML = "<button class='btn btn-primary btn-sm' aria-pressed='false' id='btnSelecionar" + cont + "' type='button'>Selecionar</button>";
         
         switch(cont) {
@@ -261,7 +261,7 @@ function ClicaBtnLista(cont){
         //Adicionando o Número de Série do Cartão selecionado no Form
         indice = ((paginaAtual - 1) * 5 + cont) - 1;
         inputNumSerie.value = cartoes.numeroSerie[indice];
-        inputNovoSaldo.value = cartoes.saldo[indice];
+        inputNovoSaldo.value = parseFloat(cartoes.saldo[indice]).toFixed(2);
         inputSaldoAdicionado.addEventListener("input", function(){
             AtualizaNovoSaldo();
         });
