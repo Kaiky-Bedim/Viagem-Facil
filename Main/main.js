@@ -1,6 +1,7 @@
 import { Layout } from "../Layout/layout.js";
 import { Autenticador } from "../Infra/Autenticacao/autenticador.js";
-import { MovimentacoesManager } from "../Infra/ContaManager/MovimentacoesManager/movimentacoesManager.js"
+import { CartoesManager } from "../Infra/ContaManager/CartoesManager/cartoesManager.js";
+import { MovimentacoesManager } from "../Infra/ContaManager/MovimentacoesManager/movimentacoesManager.js";
 
 var autenticador = new Autenticador();
 //Mátodo que garante a autenticação do nosso usuário
@@ -13,7 +14,52 @@ var layout = new Layout();
 layout.carregarNavBar("../Layout/head.html", "../Layout/styleLayout.css");
 layout.carregarFoot("../Layout/foot.html", "../Layout/styleLayout.css");
 
-var mov = new MovimentacoesManager();
+//Criando os objetos Manager que são utilizados para exibir alguns dados do usuário na tela
+var cartoesManager = new CartoesManager();
+var movimentacoesManager = new MovimentacoesManager();
 
-var teste = await mov.buscarDadosCartoes("../Infra/ContaManager/MovimentacoesManager/controllerMovimentacoesManager.php", "movimentacaoJson");
-console.log(teste);
+//Recuperando os elementos para exibir dados do usuário
+var spanSaldoTotal = document.getElementById("spanSaldoTotal");
+var spanUltimaMovimentacao = document.getElementById("spanUltimaMovimentacao");
+var spanPassesAtivos = document.getElementById("spanPassesAtivos");
+var spanPassesBloqueados = document.getElementById("spanPassesBloqueados");
+
+//Recuperando e exibindo o Saldo Total do Usuário
+var saldos = JSON.parse(await cartoesManager.buscarDadosCartoes("../Infra/ContaManager/CartoesManager/controllerCartoesManager.php", "saldos"));
+var cont = 0;
+var saldoTotal = 0.0;
+while(saldos[cont] != undefined){
+    saldoTotal += parseFloat(saldos[cont]);
+    cont++;
+}
+spanSaldoTotal.innerHTML = "R$ " + parseFloat(saldoTotal).toFixed(2);
+
+//Recuperando e exibindo a Última Movimentação do Usuário
+var movimentacoes = JSON.parse(await movimentacoesManager.buscarDadosCartoes("../Infra/ContaManager/MovimentacoesManager/controllerMovimentacoesManager.php", "dataMovimentacoes"));
+var ultimaMovimentacao = FormataData(movimentacoes[0]);
+spanUltimaMovimentacao.innerHTML = ultimaMovimentacao.slice(0, 9);
+
+//Recuperando a quantidade de Passes Ativos e Bloqueados e exibindo este número na tela
+var situacoes = JSON.parse(await cartoesManager.buscarDadosCartoes("../Infra/ContaManager/CartoesManager/controllerCartoesManager.php", "bloqueados"));
+cont = 0;
+var qtdAtivos = 0;
+var qtdBloqueados = 0;
+
+while(situacoes[cont] != undefined){
+    if(situacoes[cont] == "0"){
+        qtdAtivos++;
+    }else{
+        qtdBloqueados++;
+    }
+    cont++;
+}
+
+spanPassesAtivos.innerHTML = qtdAtivos;
+spanPassesBloqueados.innerHTML = qtdBloqueados;
+
+//Esta função é responsável por formatar a Data mostrada na tela
+function FormataData(data){
+    var aux = new Date(data);
+    var dataFormatada = aux.getDate() + "/" + (aux.getMonth() + 1) + "/" + aux.getFullYear() + " - " + aux.getHours() + ":" + aux.getMinutes() + ":" + aux.getSeconds();
+    return dataFormatada;
+}
