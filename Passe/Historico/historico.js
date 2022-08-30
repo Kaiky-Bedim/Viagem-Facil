@@ -49,7 +49,29 @@ btnMostrarTodoHistorico.addEventListener("click", async function(){
         ResetaListaMostrada();
         ResetaPaginacao();
 
-        console.log(passeAtualSelecionado);
+        //Verificando se há algum button Visualizar apertado para que sejam mostradas as informações deste cartão selecionado
+        for(var cont = 1; cont <= registrosMostrando; cont++){
+            var elemento = document.getElementById("btnVisualizar" + cont);
+            if(elemento){
+                if(elemento.getAttribute("aria-pressed") == "true"){
+                    var numSerie = document.getElementById("divSerieExposta").innerText;
+                    var empresa = document.getElementById("imgLogoEmpresa").getAttribute("src");
+                    if(empresa.includes("MARINGA")){
+                        empresa = "Maringá do Vale";
+                    }else if(empresa.includes("VIAÇÃO")){
+                        empresa = "Viação Jacareí";
+                    }
+        
+                    //Recuperando um Json com todas as Movimentacoes de um Cartão específico do Usuário
+                    var json = await movimentacoesManager.buscarDadosCartoes("../Infra/ContaManager/MovimentacoesManager/controllerMovimentacoesManager.php", "movimentacaoJson", numSerie, empresa);
+        
+                    //Recuperando os dados que serão utilizados na tabela e montando a tabela
+                    movimentacoes = DeserializarJsonMovimentacoes(json);
+        
+                    MontaTabela();
+                }
+            }
+        }
     }
 
     
@@ -279,13 +301,13 @@ function ResetaListaMostrada(){
 //Reinicia todo o sistema de Paginação e a contagem de registros
 function ResetaPaginacao(){
     document.getElementById("spanMensagem4").innerHTML = "0";
-            document.getElementById("spanMensagem5").innerHTML = "0";
-            btnAnterior.setAttribute("disabled", "true");
-            btnAnterior.classList.replace("btn-light", "btnDesabilitado");
-            btnProximo.setAttribute("disabled", "true");
-            btnProximo.classList.replace("btn-light", "btnDesabilitado");
-            inputPagina.value = "1";
-            paginaAtual = 1;
+    document.getElementById("spanMensagem5").innerHTML = "0";
+    btnAnterior.setAttribute("disabled", "true");
+    btnAnterior.classList.replace("btn-light", "btnDesabilitado");
+    btnProximo.setAttribute("disabled", "true");
+    btnProximo.classList.replace("btn-light", "btnDesabilitado");
+    inputPagina.value = "1";
+    paginaAtual = 1;
 }
 
 const passeAtualSelecionado = document.getElementById("divCartaoExposto");
@@ -293,9 +315,17 @@ const passeAtualSelecionado = document.getElementById("divCartaoExposto");
 //Este Observer fica observando o passe selecionado até ele ser mudado
 var observer = new MutationObserver(async function(mutations) {
     for(var cont = 0; cont < mutations.length; cont++){
+        
+        //Verificando se as mudanças que ocorreram ocasionam ou não na alteração de Lista de Histórico
         if(mutations[cont].attributeName == "hidden" || mutations[cont].attributeName == null){
             if(passeAtualSelecionado.getAttribute("hidden") != "true"){
                 ResetaListaMostrada();
+
+                //Alterando o estado do Button de mostrar todo o histórico
+                if(btnMostrarTodoHistorico.getAttribute("aria-pressed")){
+                    btnMostrarTodoHistorico.setAttribute("aria-pressed", "false");
+                    btnMostrarTodoHistorico.classList.remove("btnMostrarTodoHistoricoApertado");
+                }
     
                 var numSerie = document.getElementById("divSerieExposta").innerText;
                 var empresa = document.getElementById("imgLogoEmpresa").getAttribute("src");
@@ -314,12 +344,16 @@ var observer = new MutationObserver(async function(mutations) {
                 MontaTabela();
                 break;
             }
-            //Apagando os dados da tabela de histórico e voltando ela para a página 1
-            ResetaListaMostrada();
-            ResetaPaginacao();
+
+            if(btnMostrarTodoHistorico.getAttribute("aria-pressed") != "true"){
+                //Apagando os dados da tabela de histórico e voltando ela para a página 1
+                ResetaListaMostrada();
+                ResetaPaginacao();
+            }
         }
     }
     });
 
+//Passando os dois elementos que serão obeservados pelo Observer
 observer.observe(passeAtualSelecionado, { attributes: true ,subtree: true });
 observer.observe(document.getElementById("divSerieExposta"), { childList: true });
