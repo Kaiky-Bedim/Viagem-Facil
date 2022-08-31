@@ -67,7 +67,10 @@ btnMostrarTodoHistorico.addEventListener("click", async function(){
         
                     //Recuperando os dados que serão utilizados na tabela e montando a tabela
                     movimentacoes = DeserializarJsonMovimentacoes(json);
-        
+                    
+                    //Resetando a lista de Histórico
+                    ResetaListaMostrada();
+                    ResetaPaginacao();
                     MontaTabela();
                 }
             }
@@ -340,7 +343,9 @@ var observer = new MutationObserver(async function(mutations) {
     
                 //Recuperando os dados que serão utilizados na tabela e montando a tabela
                 movimentacoes = DeserializarJsonMovimentacoes(json);
-    
+                
+                ResetaListaMostrada();
+                ResetaPaginacao();
                 MontaTabela();
                 break;
             }
