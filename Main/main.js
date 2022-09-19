@@ -28,34 +28,41 @@ var spanPassesBloqueados = document.getElementById("spanPassesBloqueados");
 var saldos = JSON.parse(await cartoesManager.buscarDadosCartoes("../Infra/ContaManager/CartoesManager/controllerCartoesManager.php", "saldos"));
 var cont = 0;
 var saldoTotal = 0.0;
-while(saldos[cont] != undefined){
-    saldoTotal += parseFloat(saldos[cont]);
-    cont++;
-}
-spanSaldoTotal.innerHTML = "R$ " + parseFloat(saldoTotal).toFixed(2);
-
-//Recuperando e exibindo a Última Movimentação do Usuário
-var movimentacoes = JSON.parse(await movimentacoesManager.buscarDadosCartoes("../Infra/ContaManager/MovimentacoesManager/controllerMovimentacoesManager.php", "dataMovimentacoes"));
-var ultimaMovimentacao = FormataData(movimentacoes[0]);
-spanUltimaMovimentacao.innerHTML = ultimaMovimentacao.slice(0, 9);
-
-//Recuperando a quantidade de Passes Ativos e Bloqueados e exibindo este número na tela
-var situacoes = JSON.parse(await cartoesManager.buscarDadosCartoes("../Infra/ContaManager/CartoesManager/controllerCartoesManager.php", "bloqueados"));
-cont = 0;
-var qtdAtivos = 0;
-var qtdBloqueados = 0;
-
-while(situacoes[cont] != undefined){
-    if(situacoes[cont] == "0"){
-        qtdAtivos++;
-    }else{
-        qtdBloqueados++;
+if(saldos != null){
+    while(saldos[cont] != undefined){
+        saldoTotal += parseFloat(saldos[cont]);
+        cont++;
     }
+    spanSaldoTotal.innerHTML = "R$ " + parseFloat(saldoTotal).toFixed(2);
+
+    //Recuperando e exibindo a Última Movimentação do Usuário
+    var movimentacoes = JSON.parse(await movimentacoesManager.buscarDadosCartoes("../Infra/ContaManager/MovimentacoesManager/controllerMovimentacoesManager.php", "dataMovimentacoes"));
+    var ultimaMovimentacao = FormataData(movimentacoes[0]);
+    spanUltimaMovimentacao.innerHTML = ultimaMovimentacao.slice(0, 9);
+
+    //Recuperando a quantidade de Passes Ativos e Bloqueados e exibindo este número na tela
+    var situacoes = JSON.parse(await cartoesManager.buscarDadosCartoes("../Infra/ContaManager/CartoesManager/controllerCartoesManager.php", "bloqueados"));
+    cont = 0;
+    var qtdAtivos = 0;
+    var qtdBloqueados = 0;
+
+    while(situacoes[cont] != undefined){
+        if(situacoes[cont] == "0"){
+            qtdAtivos++;
+        }else{
+            qtdBloqueados++;
+        }
     cont++;
-}
+    }
 
 spanPassesAtivos.innerHTML = qtdAtivos;
 spanPassesBloqueados.innerHTML = qtdBloqueados;
+}else{
+    spanSaldoTotal.innerHTML = "R$ 0.00";
+    spanUltimaMovimentacao.innerHTML = "XX/XX/XXXX";
+    spanPassesAtivos.innerHTML = "0";
+    spanPassesBloqueados.innerHTML = "0";
+}
 
 //Esta função é responsável por formatar a Data mostrada na tela
 function FormataData(data){
