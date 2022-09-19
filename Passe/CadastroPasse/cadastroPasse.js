@@ -5,19 +5,24 @@ var usuarioManager = new UsuarioManager();
 var popUp = new PopUp();
 
 //Listener para ouvir quando o botão cadastrar novo Passe for clicado, abre a janela para o Cadastro de novo Passe
-document.getElementById("btnCadastrarNovoPasse").addEventListener("click", function(){
+document.getElementById("btnCadastrarNovoPasse").addEventListener("click", async function(){
+    //Verificando se não há nenhum erro de servidor e o CPF, caso não haja erro
+    var cpf = await usuarioManager.buscarDadosUsuario("cpf", "../Infra/ContaManager/UsuarioManager/controllerUsuarioManager.php");        
+    if(cpf == "Erro de servidor"){
+        popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Não foi possível se conectar ao servidor");
+        return;
+    }else{
+        //Caso não haja erro continuamos a preencher as informações prévias do cartão
+        document.getElementById("spanCpfCartao").innerHTML = FormataCPF(cpf);
+    }
+
     document.getElementById("cadastroCartaoModal").removeAttribute("hidden");
     var restantePagina = document.querySelectorAll("body>div:not(.cadastroCartaoModal)");
     restantePagina.forEach(element => {
         element.className = "restantePagina";
     });
 
-    //Recuperando as informações do Nome e do CPF do usuário para mostrar no cartão
-    usuarioManager.buscarDadosUsuario("cpf", "../Infra/ContaManager/UsuarioManager/controllerUsuarioManager.php")
-        .then(cpf => {
-            document.getElementById("spanCpfCartao").innerHTML = FormataCPF(cpf);
-        });
-
+    //Recuperando as informações do Nome do usuário para mostrar no cartão
     usuarioManager.buscarDadosUsuario("nome", "../Infra/ContaManager/UsuarioManager/controllerUsuarioManager.php")
         .then(nome => {
             document.getElementById("spanNomeCartao").innerHTML = nome;

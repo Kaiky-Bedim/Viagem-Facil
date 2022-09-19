@@ -14,7 +14,7 @@ export class UsuarioManager{
         return fetch(urlCompleta)
             .then(response =>response.text())
             .then(data => {
-                if(data.includes("Sem conexão com o servidor")){
+                if(data.includes("Sem conexão com o servidor") || data.includes("Access denied")){
                     popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Não foi possível se conectar ao servidor");
                     return "Erro de servidor";
                 }else if(data.includes("Trying to access array offset on value of type null")){

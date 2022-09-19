@@ -371,7 +371,7 @@ function VerificaCadastro(cadastro){
         setTimeout(function(){
             window.location.href = "../Main/main.html";
         },1500);
-    }else if(cadastro.includes("Sem conexão com o servidor")){
+    }else if(cadastro.includes("Sem conexão com o servidor") || data.includes("Access denied")){
         popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Ocorreu algum erro interno na requisição com o servidor");
     }else{
         popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "O CPF informado já possui um cadastro no sistema");

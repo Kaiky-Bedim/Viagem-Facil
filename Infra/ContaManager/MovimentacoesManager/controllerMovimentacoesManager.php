@@ -65,8 +65,7 @@ if($action == "movimentacaoJson"){
     $jsonFormatado = str_replace("\\\u00e7", "ç", $jsonFormatado);
     $jsonFormatado = str_replace("\\\u00e3", "ã", $jsonFormatado);
     $jsonFormatado = str_replace("\\\u00ed", "í", $jsonFormatado);   
-    
-    //Retornando o JSON formatado
+
     echo $jsonFormatado;
 }
 

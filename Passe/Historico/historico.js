@@ -25,10 +25,15 @@ btnMostrarTodoHistorico.addEventListener("click", async function(){
 
         //Recuperando um Json com todas as Movimentacoes do usuário
         var json = await movimentacoesManager.buscarDadosCartoes("../Infra/ContaManager/MovimentacoesManager/controllerMovimentacoesManager.php", "movimentacaoJson");
-    
+
         //Verificando se as Moviemtnacoes não vieram como null, caso positivo, não há histórico para o usuário
         if(json.includes(":null") && json.includes("\"" + "null" + "\"")){
             popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Não há nenhum registro de uso dos cartões !");
+            return;
+        }
+
+        //Caso o servidor não esteja disponível, uma mensagem de erro é lançada
+        if(json == "Erro de servidor"){
             return;
         }
 
@@ -103,12 +108,18 @@ function MontaTabela(){
     }
     
     //Alterando a mensagem mostrada embaixo da lista
-    var aux = (paginaAtual - 1) * 5 + 1;
-    if(paginaAtual == totalPaginas){
-        var i = qtdRegistros;
+    if(qtdRegistros != 0){
+        var aux = (paginaAtual - 1) * 5 + 1;
+        if(paginaAtual == totalPaginas){
+            var i = qtdRegistros;
+        }else{
+            var i = aux + 4;
+        }
     }else{
-        var i = aux + 4;
+        var aux = 0;
+        var i = 0;
     }
+    
     document.getElementById("spanMensagem4").innerHTML = aux;
     document.getElementById("spanMensagem5").innerHTML = i;
 }
@@ -134,10 +145,19 @@ function DeserializarJsonMovimentacoes(data){
     if(json['numeroSerieCartao'] == null){
         return "";
     }
-
+    
     if(json['numeroSerieCartao'].includes(",")){
         var numeroSerieCartoes = json['numeroSerieCartao'].replace(/"/g, "");
         var empresaCartoes = json['empresaCartao'].replace(/"/g, "");
+
+        numeroSerieCartoes = numeroSerieCartoes.slice(1, numeroSerieCartoes.length - 1);
+        empresaCartoes = empresaCartoes.slice(1, empresaCartoes.length - 1);
+
+        arrayNumerosSerieCartoes = numeroSerieCartoes.split(",");
+        arrayEmpresasCartoes = empresaCartoes.split(",");
+    }else if(json['numeroSerieCartao'].includes("[")){
+        var numeroSerieCartoes = json['numeroSerieCartao'].replace(/"/g, "").replace("[\"", "").replace("\"]", "");
+        var empresaCartoes = json['empresaCartao'].replace(/"/g, "").replace("[\"", "").replace("\"]", "");
 
         numeroSerieCartoes = numeroSerieCartoes.slice(1, numeroSerieCartoes.length - 1);
         empresaCartoes = empresaCartoes.slice(1, empresaCartoes.length - 1);
@@ -212,8 +232,9 @@ function CriarCamposTabelaHistorico(qtdCampos){
         td6.id = "tdIdPercurso"+cont;
         document.getElementById("trHistorico" + cont).appendChild(td6);
     }
-
-    PreencheLinhasTabela(1, qtdCampos);
+    if(qtdCampos != 0 ){
+        PreencheLinhasTabela(1, qtdCampos);
+    }
 }
 
 //Esta função varre linha por linha da tabela de Histórico e atribuí os valores necessários
@@ -224,8 +245,8 @@ function PreencheLinhasTabela(pagina, linhas){
         document.getElementById("tdValor" + cont).innerHTML = "R$ " + parseFloat(movimentacoes.valor[cont - aux]).toFixed(2);
         document.getElementById("tdDataMovimentacao" + cont).innerHTML = FormataData(movimentacoes.dataMovimentacao[cont - aux]);
         document.getElementById("tdTipoMovimentacao" + cont).innerHTML = movimentacoes.tipoMovimentacao[cont - aux];
-        document.getElementById("tdNumeroSerie" + cont).innerHTML = movimentacoes.numeroSerieCartao[cont - aux].replace("[\"", "").replace("\"]", "");
-        document.getElementById("tdEmpresaHistorico" + cont).innerHTML = movimentacoes.empresaCartao[cont - aux].replace("[\"", "").replace("\"]", "");
+        document.getElementById("tdNumeroSerie" + cont).innerHTML = movimentacoes.numeroSerieCartao[cont - aux];
+        document.getElementById("tdEmpresaHistorico" + cont).innerHTML = movimentacoes.empresaCartao[cont - aux];
         if(movimentacoes.idPercurso[cont - aux] == "null"){
             document.getElementById("tdIdPercurso" + cont).innerHTML = "#";
         }else{
@@ -349,6 +370,11 @@ var observer = new MutationObserver(async function(mutations) {
                 //Recuperando um Json com todas as Movimentacoes de um Cartão específico do Usuário
                 var json = await movimentacoesManager.buscarDadosCartoes("../Infra/ContaManager/MovimentacoesManager/controllerMovimentacoesManager.php", "movimentacaoJson", numSerie, empresa);
     
+                //Caso o servidor não esteja disponível, uma mensagem de erro é lançada
+                if(json == "Erro de servidor"){
+                    return;
+                }
+
                 //Recuperando os dados que serão utilizados na tabela e montando a tabela
                 movimentacoes = DeserializarJsonMovimentacoes(json);
                 
