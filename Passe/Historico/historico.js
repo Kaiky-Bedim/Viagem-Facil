@@ -131,6 +131,10 @@ function DeserializarJsonMovimentacoes(data){
     var arrayNumerosSerieCartoes = [];
     var arrayEmpresasCartoes = [];
 
+    if(json['numeroSerieCartao'] == null){
+        return "";
+    }
+
     if(json['numeroSerieCartao'].includes(",")){
         var numeroSerieCartoes = json['numeroSerieCartao'].replace(/"/g, "");
         var empresaCartoes = json['empresaCartao'].replace(/"/g, "");
@@ -220,8 +224,8 @@ function PreencheLinhasTabela(pagina, linhas){
         document.getElementById("tdValor" + cont).innerHTML = "R$ " + parseFloat(movimentacoes.valor[cont - aux]).toFixed(2);
         document.getElementById("tdDataMovimentacao" + cont).innerHTML = FormataData(movimentacoes.dataMovimentacao[cont - aux]);
         document.getElementById("tdTipoMovimentacao" + cont).innerHTML = movimentacoes.tipoMovimentacao[cont - aux];
-        document.getElementById("tdNumeroSerie" + cont).innerHTML = movimentacoes.numeroSerieCartao[cont - aux];
-        document.getElementById("tdEmpresaHistorico" + cont).innerHTML = movimentacoes.empresaCartao[cont - aux];
+        document.getElementById("tdNumeroSerie" + cont).innerHTML = movimentacoes.numeroSerieCartao[cont - aux].replace("[\"", "").replace("\"]", "");
+        document.getElementById("tdEmpresaHistorico" + cont).innerHTML = movimentacoes.empresaCartao[cont - aux].replace("[\"", "").replace("\"]", "");
         if(movimentacoes.idPercurso[cont - aux] == "null"){
             document.getElementById("tdIdPercurso" + cont).innerHTML = "#";
         }else{
@@ -233,7 +237,11 @@ function PreencheLinhasTabela(pagina, linhas){
 //Esta função é responsável por formatar a Data mostrada na tabela
 function FormataData(data){
     var aux = new Date(data);
-    var dataFormatada = aux.getDate() + "/" + (aux.getMonth() + 1) + "/" + aux.getFullYear() + " - " + aux.getHours() + ":" + aux.getMinutes() + ":" + aux.getSeconds();
+    if(aux.getMonth() < 9){
+        var dataFormatada = aux.getDate() + "/" + "0" + (aux.getMonth() + 1) + "/" + aux.getFullYear() + " - " + aux.getHours() + ":" + aux.getMinutes() + ":" + aux.getSeconds();
+    }else{
+        var dataFormatada = aux.getDate() + "/" + (aux.getMonth() + 1) + "/" + aux.getFullYear() + " - " + aux.getHours() + ":" + aux.getMinutes() + ":" + aux.getSeconds();
+    }
     return dataFormatada;
 }
 

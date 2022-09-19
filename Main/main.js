@@ -38,7 +38,8 @@ if(saldos != null){
     //Recuperando e exibindo a Última Movimentação do Usuário
     var movimentacoes = JSON.parse(await movimentacoesManager.buscarDadosCartoes("../Infra/ContaManager/MovimentacoesManager/controllerMovimentacoesManager.php", "dataMovimentacoes"));
     var ultimaMovimentacao = FormataData(movimentacoes[0]);
-    spanUltimaMovimentacao.innerHTML = ultimaMovimentacao.slice(0, 9);
+    spanUltimaMovimentacao.innerHTML = ultimaMovimentacao.slice(0, 10
+        );
 
     //Recuperando a quantidade de Passes Ativos e Bloqueados e exibindo este número na tela
     var situacoes = JSON.parse(await cartoesManager.buscarDadosCartoes("../Infra/ContaManager/CartoesManager/controllerCartoesManager.php", "bloqueados"));
@@ -67,6 +68,10 @@ spanPassesBloqueados.innerHTML = qtdBloqueados;
 //Esta função é responsável por formatar a Data mostrada na tela
 function FormataData(data){
     var aux = new Date(data);
-    var dataFormatada = aux.getDate() + "/" + (aux.getMonth() + 1) + "/" + aux.getFullYear() + " - " + aux.getHours() + ":" + aux.getMinutes() + ":" + aux.getSeconds();
+    if(aux.getMonth() < 9){
+        var dataFormatada = aux.getDate() + "/" + "0" + (aux.getMonth() + 1) + "/" + aux.getFullYear() + " - " + aux.getHours() + ":" + aux.getMinutes() + ":" + aux.getSeconds();
+    }else{
+        var dataFormatada = aux.getDate() + "/" + (aux.getMonth() + 1) + "/" + aux.getFullYear() + " - " + aux.getHours() + ":" + aux.getMinutes() + ":" + aux.getSeconds();
+    }
     return dataFormatada;
 }

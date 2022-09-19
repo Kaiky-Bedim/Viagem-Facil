@@ -2,6 +2,10 @@ body{
     font: Arial, 20px, sans-serif;
 }
 
+.modal-xl{
+  max-width: 1200px!important;
+}
+
 .nav-link{
 	color:black;
 }
