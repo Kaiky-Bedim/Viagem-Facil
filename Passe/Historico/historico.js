@@ -24,7 +24,7 @@ btnMostrarTodoHistorico.addEventListener("click", async function(){
         ResetaPaginacao();
 
         //Recuperando um Json com todas as Movimentacoes do usuário
-        var json = await movimentacoesManager.buscarDadosCartoes("../Infra/ContaManager/MovimentacoesManager/controllerMovimentacoesManager.php", "movimentacaoJson");
+        var json = await movimentacoesManager.buscarDadosMovimentacoes("../Infra/ContaManager/MovimentacoesManager/controllerMovimentacoesManager.php", "movimentacaoJson");
 
         //Verificando se as Moviemtnacoes não vieram como null, caso positivo, não há histórico para o usuário
         if(json.includes(":null") && json.includes("\"" + "null" + "\"")){
@@ -68,7 +68,7 @@ btnMostrarTodoHistorico.addEventListener("click", async function(){
                     }
         
                     //Recuperando um Json com todas as Movimentacoes de um Cartão específico do Usuário
-                    var json = await movimentacoesManager.buscarDadosCartoes("../Infra/ContaManager/MovimentacoesManager/controllerMovimentacoesManager.php", "movimentacaoJson", numSerie, empresa);
+                    var json = await movimentacoesManager.buscarDadosMovimentacoes("../Infra/ContaManager/MovimentacoesManager/controllerMovimentacoesManager.php", "movimentacaoJson", numSerie, empresa);
         
                     //Recuperando os dados que serão utilizados na tabela e montando a tabela
                     movimentacoes = DeserializarJsonMovimentacoes(json);
@@ -368,7 +368,7 @@ var observer = new MutationObserver(async function(mutations) {
                 }
     
                 //Recuperando um Json com todas as Movimentacoes de um Cartão específico do Usuário
-                var json = await movimentacoesManager.buscarDadosCartoes("../Infra/ContaManager/MovimentacoesManager/controllerMovimentacoesManager.php", "movimentacaoJson", numSerie, empresa);
+                var json = await movimentacoesManager.buscarDadosMovimentacoes("../Infra/ContaManager/MovimentacoesManager/controllerMovimentacoesManager.php", "movimentacaoJson", numSerie, empresa);
     
                 //Caso o servidor não esteja disponível, uma mensagem de erro é lançada
                 if(json == "Erro de servidor"){

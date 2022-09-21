@@ -36,7 +36,7 @@ if(saldos != null){
     spanSaldoTotal.innerHTML = "R$ " + parseFloat(saldoTotal).toFixed(2);
 
     //Recuperando e exibindo a Última Movimentação do Usuário
-    var movimentacoes = JSON.parse(await movimentacoesManager.buscarDadosCartoes("../Infra/ContaManager/MovimentacoesManager/controllerMovimentacoesManager.php", "dataMovimentacoes"));
+    var movimentacoes = JSON.parse(await movimentacoesManager.buscarDadosMovimentacoes("../Infra/ContaManager/MovimentacoesManager/controllerMovimentacoesManager.php", "dataMovimentacoes"));
     var ultimaMovimentacao = FormataData(movimentacoes[0]);
     spanUltimaMovimentacao.innerHTML = ultimaMovimentacao.slice(0, 10
         );

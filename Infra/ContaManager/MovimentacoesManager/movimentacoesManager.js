@@ -7,7 +7,7 @@ export class MovimentacoesManager{
     //A variável action determina o que será buscado no controller do Usuário, o path controller é o caminho até o
     //controller a partir da classe que estiver chamando este método. Este método é assícrono, por isso, onde ele
     //for chamado deve ser seguido de then()
-    async buscarDadosCartoes(pathController, action, numeroSerie, empresaCartao){
+    async buscarDadosMovimentacoes(pathController, action, numeroSerie, empresaCartao){
         var popUp = new PopUp();
 
         //Montando a Url completa para a consulta
