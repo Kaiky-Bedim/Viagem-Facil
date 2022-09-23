@@ -97,7 +97,7 @@ function VerificaLogin(login){
         //Código executado, caso o Login seja bem sucedido
         window.sessionStorage.setItem('autenticado', "true");
         window.location.href = "../Main/main.html";
-    }else if(login.includes("Sem conexão com o servidor") || login.includes("Warning") || data.includes("Access denied")){
+    }else if(login.includes("Sem conexão com o servidor") || login.includes("Warning") || login.includes("Access denied")){
         popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Ocorreu algum erro interno na requisição com o servidor");
         ResetaSenha();
     }else{
