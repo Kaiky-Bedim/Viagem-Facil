@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Qr-code</title>
+
+        <link rel="stylesheet" type="text/css" href="styleQrcode.css"/>
+        <link rel="stylesheet" type="text/css" href="../Infra/bootstrap/css/bootstrap.min.css"/>
+    </head>
+    <body>
+        <!-- Div da NavBar -->
+        <div id="divNavBar"></div>
+        <!-- Div dos Pop-Ups -->
+        <div id="divPopUp"></div>
+
+        <div id="wrapper">
+            <div class="modal modal-signin position-static d-block margin-meio" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content rounded-5 shadow">
+
+                        <div class="modal-header p-5 pb-4 border-bottom-0 cor-form">
+                            <h2 class="fw-bold mb-0">Passes</h2>
+                        </div>
+        
+                        <div class="modal-body p-5 pt-0 cor-form">
+                            <form class="cor-form" id="form">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="modal-dialog modal-md cor" role="document">
+                                            <div class="modal-content rounded-5 shadow">
+                                                <img src="./imgQRCode/fundobranco.png" class="rounded  d-block tamanho-imagem"  id="imgqrcode">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>      
+                    </div>
+                </div>
+            </div>
+            
+
+            <div class="margin-meio" role="document">
+                <div class="modal-content rounded-5 shadow">
+                    <div class="modal-header p-5 pb-4 border-bottom-0 cor-form">
+                        <h2 class="fw-bold mb-0">Selecionar Passe</h2>
+                    </div>
+
+                       <!-- Este bloco é tudo o que está dentro do Modal Cinza da Página -->
+                    <div class="modal-body p-5 pt-0 cor-form">
+                        <form class="cor-form" method="POST" id="formQRCode">
+                            
+                            <!-- Caso o usuário não tenha nenhum Cartão, é mostrado o bloco abaixo -->
+                            <div id="divSemCartaoCadastrado" hidden>
+                                <div class="bloco-sem-card" id="divSemCartao">
+                                    <img src="../Infra/img/Assets/semCartao.png" class="sem-card">
+                                    <div>Você não possui nenhum Cartão Cadastrado em nosso sistema !</div>
+                                </div>
+    
+                                <a href="../Passe/passe.html" class="aBtnCadastrarPasse">
+                                    <input type="button" value="Cadastrar Passe" class="btn btn-dark btn-lg" id="btnCadastraPasses"/>
+                                </a>
+                            </div>
+
+                            <!-- Caso o usuário tenha cartões Cadastrados, esse bloco de código é mostrado -->
+                            <div class="row" id="divForm" hidden>
+                                <div class="col-12">
+
+                                    <!-- Esta é a tabela dos Cartões que estão sendo mostrados na Tela -->
+                                    <table class="table table-striped table-light">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Num. Série</th>
+                                                <th scope="col">Empresa</th>
+                                                <th scope="col">Tipo</th>
+                                                <th scope="col">Saldo</th>
+                                                <th scope="col">Opção 1</th>
+                                            </tr>
+                                        </thead>
+                                        <!-- Esta tabela está vazia, pois os cartões que nela aparecem são preenchidos automaticamente -->
+                                        <tbody id="tableCartoes">
+                                        </tbody>
+                                    </table>
+
+                                    <!-- HTML para controlar a Paginação dos cartões -->
+                                    <div class="flexbox controllerPaginacao">
+                                        <div class="box mensagemQtdCartoes">
+                                            Total: <span id="spanMensagem2">0</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Mostrando Cartões de <span id="spanMensagem1">0</span> a <span id="spanMensagem3" >0</span>
+                                        </div>
+                                        <div class="box estiloLetras">
+                                            <button type="button" class="btnDesabilitado" id="btnAnterior" disabled><</button>
+                                            <input id="inputPagina" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="inputPagina" readonly value="1">
+                                            <button type="button" class="btnDesabilitado" id="btnProximo" disabled>></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- Div para o Footer -->
+            <div id="divFoot"></div>
+    
+        </div>
+    </body>
+</html>
+<!-- Scripts de JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script type="module" src="qrcode.js"></script>
