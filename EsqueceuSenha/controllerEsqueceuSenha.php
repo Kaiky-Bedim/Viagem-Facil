@@ -5,12 +5,28 @@ include "../Infra/ContaManager/UsuarioManager/usuario.php";
 include "../Infra/EmailSender/emailSender.php";
 include "esqueceuSenha.php";
 
+//Iniciando a Session
+session_start();
+
+//Verificando se foi enviado o Código de Verificação para comparação
+if(isset($_GET['codigoVerificacao'])){
+    if($_SESSION['codigoVerificacao'] == $_GET['codigoVerificacao']){
+        echo true;
+
+        //Removendo das Sessions o valor do Código de Verificação, e liberando o Usuário a alterar sua Senha
+        unset($_SESSION['codigoVerificacao']);
+        $_SESSION['permissaoAlterarSenha'] = "true";
+
+        return;
+    }else{
+        echo false;
+        return;
+    }
+}
+
 //Recuperando os valores do formulário enviados via POST
 $cpf = $_POST['txtCpf'];
 $email = $_POST['txtEmail'];
-
-//Iniciando a Session
-session_start();
 
 //Criando os objetos Conexão e Usuário para poder 
 $con = new Conexao();
@@ -52,6 +68,15 @@ if($email == $emailBD){
     //Enviando o E-mail montado até aqui
     $res = $emailSender->EnviarEmail();
     echo $res;
+
+    //Se a operação foi um sucesso, guardamos o Códido de Verificação nas Sessions para ser comparado 
+    //depois com o valor que o usuário digitar
+    if(str_contains($res, "sucesso")){
+        $_SESSION['codigoVerificacao'] = $codigoVerificao;
+    }else{
+        unset($_SESSION['codigoVerificacao']);
+    }
+
 }else{
     echo "E-mail informado não coincide com o E-mail cadastrado para este CPF";
 }

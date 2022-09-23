@@ -19,7 +19,9 @@ class Usuario implements JsonSerializable{
     {
         //Verificando se as Sessions já forma iniciadas
         if($_SESSION != null){
-            $this->cpf = $_SESSION['cpf'];
+            if(isset($_SESSION['cpf'])){
+                $this->cpf = $_SESSION['cpf'];
+            }
         }
     }
 
