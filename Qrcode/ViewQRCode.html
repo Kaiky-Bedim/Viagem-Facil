@@ -15,32 +15,6 @@
         <div id="divPopUp"></div>
 
         <div id="wrapper">
-            <div class="modal modal-signin position-static d-block margin-meio" tabindex="-1" role="dialog">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content rounded-5 shadow">
-
-                        <div class="modal-header p-5 pb-4 border-bottom-0 cor-form">
-                            <h2 class="fw-bold mb-0">Passes</h2>
-                        </div>
-        
-                        <div class="modal-body p-5 pt-0 cor-form">
-                            <form class="cor-form" id="form">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="modal-dialog modal-md cor" role="document">
-                                            <div class="modal-content rounded-5 shadow">
-                                                <img src="./imgQRCode/fundobranco.png" class="rounded  d-block tamanho-imagem"  id="imgqrcode">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>      
-                    </div>
-                </div>
-            </div>
-            
-
             <div class="margin-meio" role="document">
                 <div class="modal-content rounded-5 shadow">
                     <div class="modal-header p-5 pb-4 border-bottom-0 cor-form">
@@ -49,8 +23,26 @@
 
                        <!-- Este bloco é tudo o que está dentro do Modal Cinza da Página -->
                     <div class="modal-body p-5 pt-0 cor-form">
-                        <form class="cor-form" method="POST" id="formQRCode">
-                            
+                        <form class="" method="POST" id="formQRCode">
+                            <div class="modal modal-signin position-static d-block margin-meio" tabindex="-1" role="dialog">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content rounded-5 shadow ">
+                                        <div class="modal-body p-5 pt-0 teste">
+                                            <form class="cor-form" id="form">
+                                                <div class="row" style="text-align: center;">
+                                                    <div class="col-12">
+                                                        <div class="modal-dialog modal-md cor" role="document">
+                                                            <div class="modal-content rounded-5 shadow">
+                                                                <img src="../Infra/img/Assets/semCartao.png" class="rounded  d-block tamanho-imagem"  id="imgqrcode">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>      
+                                    </div>
+                                </div>
+                            </div>
                             <!-- Caso o usuário não tenha nenhum Cartão, é mostrado o bloco abaixo -->
                             <div id="divSemCartaoCadastrado" hidden>
                                 <div class="bloco-sem-card" id="divSemCartao">
@@ -99,11 +91,10 @@
                         </form>
                     </div>
                 </div>
-            </div>
-            <!-- Div para o Footer -->
-            <div id="divFoot"></div>
-    
+            </div> 
         </div>
+        <!-- Div para o Footer -->
+        <div id="divFoot"></div>
     </body>
 </html>
 <!-- Scripts de JavaScript -->
