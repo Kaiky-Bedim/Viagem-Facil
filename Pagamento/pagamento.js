@@ -18,6 +18,18 @@ layout.carregarFoot("../Layout/foot.html", "../Layout/styleLayout.css");
 
 //O código abaixo verificará se o usuário possui algum cartão Cadastrado, caso não, será mostrada a Div Sem Cartão
 var qtdCartoes = await cartoesManager.buscarDadosCartoes("../Infra/ContaManager/CartoesManager/controllerCartoesManager.php", "qtdCartoes");
+var cartoesBloqueados = await cartoesManager.buscarDadosCartoes("../Infra/ContaManager/CartoesManager/controllerCartoesManager.php", "bloqueados");
+var qtdCartoesBloqueados = 0;
+
+for(var cont = 0; cont < cartoesBloqueados.length; cont++){
+    if(cartoesBloqueados[cont] == "1"){
+        qtdCartoesBloqueados++;
+    }
+}
+
+//Atribuindo a quantidade real de cartões ativos do Usuário para serem mostrados na tabela
+qtdCartoes = qtdCartoes - qtdCartoesBloqueados;
+
 const form = document.getElementById("divForm");
 const divSemCartao = document.getElementById("divSemCartaoCadastrado");
 var paginaAtual = 1;
@@ -34,7 +46,6 @@ const tblCartoes = document.getElementById("tableCartoes");
 
 //Esta variável basicamente guarda a referência para o último button que foi clicado
 var ultimoButtonClicado;
-
 if(qtdCartoes > 0){
     form.removeAttribute("hidden");
     PrepararListaCartoes();

@@ -67,7 +67,14 @@ if($action == "cep"){
 }
 
 if($action == "usuarioJson"){
-    echo json_encode($usuario);
+    $json = json_encode($usuario);
+    //Estes replaces servem para substituir caracteres Unicode que são trazidos no json_encode e que ele não converte para UTF8
+    $jsonFormatado = str_replace("\u00e1", "á", $json);
+    $jsonFormatado = str_replace("\u00e7", "ç", $jsonFormatado);
+    $jsonFormatado = str_replace("\u00e3", "ã", $jsonFormatado);
+    $jsonFormatado = str_replace("\u00e9", "é", $jsonFormatado);
+
+    echo $jsonFormatado;
 }
 
 $con->FecharConexao();

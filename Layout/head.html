@@ -37,11 +37,19 @@
 				</div>
 
 				<div class = "collapse navbar-collapse d-lg-flex justify-content-end" id="navbarNav">
-					<ul class = "navbar-nav ">
-						<div class="margin-span" id="divCumprimento"></div>
-						<button type="button" id="btnLogout" class="cor-texto btn-dark btn margin-logout">
+					<ul class = "navbar-nav espacoMargem">
+						<!-- Div com a mensagem de cumprimento para o Usuário -->
+						<div class="elementoDireita" id="divCumprimento"></div>
+
+						<!-- Button para Deslogar do sistema -->
+						<button type="button" id="btnLogout" class="cor-texto btn-dark btn elementoDireita btnLogout">
 							Logout
 						</button>
+
+						<!-- Âncora para ir para a tela de configurações -->
+						<a href = "../Configuracoes/configuracoes.html" id="aConfiguracoes">
+							<img src="../Infra/img/Assets/usuarioEngrenagem.png" class="elementoDireita imagemEngrenagem" />
+						</a>
 					</ul>
 				</div>
 			</nav>

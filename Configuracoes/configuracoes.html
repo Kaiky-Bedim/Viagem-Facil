@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Configurações</title>
+
+        <link rel="stylesheet" type="text/css" href="styleConfiguracoes.css"/>
+        <link rel="stylesheet" type="text/css" href="../Infra/bootstrap/css/bootstrap.min.css">
+    </head>
+    <body>
+        <!-- Div da NavBar -->
+        <div id="divNavBar"></div>
+        <!-- Div dos Pop-Ups -->
+        <div id="divPopUp"></div>
+
+        <!-- Modal da tela -->
+        <div id="wrapper">
+            <div class="modal-dialog modal-xl margin-meio" role="document">
+                <div class="modal-content rounded-5 shadow">
+                <div class="cor-form">
+                    </br>
+                </div>
+
+                    <!-- Corpo do Modal -->
+                    <div class="modal-body p-5 pt-0 cor-form">
+                        <h2 class="fw-bold mb-0">Seus Dados Pessoais</h2>
+                        </br>
+
+                        <div class="divDadosPesoais">
+                            <!-- Form para Alteração dos Dados Pessoais do Usuário -->
+                            <form class="container" id="formDadosPessoais">
+                                <!-- Campos com os dados do Usuário logo Abaixo -->
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" maxlength="30" class="form-control rounded-4" id="txtNome" name="Nome" placeholder="Nome" required>
+                                            <label id="labelNome" for="txtNome">Nome</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <div class="form-floating mb-3">
+                                            <input type="email" class="form-control rounded-4" id="txtEmail" name="Email" placeholder="Email" required>
+                                            <label id="labelEmail" for="txtEmail">Email</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" minlength="9" maxlength="9" required class="form-control rounded-4" id="txtRG" name="RG" placeholder="RG">
+                                            <label id="labelRG" for="txtRG">RG</label>
+                                        </div>                       
+                                    </div>
+
+                                    <div class="col-3">
+                                        <div class="form-floating mb-3">
+                                            <input type="date" required class="form-control rounded-4" id="txtDataNascimento" name="DataNascimento" placeholder="Data Nascimento" max="2022-01-01" min="1900-01-01">
+                                            <label id="labelDataNascimento" for="txtDataNascimento">Data Nascimento</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-3">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control rounded-4" id="txtTelefone1" name="Telefone1" placeholder="Telefone 1" required maxlength="11" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                            <label id="labelTelefone1" for="txtTelefone1">Telefone 1</label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-3">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control rounded-4" id="txtTelefone2" name="Telefone2" placeholder="Telefone 2" maxlength="11" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                            <label id="labelTelefone2" for="txtTelefone2">Telefone 2</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <!-- Caixa de Lista em Estado -->
+                                    <div class="col-2">
+                                        <div class="form-floating mb-3">
+                                            <select class="form-control rounded-4" id="txtEstado" name="Estado" placeholder="Estado" required>
+                                                <option value="" data-default disabled selected>Escolher</option>
+                                                <option value="AC">AC</option>
+                                                <option value="AL">AL</option>
+                                                <option value="AP">AP</option>
+                                                <option value="AM">AM</option>
+                                                <option value="BA">BA</option>
+                                                <option value="CE">CE</option>
+                                                <option value="DF">DF</option>
+                                                <option value="ES">ES</option>
+                                                <option value="GO">GO</option>
+                                                <option value="MA">MA</option>
+                                                <option value="MT">MT</option>
+                                                <option value="MS">MS</option>
+                                                <option value="MG">MG</option>
+                                                <option value="PA">PA</option>
+                                                <option value="PB">PB</option>
+                                                <option value="PR">PR</option>
+                                                <option value="PE">PE</option>
+                                                <option value="PI">PI</option>
+                                                <option value="RJ">RJ</option>
+                                                <option value="RN">RN</option>
+                                                <option value="RS">RS</option>
+                                                <option value="RO">RO</option>
+                                                <option value="RR">RR</option>
+                                                <option value="SC">SC</option>
+                                                <option value="SP">SP</option>
+                                                <option value="SE">SE</option>
+                                                <option value="TO">TO</option>
+                                            </select>
+                                            <label id="labelEstado" for="txtEstado">Estado</label>
+                                        </div>
+                                    </div>   
+
+                                    <div class="col-4">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control rounded-4" id="txtCidade" name="Cidade" placeholder="Cidade" required maxlength="30">
+                                            <label id="labelCidade" for="txtCidade">Cidade</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control rounded-4" id="txtRua" name="Rua" placeholder="Rua" required maxlength="30">
+                                            <label id="labelRua" for="txtRua">Rua</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control rounded-4" id="txtNumero" name="Numero" placeholder="Número" maxlength="7" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required>
+                                            <label id="labelNumero" for="txtNumero">Número</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control rounded-4" id="txtCEP" name="CEP" placeholder="CEP" maxlength="10" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required>
+                                            <label id="labelCEP" for="txtCEP">CEP</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control rounded-4" id="txtComplemeto" name="Complemento" placeholder="Complemento" maxlength="30">
+                                            <label id="labelComplemento" for="txtComplemeto">Complemento</label>
+                                        </div>
+                                    </div>  
+                                </div>
+
+                                <div class="row" style="width: auto;">
+                                    <div class="col-md-6 divLink">
+                                        <input id="btnAlterarSenha" type="button" class="btn btn-dark btn-lg alterarSenha btnsForm" value="Deseja alterar sua senha ?"/>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <button id="btnEnviar" class="btn btn-primary btn-lg btnEnviar btnsForm" disabled>Enviar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Div para o Footer -->
+        <div id="divFoot"></div>
+    </body>
+</html>
+
+<!-- Scripts de JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script type="module" src="configuracoes.js"></script>

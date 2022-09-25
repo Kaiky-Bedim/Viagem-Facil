@@ -81,4 +81,7 @@ if($email == $emailBD){
     echo "E-mail informado não coincide com o E-mail cadastrado para este CPF";
 }
 
+//Fechando a conexão com o BD
+$con->FecharConexao();
+
 ?>

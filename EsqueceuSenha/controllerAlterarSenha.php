@@ -37,4 +37,7 @@ if(!$res){
     echo "Senha nova não pode ser igual a antiga";
 }
 
+//Fechando a conexão com o BD
+$con->FecharConexao();
+
 ?>

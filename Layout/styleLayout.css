@@ -62,16 +62,24 @@ body{
     display: none;
 }
 
-.margin-span{
-    margin-top: 3%;
-    margin-left: -19%;
+/* .espacoMargem{
+    margin-right: 20px;
+} */
+
+.imagemEngrenagem{
+    height: 60px;
+    width: 60px;
 }
 
-.margin-logout{
-    margin-right: -8%;
-    margin-left: 8%;
+.elementoDireita{
+    align-self: center;
+}
+
+.btnLogout{
+    margin-left: 19px;
+    margin-right: 5px;
 }
 
 .margin-logo{
-    margin-left: 1%;
+    margin-left: 10px;
 }

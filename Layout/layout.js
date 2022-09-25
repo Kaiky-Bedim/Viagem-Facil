@@ -21,6 +21,7 @@ export class Layout{
                 document.getElementById("aPagamento").className = " escondido";
                 document.getElementById("aPasse").className = " escondido";
                 document.getElementById("btnLogout").className = " escondido";
+                document.getElementById("aConfiguracoes").className = "escondido";
             }else{
                 //O código abaixo trabalha com promises e com requisições assíncronas !!!
                 usuarioManager.buscarDadosUsuario("nome", "../Infra/ContaManager/UsuarioManager/controllerUsuarioManager.php")
