@@ -3,7 +3,6 @@
 class Conexao{
     private $host = "localhost";
     private $user = "root";
-    //No meu BD a senha é 96917581888, no de vocês ou é nada ou é o que vocês escolheram
     private $pass = "";
     private $db = "viagemfacil_db";
     private $con;

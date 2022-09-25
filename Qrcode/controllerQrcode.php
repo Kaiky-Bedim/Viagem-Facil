@@ -9,8 +9,8 @@ $con = new Conexao();
 $qrcode = new Qrcode();
 $cpf = $_SESSION['cpf'];
 
-$numSerie = $_POST['txtOpcaoPasse'];
-
+$data = json_decode(file_get_contents('php://input'), true);
+$numSerie = $data['numeroSerie'];
 $res = $qrcode->ImagemQrcode($cpf, $numSerie, $con);
 
 //QRCODE
