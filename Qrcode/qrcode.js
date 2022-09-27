@@ -274,6 +274,7 @@ function ClicaBtnLista(cont){
     }else{
         btnVisualizar.setAttribute("aria-pressed", "false");
         btnVisualizar.classList.remove("cartaoPresionado");
+        document.getElementById("imgqrcode").setAttribute("src","../Infra/img/Assets/IMG-branco.png")
     }
 
     //Setando a nova referência para o último button clicado

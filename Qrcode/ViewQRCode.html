@@ -16,33 +16,15 @@
 
         <div id="wrapper">
             <div class="margin-meio" role="document">
-                <div class="modal-content rounded-5 shadow">
+                <div class="modal-content rounded-5 shadow janela">
+                    
                     <div class="modal-header p-5 pb-4 border-bottom-0 cor-form">
                         <h2 class="fw-bold mb-0">Selecionar Passe</h2>
                     </div>
 
                        <!-- Este bloco é tudo o que está dentro do Modal Cinza da Página -->
                     <div class="modal-body p-5 pt-0 cor-form">
-                        <form class="" method="POST" id="formQRCode">
-                            <div class="modal modal-signin position-static d-block margin-meio" tabindex="-1" role="dialog">
-                                <div class="modal-dialog modal-lg" role="document">
-                                    <div class="modal-content rounded-5 shadow ">
-                                        <div class="modal-body p-5 pt-0 teste">
-                                            <form class="cor-form" id="form">
-                                                <div class="row" style="text-align: center;">
-                                                    <div class="col-12">
-                                                        <div class="modal-dialog modal-md cor" role="document">
-                                                            <div class="modal-content rounded-5 shadow">
-                                                                <img src="../Infra/img/Assets/semCartao.png" class="rounded  d-block tamanho-imagem"  id="imgqrcode">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>      
-                                    </div>
-                                </div>
-                            </div>
+                            
                             <!-- Caso o usuário não tenha nenhum Cartão, é mostrado o bloco abaixo -->
                             <div id="divSemCartaoCadastrado" hidden>
                                 <div class="bloco-sem-card" id="divSemCartao">
@@ -54,10 +36,8 @@
                                     <input type="button" value="Cadastrar Passe" class="btn btn-dark btn-lg" id="btnCadastraPasses"/>
                                 </a>
                             </div>
-
-                            <!-- Caso o usuário tenha cartões Cadastrados, esse bloco de código é mostrado -->
                             <div class="row" id="divForm" hidden>
-                                <div class="col-12">
+                                <div class="col-6">
 
                                     <!-- Esta é a tabela dos Cartões que estão sendo mostrados na Tela -->
                                     <table class="table table-striped table-light">
@@ -86,9 +66,15 @@
                                             <button type="button" class="btnDesabilitado" id="btnProximo" disabled>></button>
                                         </div>
                                     </div>
-                                </div>
                             </div>
-                        </form>
+                            <div class="col-6">
+                            <div class="modal-dialog modal-md cor" role="document">
+                                <div class="modal-content rounded-5 shadow">
+                                    <img src="../Infra/img/Assets/semCartao.png" class="rounded  d-block tamanho-imagem"  id="imgqrcode">
+                                </div>
+                            </div>  
+                        </div>
+                        </div>
                     </div>
                 </div>
             </div> 
