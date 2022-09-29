@@ -111,9 +111,15 @@
 }
 
 /* CSS para o botão selecionado */
-.cartaoPresionado{
+.cartaoPresionadoOp1{
     background-color: #043b8f !important;
     border-color: #001e4b !important;
+    border-width: 1px !important;
+}
+
+.cartaoPresionadoOp2{
+    background-color: #49be25 !important;
+    border-color: #164208 !important;
     border-width: 1px !important;
 }
 
