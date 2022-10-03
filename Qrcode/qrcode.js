@@ -228,7 +228,7 @@ function PreencheLinhasTabela(pagina, linhas){
         document.getElementById("tdTipoCartao" + cont).innerHTML = cartoes.tipoCartao[cont - aux];
         document.getElementById("tdSaldo" + cont).innerHTML = "R$ " + parseFloat(cartoes.saldo[cont - aux]).toFixed(2);
         document.getElementById("tdBtnSelecionar" + cont).innerHTML = "<button class='btn btn-primary btn-sm' aria-pressed='false' id='btnSelecionar" + cont + "' type='button'>Selecionar</button>";
-        document.getElementById("tdBtnPdf" + cont).innerHTML = "<button class='btn btn-success btn-sm' aria-pressed='false' id='btnPdf" + cont + "' type='button'>PDF</button>";
+        document.getElementById("tdBtnPdf" + cont).innerHTML = "<button class='btn cartaoNaoPresionadoOp2 btn-sm' aria-pressed='false' id='btnPdf" + cont + "' type='button'>PDF</button>";
         
         //Botao do QrCode
         switch(cont) {
@@ -283,7 +283,7 @@ function PreencheLinhasTabela(pagina, linhas){
         if(numSerieCartaoSelecionado == cartoes.numeroSerie[cont - aux]){
             var btnPdf = document.getElementById("btnPdf" + cont);
             btnPdf.setAttribute("aria-pressed", "true");
-            btnPdf.classList.add("cartaoPresionadoOp2");
+            btnPdf.classList.add("btn-success");
             ultimoButtonClicado = btnPdf;
         }
     }
@@ -344,18 +344,18 @@ function ClicaBtnLista(cont){
 function ClicaBtnPdf(cont){
     if(ultimoButtonClicado != undefined && ultimoButtonClicado.id != ("btnPdf" + cont)){
         ultimoButtonClicado.setAttribute("aria-pressed", "false");
-        ultimoButtonClicado.classList.remove("cartaoPresionadoOp2");
+        ultimoButtonClicado.classList.replace("btn-success", "cartaoNaoPresionadoOp2");
     }
 
     var btnVisualizar = document.getElementById("btnPdf" + cont);
     //Voltando os Labels como eram antes
 
     //É verificado se o botão está presionado ou não, adicionando ou removendo o Número de Série no Input
-    if(btnVisualizar.getAttribute("aria-pressed") == "false"){
+    if(btnVisualizar.getAttribute("aria-pressed") == "false"){  
         //o "aria-pressed" de false vai pra true
         btnVisualizar.setAttribute("aria-pressed", "true");
         //Adiciona no "class" o "cartaoPresionado"
-        btnVisualizar.classList.add("cartaoPresionadoOp2");
+        btnVisualizar.classList.replace("cartaoNaoPresionadoOp2", "btn-success");
         //Descobre indice do cartao selecionado (talvez fazer so cont - 1)
         indice = ((paginaAtual - 1) * 5 + cont) - 1;
         /*let httpRequest = new XMLHttpRequest();
@@ -383,15 +383,12 @@ function ClicaBtnPdf(cont){
     }else{
         //Tira a imagem
         btnVisualizar.setAttribute("aria-pressed", "false");
-        btnVisualizar.classList.remove("cartaoPresionadoOp2");
-        
+        btnVisualizar.classList.replace("btn-success", "cartaoNaoPresionadoOp2");
     }
 
     //Setando a nova referência para o último button clicado
     ultimoButtonClicado = btnVisualizar;
-
 }
-
 
 btnProximo.addEventListener("click", function(){
     btnAnterior.removeAttribute("disabled");
