@@ -412,3 +412,13 @@ formDadosPessoais.addEventListener("submit", function(event){
         }
     }
 });
+
+//Recuperando o Button para alterar a Senha do Usuário
+const btnAlterarSenha = document.getElementById("btnAlterarSenha");
+const divAlterarSenha = document.getElementById("alterarSenha");
+
+//Função executada ao clicar no Button Alterar Senha
+btnAlterarSenha.addEventListener("click", function(){
+    divAlterarSenha.removeAttribute("hidden");
+    console.log("Viado ?");
+})

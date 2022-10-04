@@ -27,9 +27,6 @@ for(var cont = 0; cont < cartoesBloqueados.length; cont++){
     }
 }
 
-//Atribuindo a quantidade real de cartões ativos do Usuário para serem mostrados na tabela
-qtdCartoes = qtdCartoes - qtdCartoesBloqueados;
-
 const form = document.getElementById("divForm");
 const divSemCartao = document.getElementById("divSemCartaoCadastrado");
 var paginaAtual = 1;
@@ -46,7 +43,7 @@ const tblCartoes = document.getElementById("tableCartoes");
 
 //Esta variável basicamente guarda a referência para o último button que foi clicado
 var ultimoButtonClicado;
-if(qtdCartoes > 0){
+if(qtdCartoes - qtdCartoesBloqueados > 0){
     form.removeAttribute("hidden");
     PrepararListaCartoes();
 }else{
