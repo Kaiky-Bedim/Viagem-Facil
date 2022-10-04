@@ -360,38 +360,17 @@ async function ClicaBtnPdf(cont){
         httpRequest.send(JSON.stringify(data));
         httpRequest.onreadystatechange = function(){
             if(this.readyState == 4){
-                console.log("aaa");
                 if(this.status == 200  && !this.responseText.includes("Fatal error")){
                     popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", this.responseText);
                     
                 }else{
-                    popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Ocorreu um erro inesperado");
+                    popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "erro");
                 }
             }
         }
     });
 
-        /*let httpRequest = new XMLHttpRequest();
-        numSerie = cartoes.numeroSerie[indice]
-        let data = `
-            {
-            "numeroSerie": "${numSerie}"
-            }`;
-
-        httpRequest.open("POST", "controllerQrCode.php");
-        httpRequest.setRequestHeader("Content-type", "application/json");
-        httpRequest.send(data);
-        httpRequest.onreadystatechange = async function()
-        {
-            if(this.readyState == 4)
-            {
-                if(this.status == 200)
-                {
-                    //coloca a imagem
-                    document.getElementById("imgqrcode").setAttribute("src","./imgQRCode/qrCode"+numSerie+".svg")
-                }
-            }
-        }*/
+        
 }
 
 btnProximo.addEventListener("click", function(){

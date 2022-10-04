@@ -1,16 +1,24 @@
 <?php
-require_once "../Infra/BD/conexao.php";
-include "pdf.php";
+//Carrega o Composer
+require_once './ApiPdf/vendor/autoload.php';
 
-session_start();
+//Referenciar o namespace Dompdf
+use Dompdf\Dompdf;
 
-$con = new Conexao();
-$pdf = new Pdf();
-$cpf = $_SESSION['cpf'];
+//$data = json_decode(file_get_contents('php://input'), true);
+//$numSerie = $data['numSerie'];
 
-$res = $pdf->Teste();
 
-echo $res;
-echo "penis";
+//Instanciar e usar a classe dompdf
+$domPdf = new Dompdf();
 
+$dados = "<h1>QrCode do cartão número série:'7804503'<h1>";
+
+$domPdf->loadHtml($dados);
+$domPdf->setPaper('A4', 'portrait');
+
+$domPdf->render();
+$domPdf->stream();
+
+echo "ok";
 ?>
