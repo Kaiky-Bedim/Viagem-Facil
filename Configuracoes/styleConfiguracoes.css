@@ -44,3 +44,20 @@ body{
     height: 415px;
     padding-top: 35px;
 }
+
+.divAlterarSenha{
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    margin-top: 225px;
+}
+
+.divAlterarSenha form{
+    background: #817A87;
+    border-radius: 10px;
+    box-shadow: 0 10px 15px rgba(0,0,0,.1);
+    padding: 20px;
+    width: 900px;
+	height: auto;
+    padding-top: 160px;
+}

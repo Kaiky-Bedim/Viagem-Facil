@@ -31,17 +31,26 @@ var cartoesMostrando = 0;
 var cartoes;
 var numSerieCartaoSelecionado = "";
 var indice;
+var qtdCartoesBloqueados = 0;
 
+var cartoesBloqueados = await cartoesManager.buscarDadosCartoes("../Infra/ContaManager/CartoesManager/controllerCartoesManager.php", "bloqueados");
+
+for(var cont = 0; cont < cartoesBloqueados.length; cont++){
+    if(cartoesBloqueados[cont] == "1"){
+        qtdCartoesBloqueados++;
+    }
+}
 
 //Recuperando os btns para navegar na lista
 const btnAnterior = document.getElementById("btnAnterior");
 const btnProximo = document.getElementById("btnProximo");
 const inputPagina = document.getElementById("inputPagina");
 const tblCartoes = document.getElementById("tableCartoes");
+const pNenhumCartaoSelecionado = document.getElementById("pNenhumCartaoSelecionado");
 
 var ultimoButtonClicado;
 
-if(qtdCartoes > 0){
+if(qtdCartoes - qtdCartoesBloqueados > 0){
     form.removeAttribute("hidden");
     PrepararListaCartoes();
 }else{
@@ -267,6 +276,7 @@ function ClicaBtnLista(cont){
                 if(this.status == 200)
                 {
                     document.getElementById("imgqrcode").setAttribute("src","./imgQRCode/qrCode"+numSerie+".svg")
+                    pNenhumCartaoSelecionado.setAttribute("hidden", "true");
                 }
             }
         }
@@ -274,7 +284,8 @@ function ClicaBtnLista(cont){
     }else{
         btnVisualizar.setAttribute("aria-pressed", "false");
         btnVisualizar.classList.remove("cartaoPresionado");
-        document.getElementById("imgqrcode").setAttribute("src","../Infra/img/Assets/IMG-branco.png")
+        document.getElementById("imgqrcode").setAttribute("src","../Infra/img/Assets/semCartao.png")
+        pNenhumCartaoSelecionado.removeAttribute("hidden");
     }
 
     //Setando a nova referência para o último button clicado
