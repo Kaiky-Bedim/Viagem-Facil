@@ -2,9 +2,13 @@
 
 class Pdf{
 
+    private $numSerie;
 
-    public function Teste(){
-        return "Teste";
+    public function Teste($numSerie){
+        $this->numSerie = $numSerie;
+
+        //$image = new Imagick();
+
     }
 
 }

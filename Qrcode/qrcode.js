@@ -236,7 +236,12 @@ function PreencheLinhasTabela(pagina, linhas){
         document.getElementById("tdTipoCartao" + cont).innerHTML = cartoes.tipoCartao[cont - aux];
         document.getElementById("tdSaldo" + cont).innerHTML = "R$ " + parseFloat(cartoes.saldo[cont - aux]).toFixed(2);
         document.getElementById("tdBtnSelecionar" + cont).innerHTML = "<button class='btn btn-primary btn-sm' aria-pressed='false' id='btnSelecionar" + cont + "' type='button'>Selecionar</button>";
-        document.getElementById("tdBtnPdf" + cont).innerHTML = "<button class='btn cartaoNaoPresionadoOp2 btn-sm' id='btnPdf" + cont + "' type='button'>PDF</button>";
+        //Coloca cada numSerie no botao
+        indice = ((paginaAtual - 1) * 5 + cont) - 1;
+        var numSerie = cartoes.numeroSerie[indice];
+
+        document.getElementById("tdBtnPdf" + cont).innerHTML = "<form method='POST' action='../Qrcode/PDF/controllerPdf.php'>" + 
+        "<button class='btn cartaoNaoPresionadoOp2 btn-sm' name='txtPdf' id='btnPdf" + cont + "' type='submit' value='"+numSerie+"'>PDF</button></form>";
         
         //Botao do QrCode
         switch(cont) {
@@ -260,7 +265,7 @@ function PreencheLinhasTabela(pagina, linhas){
         }
 
         //Botao do Pdf
-        switch(cont) {
+        /*switch(cont) {
             case 1:
                 document.getElementById("btnPdf1").onclick = function() { ClicaBtnPdf(1) };
                 break;
@@ -278,7 +283,7 @@ function PreencheLinhasTabela(pagina, linhas){
                 break;
             default:
                 popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Ocorreu um erro inesperado na paginação");
-        }
+        }*/
         
         
         if(numSerieCartaoSelecionado == cartoes.numeroSerie[cont - aux]){
@@ -350,18 +355,20 @@ function ClicaBtnLista(cont){
     ultimoButtonClicado = btnVisualizar;
 }
 
+//Era do pdf
+/*async function ClicaBtnPdf(cont){
 
-async function ClicaBtnPdf(cont){
+    //Gera indice e numSerie antes para colocar no botao
+    indice = ((paginaAtual - 1) * 5 + cont) - 1;
+    var numSerie = cartoes.numeroSerie[indice];
+    var data = {'numSerie': numSerie};
+ 
     //Voltando os Labels como eram antes
-    await popUp.imprimirPopUpConfirmacao("../Pop-Ups/popUpConfirmacao.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Deseja baixar o QrCode em formato de PDF ?");
+   /* await popUp.imprimirPopUpConfirmacao("../Pop-Ups/popUpConfirmacao.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Deseja baixar o QrCode em formato de PDF ?");
     const btnConfirmar = document.getElementById("buttonConfirmar");
-    btnConfirmar.addEventListener("confirmacao", function(){
-        indice = ((paginaAtual - 1) * 5 + cont) - 1;
-        
-        //Escrever códigos para gerar pDF aqui
 
-        var numSerie = cartoes.numeroSerie[indice];
-        var data = {'numSerie': numSerie};
+    btnConfirmar.addEventListener("confirmacao", function(){
+        
 
         let httpRequest = new XMLHttpRequest();
         httpRequest.open("POST", "PDF/controllerPdf.php");
@@ -381,7 +388,7 @@ async function ClicaBtnPdf(cont){
     });
 
         
-}
+}*/
 
 btnProximo.addEventListener("click", function(){
     btnAnterior.removeAttribute("disabled");
