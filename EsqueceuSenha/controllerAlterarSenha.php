@@ -7,14 +7,20 @@ include "esqueceuSenha.php";
 session_start();
 
 //Verificando se o usuário passou pelos processos de Código de Verificação e possui autorização para continuar
-if(!isset($_SESSION['permissaoAlterarSenha'])){
+if(!isset($_SESSION['permissaoAlterarSenha']) && !isset($_SESSION['permissaoParaAlterarSenhaConfiguracoes'])){
     echo "Você não possui autorização para alterar a Senha";
     return;
 }
 
 //Rebendo a Nova Senha do Usuário
 $novaSenha = $_POST["senha"];
-$cpf = $_POST["cpf"];
+
+//Verificando por onde virá o CPF do usuário que terá a Senha Alterada
+if(isset($_SESSION['cpf'])){
+    $cpf = $_SESSION['cpf'];
+}else{
+    $cpf = $_POST["cpf"];
+}
 
 //Criando os objetos que serão utilizados no sistema
 $con = new Conexao();
@@ -29,7 +35,13 @@ if(!$res){
     if($res){
         echo "Senha alterada com sucesso";
         //Removendo a permissão do Usuário de alterar a Senha
-        unset($_SESSION['permissaoAlterarSenha']);
+        if(isset($_SESSION['permissaoAlterarSenha'])){
+            unset($_SESSION['permissaoAlterarSenha']);
+        }
+
+        if(isset($_SESSION['permissaoParaAlterarSenhaConfiguracoes'])){
+            unset($_SESSION['permissaoParaAlterarSenhaConfiguracoes']);
+        }
     }else{
         echo "Não foi possível alterar a sua Senha !";
     }

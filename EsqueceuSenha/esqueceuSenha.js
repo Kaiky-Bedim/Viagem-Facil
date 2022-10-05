@@ -92,7 +92,7 @@ function ValidaCodigoVerificacao(){
             document.getElementById("labelCodigoVerificacao").innerHTML = "Código Verificação*";
             if(codigoVerificao.value == ""){
                 codigoVerificao.setCustomValidity("O campo Código Verificação é obrigatório");
-            }else if(codigoVerificao.value.length > 0 && codigoVerificao.value.length < 11){
+            }else if(codigoVerificao.value.length > 0 && codigoVerificao.value.length < 6){
                 codigoVerificao.setCustomValidity("Um Código Verificação válido deve possuir 6 dígitos");
             }
             return;

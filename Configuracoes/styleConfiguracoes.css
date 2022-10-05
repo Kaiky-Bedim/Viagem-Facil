@@ -45,19 +45,45 @@ body{
     padding-top: 35px;
 }
 
+/* As Divs abaixo servem para o CSS da alteração de Senha do Usuário */
 .divAlterarSenha{
     position: fixed;
     z-index: 1;
     width: 100%;
-    margin-top: 225px;
+    margin-top: 50px;
 }
 
 .divAlterarSenha form{
     background: #817A87;
     border-radius: 10px;
-    box-shadow: 0 10px 15px rgba(0,0,0,.1);
-    padding: 20px;
-    width: 900px;
-	height: auto;
-    padding-top: 160px;
+    box-shadow: 0 10px 15px rgb(0 0 0 / 10%);
+    width: 480px;
+    height: auto;
+    margin: auto;
+    height: fit-content;
+}
+
+.divAlterarSenha form h1{
+    text-align: initial;
+    padding-top: 30px;
+    padding-left: 30px;
+}
+
+.btnsFormAlterarSenha{
+    width: 160px!important;
+    margin-bottom: 30px;
+}
+
+.esquerda{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.direita{
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.restantePaginaAlteracaoSenha{
+    opacity: 0.5;
 }

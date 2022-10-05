@@ -416,9 +416,250 @@ formDadosPessoais.addEventListener("submit", function(event){
 //Recuperando o Button para alterar a Senha do Usuário
 const btnAlterarSenha = document.getElementById("btnAlterarSenha");
 const divAlterarSenha = document.getElementById("alterarSenha");
+const inputSenha = document.getElementById("txtSenha");
+const btnEnviarSenha = document.getElementById("btnEnviarSenha");
+const formMudarSenha = document.getElementById("formMudarSenha");
+var segundaRequisicao = false;
+var primeiraTentativa1 = true;
+var restantePagina;
+var content;
 
 //Função executada ao clicar no Button Alterar Senha
 btnAlterarSenha.addEventListener("click", function(){
+    //Fazendo a tela de Alteração de Senha aparecer
     divAlterarSenha.removeAttribute("hidden");
-    console.log("Viado ?");
+
+    //Este Observer fica observando o input até seu valor ser mudado, ele apenas seta as configurações para verificar se o usuário clicou fora da tela de Alteração de Senha
+    var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if(divPopUp.innerHTML == ""){
+                SetaDocumentOnClick();
+            }
+        });
+    });
+
+    observer.observe(divPopUp, { childList: true});
+
+    //Setando o restante da página como forma de fechar a tela de Alteração de Senha
+    restantePagina = document.querySelectorAll("body>div:not(.formMudarSenha)");
+    restantePagina.forEach(element => {
+        if(element.id != "alterarSenha"){
+            element.classList.add("restantePaginaAlteracaoSenha");
+        }
+    });
+
+    //Caso o usuário clique fora da telinha de Alteração de Senha, ela fechará
+    SetaDocumentOnClick();
+
+    //Caso o usuário clique na tela Voltar, ela fechará também !
+    document.getElementById("btnVoltar").addEventListener("click", function(){
+        FecharJanela();
+    })
+})
+
+//Esta função seta o Document.click para auxiliar no fechamento da tela de Alteração de Senha
+function SetaDocumentOnClick(){
+    //Recuperando a tag da Div que não pode fechar a janela de Alterar Senha quando clicada
+    content = document.getElementById("alterarSenha");
+
+    document.documentElement.onclick = function(event){
+        if(event.target.id != "btnAlterarSenha" && !content.innerHTML.includes(event.target.parentNode.innerHTML) 
+            && event.target.id != "buttonXPopUp" && event.target.id != "buttonFechar"){
+            FecharJanela();
+        }
+    }
+}
+
+//Esta função fecha a janela de Alteração de Senha
+function FecharJanela(){
+    //Escondendo a janela de Alteração de Senha
+    document.getElementById("alterarSenha").setAttribute("hidden", "true");
+
+    //Trocando os campos do Form
+    divSenhaAtual.removeAttribute("hidden");
+    divNovaSenha.setAttribute("hidden", "true");
+    divConfirmaNovaSenha.setAttribute("hidden", "true");
+
+    inputSenha.removeAttribute("disabled");
+    inputNovaSenha.setAttribute("disabled", "true");
+    inputConfirmarNovaSenha.setAttribute("disabled", "true");
+
+    inputSenha.value = "";
+    inputNovaSenha.value = "";
+    inputConfirmarNovaSenha.value = "";
+
+    restantePagina.forEach(element => {
+        element.classList.remove("restantePaginaAlteracaoSenha");
+    });
+
+    //Setando a variável de controle como true
+    segundaRequisicao = false;
+}
+
+//Funções para validar os campos do formulário 1
+function ValidaSenha(){
+    inputSenha.setCustomValidity("");
+
+    if(!primeiraTentativa1){
+        //Reexecuta validação
+        if (!inputSenha.validity.valid) {
+            //Se inválido, coloca mensagem de erro
+            document.getElementById("labelSenha").innerHTML = "Senha Atual*";
+            if(inputSenha.value == ""){
+                inputSenha.setCustomValidity("O campo Senha Atual é obrigatório");
+            }
+            return;
+        }
+        document.getElementById("labelSenha").innerHTML = "Senha Atual";
+    }
+}
+
+btnEnviarSenha.onclick = function(){
+    //Verifica se é a primeira vez que se preenche o formulário
+    primeiraTentativa1 = false;
+    ValidaSenha();
+}
+
+inputSenha.oninput = function(){
+    ValidaSenha();
+}
+
+//Recuperando as referências de Divs e inputs importantes do Form
+const divPopUp = document.getElementById("divPopUp");
+const divSenhaAtual = document.getElementById("divSenhaAtual");
+const divNovaSenha = document.getElementById("divNovaSenha");
+const divConfirmaNovaSenha = document.getElementById("divConfirmaNovaSenha");
+const inputNovaSenha = document.getElementById("txtNovaSenha");
+const inputConfirmarNovaSenha = document.getElementById("txtConfirmarNovaSenha");
+var primeiraTentativa2 = true;
+
+//Funções para validar os campos do formulário 2
+function ValidaNovaSenha(){
+    inputNovaSenha.setCustomValidity("");
+
+    if(!primeiraTentativa2){
+        //Reexecuta validação
+        if (!inputNovaSenha.validity.valid) {
+            //Se inválido, coloca mensagem de erro
+            document.getElementById("labelNovaSenha").innerHTML = "Nova Senha*";
+            if(inputNovaSenha.value == ""){
+                inputNovaSenha.setCustomValidity("O campo Nova Senha é obrigatório");
+            }
+            return;
+        }
+        document.getElementById("labelNovaSenha").innerHTML = "Nova Senha";
+    }
+}
+
+function ValidaConfirmaNovaSenha(){
+    inputConfirmarNovaSenha.setCustomValidity("");
+
+    if(!primeiraTentativa2){
+        //Reexecuta validação
+        if (!inputConfirmarNovaSenha.validity.valid) {
+            //Se inválido, coloca mensagem de erro
+            document.getElementById("labelConfirmarNovaSenha").innerHTML = "Confirmar Nova Senha*";
+            if(inputConfirmarNovaSenha.value == ""){
+                inputConfirmarNovaSenha.setCustomValidity("O campo Confirmar Nova Senha é obrigatório");
+            }
+            return;
+        }
+        document.getElementById("labelConfirmarNovaSenha").innerHTML = "Confirmar Nova Senha";
+    }
+}
+
+btnEnviarSenha.onclick = function(){
+    //Verifica se é a primeira vez que se preenche o formulário
+    if(!segundaRequisicao){
+        primeiraTentativa1 = false;
+        ValidaSenha();
+    }else{
+        primeiraTentativa2 = false;
+        ValidaNovaSenha();
+        ValidaConfirmaNovaSenha();
+    }
+}
+
+inputNovaSenha.oninput = function(){
+    ValidaNovaSenha();
+}
+
+inputConfirmarNovaSenha.oninput = function(){
+    ValidaConfirmaNovaSenha();
+}
+
+//Esta é a função que será executada ao Enviar o primeiro formulário de Alteração de Senha
+formMudarSenha.addEventListener("submit", function(event){
+    event.preventDefault();
+
+    //Criando o objeto do formulário que será mandado para o Servidor
+    let httpRequest = new XMLHttpRequest();
+
+    //Verifica para qual dos dois Endpoints a requisição será mandada
+    if(!segundaRequisicao){
+        httpRequest.open("POST", "controllerCompararSenha.php");
+        httpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+        httpRequest.send("senha=" + inputSenha.value);
+        httpRequest.onreadystatechange = function(){
+            if(this.readyState == 4){
+                if(this.status == 200){
+                    //Verificando as possíveis diferentes respostas da API
+                    if(this.response == "Senha correta"){
+                        //Trocando os campos do Form
+                        divSenhaAtual.setAttribute("hidden", "true");
+                        divNovaSenha.removeAttribute("hidden");
+                        divConfirmaNovaSenha.removeAttribute("hidden");
+
+                        inputSenha.setAttribute("disabled", "true");
+                        inputNovaSenha.removeAttribute("disabled");
+                        inputConfirmarNovaSenha.removeAttribute("disabled");
+
+                        segundaRequisicao = true;
+                    }else if(this.response.includes("Access denied")){
+                        FecharJanela();
+                        popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Ocorreu algum erro interno na requisição com o servidor");
+                    }
+                    else{
+                        popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", this.response);
+                    }
+                }else{
+                    popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Não foi possível terminar a requisição");
+                }
+            }
+        }
+    }else{
+        //Verificando se os campos senha não são iguais
+        if(inputNovaSenha.value != inputConfirmarNovaSenha.value){
+            popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Os campos senhas não são iguais");
+            return;
+        }
+
+        httpRequest.open("POST", "../EsqueceuSenha/controllerAlterarSenha.php");
+        httpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+        httpRequest.send("senha=" + inputNovaSenha.value);
+        httpRequest.onreadystatechange = function(){
+            if(this.readyState == 4){
+                if(this.status == 200){
+                    //Verificando as possíveis diferentes respostas da API
+                    if(this.response == "Senha alterada com sucesso"){
+                        FecharJanela();
+                        popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", this.response);    
+                    }else if(this.response == "Senha nova não pode ser igual a antiga"){
+                        popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", this.response);
+                        SetaDocumentOnClick();
+                    }else if(this.response == "Você não possui autorização para alterar a Senha"){
+                        FecharJanela();
+                        popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", this.response);    
+                    }else if(this.response.includes("Access denied")){
+                        FecharJanela();
+                        popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Ocorreu algum erro interno na requisição com o servidor");
+                    }else{
+                        console.log(this.response);
+                    }
+                }else{
+                    popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Não foi possível terminar a requisição");
+                }
+            }
+        }
+    }
 })
