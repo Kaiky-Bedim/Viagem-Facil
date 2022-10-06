@@ -276,6 +276,7 @@ button.onclick = function(){
     ValidaCEP();
     ValidaTelefone1();
 }
+ProcurarCep();
 
 nome.oninput = function(){
     ValidaNome();
@@ -378,6 +379,51 @@ function VerificaCadastro(cadastro){
     }
 }
 //Código do Login via AJAX termina aqui
+
+function ProcurarCep(){
+
+    //Evento que ocorre quando o input do CEP é deselecionado, ativo o focusout
+    document.getElementById('txtCEP')
+    .addEventListener('focusout',async()=>{
+        console.log("entrou");
+        //Pega o valor que esta dentro do input do CEP
+        const cepValidar = document.getElementById('txtCEP').value;
+        //Pega o json dos dados de endereço vindo da WebApi viacep
+        const url = `https://viacep.com.br/ws/${cepValidar}/json/`;
+        //Manda para uma função que verifica se não tem letra no cep, caso for True um fetch com a url
+        //para a WebApi, se o cep que foi junto com a url estiver errado entra no if e mostrara que não encotro o cep
+        //caso o cep estaja certo ele chama a função preencherFormulario
+        if(cepValido(cepValidar)){
+            const dados = await fetch(url);
+            const endereco = await dados.json();
+            console.log(endereco);
+            if(endereco.hasOwnProperty('erro')){
+                document.getElementById('txtRua').value = "CEP NÃO ENCONTRADO";
+                document.getElementById('txtNumero').value = "CEP NÃO ENCONTRADO";
+                document.getElementById('txtCidade').value = "CEP NÃO ENCONTRADO";
+                document.getElementById('txtEstado').value = "CEP NÃO ENCONTRADO";
+                document.getElementById('txtComplemeto').value = "CEP NÃO ENCONTRADO";
+            }else{
+                console.log("entro 2");
+                preencherFormulario(endereco);
+            }
+        }else{
+            document.getElementById('endereco').value = "CEP incorreto!";
+        }
+    
+    });
+
+}
+
+const cepValido = (cep) =>  /^[0-9]+$/.test(cep);
+
+const preencherFormulario= (endereco) =>{
+    document.getElementById('txtRua').value = endereco.logradouro;
+    document.getElementById('txtCidade').value = endereco.localidade;
+    document.getElementById('txtEstado').value = endereco.uf;
+    document.getElementById('txtNumero').value = endereco.bairro;
+    document.getElementById('txtComplemeto').value = endereco.complemento;
+}
 
 //Função para retornar para a tela de Login
 const buttonVoltarLogin = document.getElementById("irParaLogin");
