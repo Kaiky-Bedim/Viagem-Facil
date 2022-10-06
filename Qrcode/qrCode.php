@@ -25,7 +25,7 @@ class Qrcode{
         }
         
         #Tudo certo agora
-        $qrcode = "http://192.168.0.4/Viagem-Facil/Qrcode/controllerLeitor.php?NumSerie=".$this->numSerie;
+        $qrcode = "http://192.168.0.11/Viagem-Facil/Qrcode/controllerLeitor.php?NumSerie=".$this->numSerie;
         
         if($this->bloqueado == 1){
             $qrcode = sha1("Bloqueado");

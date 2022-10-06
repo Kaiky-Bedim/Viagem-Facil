@@ -3,6 +3,7 @@ class Leitor{
     private $cpf;
     private $conexao;
     private $numSerie;
+    private $empresaCartao;
     
 
     #GETS
@@ -31,17 +32,21 @@ class Leitor{
         $this->numSerie = $numSerie;
     }
 
+
     #METODOS
 
     #DESCONTO
     public function DescontarPasse(){
-        $sql = "select Saldo, TipoCartao from Cartao where CPFProprietario = '".$this->cpf."' and NumeroSerie = '".$this->numSerie."';";
+        $sql = "select Saldo, TipoCartao, Empresa from Cartao where CPFProprietario = '".$this->cpf."' and NumeroSerie = '".$this->numSerie."';";
         $res = mysqli_query($this->conexao->getConexao(), $sql);
 
         while ($dado = mysqli_fetch_assoc($res)){
             $saldoAntigo = $dado["Saldo"];
             $tipoCartao = $dado["TipoCartao"];
+            $empresaCartao = $dado["Empresa"];
         }
+
+        $this->empresaCartao = $empresaCartao;
 
         if($saldoAntigo < 4.50){
             $resp = false;
@@ -90,10 +95,11 @@ class Leitor{
 
     #MOVIMENTAÇÃO
     public function GerarMovimentacao($id, $desconto){
-        $data = date('d/m/Y H:i');
+        date_default_timezone_set("America/Sao_Paulo");
+        $dateTime = date('Y-m-d H:i:s', time());
 
-        $sql = "insert into Movimentacoes (Valor, DataMovimentacao, TipoMovimentacao, NumeroSerieCartao, CPFProprietario, Id_Percurso) values 
-        ('".$desconto."', '".$data."', 'Utilização em ônibus', '".$this->numSerie."', '".$this->cpf."','".$id."');";
+        $sql = "insert into Movimentacoes (Valor, DataMovimentacao, TipoMovimentacao, NumeroSerieCartao, EmpresaCartao, CPFProprietario, Id_Percurso) values 
+        ('".$desconto."', '".$dateTime."', 'Utilização em ônibus', '".$this->numSerie."', '".$this->empresaCartao."', '".$this->cpf."','".$id."');";
         $res = mysqli_query($this->conexao->getConexao(), $sql);
     }
 

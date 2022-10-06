@@ -1,25 +1,32 @@
 <?php
 //Carrega o Composer
-require_once './ApiPdf/vendor/autoload.php';
+//require_once './Api_Image/vendor/autoload.php';
 
-$valor = $_POST['txtPdf'];
-//Referenciar o namespace Dompdf
-use Dompdf\Dompdf;
+//Caminho imagem .svg
+$caminho = '../imgQRCode/qrCode1500386.svg';
 
-//$data = json_decode(file_get_contents('php://input'), true);
-//$numSerie = $data['numSerie'];
+$im = new Imagick();
+
+//Contem imagem svg
+$svg = file_get_contents($caminho);
+
+$im->readImageBlob($svg);
+
+/*jpeg*/
+$im->setImageFormat("jpeg");
+$im->adaptiveResizeImage(720, 445); /*Optional, if you need to resize*/
+
+$im->writeImage('qrCode1500386.jpeg');/*(or .jpg)*/
+echo $im;
+$im->clear();
 
 
-//Instanciar e usar a classe dompdf
-$domPdf = new Dompdf();
 
-$dados = "<h1>QrCode do cartão número série:'".$valor."'<h1>";
+/*$image->readImageBlob(file_get_contents('../imgQRCode/qrCode1500386.svg'));
+$image->setImageFormat("png24");
+$image->resizeImage(1024, 768, imagick::FILTER_LANCZOS, 1); 
+$image->writeImage('qrCode1500386.png');
 
-$domPdf->loadHtml($dados);
-$domPdf->setPaper('A4', 'portrait');
+echo $image;*/
 
-$domPdf->render();
-$domPdf->stream();
-
-echo "ok";
 ?>

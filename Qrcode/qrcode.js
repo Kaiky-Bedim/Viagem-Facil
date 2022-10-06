@@ -216,9 +216,9 @@ function CriarCamposTabelaCartoes(qtdCampos){
         td5.id = "tdBtnSelecionar"+cont;
         document.getElementById("tr" + cont).appendChild(td5);
 
-        var td6 = document.createElement("td");
+        /*var td6 = document.createElement("td");
         td6.id = "tdBtnPdf"+cont;
-        document.getElementById("tr" + cont).appendChild(td6);
+        document.getElementById("tr" + cont).appendChild(td6);*/
     }
 
     PreencheLinhasTabela(1, qtdCampos);
@@ -234,14 +234,17 @@ function PreencheLinhasTabela(pagina, linhas){
         document.getElementById("tdNumSerie" + cont).innerHTML = cartoes.numeroSerie[cont - aux];
         document.getElementById("tdEmpresa" + cont).innerHTML = cartoes.empresa[cont - aux];
         document.getElementById("tdTipoCartao" + cont).innerHTML = cartoes.tipoCartao[cont - aux];
-        document.getElementById("tdSaldo" + cont).innerHTML = "R$ " + parseFloat(cartoes.saldo[cont - aux]).toFixed(2);
+        if(cartoes.tipoCartao[cont - aux] == "Idoso"){
+            document.getElementById("tdSaldo" + cont).innerHTML = "Ilimitado";
+        }else{
+            document.getElementById("tdSaldo" + cont).innerHTML = "R$ " + parseFloat(cartoes.saldo[cont - aux]).toFixed(2);
+        }
         document.getElementById("tdBtnSelecionar" + cont).innerHTML = "<button class='btn btn-primary btn-sm' aria-pressed='false' id='btnSelecionar" + cont + "' type='button'>Selecionar</button>";
         //Coloca cada numSerie no botao
-        indice = ((paginaAtual - 1) * 5 + cont) - 1;
-        var numSerie = cartoes.numeroSerie[indice];
+        //indice = ((paginaAtual - 1) * 5 + cont) - 1;
+        //var numSerie = cartoes.numeroSerie[indice];
 
-        document.getElementById("tdBtnPdf" + cont).innerHTML = "<form method='POST' action='../Qrcode/PDF/controllerPdf.php'>" + 
-        "<button class='btn cartaoNaoPresionadoOp2 btn-sm' name='txtPdf' id='btnPdf" + cont + "' type='submit' value='"+numSerie+"'>PDF</button></form>";
+       // document.getElementById("tdBtnPdf" + cont).innerHTML = "<button class='btn cartaoNaoPresionadoOp2 btn-sm' id='btnPdf" + cont + "' type='button'>PDF</button>";
         
         //Botao do QrCode
         switch(cont) {
@@ -358,33 +361,25 @@ function ClicaBtnLista(cont){
 //Era do pdf
 /*async function ClicaBtnPdf(cont){
 
-    //Gera indice e numSerie antes para colocar no botao
-    indice = ((paginaAtual - 1) * 5 + cont) - 1;
-    var numSerie = cartoes.numeroSerie[indice];
-    var data = {'numSerie': numSerie};
- 
     //Voltando os Labels como eram antes
-   /* await popUp.imprimirPopUpConfirmacao("../Pop-Ups/popUpConfirmacao.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Deseja baixar o QrCode em formato de PDF ?");
+    await popUp.imprimirPopUpConfirmacao("../Pop-Ups/popUpConfirmacao.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Deseja baixar o QrCode em formato de PDF ?");
     const btnConfirmar = document.getElementById("buttonConfirmar");
 
     btnConfirmar.addEventListener("confirmacao", function(){
-        
 
-        let httpRequest = new XMLHttpRequest();
-        httpRequest.open("POST", "PDF/controllerPdf.php");
-        httpRequest.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-        
-        httpRequest.send(JSON.stringify(data));
-        httpRequest.onreadystatechange = function(){
-            if(this.readyState == 4){
-                if(this.status == 200  && !this.responseText.includes("Fatal error")){
-                    popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", this.responseText);
-                    
-                }else{
-                    popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "erro");
-                }
-            }
-        }
+        //Gera indice e numSerie antes para colocar no botao
+        indice = ((paginaAtual - 1) * 5 + cont) - 1;
+        var numSerie = cartoes.numeroSerie[indice];
+
+        var doc = new jsPDF();
+        var imgData = "../Qrcode/imgQRCode/qrCode1500386.jpeg";
+
+        doc.text("QrCode do passe " + numSerie, 10, 10);
+        doc.addImage(imgData, 'JPEG', 15, 40, 180, 180);
+
+        doc.save("Passe"+numSerie+".pdf");
+        popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Pdf baixado com sucesso !");
+                            
     });
 
         

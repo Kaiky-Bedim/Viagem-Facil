@@ -188,12 +188,21 @@ function DeserializarJsonMovimentacoes(data){
     var arrayTiposMovimentacoes = tipoMovimentacoes.split(",");
     var arrayIdsPercursos = idPercursos.split(",");
 
+    //Conserta 'utilização em onibus'
+    for(var x = 0; x <= arrayTiposMovimentacoes.length - 1; x++){
+        if(arrayTiposMovimentacoes[x] != "Recarga"){
+            arrayTiposMovimentacoes[x] = "Utilização em ônibus";
+        }
+    }
+
     movimentacoes.valor = arrayValores;
     movimentacoes.dataMovimentacao = arrayDatasMovimentacoes;
     movimentacoes.tipoMovimentacao = arrayTiposMovimentacoes;
     movimentacoes.numeroSerieCartao = arrayNumerosSerieCartoes;
     movimentacoes.empresaCartao = arrayEmpresasCartoes;
     movimentacoes.idPercurso = arrayIdsPercursos;
+
+    console.log(arrayTiposMovimentacoes);
 
     //Setando a quantidade de registros do usuário
     qtdRegistros = arrayValores.length;

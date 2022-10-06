@@ -4,7 +4,7 @@ class Pdf{
 
     private $numSerie;
 
-    public function Teste($numSerie){
+    public function TransformarImagem($numSerie){
         $this->numSerie = $numSerie;
 
         //$image = new Imagick();

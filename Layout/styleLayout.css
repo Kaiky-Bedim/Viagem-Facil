@@ -83,3 +83,15 @@ body{
 .margin-logo{
     margin-left: 10px;
 }
+
+
+@media screen and (max-width: 600px){
+
+    .divFoot{
+        width: 100%;
+        height: 100px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+}

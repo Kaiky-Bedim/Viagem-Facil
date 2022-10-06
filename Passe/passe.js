@@ -211,7 +211,11 @@ function PreencheLinhasTabela(pagina, linhas){
         document.getElementById("tdSituacao" + cont).innerHTML = cartoes.situacao[cont - aux];
         document.getElementById("tdTipoCartao" + cont).innerHTML = cartoes.tipoCartao[cont - aux];
         document.getElementById("tdEmpresa" + cont).innerHTML = cartoes.empresa[cont - aux];
-        document.getElementById("tdSaldo" + cont).innerHTML = "R$ " + parseFloat(cartoes.saldo[cont - aux]).toFixed(2);
+        if(cartoes.tipoCartao[cont - aux] == "Idoso"){
+            document.getElementById("tdSaldo" + cont).innerHTML = "Ilimitado";
+        }else{
+            document.getElementById("tdSaldo" + cont).innerHTML = "R$ " + parseFloat(cartoes.saldo[cont - aux]).toFixed(2);
+        }
         document.getElementById("tdBtnVisualizar" + cont).innerHTML = "<button class='btn btn-primary btn-sm' aria-pressed='false' id='btnVisualizar" + cont + "' type='button'>Vizualizar</button>";
         if(cartoes.bloqueado[cont-aux] == 0){
             document.getElementById("tdBtnBloquear" + cont).innerHTML = "<button class='btn btn-danger btn-sm' id='btnBloquear" + cont + "' type='button'>Bloquear</button>";
