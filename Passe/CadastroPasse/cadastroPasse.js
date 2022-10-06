@@ -359,7 +359,7 @@ form.addEventListener("submit", function(event){
                 document.getElementById("inputAtualizaLista").value = "Desatualizada";
                 popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", this.responseText);
             }else{
-                popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", this.responseText);
+                popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Passe já cadastrado !");
             }
         }
     }

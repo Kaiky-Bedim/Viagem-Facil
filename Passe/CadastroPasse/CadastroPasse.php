@@ -31,8 +31,6 @@ class CadastroPasse{
 
         $resCadastroPasse = mysqli_query($this->conexao->getConexao(), $sql);
 
-        $this->conexao->FecharConexao();
-
         if($resCadastroPasse != 1){
             return false;
         }
@@ -89,8 +87,6 @@ class CadastroPasse{
         }
 
         mysqli_query($this->conexao->getConexao(), $sqlAtualizar);
-
-        $this->conexao->FecharConexao();
 
         if($resCadastroPasse != 1){
             return false;
