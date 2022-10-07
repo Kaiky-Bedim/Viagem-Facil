@@ -25,9 +25,9 @@ class Qrcode{
         while ($dado = mysqli_fetch_assoc($res)){
             $this->numFabrica = $dado["NumeroFabrica"];
         }
-        
+        //Ip japones = 192.168.0.11
         #Colocar Empresa tbm
-        $qrcode = "http://169.254.86.114/Viagem-Facil/Qrcode/controllerLeitor.php?NumSerie=".$this->numSerie."&Empresa=".$this->cartaoEmpresa;
+        $qrcode = "http://192.168.0.11/Viagem-Facil/Qrcode/controllerLeitor.php?NumSerie=".$this->numSerie."&Empresa=".$this->cartaoEmpresa;
         
         if($this->bloqueado == 1){
             $qrcode = sha1("Bloqueado");
