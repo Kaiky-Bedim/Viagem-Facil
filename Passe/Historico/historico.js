@@ -86,6 +86,10 @@ btnMostrarTodoHistorico.addEventListener("click", async function(){
 });
 
 function MontaTabela(){
+    if(movimentacoes == ""){
+        return;
+    }
+
     if(qtdRegistros > 5){
         registrosMostrando = 5;
 
@@ -390,6 +394,7 @@ var observer = new MutationObserver(async function(mutations) {
                 ResetaListaMostrada();
                 ResetaPaginacao();
                 MontaTabela();
+
                 break;
             }
 

@@ -19,13 +19,33 @@ layout.carregarFoot("../Layout/foot.html", "../Layout/styleLayout.css");
 //O código abaixo verificará se o usuário possui algum cartão Cadastrado, caso não, será mostrada a Div Sem Cartão
 var qtdCartoes = await cartoesManager.buscarDadosCartoes("../Infra/ContaManager/CartoesManager/controllerCartoesManager.php", "qtdCartoes");
 var cartoesBloqueados = await cartoesManager.buscarDadosCartoes("../Infra/ContaManager/CartoesManager/controllerCartoesManager.php", "bloqueados");
+var cartoesIdosos = await cartoesManager.buscarDadosCartoes("../Infra/ContaManager/CartoesManager/controllerCartoesManager.php", "tipoCartoes");
+
+//Recuperando os valores que vieram da requisição e ajustando eles
+cartoesBloqueados = cartoesBloqueados.replace("[", "");
+cartoesBloqueados = cartoesBloqueados.replace("]", "");
+cartoesBloqueados = cartoesBloqueados.split(",");
+
+cartoesIdosos = cartoesIdosos.replace("[", "");
+cartoesIdosos = cartoesIdosos.replace("]", "");
+cartoesIdosos = cartoesIdosos.split(",");
+
 var qtdCartoesBloqueados = 0;
+var qtdCartoesIdosos = 0;
 
 for(var cont = 0; cont < cartoesBloqueados.length; cont++){
-    if(cartoesBloqueados[cont] == "1"){
+    if(cartoesBloqueados[cont] == "\"1\""){
         qtdCartoesBloqueados++;
     }
 }
+
+for(var cont = 0; cont < cartoesIdosos.length; cont++){
+    if(cartoesIdosos[cont] == "\"Idoso\""){
+        qtdCartoesIdosos++;
+    }
+}
+
+qtdCartoes = qtdCartoes - qtdCartoesBloqueados - qtdCartoesIdosos;
 
 const form = document.getElementById("divForm");
 const divSemCartao = document.getElementById("divSemCartaoCadastrado");
@@ -43,7 +63,7 @@ const tblCartoes = document.getElementById("tableCartoes");
 
 //Esta variável basicamente guarda a referência para o último button que foi clicado
 var ultimoButtonClicado;
-if(qtdCartoes - qtdCartoesBloqueados > 0){
+if(qtdCartoes > 0){
     form.removeAttribute("hidden");
     PrepararListaCartoes();
 }else{
@@ -163,8 +183,6 @@ function DeserializarJsonCartoes(data){
             cartoesFinais.empresa.push(cartoes.empresa[i]);
             cartoesFinais.saldo.push(cartoes.saldo[i]);
             cartoesFinais.dataExpedicao.push(cartoes.dataExpedicao[i]);
-        }else{
-            qtdCartoes--;
         }
     }
     return cartoesFinais;
@@ -489,7 +507,6 @@ formElement.addEventListener("submit", async function(event){
                         //Caso tudo tenha dado certo, ele atualiza a lista em tempo real
                         var json = await cartoesManager.buscarDadosCartoes("../Infra/ContaManager/CartoesManager/controllerCartoesManager.php", "cartaoJson");
                         cartoes = DeserializarJsonCartoes(json);
-
                         //Atualizando a lista em tempo real
                         if(paginaAtual < totalPaginas){
                             var i = 5;

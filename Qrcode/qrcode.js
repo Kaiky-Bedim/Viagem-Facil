@@ -216,10 +216,6 @@ function CriarCamposTabelaCartoes(qtdCampos){
         var td5 = document.createElement("td");
         td5.id = "tdBtnSelecionar"+cont;
         document.getElementById("tr" + cont).appendChild(td5);
-
-        var td6 = document.createElement("td");
-        td6.id = "tdBtnPdf"+cont;
-        document.getElementById("tr" + cont).appendChild(td6);
     }
 
     PreencheLinhasTabela(1, qtdCampos);
@@ -235,15 +231,17 @@ function PreencheLinhasTabela(pagina, linhas){
         document.getElementById("tdNumSerie" + cont).innerHTML = cartoes.numeroSerie[cont - aux];
         document.getElementById("tdEmpresa" + cont).innerHTML = cartoes.empresa[cont - aux];
         document.getElementById("tdTipoCartao" + cont).innerHTML = cartoes.tipoCartao[cont - aux];
-        document.getElementById("tdSaldo" + cont).innerHTML = "R$ " + parseFloat(cartoes.saldo[cont - aux]).toFixed(2);
+
+        if(cartoes.tipoCartao[cont - aux] == "Idoso"){
+            document.getElementById("tdSaldo" + cont).innerHTML = "Ilimitado";
+        }else{
+            document.getElementById("tdSaldo" + cont).innerHTML = "R$ " + parseFloat(cartoes.saldo[cont - aux]).toFixed(2);
+        }
         document.getElementById("tdBtnSelecionar" + cont).innerHTML = "<button class='btn btn-primary btn-sm' aria-pressed='false' id='btnSelecionar" + cont + "' type='button'>Selecionar</button>";
         //Coloca cada numSerie no botao
         indice = ((paginaAtual - 1) * 5 + cont) - 1;
         var numSerie = cartoes.numeroSerie[indice];
 
-        document.getElementById("tdBtnPdf" + cont).innerHTML = "<form method='POST' action='../Qrcode/PDF/controllerPdf.php'>" + 
-        "<button class='btn cartaoNaoPresionadoOp2 btn-sm' name='txtPdf' id='btnPdf" + cont + "' type='submit' value='"+numSerie+"'>PDF</button></form>";
-        
         //Botao do QrCode
         switch(cont) {
             case 1:
@@ -350,7 +348,7 @@ function ClicaBtnLista(cont){
     }else{
         //Tira a imagem
         btnVisualizar.setAttribute("aria-pressed", "false");
-        btnVisualizar.classList.remove("cartaoPresionado");
+        btnVisualizar.classList.remove("cartaoPresionadoOp1");
         document.getElementById("imgqrcode").setAttribute("src","../Infra/img/Assets/semCartao.png")
         pNenhumCartaoSelecionado.removeAttribute("hidden");
     }

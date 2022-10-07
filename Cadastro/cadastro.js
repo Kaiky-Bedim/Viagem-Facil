@@ -372,7 +372,7 @@ function VerificaCadastro(cadastro){
         setTimeout(function(){
             window.location.href = "../Main/main.html";
         },1500);
-    }else if(cadastro.includes("Sem conexão com o servidor") || data.includes("Access denied")){
+    }else if(cadastro.includes("Sem conexão com o servidor") || cadastro.includes("Access denied")){
         popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Ocorreu algum erro interno na requisição com o servidor");
     }else{
         popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "O CPF informado já possui um cadastro no sistema");
@@ -421,7 +421,6 @@ const preencherFormulario= (endereco) =>{
     document.getElementById('txtRua').value = endereco.logradouro;
     document.getElementById('txtCidade').value = endereco.localidade;
     document.getElementById('txtEstado').value = endereco.uf;
-    document.getElementById('txtNumero').value = endereco.bairro;
     document.getElementById('txtComplemeto').value = endereco.complemento;
 }
 
