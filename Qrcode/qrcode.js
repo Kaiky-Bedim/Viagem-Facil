@@ -20,6 +20,7 @@ layout.carregarFoot("../Layout/foot.html", "../Layout/styleLayout.css");
 
 
 var numSerie = await cartoesManager.buscarDadosCartoes("../Infra/ContaManager/CartoesManager/controllerCartoesManager.php", "numeroSeries");
+var cartaoEmpresa;
 
 //O código abaixo verificará se o usuário possui algum cartão Cadastrado, caso não, será mostrada a Div Sem Cartão
 var qtdCartoes = await cartoesManager.buscarDadosCartoes("../Infra/ContaManager/CartoesManager/controllerCartoesManager.php", "qtdCartoes");
@@ -296,12 +297,12 @@ function PreencheLinhasTabela(pagina, linhas){
             ultimoButtonClicado = btn;
         }
 
-        if(numSerieCartaoSelecionado == cartoes.numeroSerie[cont - aux]){
+        /*if(numSerieCartaoSelecionado == cartoes.numeroSerie[cont - aux]){
             var btnPdf = document.getElementById("btnPdf" + cont);
             btnPdf.setAttribute("aria-pressed", "true");
             btnPdf.classList.add("btn-success");
             ultimoButtonClicado = btnPdf;
-        }
+        }*/
     }
 }
 
@@ -324,10 +325,13 @@ function ClicaBtnLista(cont){
         //Descobre indice do cartao selecionado (talvez fazer so cont - 1)
         indice = ((paginaAtual - 1) * 5 + cont) - 1;
         let httpRequest = new XMLHttpRequest();
-        numSerie = cartoes.numeroSerie[indice]
+        numSerie = cartoes.numeroSerie[indice];
+        cartaoEmpresa = cartoes.empresa[indice];
+        
         let data = `
             {
-            "numeroSerie": "${numSerie}"
+            "numeroSerie": "${numSerie}",
+            "empresa": "${cartaoEmpresa}"
             }`;
 
         httpRequest.open("POST", "controllerQrCode.php");

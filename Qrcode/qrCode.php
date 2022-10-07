@@ -7,12 +7,14 @@ class Qrcode{
     private $bloqueado;
     private $conexao;
     private $qrcode;
+    private $cartaoEmpresa;
 
     //Falta gets e sets
 
-    public function ImagemQrcode($cpf, $numSerie, $con){
+    public function ImagemQrcode($cpf, $numSerie, $con, $empresa){
         $this->conexao = $con;
         $this->cpf = $cpf;
+        $this->cartaoEmpresa = $empresa;
 
         
         $numSerieFinal = str_replace(" ", "", $numSerie);
@@ -24,8 +26,8 @@ class Qrcode{
             $this->numFabrica = $dado["NumeroFabrica"];
         }
         
-        #Tudo certo agora
-        $qrcode = "http://192.168.0.11/Viagem-Facil/Qrcode/controllerLeitor.php?NumSerie=".$this->numSerie;
+        #Colocar Empresa tbm
+        $qrcode = "http://192.168.0.11/Viagem-Facil/Qrcode/controllerLeitor.php?NumSerie=".$this->numSerie."&Empresa=".$this->cartaoEmpresa;
         
         if($this->bloqueado == 1){
             $qrcode = sha1("Bloqueado");

@@ -155,7 +155,7 @@ function DeserializarJsonCartoes(data){
     };
 
     for(var i = 0; i < cartoes.numeroSerie.length; i++){
-        if(cartoes.bloqueado[i] == 0){
+        if((cartoes.bloqueado[i] == 0) && (cartoes.tipoCartao[i] != "Idoso")){
             cartoesFinais.numeroSerie.push(cartoes.numeroSerie[i]);
             cartoesFinais.numeroFabrica.push(cartoes.numeroFabrica[i]);
             cartoesFinais.tipoCartao.push(cartoes.tipoCartao[i]);

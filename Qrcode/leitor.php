@@ -19,6 +19,10 @@ class Leitor{
         return $this->numSerie;
     }
 
+    public function getEmpresaCartao(){
+        return $this->empresaCartao;
+    }
+
     #SETS
     public function setCpf($cpf) {
         $this->cpf = $cpf;
@@ -32,32 +36,63 @@ class Leitor{
         $this->numSerie = $numSerie;
     }
 
+    public function setEmpresaCartao($empresaCartao){
+        $this->empresaCartao = $empresaCartao;
+    }
+
 
     #METODOS
 
     #DESCONTO
     public function DescontarPasse(){
-        $sql = "select Saldo, TipoCartao, Empresa from Cartao where CPFProprietario = '".$this->cpf."' and NumeroSerie = '".$this->numSerie."';";
+        
+        $sql = "select Saldo, TipoCartao from Cartao where CPFProprietario = '".$this->cpf."' and NumeroSerie = '".$this->numSerie."' and Empresa = '".$this->empresaCartao."';";
         $res = mysqli_query($this->conexao->getConexao(), $sql);
 
-        while ($dado = mysqli_fetch_assoc($res)){
+        while ($dado = mysqli_fetch_assoc($res)){           
             $saldoAntigo = $dado["Saldo"];
             $tipoCartao = $dado["TipoCartao"];
-            $empresaCartao = $dado["Empresa"];
         }
 
-        $this->empresaCartao = $empresaCartao;
+        if($tipoCartao == "Idoso"){
+            return true;
+            
+        //Estudantil sem dinheiro
+        }else if($tipoCartao == "Estudantil" && $saldoAntigo < 2.25){
+            return false;
+            
+        //Estudantil com dinheiro
+        }else if($tipoCartao == "Estudantil" && $saldoAntigo >= 2.25){
+            $saldoNovo = $saldoAntigo - 2.25;
+            $desconto = 2.25;
 
-        if($saldoAntigo < 4.50){
+            $sql = "update Cartao set Saldo = '".$saldoNovo."' where CPFProprietario = '".$this->cpf."' and NumeroSerie = '".$this->numSerie."' and Empresa = '".$this->empresaCartao."';";
+            $res = mysqli_query($this->conexao->getConexao(), $sql);
+
+            return $desconto;
+
+        //Comum sem dinheiro
+        }else if($tipoCartao == "Comum" && $saldoAntigo < 4.50){
+            return false;
+
+        //Comum com dinheiro
+        }else{
+            $saldoNovo = $saldoAntigo - 4.50;
+            $desconto = 4.50;
+
+            $sql = "update Cartao set Saldo = '".$saldoNovo."' where CPFProprietario = '".$this->cpf."' and NumeroSerie = '".$this->numSerie."' and Empresa = '".$this->empresaCartao."';";
+            $res = mysqli_query($this->conexao->getConexao(), $sql);
+
+            return $desconto;
+        }
+
+        /*if($saldoAntigo < 4.50){
             $resp = false;
             return $resp;
 
         }else{
-            if($tipoCartao == "Idoso"){
-                $saldoNovo = $saldoAntigo;
-                $desconto = 0;
-    
-            }else if($tipoCartao == "Estudantil"){
+        
+            if($tipoCartao == "Estudantil"){
                 $saldoNovo = $saldoAntigo - 2.25;
                 $desconto = 2.25;
     
@@ -67,11 +102,11 @@ class Leitor{
     
             }
     
-            $sql = "update Cartao set Saldo = '".$saldoNovo."' where CPFProprietario = '".$this->cpf."' and NumeroSerie = '".$this->numSerie."';";
+            $sql = "update Cartao set Saldo = '".$saldoNovo."' where CPFProprietario = '".$this->cpf."' and NumeroSerie = '".$this->numSerie."' and Empresa = '".$this->empresaCartao."';";
             $res = mysqli_query($this->conexao->getConexao(), $sql);
 
             return $desconto;
-        }
+        }*/
     }
 
     #PERCURSO

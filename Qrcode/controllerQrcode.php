@@ -2,16 +2,22 @@
 
 require_once "../Infra/BD/conexao.php";
 include "qrCode.php";
+//include "leitor.php";
 
 session_start();
 
 $con = new Conexao();
 $qrcode = new Qrcode();
+//$leitor = new Leitor();
 $cpf = $_SESSION['cpf'];
 
 $data = json_decode(file_get_contents('php://input'), true);
 $numSerie = $data['numeroSerie'];
-$res = $qrcode->ImagemQrcode($cpf, $numSerie, $con);
+$empresa = $data['empresa'];
+$empresa = str_replace(" ", "", $empresa);
+//$leitor->setEmpresaCartao($empresa);
+$res = $qrcode->ImagemQrcode($cpf, $numSerie, $con, $empresa);
+$con->FecharConexao();
 
 //QRCODE
 use chillerlan\QRCode\{QRCode, QROptions};
