@@ -50,7 +50,7 @@ class Cadastro {
         $this->conexao = $con;
 
         $sql = "insert into DadosCadastrais values('".$this->cpf."', '".$this->rg."', '".$this->nome."', '".$this->dataNascimento."', '".$this->telefone1."', '".$this->telefone2."', '".$this->email."', 
-        '".$this->estado."', '".$this->cidade."', '".$this->rua."', '".$this->complemento."', ".$this->numero.", '".$this->cep."');";
+        '".$this->estado."', '".$this->cidade."', '".$this->rua."', '".$this->complemento."', ".$this->numero.", '".$this->cep."', null);";
         $resCadastro = mysqli_query($this->conexao->getConexao(), $sql);
 
         $sql = "insert into Senhas values (sha('".$this->cpf."'), sha('".$this->senha."'));";

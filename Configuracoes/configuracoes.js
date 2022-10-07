@@ -17,6 +17,54 @@ var usuarioManager = new UsuarioManager();
 layout.carregarNavBar("../Layout/head.html", "../Layout/styleLayout.css");
 layout.carregarFoot("../Layout/foot.html", "../Layout/styleLayout.css");
 
+//Variáveis de auxílio para as funções dos Selects de Insittuições de Ensino
+const txtCidadeInstituicao = document.getElementById("txtCidadeInstituicao");
+const txtInstituicao = document.getElementById("txtInstituicao");
+var arrayInstituicoes = [];
+
+PreencheSelectsInstituicoes();
+
+//Esta função vai preencher os Selects com todas as Instituições de Ensino cadastradas no BD
+async function PreencheSelectsInstituicoes(){
+    //Este fetch abaixo basicamente recupera as Instituicoes cadastradas
+    var json = await fetch("CadastroInstituicoes/controllerInstituicoes.php?action=Cidades").then(response =>response.text());
+    var formatados = json.replace(/"/g, "").replace(/\[/g, "").replace(/\]/g, "").split(",");
+    var cidades = [];
+    var aux = 0
+
+    //Este for está removendo as cidades repetidasque foram recuperadas
+    for(var cont = 0; cont < formatados.length; cont++){
+        if(cidades[aux - 1] != formatados[cont]){
+            var option = document.createElement("option");
+            option.innerHTML = formatados[cont];
+            option.value = aux;
+            txtCidadeInstituicao.appendChild(option);
+            cidades[aux] = formatados[cont];
+            aux++;
+        }
+    }
+
+    for(var cont = 0; cont < cidades.length; cont++){
+        var json = await fetch("CadastroInstituicoes/controllerInstituicoes.php?action=Instituicoes&cidade=" + cidades[cont]).then(response =>response.text());
+        arrayInstituicoes[cont] = json.replace(/"/g, "").replace(/\[/g, "").replace(/\]/g, "").split(",");
+    }
+}
+
+//Evento acionado quando o usuário seleciona uma opção do Select
+txtCidadeInstituicao.addEventListener("input", function(event){
+    txtInstituicao.removeAttribute("disabled");
+    txtInstituicao.innerHTML = "";
+
+    var dados = arrayInstituicoes[event.target.value];
+
+    for(var cont = 0; cont < dados.length; cont++){
+        var option = document.createElement("option");
+        option.innerHTML = dados[cont];
+        option.value = dados;
+        txtInstituicao.appendChild(option);
+    }
+});
+
 //Recuperando os inputs do Form
 const nome = document.getElementById("txtNome");
 const email = document.getElementById("txtEmail");
@@ -382,7 +430,7 @@ formDadosPessoais.addEventListener("submit", function(event){
     let data = new FormData(formDadosPessoais);
     let httpRequest = new XMLHttpRequest();
 
-    httpRequest.open("POST", "controllerConfiguracoes.php");
+    httpRequest.open("POST", "AlterarDadosPessoais/controllerConfiguracoes.php");
     httpRequest.setRequestHeader("X-Content-Type-Options", "multipart/form-data");
     httpRequest.send(data);
     httpRequest.onreadystatechange = async function(){
@@ -597,7 +645,7 @@ formMudarSenha.addEventListener("submit", function(event){
 
     //Verifica para qual dos dois Endpoints a requisição será mandada
     if(!segundaRequisicao){
-        httpRequest.open("POST", "controllerCompararSenha.php");
+        httpRequest.open("POST", "AlterarSenha/controllerCompararSenha.php");
         httpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
         httpRequest.send("senha=" + inputSenha.value);
         httpRequest.onreadystatechange = function(){

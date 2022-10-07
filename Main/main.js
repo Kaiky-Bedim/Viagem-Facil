@@ -37,9 +37,12 @@ if(saldos != null){
 
     //Recuperando e exibindo a Última Movimentação do Usuário
     var movimentacoes = JSON.parse(await movimentacoesManager.buscarDadosMovimentacoes("../Infra/ContaManager/MovimentacoesManager/controllerMovimentacoesManager.php", "dataMovimentacoes"));
-    var ultimaMovimentacao = FormataData(movimentacoes[0]);
-    spanUltimaMovimentacao.innerHTML = ultimaMovimentacao.slice(0, 10
-        );
+    if(movimentacoes != null){
+        var ultimaMovimentacao = FormataData(movimentacoes[0]);
+        spanUltimaMovimentacao.innerHTML = ultimaMovimentacao.slice(0, 10);
+    }else{
+        spanUltimaMovimentacao.innerHTML = "XX/XX/XXXX";
+    }
 
     //Recuperando a quantidade de Passes Ativos e Bloqueados e exibindo este número na tela
     var situacoes = JSON.parse(await cartoesManager.buscarDadosCartoes("../Infra/ContaManager/CartoesManager/controllerCartoesManager.php", "bloqueados"));

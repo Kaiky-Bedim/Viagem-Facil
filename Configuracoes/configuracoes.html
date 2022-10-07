@@ -165,6 +165,41 @@
                                 </div>
                             </form>
                         </div>
+                        </br></br>
+
+                        <!-- HTML para o Cadastro de uma Instituição de Ensino para o Usuário -->
+                        <h2 class="fw-bold mb-0">Sua Instituição de Ensino</h2>
+                        </br>
+
+                        <div class="divInstituicaoEnsino">
+                            <form>
+                                <div class="row" style="padding-left: 11px;">
+                                    <!-- Caixa de Lista da Cidade da Instituição de Ensino -->
+                                    <div class="col-4 container-pai">
+                                        <div class="form-floating">
+                                            <select class="form-control rounded-4" id="txtCidadeInstituicao" name="CidadeInstituicao" placeholder="CidadeInstituicao" required>
+                                                <option value="" data-default selected>Escolher</option>
+                                            </select>
+                                            <label id="labelCidadeInstituicao" for="txtCidadeInstituicao">Cidade da Instituição de Ensino</label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Caixa de Lista das Instituições de Ensino disponíveis na cidade escolhida -->
+                                    <div class="col-4 container-pai">
+                                        <div class="form-floating">
+                                            <select class="form-control rounded-4" id="txtInstituicao" name="Instituicao" placeholder="Instituicao" required>
+                                                <option value="" data-default disabled selected>Escolher</option>
+                                            </select>
+                                            <label id="labelInstituicao" for="txtInstituicao">Instituição de Ensino</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-4 container-pai" style="padding-left: 38px;">
+                                        <button id="btnEnviarInstituicao" class="btn btn-primary btn-lg btnEnviar btnsForm" style="margin: auto;" disabled>Enviar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

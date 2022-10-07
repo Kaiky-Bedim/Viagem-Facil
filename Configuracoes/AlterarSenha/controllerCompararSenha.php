@@ -1,7 +1,7 @@
 <?php
 
-require_once "../Infra/BD/conexao.php";
-require "../EsqueceuSenha/esqueceuSenha.php";
+require_once "../../Infra/BD/conexao.php";
+require "../../EsqueceuSenha/esqueceuSenha.php";
 
 //Iniciando a Session
 session_start();

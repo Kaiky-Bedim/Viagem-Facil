@@ -61,10 +61,7 @@ if($action == "empresaCartao"){
 if($action == "movimentacaoJson"){
     $json = json_encode($movimentacoes);
     //Estes replaces servem para substituir caracteres Unicode que são trazidos no json_encode e que ele não converte para UTF8
-    $jsonFormatado = str_replace("\\\u00e1", "á", $json);
-    $jsonFormatado = str_replace("\\\u00e7", "ç", $jsonFormatado);
-    $jsonFormatado = str_replace("\\\u00e3", "ã", $jsonFormatado);
-    $jsonFormatado = str_replace("\\\u00ed", "í", $jsonFormatado);   
+    $jsonFormatado = $formatador->Formatar($json); 
 
     echo $jsonFormatado;
 }

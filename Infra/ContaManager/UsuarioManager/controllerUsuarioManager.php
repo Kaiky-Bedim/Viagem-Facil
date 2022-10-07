@@ -1,5 +1,6 @@
 <?php
 require_once "../../BD/conexao.php";
+include "../../Formatador/formatador.php";
 include "usuario.php";
 
 //Iniciando sessão
@@ -11,6 +12,7 @@ $con = new Conexao();
 
 //Criando objeto usuario
 $usuario = new Usuario();
+$formatador = new Formatador();
 $usuario->SetAtributosUsuario($con);
 
 //Criei vários métodos, que seriam as ações que se pode tomar neste controller e os dados que se pode recuperar do usuário
@@ -69,10 +71,7 @@ if($action == "cep"){
 if($action == "usuarioJson"){
     $json = json_encode($usuario);
     //Estes replaces servem para substituir caracteres Unicode que são trazidos no json_encode e que ele não converte para UTF8
-    $jsonFormatado = str_replace("\u00e1", "á", $json);
-    $jsonFormatado = str_replace("\u00e7", "ç", $jsonFormatado);
-    $jsonFormatado = str_replace("\u00e3", "ã", $jsonFormatado);
-    $jsonFormatado = str_replace("\u00e9", "é", $jsonFormatado);
+    $jsonFormatado = $formatador->Formatar($json);
 
     echo $jsonFormatado;
 }

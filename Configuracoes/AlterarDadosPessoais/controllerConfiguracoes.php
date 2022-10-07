@@ -1,6 +1,6 @@
 <?php
 
-require_once "../Infra/BD/conexao.php";
+require_once "../../Infra/BD/conexao.php";
 include "dadosPessoais.php";
 
 //Iniciando as Sessions

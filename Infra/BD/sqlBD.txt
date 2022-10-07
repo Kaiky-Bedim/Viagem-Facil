@@ -7,6 +7,12 @@ CPF varchar(50) PRIMARY KEY NOT NULL,
 Senha varchar(50) NOT NULL
 );
 
+create table InstituicoesEnsino(
+Id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+Nome varchar(50) NOT NULL,
+Cidade varchar(50) NOT NULL
+);
+
 create table DadosCadastrais(
 CPF varchar(11) PRIMARY KEY NOT NULL,
 RG varchar(9) NOT NULL,
@@ -20,7 +26,9 @@ Cidade varchar(50) not null,
 Rua varchar(50) not null,
 Complemento varchar(50),
 Numero int not null,
-CEP varchar(10) not null
+CEP varchar(10) not null,
+InstituicaoEnsinoID int,
+FOREIGN KEY (InstituicaoEnsinoID) REFERENCES InstituicoesEnsino (Id)
 );
 
 create table Cartao(
@@ -79,3 +87,14 @@ insert into Percursos values (0, 308, "Bosque dos Eucaliptos", "Ônibus");
 insert into Percursos values (0, 307, "Morumbi", "Ônibus");
 insert into Percursos values (0, 240, "Novo Horizonte", "Ônibus");
 insert into Percursos values (0, 315, "Interlagos", "Ônibus");
+
+#Não removam os inserts abaixo, eles cadastram algumas Instituições de Ensino para escolha do Usuário
+insert into InstituicoesEnsino values(0, "Colégio Univap - Centro", "São José dos Campos");
+insert into InstituicoesEnsino values(0, "Poliedro", "São José dos Campos");
+insert into InstituicoesEnsino values(0, "FATEC", "São José dos Campos");
+insert into InstituicoesEnsino values(0, "UNESP", "São José dos Campos");
+
+insert into InstituicoesEnsino values(0, "EEI Antônio Afonso", "Jacareí");
+insert into InstituicoesEnsino values(0, "Colégio Adventista", "Jacareí");
+insert into InstituicoesEnsino values(0, "Anhanguera", "Jacareí");
+insert into InstituicoesEnsino values(0, "SENAI", "Jacareí");

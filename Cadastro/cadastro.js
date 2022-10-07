@@ -426,6 +426,7 @@ const preencherFormulario= (endereco) =>{
 
 //Função para retornar para a tela de Login
 const buttonVoltarLogin = document.getElementById("irParaLogin");
-buttonVoltarLogin.addEventListener("click", function(){
+buttonVoltarLogin.addEventListener("click", function(event){
+    event.preventDefault();
     window.location.href = "../Login/login.html"
 });
