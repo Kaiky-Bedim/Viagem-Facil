@@ -1,6 +1,7 @@
 <?php
 
 require_once "../../BD/conexao.php";
+include "../../Formatador/formatador.php";
 include "movimentacoes.php";
 
 //Iniciando as Sessions para uso
@@ -20,6 +21,7 @@ if(isset($_GET['empresa'])){
 
 //Criando o objeto Conexão
 $con = new Conexao();
+$formatador = new Formatador();
 
 //Criando objeto Movimentacoes
 $movimentacoes = new Movimentacoes();

@@ -139,7 +139,7 @@ function DeserializarJsonMovimentacoes(data){
         empresaCartao: [],
         idPercurso: []
     };
-    
+
     //Tratando das diferenças entre um array de Números de Série e Empresas, de um único valor
     var json = JSON.parse(data);
 
@@ -149,67 +149,17 @@ function DeserializarJsonMovimentacoes(data){
     if(json['numeroSerieCartao'] == null){
         return "";
     }
-    
-    if(json['numeroSerieCartao'].includes(",")){
-        var numeroSerieCartoes = json['numeroSerieCartao'].replace(/"/g, "");
-        var empresaCartoes = json['empresaCartao'].replace(/"/g, "");
-
-        numeroSerieCartoes = numeroSerieCartoes.slice(1, numeroSerieCartoes.length - 1);
-        empresaCartoes = empresaCartoes.slice(1, empresaCartoes.length - 1);
-
-        arrayNumerosSerieCartoes = numeroSerieCartoes.split(",");
-        arrayEmpresasCartoes = empresaCartoes.split(",");
-    }else if(json['numeroSerieCartao'].includes("[")){
-        var numeroSerieCartoes = json['numeroSerieCartao'].replace(/"/g, "").replace("[\"", "").replace("\"]", "");
-        var empresaCartoes = json['empresaCartao'].replace(/"/g, "").replace("[\"", "").replace("\"]", "");
-
-        numeroSerieCartoes = numeroSerieCartoes.slice(1, numeroSerieCartoes.length - 1);
-        empresaCartoes = empresaCartoes.slice(1, empresaCartoes.length - 1);
-
-        arrayNumerosSerieCartoes = numeroSerieCartoes.split(",");
-        arrayEmpresasCartoes = empresaCartoes.split(",");
-    }else{
-        var i = json['valor'].split(",").length;
-        for(var cont = 0; cont < i; cont++){
-            arrayNumerosSerieCartoes[cont] = json['numeroSerieCartao'];
-            arrayEmpresasCartoes[cont] = json['empresaCartao'];
-        }
-    }
 
     //Atribuindo os valores de cada um dos campos a seus respectivos espaços no objeto Movimentacoes
-    var valores = json['valor'].replace(/"/g, "");
-    var dataMovimentacoes = json['dataMovimentacao'].replace(/"/g, "");
-    var tipoMovimentacoes = json['tipoMovimentacao'].replace(/"/g, "");
-    var idPercursos = json['idPercurso'].replace(/"/g, "");
-
-    valores = valores.slice(1, valores.length - 1);
-    dataMovimentacoes = dataMovimentacoes.slice(1, dataMovimentacoes.length - 1);
-    tipoMovimentacoes = tipoMovimentacoes.slice(1, tipoMovimentacoes.length - 1);
-    idPercursos = idPercursos.slice(1, idPercursos.length - 1);
-
-    var arrayValores = valores.split(",");
-    var arrayDatasMovimentacoes = dataMovimentacoes.split(",");
-    var arrayTiposMovimentacoes = tipoMovimentacoes.split(",");
-    var arrayIdsPercursos = idPercursos.split(",");
-
-    //Conserta 'utilização em onibus'
-    for(var x = 0; x <= arrayTiposMovimentacoes.length - 1; x++){
-        if(arrayTiposMovimentacoes[x] != "Recarga"){
-            arrayTiposMovimentacoes[x] = "Utilização em ônibus";
-        }
-    }
-
-    movimentacoes.valor = arrayValores;
-    movimentacoes.dataMovimentacao = arrayDatasMovimentacoes;
-    movimentacoes.tipoMovimentacao = arrayTiposMovimentacoes;
-    movimentacoes.numeroSerieCartao = arrayNumerosSerieCartoes;
-    movimentacoes.empresaCartao = arrayEmpresasCartoes;
-    movimentacoes.idPercurso = arrayIdsPercursos;
-
-    console.log(arrayTiposMovimentacoes);
+    movimentacoes.valor = json['valor'];
+    movimentacoes.dataMovimentacao = json['dataMovimentacao'];
+    movimentacoes.tipoMovimentacao = json['tipoMovimentacao'];
+    movimentacoes.numeroSerieCartao = json['numeroSerieCartao'];
+    movimentacoes.empresaCartao = json['empresaCartao'];
+    movimentacoes.idPercurso = json['idPercurso'];
 
     //Setando a quantidade de registros do usuário
-    qtdRegistros = arrayValores.length;
+    qtdRegistros = movimentacoes.valor.length;
 
     return movimentacoes;
 }
@@ -258,9 +208,14 @@ function PreencheLinhasTabela(pagina, linhas){
         document.getElementById("tdValor" + cont).innerHTML = "R$ " + parseFloat(movimentacoes.valor[cont - aux]).toFixed(2);
         document.getElementById("tdDataMovimentacao" + cont).innerHTML = FormataData(movimentacoes.dataMovimentacao[cont - aux]);
         document.getElementById("tdTipoMovimentacao" + cont).innerHTML = movimentacoes.tipoMovimentacao[cont - aux];
-        document.getElementById("tdNumeroSerie" + cont).innerHTML = movimentacoes.numeroSerieCartao[cont - aux];
-        document.getElementById("tdEmpresaHistorico" + cont).innerHTML = movimentacoes.empresaCartao[cont - aux];
-        if(movimentacoes.idPercurso[cont - aux] == "null"){
+        if(Array.isArray(movimentacoes.numeroSerieCartao)){
+            document.getElementById("tdNumeroSerie" + cont).innerHTML = movimentacoes.numeroSerieCartao[cont - aux];
+            document.getElementById("tdEmpresaHistorico" + cont).innerHTML = movimentacoes.empresaCartao[cont - aux];
+        }else{
+            document.getElementById("tdNumeroSerie" + cont).innerHTML = movimentacoes.numeroSerieCartao;
+            document.getElementById("tdEmpresaHistorico" + cont).innerHTML = movimentacoes.empresaCartao;
+        }
+        if(movimentacoes.idPercurso[cont - aux] == null){
             document.getElementById("tdIdPercurso" + cont).innerHTML = "#";
         }else{
             document.getElementById("tdIdPercurso" + cont).innerHTML = movimentacoes.idPercurso[cont - aux];

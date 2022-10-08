@@ -9,6 +9,30 @@ $con = new Conexao();
 $formatador = new Formatador();
 $instituicoes = new Instituicoes();
 
+//Iniciando sessão
+session_start();
+
+//Verificando se não foi enviada uma requisição POST para este controller
+if(isset($_POST['CidadeInstituicao'])){
+    $cidadeInstituicao = $_POST['CidadeInstituicao'];
+}
+
+if(isset($_POST['Instituicao'])){
+    $instituicao = $_POST['Instituicao'];
+}
+
+//Se todos os parâmetros tiverem sido passados, ocorre o cadastro da Instituição de Ensino
+if(isset($cidadeInstituicao) && isset($instituicao)){
+    $cpf = $_SESSION['cpf'];
+
+    if($instituicoes->CadastraInstituicoesParaUsuario($con, $cidadeInstituicao, $instituicao, $cpf)){
+        echo "Instituição de Ensino cadastrada com Sucesso";
+    }else{
+        echo "Ocorreu um erro inesperado !";
+    }
+    return;
+}
+
 //Variável que armazenará o que será feito no controller por intermédio do objeto Instituicoes
 $action = $_GET['action'];
 

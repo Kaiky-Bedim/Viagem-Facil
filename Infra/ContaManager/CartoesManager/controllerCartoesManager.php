@@ -1,6 +1,7 @@
 <?php
 
 require_once "../../BD/conexao.php";
+include "../../Formatador/formatador.php";
 include "cartoes.php";
 
 //Iniciando sessão
@@ -12,6 +13,7 @@ if(isset($_GET['index'])){
 }
 
 $con = new Conexao();
+$formatador = new Formatador();
 
 //Criando objeto cartao
 $cartao = new Cartoes();

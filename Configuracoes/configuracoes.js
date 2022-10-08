@@ -20,6 +20,59 @@ layout.carregarFoot("../Layout/foot.html", "../Layout/styleLayout.css");
 //Variáveis de auxílio para as funções dos Selects de Insittuições de Ensino
 const txtCidadeInstituicao = document.getElementById("txtCidadeInstituicao");
 const txtInstituicao = document.getElementById("txtInstituicao");
+const btnEnviarInstituicao = document.getElementById("btnEnviarInstituicao");
+const formInstituicoesEnsino = document.getElementById("formInstituicoesEnsino");
+var primeiraTentativa0 = true;
+
+function ValidaCidadeInstituicao(){
+    txtCidadeInstituicao.setCustomValidity("");
+
+    if(!primeiraTentativa0){
+        //Reexecuta validação
+        if (!txtCidadeInstituicao.validity.valid) {
+            //Se inválido, coloca mensagem de erro
+            document.getElementById("labelCidadeInstituicao").innerHTML = "Cidade da Instituição de Ensino*";
+            if(txtCidadeInstituicao.value == ""){
+                txtCidadeInstituicao.setCustomValidity("O campo Cidade da Instituição de Ensino é obrigatório");
+            }
+            return;
+        }
+        document.getElementById("labelCidadeInstituicao").innerHTML = "Cidade da Instituição de Ensino";
+    }
+}
+
+function ValidaInstituicao(){
+    txtInstituicao.setCustomValidity("");
+
+    if(!primeiraTentativa0){
+        //Reexecuta validação
+        if (!txtInstituicao.validity.valid) {
+            //Se inválido, coloca mensagem de erro
+            document.getElementById("labelInstituicao").innerHTML = "Instituição de Ensino*";
+            if(txtInstituicao.value == ""){
+                txtInstituicao.setCustomValidity("O campo Instituição de Ensino é obrigatório");
+            }
+            return;
+        }
+        document.getElementById("labelInstituicao").innerHTML = "Instituição de Ensino";
+    }
+}
+
+btnEnviarInstituicao.onclick = function(){
+    primeiraTentativa0 = false;
+    ValidaCidadeInstituicao();
+    ValidaInstituicao();
+}
+
+txtCidadeInstituicao.oninput = function(){
+    ValidaCidadeInstituicao();
+}
+
+txtInstituicao.oninput = function(){
+    ValidaInstituicao();
+}
+
+var cidades = [];
 var arrayInstituicoes = [];
 
 PreencheSelectsInstituicoes();
@@ -29,7 +82,6 @@ async function PreencheSelectsInstituicoes(){
     //Este fetch abaixo basicamente recupera as Instituicoes cadastradas
     var json = await fetch("CadastroInstituicoes/controllerInstituicoes.php?action=Cidades").then(response =>response.text());
     var formatados = json.replace(/"/g, "").replace(/\[/g, "").replace(/\]/g, "").split(",");
-    var cidades = [];
     var aux = 0
 
     //Este for está removendo as cidades repetidasque foram recuperadas
@@ -45,23 +97,116 @@ async function PreencheSelectsInstituicoes(){
     }
 
     for(var cont = 0; cont < cidades.length; cont++){
-        var json = await fetch("CadastroInstituicoes/controllerInstituicoes.php?action=Instituicoes&cidade=" + cidades[cont]).then(response =>response.text());
-        arrayInstituicoes[cont] = json.replace(/"/g, "").replace(/\[/g, "").replace(/\]/g, "").split(",");
+        var array = await fetch("CadastroInstituicoes/controllerInstituicoes.php?action=Instituicoes&cidade=" + cidades[cont]).then(response =>response.text());
+        arrayInstituicoes[cont] = array.replace(/"/g, "").replace(/\[/g, "").replace(/\]/g, "").split(",");
+    }
+
+    //Verificando se o Usuário já possuí uma Instituição de Ensino cadastrada no sistema
+    if(dados['instituicaoEnsinoCidade'] != null){
+        for(var cont = 0; cont < txtCidadeInstituicao.children.length; cont++){
+            if(dados['instituicaoEnsinoCidade'] == cidades[cont]){
+                //Preenchendo automaticamente os campos que pertencem ao Usuário
+                txtCidadeInstituicao.value = cont;
+                PreencheCidades(cont);
+                txtInstituicao.value = dados['instituicaoEnsino'];
+            }
+        }
+
+        //Verificando se as Instituições não são as mesmas do BD, caso sejam o Botão permanece desativado
+        if(dados['instituicaoEnsinoCidade'] == txtCidadeInstituicao.value && dados['instituicaoEnsino'] == txtInstituicao.value){
+            btnEnviarInstituicao.setAttribute("disabled", "true");
+        }else{
+            btnEnviarInstituicao.removeAttribute("disabled");
+        }
+    }else{
+        btnEnviarInstituicao.removeAttribute("disabled");
     }
 }
 
+//Evento executado quando o Form é enviado
+formInstituicoesEnsino.addEventListener("submit", async function(event){
+    event.preventDefault();
+
+    //Imprimindo o PopUp de confirmação para ter certeza de que o usuário vai querer cadastar/alterar sua Instituição de Ensino
+    await popUp.imprimirPopUpConfirmacao("../Pop-Ups/popUpConfirmacao.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Deseja mesmo Cadastrar/Alterar sua Instituição de Ensino ?");
+
+    const btnConfirmar = document.getElementById("buttonConfirmar");
+    btnConfirmar.addEventListener("confirmacao", function(){    
+        let data = new FormData(formInstituicoesEnsino);
+        let httpRequest = new XMLHttpRequest();
+
+        httpRequest.open("POST", "CadastroInstituicoes/controllerInstituicoes.php");
+        httpRequest.setRequestHeader("X-Content-Type-Options", "multipart/form-data");
+        httpRequest.send(data);
+        httpRequest.onreadystatechange = async function(){
+            if(this.readyState == 4){
+                if(this.status == 200){
+                    //Verificando todos o possíveis retornos da Requisição
+                    if(this.response.includes("Instituição de Ensino cadastrada com Sucesso")){
+                        popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", this.response);
+                        btnEnviarInstituicao.setAttribute("disabled", "true");
+
+                        //Atualizando o JSON
+                        dados['instituicaoEnsinoCidade'] = txtCidadeInstituicao.value;
+                        dados['instituicaoEnsino'] = txtInstituicao.value;
+                    }else if(this.response.includes("Access denied")){
+                        popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Ocorreu algum erro interno na requisição com o servidor");
+                    }else if(this.response.includes("Ocorreu um erro inesperado !")){
+                        popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", this.response);
+                    }else{
+                        console.log(this.response);
+                    }
+                }
+            }
+        }
+    });
+});
+
 //Evento acionado quando o usuário seleciona uma opção do Select
-txtCidadeInstituicao.addEventListener("input", function(event){
+txtCidadeInstituicao.addEventListener("change", function(event){
     txtInstituicao.removeAttribute("disabled");
     txtInstituicao.innerHTML = "";
 
-    var dados = arrayInstituicoes[event.target.value];
+    //Setando values corretos para os Options !
+    for(var cont = 1; cont <= cidades.length; cont++){
+        txtCidadeInstituicao.children.item(cont).value = cont - 1;
+    }
 
-    for(var cont = 0; cont < dados.length; cont++){
+    PreencheCidades(event.target.value);
+});
+
+//Função para preencher as Escolas de determinada Cidade selecionada na outra SelectBox
+function PreencheCidades(i){
+    var dadosInstituicoes = arrayInstituicoes[i];
+
+    //Criando os options corretos das escolas da cidade escolhida
+    for(var cont = 0; cont < dadosInstituicoes.length; cont++){
         var option = document.createElement("option");
-        option.innerHTML = dados[cont];
-        option.value = dados;
+        option.innerHTML = dadosInstituicoes[cont];
+        option.value = dadosInstituicoes[cont];
         txtInstituicao.appendChild(option);
+    }
+
+    //Setando values corretos para os Options !
+    for(var cont = 1; cont <= cidades.length; cont++){
+        txtCidadeInstituicao.children.item(cont).value = cidades[cont - 1];
+    }
+
+    //Verificando se as Instituições não são as mesmas do BD, caso sejam o Botão permanece desativado
+    if(dados['instituicaoEnsinoCidade'] == txtCidadeInstituicao.value && dados['instituicaoEnsino'] == txtInstituicao.value){
+        btnEnviarInstituicao.setAttribute("disabled", "true");
+    }else{
+        btnEnviarInstituicao.removeAttribute("disabled");
+    }
+}
+
+//Este Listener fica de olho para possíveis alterações nas informações das Instituições
+txtInstituicao.addEventListener("change", function(){
+    //Verificando se as Instituições não são as mesmas do BD, caso sejam o Botão permanece desativado
+    if(dados['instituicaoEnsinoCidade'] == txtCidadeInstituicao.value && dados['instituicaoEnsino'] == txtInstituicao.value){
+        btnEnviarInstituicao.setAttribute("disabled", "true");
+    }else{
+        btnEnviarInstituicao.removeAttribute("disabled");
     }
 });
 

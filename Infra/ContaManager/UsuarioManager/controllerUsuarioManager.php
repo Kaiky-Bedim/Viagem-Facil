@@ -68,6 +68,14 @@ if($action == "cep"){
     echo $usuario->GetCEP();
 }
 
+if($action == "instituicaoEnsinoCidade"){
+    echo $usuario->GetInstituicaoEnsinoCidade();
+}
+
+if($action == "instituicaoEnsino"){
+    echo $usuario->GetInstituicaoEnsino();
+}
+
 if($action == "usuarioJson"){
     $json = json_encode($usuario);
     //Estes replaces servem para substituir caracteres Unicode que são trazidos no json_encode e que ele não converte para UTF8

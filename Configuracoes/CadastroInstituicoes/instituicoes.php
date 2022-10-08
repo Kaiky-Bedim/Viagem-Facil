@@ -29,7 +29,31 @@ class Instituicoes{
         }
 
         return 0;
-    } 
+    }
+
+    //Função responsável por cadastrar uma Instituição para o Usuário
+    function CadastraInstituicoesParaUsuario($con, $cidadeInstituicao, $instituicao, $cpf){
+        //Criando o SQL e executando a Query
+        $sql = "select Id from InstituicoesEnsino where Cidade = '".$cidadeInstituicao."' and Nome = '".$instituicao."'";
+        $res = mysqli_query($con->getConexao(), $sql);
+
+        //Verificandp se a opereção foi um sucesso
+        if($res->num_rows > 0){
+            $idInstituicao = $res->fetch_array()[0];
+
+            //Montando a Query para atualizar o Id da Instituição de Ensino escolhida
+            $sql = "update DadosCadastrais set InstituicaoEnsinoID = ".$idInstituicao." where cpf = '".$cpf."'";
+            $res = mysqli_query($con->getConexao(), $sql);
+
+            if($res > 0){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return 0;
+        }
+    }
 }
 
 ?>

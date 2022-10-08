@@ -128,41 +128,14 @@ function DeserializarJsonCartoes(data){
     var json = JSON.parse(data);
     
     //Atribuindo os valores de cada um dos campos a seus respectivos espaços no objeto cartoes
-    var numerosSerie = json['numeroSerie'].replace(/"/g, "");
-    var numerosFabrica = json['numeroFabrica'].replace(/"/g, "");
-    var tiposCartao = json['tipoCartao'].replace(/"/g, "");
-    var situacoes = json['situacao'].replace(/"/g, "");
-    var empresas = json['empresa'].replace(/"/g, "");
-    var bloqueados = json['bloqueado'].replace(/"/g, "");
-    var saldos = json['saldo'].replace(/"/g, "");
-    var datasExpedicao = json['dataExpedicao'].replace(/"/g, "");
-
-    numerosSerie = numerosSerie.slice(1, numerosSerie.length - 1);
-    numerosFabrica = numerosFabrica.slice(1, numerosFabrica.length - 1);
-    tiposCartao = tiposCartao.slice(1, tiposCartao.length - 1);
-    situacoes = situacoes.slice(1, situacoes.length - 1);
-    empresas = empresas.slice(1, empresas.length - 1);
-    bloqueados = bloqueados.slice(1, bloqueados.length - 1);
-    saldos = saldos.slice(1, saldos.length - 1);
-    datasExpedicao = datasExpedicao.slice(1, datasExpedicao.length - 1);
-
-    var arrayNumerosSerie = numerosSerie.split(",");
-    var arrayNumerosFabrica = numerosFabrica.split(",");
-    var arrayTiposCartao = tiposCartao.split(",");
-    var arraySituacoes = situacoes.split(",");
-    var arrayEmpresas = empresas.split(",");
-    var arrayBloqueados = bloqueados.split(",");
-    var arraySaldos = saldos.split(",");
-    var arrayDatasExpedicao = datasExpedicao.split(",");
-
-    cartoes.numeroSerie = arrayNumerosSerie;
-    cartoes.numeroFabrica = arrayNumerosFabrica;
-    cartoes.tipoCartao = arrayTiposCartao;
-    cartoes.situacao = arraySituacoes;
-    cartoes.empresa = arrayEmpresas;
-    cartoes.bloqueado = arrayBloqueados;
-    cartoes.saldo = arraySaldos;
-    cartoes.dataExpedicao = arrayDatasExpedicao;
+    cartoes.numeroSerie = json['numeroSerie'];
+    cartoes.numeroFabrica = json['numeroFabrica'];
+    cartoes.tipoCartao = json['tipoCartao'];
+    cartoes.situacao = json['situacao'];
+    cartoes.empresa = json['empresa'];
+    cartoes.bloqueado = json['bloqueado'];
+    cartoes.saldo = json['saldo'];
+    cartoes.dataExpedicao = json['dataExpedicao'];
 
     var cartoesFinais = {
         numeroSerie: [],

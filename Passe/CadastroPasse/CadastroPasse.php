@@ -10,9 +10,54 @@ class CadastroPasse{
     private $cpfProprietario;
     private $conexao;
 
+    //Função que irá verificar se o Passe já existe no BD
+    public function VerificaSePasseJaCadastrado($con, $numeroSerie, $empresa){
+        $this->conexao = $con;
+        $sql = "select * from Cartao where NumeroSerie = '".$numeroSerie."' and Empresa = '".$empresa."';";
+        $res = mysqli_query($this->conexao->getConexao(), $sql);
+
+        //Verifica se foi encontrado algum cartão com essas características
+        if($res->num_rows > 0){
+            return true;
+        }
+        return false;
+
+    }
+
+    //Verifica se o Usuário é realmente um Idoso e pode cadastrar passes para Idosos
+    public function VerificaSeUsuarioIdoso($usuario){
+        date_default_timezone_set("America/Sao_Paulo");
+        $dateNow = new DateTime('now');
+
+        $dateNascimento = new DateTime($usuario->GetDataNascimento());
+
+        //Subtraindo a data atual da data de nascimento do Usuário
+        $idadeAnos = $dateNascimento->diff($dateNow)->y;
+
+        //Verificando se o Usuário é ou não um Idoso
+        if($idadeAnos >= 60){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    //Verifica se o Usuário possui uma Instituição de Ensino cadastrada e assim pode ter Cartões Estudantis
+    public function VerificaSeUsuarioEstudante($usuario){
+        //Recuperando as informações de Estudo do Usuário
+        $instituicaoEnsinoCidade = $usuario->GetInstituicaoEnsinoCidade();
+        $instituicaoEnsino = $usuario->GetInstituicaoEnsino();
+
+        //Verificando se o Usuário é ou não um Estudante
+        if($instituicaoEnsinoCidade != null && $instituicaoEnsino != null){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     //Atribuindo valores às variáveis
     public function SetInformacoesPasseJaExistente($numSerie, $numFabrica, $tipoCartao, $empresa){
-        session_start();
         $this->numSerie = $numSerie;
         $this->numFabrica = $numFabrica;
         $this->tipoCartao = $tipoCartao;
@@ -39,7 +84,6 @@ class CadastroPasse{
 
     //Atribuindo valores para as variáveis
     public function SetInformacoesNovoPasse($tipoCartao, $empresa){
-        session_start();
         $this->tipoCartao = $tipoCartao;
         $this->empresa = $empresa;
         $this->cpfProprietario = $_SESSION['cpf'];

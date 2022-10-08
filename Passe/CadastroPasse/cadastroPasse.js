@@ -61,7 +61,6 @@ document.documentElement.onclick = function(event){
 //listener do document.documentElement.onclick
 function VerificaSeUsuarioClicouFora(event){
     if(document.getElementById("cadastroCartaoModal").getAttribute("hidden") == null){
-        console.log(event.target.innerHTML);
         var formVerificacao = document.getElementById("formCadastroPasse").innerHTML;
         var card = document.getElementById("cardCartao").innerHTML;
         if(!formVerificacao.includes(event.target.innerHTML) && !card.includes(event.target.innerHTML) && event.target.innerHTML != "Cadastrar Novo Passe" && event.target.innerHTML != "Novo Passe"
@@ -355,11 +354,21 @@ form.addEventListener("submit", function(event){
     httpRequest.send(data);
     httpRequest.onreadystatechange = function(){
         if(this.readyState == 4){
-            if(this.status == 200 && !this.responseText.includes("Fatal error")){
-                document.getElementById("inputAtualizaLista").value = "Desatualizada";
-                popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", this.responseText);
-            }else{
-                popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Passe já cadastrado !");
+            if(this.status == 200){
+                //Verificando todas as possíveis respostas do servidor para a Requisição
+                if(this.response == "Seu pedido para o cadastro do Cartão foi enviado com Sucesso"){
+                    document.getElementById("inputAtualizaLista").value = "Desatualizada";
+                    popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", this.response);
+                }else if(this.response == "Você não possui a Idade necessária para cadastrar um Cartão do tipo Idoso"){
+                    popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", this.response);
+                }else if(this.response == "Você não possui uma Instituição de Ensino cadastrada para ter um Cartão do tipo Estudantil"){
+                    popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", this.response);
+                }
+                else if(this.response == "Um Passe com essas informações já foi cadastrado no sistema !"){
+                    popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", this.response);
+                }else if(this.response.includes("Fatal error")){
+                    popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Não foi possível realizar a operação");    
+                }
             }
         }
     }

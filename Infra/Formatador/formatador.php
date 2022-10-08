@@ -37,6 +37,13 @@ class Formatador{
         $dataFormatada = str_replace("\u00EC", "ì", $dataFormatada);
         $dataFormatada = str_replace("\u00ED", "í", $dataFormatada);
         $dataFormatada = str_replace("\u00EE", "î", $dataFormatada);
+        $dataFormatada = str_replace("\u00F2", "ò", $dataFormatada);
+        $dataFormatada = str_replace("\u00F3", "ó", $dataFormatada);
+        $dataFormatada = str_replace("\u00F4", "ô", $dataFormatada);
+        $dataFormatada = str_replace("\u00F5", "õ", $dataFormatada);
+        $dataFormatada = str_replace("\u00F9", "ù", $dataFormatada);
+        $dataFormatada = str_replace("\u00FA", "ú", $dataFormatada);
+        $dataFormatada = str_replace("\u00FB", "û", $dataFormatada);
         $dataFormatada = str_replace("\u00F1", "ñ", $dataFormatada);
 
         $dataFormatada = str_replace("\u00c1", "Á", $dataFormatada);
@@ -67,7 +74,18 @@ class Formatador{
         $dataFormatada = str_replace("\u00ec", "ì", $dataFormatada);
         $dataFormatada = str_replace("\u00ed", "í", $dataFormatada);
         $dataFormatada = str_replace("\u00ee", "î", $dataFormatada);
+        $dataFormatada = str_replace("\u00f2", "ò", $dataFormatada);
+        $dataFormatada = str_replace("\u00f3", "ó", $dataFormatada);
+        $dataFormatada = str_replace("\u00f4", "ô", $dataFormatada);
+        $dataFormatada = str_replace("\u00f5", "õ", $dataFormatada);
+        $dataFormatada = str_replace("\u00f9", "ù", $dataFormatada);
+        $dataFormatada = str_replace("\u00fa", "ú", $dataFormatada);
+        $dataFormatada = str_replace("\u00fb", "û", $dataFormatada);
         $dataFormatada = str_replace("\u00f1", "ñ", $dataFormatada);
+
+        $dataFormatada = str_replace("\"[", "[", $dataFormatada);
+        $dataFormatada = str_replace("]\"", "]", $dataFormatada);
+        $dataFormatada = str_replace("\\", "", $dataFormatada);
 
         return $dataFormatada;
     }

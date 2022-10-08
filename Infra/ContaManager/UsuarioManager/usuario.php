@@ -14,6 +14,8 @@ class Usuario implements JsonSerializable{
     private $complemento;
     private $numero;
     private $cep;
+    private $instituicaoEnsinoCidade;
+    private $instituicaoEnsino;
 
     public function __construct()
     {
@@ -44,6 +46,16 @@ class Usuario implements JsonSerializable{
             $this->complemento = $row['Complemento'];
             $this->numero = $row['Numero'];
             $this->cep = $row['CEP'];
+
+            if($row['InstituicaoEnsinoID'] != null){
+                //Recuperando os dados
+                $sql = "select * from instituicoesensino where Id = '".$row['InstituicaoEnsinoID']."';";
+                $res = mysqli_query($con->getConexao(), $sql);
+                $row = mysqli_fetch_assoc($res);
+
+                $this->instituicaoEnsinoCidade = $row['Cidade'];
+                $this->instituicaoEnsino = $row['Nome'];
+            }
         }
     }
 
@@ -104,6 +116,14 @@ class Usuario implements JsonSerializable{
         return $this->cep;
     }
 
+    public function GetInstituicaoEnsinoCidade(){
+        return $this->instituicaoEnsinoCidade;
+    }
+
+    public function GetInstituicaoEnsino(){
+        return $this->instituicaoEnsino;
+    }
+
     //Este método vem da Interface que essa classe implementa, ele permite que convertamos objetos Usuario em JSON
     public function jsonSerialize() {
         return [
@@ -120,6 +140,8 @@ class Usuario implements JsonSerializable{
             'complemento' => $this->GetComplemento(),
             'numero' => $this->GetNumero(),
             'cep' => $this->GetCEP(),
+            'instituicaoEnsinoCidade' => $this->GetInstituicaoEnsinoCidade(),
+            'instituicaoEnsino' => $this->GetInstituicaoEnsino()
         ];
     }
 }
