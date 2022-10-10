@@ -29,7 +29,8 @@ export class PopUp{
 
             document.documentElement.onclick = function(event){
                 if(event.target.innerHTML != content && event.target.innerHTML != header
-                     && event.target.innerHTML != texto && event.target.innerHTML != footer){
+                     && event.target.innerHTML != texto && event.target.innerHTML != footer
+                      && event.target.id != "buttonXPopUp"){
                     document.getElementById(idDiv).innerHTML = "";
                     restantePagina.forEach(element => {
                         element.classList.remove("restantePaginaPopUp"); 
