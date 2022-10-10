@@ -35,6 +35,7 @@ var cartoes;
 var numSerieCartaoSelecionado = "";
 var indice;
 var qtdCartoesBloqueados = 0;
+var FileQRCode;
 
 var cartoesBloqueados = await cartoesManager.buscarDadosCartoes("../Infra/ContaManager/CartoesManager/controllerCartoesManager.php", "bloqueados");
 
@@ -45,6 +46,8 @@ for(var cont = 0; cont < cartoesBloqueados.length; cont++){
 }
 
 //Recuperando os btns para navegar na lista
+const btnPDF = document.getElementById("btnPDF");
+const btnImage = document.getElementById("btnImage");
 const btnAnterior = document.getElementById("btnAnterior");
 const btnProximo = document.getElementById("btnProximo");
 const inputPagina = document.getElementById("inputPagina");
@@ -232,27 +235,6 @@ function PreencheLinhasTabela(pagina, linhas){
             default:
                 popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Ocorreu um erro inesperado na paginação");
         }
-
-        //Botao do Pdf
-        /*switch(cont) {
-            case 1:
-                document.getElementById("btnPdf1").onclick = function() { ClicaBtnPdf(1) };
-                break;
-            case 2:
-                document.getElementById("btnPdf2").onclick = function() { ClicaBtnPdf(2) };
-                break;
-            case 3:
-                document.getElementById("btnPdf3").onclick = function() { ClicaBtnPdf(3) };
-                break;
-            case 4:
-                document.getElementById("btnPdf4").onclick = function() { ClicaBtnPdf(4) };
-                break;
-            case 5:
-                document.getElementById("btnPdf5").onclick = function() { ClicaBtnPdf(5) };
-                break;
-            default:
-                popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Ocorreu um erro inesperado na paginação");
-        }*/
         
         
         if(numSerieCartaoSelecionado == cartoes.numeroSerie[cont - aux]){
@@ -292,13 +274,12 @@ function ClicaBtnLista(cont){
         let httpRequest = new XMLHttpRequest();
         numSerie = cartoes.numeroSerie[indice];
         cartaoEmpresa = cartoes.empresa[indice];
-        
         let data = `
             {
             "numeroSerie": "${numSerie}",
             "empresa": "${cartaoEmpresa}"
             }`;
-
+        
         httpRequest.open("POST", "controllerQrCode.php");
         httpRequest.setRequestHeader("Content-type", "application/json");
         httpRequest.send(data);
@@ -308,25 +289,62 @@ function ClicaBtnLista(cont){
             {
                 if(this.status == 200)
                 {
-                    //coloca a imagem
-                    document.getElementById("imgqrcode").setAttribute("src","./imgQRCode/qrCode"+numSerie+".svg")
+                    
+                    var qrcodeImg = document.getElementById("qrcode")
+                    qrcodeImg.innerHTML = ""; 
+                    var qrcode = new QRCode("qrcode", {
+                        text: "eae",
+                        width: 306,
+                        height: 306,
+                        colorDark : "#000000",
+                        colorLight : "#ffffff",
+                        correctLevel : QRCode.CorrectLevel.H
+                    });
+                    const teste1 = document.getElementById("qrcode");
+		            const teste2 = teste1.getElementsByTagName("img");
+                    //teste1[0].setAttribute("class", "rounded d-block propriedades-imagem");
+                    btnPDF.removeAttribute("hidden");
+                    btnImage.removeAttribute("hidden");
                     pNenhumCartaoSelecionado.setAttribute("hidden", "true");
+                    
+                    btnPDF.addEventListener("click", function(){
+                        FileQRCode = teste2[0].getAttribute("src");
+                        var doc = new jsPDF();
+                        doc.setFontSize(20)
+                        doc.text(35, 25, 'QRCode')
+                        doc.addImage(FileQRCode, 'PNG', 15, 40, 180, 160)
+                        doc.save("QRCode.pdf");
+                    });
+
+                    btnImage.addEventListener("click", function(){
+                        FileQRCode = teste2[0].getAttribute("src");
+                        let fileName = "QRCode.jpg";
+                        saveAs(FileQRCode, fileName);
+                    });
                 }
             }
         }
         
     }else{
         //Tira a imagem
+        
+        var qrcodeImg = document.getElementById("qrcode")
+        qrcodeImg.innerHTML = "";   
+        var SemImg = document.createElement('img');
+        SemImg.setAttribute("id", "SemCartao");
+        qrcodeImg.appendChild(SemImg);
         btnVisualizar.setAttribute("aria-pressed", "false");
         btnVisualizar.classList.remove("cartaoPresionadoOp1");
-        document.getElementById("imgqrcode").setAttribute("src","../Infra/img/Assets/semCartao.png")
+        document.getElementById("SemCartao").setAttribute("src","../Infra/img/Assets/semCartao.png")
+
         pNenhumCartaoSelecionado.removeAttribute("hidden");
+        btnPDF.setAttribute("hidden", "true");
+        btnImage.setAttribute("hidden", "true");
     }
 
     //Setando a nova referência para o último button clicado
     ultimoButtonClicado = btnVisualizar;
 }
-
 //Era do pdf
 /*async function ClicaBtnPdf(cont){
 
@@ -425,3 +443,29 @@ btnAnterior.addEventListener("click", function(){
 function ResetaListaMostrada(){
     tblCartoes.innerHTML = "";
 }
+
+var map = L.map('map');
+var tileLayer = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', { attribution: "OSM"}).addTo(map);
+
+
+    L.Routing.control({
+        waypoints: [
+            L.latLng(-23.2432, -45.8884),
+            L.latLng(-23.2179, -45.8915)
+        ],
+    }).addTo(map);
+
+    /*navigator.geolocation.getCurrentPosition(function(position) {
+        plot_map(position.coords.latitude, position.coords.longitude);
+    });*/
+    document.getElementById("teste").onclick = function() { 
+    const teste2 = document.getElementsByClassName('leaflet-routing-alt')[0];
+    const teste = document.getElementsByClassName('leaflet-routing-container');
+    while(teste.length > 0){
+        teste[0].parentNode.removeChild(teste[0]);
+    }
+        const teste3 = teste2.getElementsByTagName('h3')
+        const teste4 = teste3[0].innerHTML
+        const teste5 = teste4.split(',')
+        console.log(teste5[1]+"/"+teste5[0]);
+    }
