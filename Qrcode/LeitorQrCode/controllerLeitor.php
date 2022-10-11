@@ -10,7 +10,7 @@ $leitor = new Leitor();
 $cpf = $_SESSION['cpf'];
 $numSerie = $_GET['NumSerie'];
 $empresaCartao = $_GET['Empresa'];
-if($empresaCartao == "MaringádoVale"){
+if($empresaCartao == "Maringa do Vale"){
     $empresaCartao = "Maringá do Vale";
 }else{
     $empresaCartao = "Viação Jacareí";

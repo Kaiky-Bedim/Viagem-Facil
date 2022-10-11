@@ -274,6 +274,12 @@ function ClicaBtnLista(cont){
         let httpRequest = new XMLHttpRequest();
         numSerie = cartoes.numeroSerie[indice];
         cartaoEmpresa = cartoes.empresa[indice];
+        if(cartaoEmpresa == "Viação Jacareí"){
+            cartaoEmpresa = "Viacao Jacarei";
+        }else{
+            cartaoEmpresa = "Maringa do Vale";
+        }
+        console.log(cartaoEmpresa);
         let data = `
             {
             "numeroSerie": "${numSerie}",
@@ -293,7 +299,7 @@ function ClicaBtnLista(cont){
                     var qrcodeImg = document.getElementById("qrcode")
                     qrcodeImg.innerHTML = ""; 
                     var qrcode = new QRCode("qrcode", {
-                        text: "eae",
+                        text: "http://localhost/Viagem-Facil/Qrcode/LeitorQrCode/controllerLeitor.php?NumSerie="+numSerie+"&Empresa="+cartaoEmpresa,
                         width: 306,
                         height: 306,
                         colorDark : "#000000",

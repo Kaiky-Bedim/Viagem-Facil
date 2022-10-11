@@ -27,7 +27,7 @@ class Qrcode{
         }
         //Ip japones = 192.168.0.11
         #Colocar Empresa tbm
-        $qrcode = "http://localhost/Viagem-Facil/Qrcode/controllerLeitor.php?NumSerie=".$this->numSerie."&Empresa=".$this->cartaoEmpresa;
+        $qrcode = "http://localhost/Viagem-Facil/Qrcode/LeitorQrCode/controllerLeitor.php?NumSerie=".$this->numSerie."&Empresa=".$this->cartaoEmpresa;
         
         if($this->bloqueado == 1){
             $qrcode = sha1("Bloqueado");
