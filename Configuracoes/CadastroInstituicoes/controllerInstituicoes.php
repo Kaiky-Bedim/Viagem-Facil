@@ -12,6 +12,16 @@ $instituicoes = new Instituicoes();
 //Iniciando sessão
 session_start();
 
+if(isset($_POST['Remover'])){
+    $cpf = $_SESSION['cpf'];
+    if($instituicoes->RemoveInstituicaoEnsinoDoUsuario($con, $cpf)){
+        echo "Instituições removidas do seu cadastro com sucesso !";
+    }else{
+        echo "Ocorreu um erro inesperado !";
+    }
+    return;
+}
+
 //Verificando se não foi enviada uma requisição POST para este controller
 if(isset($_POST['CidadeInstituicao'])){
     $cidadeInstituicao = $_POST['CidadeInstituicao'];

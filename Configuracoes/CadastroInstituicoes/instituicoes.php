@@ -54,6 +54,19 @@ class Instituicoes{
             return 0;
         }
     }
+
+    //Função responsável por remover uma Instituição de Ensino do Usuário
+    function RemoveInstituicaoEnsinoDoUsuario($con, $cpf){
+        //Montando a Query para remover o Id da Instituição de Ensino escolhida
+        $sql = "update DadosCadastrais set InstituicaoEnsinoID = null where cpf = '".$cpf."'";
+        $res = mysqli_query($con->getConexao(), $sql);
+
+        if($res > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
 
 ?>

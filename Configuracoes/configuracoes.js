@@ -21,6 +21,7 @@ layout.carregarFoot("../Layout/foot.html", "../Layout/styleLayout.css");
 const txtCidadeInstituicao = document.getElementById("txtCidadeInstituicao");
 const txtInstituicao = document.getElementById("txtInstituicao");
 const btnEnviarInstituicao = document.getElementById("btnEnviarInstituicao");
+const btnRemoverInstituicao = document.getElementById("btnRemoverInstituicao");
 const formInstituicoesEnsino = document.getElementById("formInstituicoesEnsino");
 var primeiraTentativa0 = true;
 
@@ -115,11 +116,14 @@ async function PreencheSelectsInstituicoes(){
         //Verificando se as Instituições não são as mesmas do BD, caso sejam o Botão permanece desativado
         if(dados['instituicaoEnsinoCidade'] == txtCidadeInstituicao.value && dados['instituicaoEnsino'] == txtInstituicao.value){
             btnEnviarInstituicao.setAttribute("disabled", "true");
+            btnRemoverInstituicao.removeAttribute("disabled");
         }else{
             btnEnviarInstituicao.removeAttribute("disabled");
+            btnRemoverInstituicao.setAttribute("disabled", "true");
         }
     }else{
         btnEnviarInstituicao.removeAttribute("disabled");
+        btnRemoverInstituicao.setAttribute("disabled", "true");
     }
 }
 
@@ -145,6 +149,7 @@ formInstituicoesEnsino.addEventListener("submit", async function(event){
                     if(this.response.includes("Instituição de Ensino cadastrada com Sucesso")){
                         popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", this.response);
                         btnEnviarInstituicao.setAttribute("disabled", "true");
+                        btnRemoverInstituicao.removeAttribute("disabled");
 
                         //Atualizando o JSON
                         dados['instituicaoEnsinoCidade'] = txtCidadeInstituicao.value;
@@ -195,8 +200,10 @@ function PreencheCidades(i){
     //Verificando se as Instituições não são as mesmas do BD, caso sejam o Botão permanece desativado
     if(dados['instituicaoEnsinoCidade'] == txtCidadeInstituicao.value && dados['instituicaoEnsino'] == txtInstituicao.value){
         btnEnviarInstituicao.setAttribute("disabled", "true");
+        btnRemoverInstituicao.removeAttribute("disabled");
     }else{
         btnEnviarInstituicao.removeAttribute("disabled");
+        btnRemoverInstituicao.setAttribute("disabled", "true");
     }
 }
 
@@ -205,10 +212,49 @@ txtInstituicao.addEventListener("change", function(){
     //Verificando se as Instituições não são as mesmas do BD, caso sejam o Botão permanece desativado
     if(dados['instituicaoEnsinoCidade'] == txtCidadeInstituicao.value && dados['instituicaoEnsino'] == txtInstituicao.value){
         btnEnviarInstituicao.setAttribute("disabled", "true");
+        btnRemoverInstituicao.removeAttribute("disabled");
     }else{
         btnEnviarInstituicao.removeAttribute("disabled");
+        btnRemoverInstituicao.setAttribute("disabled", "true");
     }
 });
+
+//Função para remover a Instituição que foi cadastrada para o Usuário
+btnRemoverInstituicao.addEventListener("click", async function(){
+    //Imprimindo o PopUp de confirmação para ter certeza de que o usuário vai querer remover sua Instituição de Ensino
+    await popUp.imprimirPopUpConfirmacao("../Pop-Ups/popUpConfirmacao.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Deseja mesmo Remover sua Instituição de Ensino do seu cadastro ?");
+
+    const btnConfirmar = document.getElementById("buttonConfirmar");
+    btnConfirmar.addEventListener("confirmacao", function(){
+        //Criando os objetos para fazer a requisição
+        let httpRequest = new XMLHttpRequest();
+        httpRequest.open("POST", "CadastroInstituicoes/controllerInstituicoes.php");
+        httpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+        httpRequest.send("Remover=1");
+        httpRequest.onreadystatechange = function(){
+            if(this.readyState == 4){
+                if(this.status == 200){
+                    //Verificando todos o possíveis retornos da Requisição
+                    if(this.response.includes("Instituições removidas do seu cadastro com sucesso !")){
+                        popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", this.response);
+                        btnEnviarInstituicao.removeAttribute("disabled");
+                        btnRemoverInstituicao.setAttribute("disabled", "true");
+
+                        //Atualizando o JSON
+                        dados['instituicaoEnsinoCidade'] = null;
+                        dados['instituicaoEnsino'] = null;
+                    }else if(this.response.includes("Access denied")){
+                        popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Ocorreu algum erro interno na requisição com o servidor");
+                    }else if(this.response.includes("Ocorreu um erro inesperado !")){
+                        popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", this.response);
+                    }else{
+                        console.log(this.response);
+                    }
+                }
+            }
+        }
+    });
+})
 
 //Recuperando os inputs do Form
 const nome = document.getElementById("txtNome");
