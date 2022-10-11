@@ -84,6 +84,11 @@ async function PreencheSelectsInstituicoes(){
     var json = await fetch("CadastroInstituicoes/controllerInstituicoes.php?action=Cidades").then(response =>response.text());
     var formatados = json.replace(/"/g, "").replace(/\[/g, "").replace(/\]/g, "").split(",");
     var aux = 0
+    
+    //Verificando se a requisição foi bem sucedida ou não
+    if(json.includes("Fatal error") || json.includes("Erro de servidor")){
+        return;
+    }
 
     //Este for está removendo as cidades repetidasque foram recuperadas
     for(var cont = 0; cont < formatados.length; cont++){
@@ -596,6 +601,11 @@ window.onload = function(){
 async function RenderizarPagina(){
     var json = await usuarioManager.buscarDadosUsuario("usuarioJson", "../Infra/ContaManager/UsuarioManager/controllerUsuarioManager.php");
     
+    //Verificando se a requisição foi um sucesso ou não
+    if(json.includes("Fatal error") || json.includes("Erro de servidor")){
+        return;
+    }
+
     //Convertendo a String do JSON para um objeto JSON
     dados = JSON.parse(json);
     nome.value = dados['nome'];
