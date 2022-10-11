@@ -4,8 +4,8 @@
 //substituindo caracteres que não são Unicode pelos caracteres Unicode correspondentes corretos
 class Formatador{
 
-    //Esta função é a responsável por formatar os dados
-    function Formatar($data){
+    //Esta função é a responsável por formatar os dados de Tabela para caracteres especiais
+    function FormatarTabelaParaCaracteresEspeciais($data){
         $dataFormatada = $data;
 
         //Substituindo os caracteres especiais que não foram formatados pelos sues correspondentes Unicode
@@ -82,6 +82,92 @@ class Formatador{
         $dataFormatada = str_replace("\u00fa", "ú", $dataFormatada);
         $dataFormatada = str_replace("\u00fb", "û", $dataFormatada);
         $dataFormatada = str_replace("\u00f1", "ñ", $dataFormatada);
+
+        $dataFormatada = str_replace("\"[", "[", $dataFormatada);
+        $dataFormatada = str_replace("]\"", "]", $dataFormatada);
+        $dataFormatada = str_replace("\\", "", $dataFormatada);
+
+        return $dataFormatada;
+    }
+
+    //Esta função é a responsável por formatar os caracteres especiais para dados de Tabela
+    function FormatarCaracteresEspeciaisParaTabela($data){
+        $dataFormatada = $data;
+
+        //Substituindo o Unicode pelos seus caracteres especiais correspondentes que não foram formatados
+        $dataFormatada = str_replace("Á", "\u00C1", $dataFormatada);
+        $dataFormatada = str_replace("Â", "\u00C2", $dataFormatada);
+        $dataFormatada = str_replace("Ã", "\u00C3", $dataFormatada);
+        $dataFormatada = str_replace("Ç", "\u00C7", $dataFormatada);
+        $dataFormatada = str_replace("È", "\u00C8", $dataFormatada);
+        $dataFormatada = str_replace("É", "\u00C9", $dataFormatada);
+        $dataFormatada = str_replace("Ê", "\u00CA", $dataFormatada);
+        $dataFormatada = str_replace("Ì", "\u00CC", $dataFormatada);
+        $dataFormatada = str_replace("Í", "\u00CD", $dataFormatada);
+        $dataFormatada = str_replace("Î", "\u00CE", $dataFormatada);
+        $dataFormatada = str_replace("Ò", "\u00D2", $dataFormatada);
+        $dataFormatada = str_replace("Ó", "\u00D3", $dataFormatada);
+        $dataFormatada = str_replace("Ô", "\u00D4", $dataFormatada);
+        $dataFormatada = str_replace("Õ", "\u00D5", $dataFormatada);
+        $dataFormatada = str_replace("Ù", "\u00D9", $dataFormatada);
+        $dataFormatada = str_replace("Ú", "\u00DA", $dataFormatada);
+        $dataFormatada = str_replace("Û", "\u00DB", $dataFormatada);
+        $dataFormatada = str_replace("à", "\u00E0", $dataFormatada);
+        $dataFormatada = str_replace("á", "\u00E1", $dataFormatada);
+        $dataFormatada = str_replace("â", "\u00E2", $dataFormatada);
+        $dataFormatada = str_replace("ã", "\u00E3", $dataFormatada);
+        $dataFormatada = str_replace("ç", "\u00E7", $dataFormatada);
+        $dataFormatada = str_replace("è", "\u00E8", $dataFormatada);
+        $dataFormatada = str_replace("é", "\u00E9", $dataFormatada);
+        $dataFormatada = str_replace("ê", "\u00EA", $dataFormatada);
+        $dataFormatada = str_replace("ì", "\u00EC", $dataFormatada);
+        $dataFormatada = str_replace("í", "\u00ED", $dataFormatada);
+        $dataFormatada = str_replace("î", "\u00EE", $dataFormatada);
+        $dataFormatada = str_replace("ò", "\u00F2", $dataFormatada);
+        $dataFormatada = str_replace("ó", "\u00F3", $dataFormatada);
+        $dataFormatada = str_replace("ô", "\u00F4", $dataFormatada);
+        $dataFormatada = str_replace("õ", "\u00F5", $dataFormatada);
+        $dataFormatada = str_replace("ù", "\u00F9", $dataFormatada);
+        $dataFormatada = str_replace("ú", "\u00FA", $dataFormatada);
+        $dataFormatada = str_replace("û", "\u00FB", $dataFormatada);
+        $dataFormatada = str_replace("ñ", "\u00F1", $dataFormatada);
+
+        $dataFormatada = str_replace("Á", "\u00c1", $dataFormatada);
+        $dataFormatada = str_replace("Â", "\u00c2", $dataFormatada);
+        $dataFormatada = str_replace("Ã", "\u00c3", $dataFormatada);
+        $dataFormatada = str_replace("Ç", "\u00c7", $dataFormatada);
+        $dataFormatada = str_replace("È", "\u00c8", $dataFormatada);
+        $dataFormatada = str_replace("É", "\u00c9", $dataFormatada);
+        $dataFormatada = str_replace("Ê", "\u00ca", $dataFormatada);
+        $dataFormatada = str_replace("Ì", "\u00cc", $dataFormatada);
+        $dataFormatada = str_replace("Í", "\u00cd", $dataFormatada);
+        $dataFormatada = str_replace("Î", "\u00ce", $dataFormatada);
+        $dataFormatada = str_replace("Ò", "\u00d2", $dataFormatada);
+        $dataFormatada = str_replace("Ó", "\u00d3", $dataFormatada);
+        $dataFormatada = str_replace("Ô", "\u00d4", $dataFormatada);
+        $dataFormatada = str_replace("Õ", "\u00d5", $dataFormatada);
+        $dataFormatada = str_replace("Ù", "\u00d9", $dataFormatada);
+        $dataFormatada = str_replace("Ú", "\u00da", $dataFormatada);
+        $dataFormatada = str_replace("Û", "\u00db", $dataFormatada);
+        $dataFormatada = str_replace("à", "\u00e0", $dataFormatada);
+        $dataFormatada = str_replace("á", "\u00e1", $dataFormatada);
+        $dataFormatada = str_replace("â", "\u00e2", $dataFormatada);
+        $dataFormatada = str_replace("ã", "\u00e3", $dataFormatada);
+        $dataFormatada = str_replace("ç", "\u00e7", $dataFormatada);
+        $dataFormatada = str_replace("è", "\u00e8", $dataFormatada);
+        $dataFormatada = str_replace("é", "\u00e9", $dataFormatada);
+        $dataFormatada = str_replace("ê", "\u00ea", $dataFormatada);
+        $dataFormatada = str_replace("ì", "\u00ec", $dataFormatada);
+        $dataFormatada = str_replace("í", "\u00ed", $dataFormatada);
+        $dataFormatada = str_replace("î", "\u00ee", $dataFormatada);
+        $dataFormatada = str_replace("ò", "\u00f2", $dataFormatada);
+        $dataFormatada = str_replace("ó", "\u00f3", $dataFormatada);
+        $dataFormatada = str_replace("ô", "\u00f4", $dataFormatada);
+        $dataFormatada = str_replace("õ", "\u00f5", $dataFormatada);
+        $dataFormatada = str_replace("ù", "\u00f9", $dataFormatada);
+        $dataFormatada = str_replace("ú", "\u00fa", $dataFormatada);
+        $dataFormatada = str_replace("û", "\u00fb", $dataFormatada);
+        $dataFormatada = str_replace("ñ", "\u00f1", $dataFormatada);
 
         $dataFormatada = str_replace("\"[", "[", $dataFormatada);
         $dataFormatada = str_replace("]\"", "]", $dataFormatada);

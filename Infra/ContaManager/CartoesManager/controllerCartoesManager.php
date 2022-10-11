@@ -130,7 +130,7 @@ if($action == "dataExpedicoes"){
 if($action == "cartaoJson"){
     $json = json_encode($cartao);
     //Estes replaces servem para substituir caracteres Unicode que são trazidos no json_encode e que ele não converte para UTF8
-    $jsonFormatado = $formatador->Formatar($json);
+    $jsonFormatado = $formatador->FormatarTabelaParaCaracteresEspeciais($json);
     echo $jsonFormatado;
 }
 

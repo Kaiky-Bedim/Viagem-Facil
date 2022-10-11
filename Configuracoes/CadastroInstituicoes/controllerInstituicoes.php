@@ -48,7 +48,7 @@ if($action == "Cidades"){
     $json = json_encode($res);
 
     //Devolvendo as cidades
-    echo $formatador->Formatar($json);
+    echo $formatador->FormatarTabelaParaCaracteresEspeciais($json);
     return;
 }
 
@@ -59,7 +59,7 @@ if($action == "Instituicoes"){
         $json = json_encode($res);
 
         //Devolvendo as Instituições de Ensino da Cidade
-        echo $formatador->Formatar($json);
+        echo $formatador->FormatarTabelaParaCaracteresEspeciais($json);
         return;
     }else{
         echo "Informe uma cidade para recuperar as Instituicoes";
