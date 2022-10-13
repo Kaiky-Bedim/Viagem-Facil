@@ -28,58 +28,67 @@
                     <div class="modal-body p-5 pt-0 cor-form">
                             
                             <!-- Caso o usuário não tenha nenhum Cartão, é mostrado o bloco abaixo -->
-                            <div id="divSemCartaoCadastrado" hidden>
-                                <div class="bloco-sem-card" id="divSemCartao">
-                                    <img src="../Infra/img/Assets/semCartao.png" class="sem-card">
-                                    <div>Você não possui nenhum Cartão Ativo cadastrado em nosso sistema !</div>
-                                </div>
-    
-                                <a href="../Passe/passe.html" class="aBtnCadastrarPasse">
-                                    <input type="button" value="Cadastrar Passe" class="btn btn-dark btn-lg" id="btnCadastraPasses"/>
-                                </a>
+                        <div id="divSemCartaoCadastrado" hidden>
+                            <div class="bloco-sem-card" id="divSemCartao">
+                                <img src="../Infra/img/Assets/semCartao.png" class="sem-card">
+                                <div>Você não possui nenhum Cartão Ativo cadastrado em nosso sistema !</div>
                             </div>
-                            <div class="row" id="divForm" hidden>
-                                <div class="col-7">
+    
+                            <a href="../Passe/passe.html" class="aBtnCadastrarPasse">
+                                <input type="button" value="Cadastrar Passe" class="btn btn-dark btn-lg" id="btnCadastraPasses"/>
+                            </a>
+                        </div>
+                        <div class="row" id="divForm" hidden>
 
-                                    <!-- Esta é a tabela dos Cartões que estão sendo mostrados na Tela -->
-                                    <table class="table table-striped table-light">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Num. Série</th>
-                                                <th scope="col">Empresa</th>
-                                                <th scope="col">Tipo</th>
-                                                <th scope="col">Saldo</th>
-                                                <th scope="col">Opção 1</th>
-                                            </tr>
-                                        </thead>
+                            <div class="col-7">
+                                <!-- Esta é a tabela dos Cartões que estão sendo mostrados na Tela -->
+                                <table class="table table-striped table-light">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Num. Série</th>
+                                            <th scope="col">Empresa</th>
+                                            <th scope="col">Tipo</th>
+                                            <th scope="col">Saldo</th>
+                                            <th scope="col">Opção 1</th>
+                                        </tr>
+                                    </thead>
                                         <!-- Esta tabela está vazia, pois os cartões que nela aparecem são preenchidos automaticamente -->
-                                        <tbody id="tableCartoes">
-                                        </tbody>
-                                    </table>
+                                    <tbody id="tableCartoes">
+                                    </tbody>
+                                </table>
 
                                     <!-- HTML para controlar a Paginação dos cartões -->
-                                    <div class="flexbox controllerPaginacao">
-                                        <div class="box mensagemQtdCartoes">
-                                            Total: <span id="spanMensagem2">0</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Mostrando Cartões de <span id="spanMensagem1">0</span> a <span id="spanMensagem3" >0</span>
-                                        </div>
-                                        <div class="box estiloLetras">
-                                            <button type="button" class="btnDesabilitado" id="btnAnterior" disabled><</button>
-                                            <input id="inputPagina" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="inputPagina" readonly value="1">
-                                            <button type="button" class="btnDesabilitado" id="btnProximo" disabled>></button>
-                                        </div>
+                                <div class="flexbox controllerPaginacao">
+                                    <div class="box mensagemQtdCartoes">
+                                        Total: <span id="spanMensagem2">0</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Mostrando Cartões de <span id="spanMensagem1">0</span> a <span id="spanMensagem3" >0</span>
                                     </div>
-                            </div>
-                            <div class="col-5">
-                            <div class="cor-img">
-                                <!--<img src="../Infra/img/Assets/semCartao.png" class="rounded d-block propriedades-imagem"  id="imgqrcode">-->
-                                <div id="qrcode">
-                                    <img id="SemCartao" src="../Infra/img/Assets/semCartao.png">
+                                    <div class="box estiloLetras">
+                                        <button type="button" class="btnDesabilitado" id="btnAnterior" disabled><</button>
+                                        <input id="inputPagina" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="inputPagina" readonly value="1">
+                                        <button type="button" class="btnDesabilitado" id="btnProximo" disabled>></button>
+                                    </div>
                                 </div>
-                                <button id="btnPDF" class="btn btn-info" hidden>PDF</button>
-                                <button id="btnImage" class="btn btn-success" hidden>Image</button>
-                                <p id="pNenhumCartaoSelecionado">Nenhum Cartão selecionado !</p>
-                            </div>  
-                        </div>
+                            </div>
+
+                            <div class="col-5">
+                                <div class="container">
+                                    <div class="cor-img container">
+                                        <!--<img src="../Infra/img/Assets/semCartao.png" class="rounded d-block propriedades-imagem"  id="imgqrcode">-->
+                                        <div id="qrcode" class="container">
+                                            <img id="SemCartao" src="../Infra/img/Assets/semCartao.png">
+                                        </div>
+                                        
+                                        <p id="pNenhumCartaoSelecionado">Nenhum Cartão selecionado !</p>
+                                    </div>  
+                                </div>
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <button id="btnPDF" class="btn btn-info" hidden>PDF</button>
+                                    <button id="btnImage" class="btn btn-success" hidden>Imagem</button>
+                                </div>
+                                
+                                
+                            </div>
+
                         </div>
                     </div>
                 </div>

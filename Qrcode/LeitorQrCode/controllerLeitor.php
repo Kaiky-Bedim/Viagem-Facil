@@ -1,5 +1,6 @@
 <?php
-require_once "../Infra/BD/conexao.php";
+//Dando pal na hora de pegar a conexao
+require_once "conexao.php";
 include "leitor.php";
 
 session_start();
