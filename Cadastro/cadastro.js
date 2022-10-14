@@ -133,6 +133,8 @@ function ValidaSenha(){
             document.getElementById("labelSenha").innerHTML = "Senha*";
             if(senha.value == ""){
                 senha.setCustomValidity("O campo Senha é obrigatório");
+            }else if(senha.value.length > 0 && senha.value.length < 8){
+                senha.setCustomValidity("Uma Senha válida deve possuir 8 dígitos no mínimo");
             }
             return;
         }
@@ -150,6 +152,8 @@ function ValidaConfirmarSenha(){
             document.getElementById("labelConfirmarSenha").innerHTML = "Confirmar Senha*";
             if(confirmarSenha.value == ""){
                 confirmarSenha.setCustomValidity("O campo Confirmar Senha é obrigatório");
+            }else if(confirmarSenha.value.length > 0 && confirmarSenha.value.length < 8){
+                confirmarSenha.setCustomValidity("Uma Senha válida deve possuir 8 dígitos no mínimo");
             }
             return;
         }
@@ -357,7 +361,6 @@ form.addEventListener("submit", function(event){
     httpRequest.onreadystatechange = function(){
         if(this.readyState == 4){
             if(this.status == 200){
-                console.log(this.response);
                 VerificaCadastro(this.response);
             }else{
                 popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Não foi possível terminar a requisição");
@@ -374,8 +377,13 @@ function VerificaCadastro(cadastro){
         },1500);
     }else if(cadastro.includes("Sem conexão com o servidor") || cadastro.includes("Access denied")){
         popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Ocorreu algum erro interno na requisição com o servidor");
-    }else{
-        popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "O CPF informado já possui um cadastro no sistema");
+    }else if(cadastro.includes("O CPF informado é inválido !")){
+        popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", cadastro);
+    }else if(cadastro.includes("O CPF informado já foi cadastrado no sistema !")){
+        popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", cadastro);
+    }
+    else{
+        console.log(cadastro);
     }
 }
 //Código do Login via AJAX termina aqui

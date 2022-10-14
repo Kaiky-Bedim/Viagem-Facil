@@ -45,7 +45,11 @@ function ValidaSenha(){
     if (!senha.validity.valid) {
         //Se inválido, coloca mensagem de erro
         document.getElementById("labelSenha").innerHTML = "Senha*";
-        senha.setCustomValidity("O campo Senha é obrigatório");
+        if(senha.value == ""){
+            senha.setCustomValidity("O campo Senha é obrigatório");
+        }else if(senha.value.length > 0 && senha.value.length < 8){
+            senha.setCustomValidity("Uma Senha válida deve possuir 8 dígitos no mínimo");
+        }
         return;
     }
     document.getElementById("labelSenha").innerHTML = "Senha";

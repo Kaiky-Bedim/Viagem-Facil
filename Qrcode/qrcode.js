@@ -3,11 +3,13 @@ import { Layout } from "../Layout/layout.js";
 import { PopUp } from "../Pop-Ups/popUp.js";
 import { CartoesManager } from "../Infra/ContaManager/CartoesManager/cartoesManager.js";
 import { UsuarioManager } from "../Infra/ContaManager/UsuarioManager/usuarioManager.js";
+import { Formatador } from "../Infra/Formatador/formatador.js";
 
 var autenticador = new Autenticador();
 var layout = new Layout();
 var cartoesManager = new CartoesManager();
 var usuarioManager = new UsuarioManager();
+var formatador = new Formatador();
 var popUp = new PopUp();
 
 //Mátodo que garante a autenticação do nosso usuário
@@ -236,22 +238,25 @@ function PreencheLinhasTabela(pagina, linhas){
                 popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Ocorreu um erro inesperado na paginação");
         }
         
-        
         if(numSerieCartaoSelecionado == cartoes.numeroSerie[cont - aux]){
             var btn = document.getElementById("btnSelecionar" + cont);
             btn.setAttribute("aria-pressed", "true");
             btn.classList.add("cartaoPresionadoOp1");
             ultimoButtonClicado = btn;
         }
-
-        /*if(numSerieCartaoSelecionado == cartoes.numeroSerie[cont - aux]){
-            var btnPdf = document.getElementById("btnPdf" + cont);
-            btnPdf.setAttribute("aria-pressed", "true");
-            btnPdf.classList.add("btn-success");
-            ultimoButtonClicado = btnPdf;
-        }*/
     }
 }
+
+//Div do QRCode
+const divQrCode = document.getElementById("qrcode");
+
+//Este mutation vai observar quando ocorre uma mudança na Div do QRCode
+var observer = new MutationObserver(function(mutations) {
+    var mutation = mutations[0];
+    if(mutation.target.nodeName == "IMG"){
+        mutation.target.removeAttribute("style");
+    }
+});
 
 function ClicaBtnLista(cont){
     //Variavel indefinida = (não tem valor atribuido)
@@ -274,63 +279,46 @@ function ClicaBtnLista(cont){
         let httpRequest = new XMLHttpRequest();
         numSerie = cartoes.numeroSerie[indice];
         cartaoEmpresa = cartoes.empresa[indice];
-        if(cartaoEmpresa == "Viação Jacareí"){
-            cartaoEmpresa = "Viacao Jacarei";
-        }else{
-            cartaoEmpresa = "Maringa do Vale";
-        }
-        console.log(cartaoEmpresa);
-        let data = `
-            {
-            "numeroSerie": "${numSerie}",
-            "empresa": "${cartaoEmpresa}"
-            }`;
         
-        httpRequest.open("POST", "controllerQrCode.php");
-        httpRequest.setRequestHeader("Content-type", "application/json");
-        httpRequest.send(data);
-        httpRequest.onreadystatechange = async function()
-        {
-            if(this.readyState == 4)
-            {
-                if(this.status == 200)
-                {
-                    
-                    var qrcodeImg = document.getElementById("qrcode")
-                    qrcodeImg.innerHTML = ""; 
-                    var qrcode = new QRCode("qrcode", {
-                        text: "http://localhost/Viagem-Facil/Qrcode/LeitorQrCode/controllerLeitor.php?NumSerie="+numSerie+"&Empresa="+cartaoEmpresa,
-                        width: 306,
-                        height: 306,
-                        colorDark : "#000000",
-                        colorLight : "#ffffff",
-                        correctLevel : QRCode.CorrectLevel.H
-                    });
-                    const teste1 = document.getElementById("qrcode");
-		            const teste2 = teste1.getElementsByTagName("img");
-                    //teste1[0].setAttribute("class", "rounded d-block propriedades-imagem");
-                    btnPDF.removeAttribute("hidden");
-                    btnImage.removeAttribute("hidden");
-                    pNenhumCartaoSelecionado.setAttribute("hidden", "true");
-                    
-                    btnPDF.addEventListener("click", function(){
-                        FileQRCode = teste2[0].getAttribute("src");
-                        var doc = new jsPDF();
-                        doc.setFontSize(20)
-                        doc.text(35, 25, 'QRCode')
-                        doc.addImage(FileQRCode, 'PNG', 15, 40, 180, 160)
-                        doc.save("QRCode.pdf");
-                    });
+        //Formatao o nome da Empresa de forma a possibilitar o envio para o servidor
+        cartaoEmpresa = formatador.FormataCaracterEspecialParaTable(cartaoEmpresa);
+        
+        divQrCode.innerHTML = "";
 
-                    btnImage.addEventListener("click", function(){
-                        FileQRCode = teste2[0].getAttribute("src");
-                        let fileName = "QRCode.jpg";
-                        saveAs(FileQRCode, fileName);
-                    });
-                }
-            }
-        }
+        new QRCode("qrcode", {
+            text: "http://localhost/Viagem-Facil/Qrcode/LeitorQrCode/controllerLeitor.php?NumSerie="+numSerie+"&Empresa="+cartaoEmpresa,
+            width: 306,
+            height: 306,
+            colorDark : "#000000",
+            colorLight : "#ffffff",
+            correctLevel : QRCode.CorrectLevel.H
+        });
         
+        divQrCode.removeChild(divQrCode.children[0]);
+        divQrCode.removeAttribute("title");
+
+        const img = divQrCode.children[0];
+        img.removeAttribute("style");
+        observer.observe(img, { attributes: true});
+
+        btnPDF.removeAttribute("hidden");
+        btnImage.removeAttribute("hidden");
+        pNenhumCartaoSelecionado.setAttribute("hidden", "true");
+        
+        btnPDF.addEventListener("dblclick", function(){
+            FileQRCode = img.getAttribute("src");
+            var doc = new jsPDF();
+            doc.setFontSize(20)
+            doc.text(35, 25, 'QRCode')
+            doc.addImage(FileQRCode, 'PNG', 15, 40, 180, 160)
+            doc.save("QRCode.pdf");
+        });
+
+        btnImage.addEventListener("dblclick", function(){
+            FileQRCode = img.getAttribute("src");
+            let fileName = "QRCode.jpg";
+            saveAs(FileQRCode, fileName);
+        });
     }else{
         //Tira a imagem
         
@@ -351,40 +339,6 @@ function ClicaBtnLista(cont){
     //Setando a nova referência para o último button clicado
     ultimoButtonClicado = btnVisualizar;
 }
-//Era do pdf
-/*async function ClicaBtnPdf(cont){
-
-    //Gera indice e numSerie antes para colocar no botao
-    indice = ((paginaAtual - 1) * 5 + cont) - 1;
-    var numSerie = cartoes.numeroSerie[indice];
-    var data = {'numSerie': numSerie};
- 
-    //Voltando os Labels como eram antes
-   /* await popUp.imprimirPopUpConfirmacao("../Pop-Ups/popUpConfirmacao.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Deseja baixar o QrCode em formato de PDF ?");
-    const btnConfirmar = document.getElementById("buttonConfirmar");
-
-    btnConfirmar.addEventListener("confirmacao", function(){
-        
-
-        let httpRequest = new XMLHttpRequest();
-        httpRequest.open("POST", "PDF/controllerPdf.php");
-        httpRequest.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-        
-        httpRequest.send(JSON.stringify(data));
-        httpRequest.onreadystatechange = function(){
-            if(this.readyState == 4){
-                if(this.status == 200  && !this.responseText.includes("Fatal error")){
-                    popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", this.responseText);
-                    
-                }else{
-                    popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "erro");
-                }
-            }
-        }
-    });
-
-        
-}*/
 
 btnProximo.addEventListener("click", function(){
     btnAnterior.removeAttribute("disabled");
@@ -453,25 +407,24 @@ function ResetaListaMostrada(){
 var map = L.map('map');
 var tileLayer = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', { attribution: "OSM"}).addTo(map);
 
+L.Routing.control({
+    waypoints: [
+        L.latLng(-23.2432, -45.8884),
+        L.latLng(-23.2179, -45.8915)
+    ],
+}).addTo(map);
 
-    L.Routing.control({
-        waypoints: [
-            L.latLng(-23.2432, -45.8884),
-            L.latLng(-23.2179, -45.8915)
-        ],
-    }).addTo(map);
-
-    /*navigator.geolocation.getCurrentPosition(function(position) {
-        plot_map(position.coords.latitude, position.coords.longitude);
-    });*/
-    document.getElementById("teste").onclick = function() { 
-    const teste2 = document.getElementsByClassName('leaflet-routing-alt')[0];
-    const teste = document.getElementsByClassName('leaflet-routing-container');
-    while(teste.length > 0){
-        teste[0].parentNode.removeChild(teste[0]);
-    }
-        const teste3 = teste2.getElementsByTagName('h3')
-        const teste4 = teste3[0].innerHTML
-        const teste5 = teste4.split(',')
-        console.log(teste5[1]+"/"+teste5[0]);
-    }
+/*navigator.geolocation.getCurrentPosition(function(position) {
+    plot_map(position.coords.latitude, position.coords.longitude);
+});*/
+document.getElementById("teste").onclick = function() { 
+const teste2 = document.getElementsByClassName('leaflet-routing-alt')[0];
+const teste = document.getElementsByClassName('leaflet-routing-container');
+while(teste.length > 0){
+    teste[0].parentNode.removeChild(teste[0]);
+}
+    const teste3 = teste2.getElementsByTagName('h3')
+    const teste4 = teste3[0].innerHTML
+    const teste5 = teste4.split(',')
+    console.log(teste5[1]+"/"+teste5[0]);
+}

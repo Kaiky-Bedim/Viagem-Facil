@@ -213,19 +213,19 @@
                 <h1 class="fw-bold mb-0" style="text-align: initial;">Alterar Senha</h1></br>
                 <div id="divSenhaAtual" class="form-floating mb-3" style="margin-left: 30px; margin-right: 30px;">
                     <!-- Input para a Senha do Usuário -->
-                    <input type="password" class="form-control rounded-4" id="txtSenha" name="Senha" placeholder="Senha" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required>
+                    <input type="password" class="form-control rounded-4" id="txtSenha" name="Senha" placeholder="Senha" minlength="8" required>
                     <label id="labelSenha" for="txtSenha">Senha Atual</label>
                 </div>
 
                 <div id="divNovaSenha" class="form-floating mb-3" style="margin-left: 30px; margin-right: 30px;" hidden>
                     <!-- Input para a Senha do Usuário -->
-                    <input type="password" class="form-control rounded-4" id="txtNovaSenha" name="NovaSenha" placeholder="NovaSenha" onkeypress="return event.charCode >= 48 && event.charCode <= 57" disabled required>
+                    <input type="password" class="form-control rounded-4" id="txtNovaSenha" name="NovaSenha" placeholder="NovaSenha" disabled minlength="8" required>
                     <label id="labelNovaSenha" for="txtNovaSenha">Nova Senha</label>
                 </div>
     
                 <div id="divConfirmaNovaSenha" class="form-floating mb-3" style="margin-left: 30px; margin-right: 30px;" hidden>
                     <!-- Input para a Senha do Usuário -->
-                    <input type="password" class="form-control rounded-4" id="txtConfirmarNovaSenha" name="ConfirmarNovaSenha" placeholder="ConfirmarNovaSenha" onkeypress="return event.charCode >= 48 && event.charCode <= 57" disabled required>
+                    <input type="password" class="form-control rounded-4" id="txtConfirmarNovaSenha" name="ConfirmarNovaSenha" placeholder="ConfirmarNovaSenha" disabled minlength="8" required>
                     <label id="labelConfirmarNovaSenha" for="txtConfirmarNovaSenha">Confirmar Nova Senha</label>
                 </div>
 

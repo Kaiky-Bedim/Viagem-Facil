@@ -1,21 +1,24 @@
 <?php
 //Dando pal na hora de pegar a conexao
-require_once "conexao.php";
+require_once "../../Infra/BD/conexao.php";
+include "../../Infra/Formatador/formatador.php";
 include "leitor.php";
 
 session_start();
 
+//Criando os Objetos que serão utilizados
 $con = new Conexao();
+$formatador = new Formatador();
 $leitor = new Leitor();
 
+//Recuperando o CPF do Usuário logado
 $cpf = $_SESSION['cpf'];
+
 $numSerie = $_GET['NumSerie'];
 $empresaCartao = $_GET['Empresa'];
-if($empresaCartao == "Maringa do Vale"){
-    $empresaCartao = "Maringá do Vale";
-}else{
-    $empresaCartao = "Viação Jacareí";
-}
+
+//Convertendo os caracteres de Tabela para Caracteres Especiais novamente
+$empresaCartao = $formatador->FormatarTabelaParaCaracteresEspeciais($empresaCartao);
 
 $leitor->setCpf($cpf);
 $leitor->setConexao($con);
@@ -26,7 +29,6 @@ $resp = $leitor->DescontarPasse();
 
 if($resp == false){
     echo "Saldo Insuficiente!!!";
-    $con->FecharConexao();
     
 }else{
     echo "Passe Aprovado!!!";
@@ -34,9 +36,10 @@ if($resp == false){
     $idPercurso = $leitor->GerarPercurso();
     #Falta a Movimentação
     $leitor->GerarMovimentacao($idPercurso, $resp);
-    //Fechando a conexão do BD
-    $con->FecharConexao();
-
+    
 }
+
+//Fechando a conexão do BD
+$con->FecharConexao();
 
 ?>

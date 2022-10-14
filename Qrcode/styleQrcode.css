@@ -11,6 +11,7 @@
 }
 
 .cor-img{
+    height: 380px;
     background-color: #fff;
     border-radius: 15px;
 }
@@ -168,8 +169,19 @@
     margin-left: auto
 }
 
-.porra{
-    width: 700px; 
-    margin-left: auto;
-    margin-right: auto; 
+/* CSS para os Btns de Download dos QRCodes */
+.divBtns{
+    width: 100%; 
+    margin-top: 10px;
+}
+
+.btnsParaDonwloads{
+    border-radius: 5px !important;
+    width: 115px;
+    height: 50px;
+}
+
+.btnsParaDonwloads:hover{
+    background-color: rgb(61, 61, 61) !important;
+    border-color: rgb(41, 41, 41) !important;
 }

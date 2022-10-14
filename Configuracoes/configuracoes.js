@@ -756,6 +756,8 @@ function ValidaSenha(){
             document.getElementById("labelSenha").innerHTML = "Senha Atual*";
             if(inputSenha.value == ""){
                 inputSenha.setCustomValidity("O campo Senha Atual é obrigatório");
+            }else if(inputSenha.value.length > 0 && inputSenha.value.length < 8){
+                inputSenha.setCustomValidity("Uma Senha válida deve possuir 8 dígitos no mínimo");
             }
             return;
         }
@@ -793,6 +795,8 @@ function ValidaNovaSenha(){
             document.getElementById("labelNovaSenha").innerHTML = "Nova Senha*";
             if(inputNovaSenha.value == ""){
                 inputNovaSenha.setCustomValidity("O campo Nova Senha é obrigatório");
+            }else if(inputNovaSenha.value.length > 0 && inputNovaSenha.value.length < 8){
+                inputNovaSenha.setCustomValidity("Uma Senha válida deve possuir 8 dígitos no mínimo");
             }
             return;
         }
@@ -810,6 +814,8 @@ function ValidaConfirmaNovaSenha(){
             document.getElementById("labelConfirmarNovaSenha").innerHTML = "Confirmar Nova Senha*";
             if(inputConfirmarNovaSenha.value == ""){
                 inputConfirmarNovaSenha.setCustomValidity("O campo Confirmar Nova Senha é obrigatório");
+            }else if(inputConfirmarNovaSenha.value.length > 0 && inpuinputConfirmarNovaSenhatNovaSenha.value.length < 8){
+                inputConfirmarNovaSenha.setCustomValidity("Uma Senha válida deve possuir 8 dígitos no mínimo");
             }
             return;
         }

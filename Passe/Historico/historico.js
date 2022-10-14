@@ -126,6 +126,7 @@ function MontaTabela(){
     
     document.getElementById("spanMensagem4").innerHTML = aux;
     document.getElementById("spanMensagem5").innerHTML = i;
+    document.getElementById("spanMensagem6").innerHTML = qtdRegistros;
 }
 
 //Esta função deserializa o json que vem de Movimentacões Manager, para que possa ser usado como Array
@@ -263,6 +264,7 @@ btnProximo.addEventListener("click", function(){
     }
     document.getElementById("spanMensagem4").innerHTML = aux;
     document.getElementById("spanMensagem5").innerHTML = i;
+    document.getElementById("spanMensagem6").innerHTML = qtdRegistros;
 })
 
 //Esta função é executada toda vez que o button Anterior é clicado
@@ -291,6 +293,7 @@ btnAnterior.addEventListener("click", function(){
     }
     document.getElementById("spanMensagem4").innerHTML = aux;
     document.getElementById("spanMensagem5").innerHTML = i;
+    document.getElementById("spanMensagem6").innerHTML = qtdRegistros;
 })
 
 //Apaga todas as linhas da tabela para que novas sejam criadas
@@ -302,6 +305,7 @@ function ResetaListaMostrada(){
 function ResetaPaginacao(){
     document.getElementById("spanMensagem4").innerHTML = "0";
     document.getElementById("spanMensagem5").innerHTML = "0";
+    document.getElementById("spanMensagem6").innerHTML = "0";
     btnAnterior.setAttribute("disabled", "true");
     btnAnterior.classList.replace("btn-light", "btnDesabilitado");
     btnProximo.setAttribute("disabled", "true");
