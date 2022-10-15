@@ -22,6 +22,7 @@ const confirmarSenha = document.getElementById("txtConfirmarSenha");
 const estado = document.getElementById("txtEstado");
 const cidade = document.getElementById("txtCidade");
 const rua = document.getElementById("txtRua");
+const bairro = document.getElementById("txtBairro");
 const numero = document.getElementById("txtNumero");
 const cep = document.getElementById("txtCEP");
 const telefone1 = document.getElementById("txtTelefone1");
@@ -212,6 +213,23 @@ function ValidaRua(){
     }
 }
 
+function ValidaBairro(){
+    bairro.setCustomValidity("");
+
+    if(!primeiraTentativa){
+        //Reexecuta validação
+        if (!bairro.validity.valid) {
+            //Se inválido, coloca mensagem de erro
+            document.getElementById("labelBairro").innerHTML = "Bairro*";
+            if(bairro.value == ""){
+                bairro.setCustomValidity("O campo Bairro é obrigatório");
+            }
+            return;
+        }
+        document.getElementById("labelBairro").innerHTML = "Bairro";
+    }
+}
+
 function ValidaNumero(){
     numero.setCustomValidity("");
 
@@ -276,6 +294,7 @@ button.onclick = function(){
     ValidaEstado();
     ValidaCidade();
     ValidaRua();
+    ValidaBairro();
     ValidaNumero();
     ValidaCEP();
     ValidaTelefone1();
@@ -320,6 +339,10 @@ cidade.oninput = function(){
 
 rua.oninput = function(){
     ValidaRua();
+}
+
+bairro.oninput = function(){
+    ValidaBairro();
 }
 
 numero.oninput = function(){

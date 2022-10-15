@@ -12,6 +12,7 @@ class DadosPessoais{
     private $estado;
     private $cidade;
     private $rua;
+    private $bairro;
     private $numero;
     private $cep;
     private $complemento;
@@ -51,6 +52,10 @@ class DadosPessoais{
 
     function SetRua($rua){
         $this->rua = $rua;
+    }
+
+    function SetBairro($bairro){
+        $this->bairro = $bairro;
     }
 
     function SetNumero($numero){
@@ -101,6 +106,10 @@ class DadosPessoais{
         return $this->rua;
     }
 
+    function GetBairro(){
+        return $this->bairro;
+    }
+
     function GetNumero(){
         return $this->numero;
     }
@@ -117,7 +126,11 @@ class DadosPessoais{
     function AlterarDadosUsuario($conexao){
         //Montando a Query e realizando a operação SQL
         $cpf = $_SESSION['cpf'];
-        $sql = "update DadosCadastrais set RG = '".$this->rg."', Nome = '".$this->nome."', DataNascimento = '".$this->dataNascimento."', Telefone1 = '".$this->telefone1."', Telefone2 = '".$this->telefone2."', Email = '".$this->email."', Estado = '".$this->estado."', Cidade = '".$this->cidade."', Rua = '".$this->rua."', Complemento = '".$this->complemento."', Numero = '".$this->numero."', CEP = '".$this->cep."' where CPF = '".$cpf."'";
+        $sql = "update DadosCadastrais set RG = '".$this->rg."', Nome = '".$this->nome."', DataNascimento = '".$this->dataNascimento."', 
+            Telefone1 = '".$this->telefone1."', Telefone2 = '".$this->telefone2."', Email = '".$this->email."', 
+            Estado = '".$this->estado."', Cidade = '".$this->cidade."', Rua = '".$this->rua."', Bairro = '".$this->bairro."', 
+            Complemento = '".$this->complemento."', Numero = '".$this->numero."', CEP = '".$this->cep."' 
+            where CPF = '".$cpf."'";
         $res = mysqli_query($conexao->getConexao(), $sql);
 
         if($res > 0){

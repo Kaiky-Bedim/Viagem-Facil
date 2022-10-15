@@ -56,6 +56,10 @@ if($action == "rua"){
     echo $usuario->GetRua();
 }
 
+if($action == "bairro"){
+    echo $usuario->GetBairro();
+}
+
 if($action == "complemento"){
     echo $usuario->GetComplemento();
 }

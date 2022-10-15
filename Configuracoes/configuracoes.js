@@ -268,6 +268,7 @@ const rg = document.getElementById("txtRG");
 const dataNascimento = document.getElementById("txtDataNascimento");
 const estado = document.getElementById("txtEstado");
 const cidade = document.getElementById("txtCidade");
+const bairro = document.getElementById("txtBairro");
 const rua = document.getElementById("txtRua");
 const numero = document.getElementById("txtNumero");
 const cep = document.getElementById("txtCEP");
@@ -406,6 +407,23 @@ function ValidaRua(){
     }
 }
 
+function ValidaBairro(){
+    bairro.setCustomValidity("");
+
+    if(!primeiraTentativa){
+        //Reexecuta validação
+        if (!bairro.validity.valid) {
+            //Se inválido, coloca mensagem de erro
+            document.getElementById("labelBairro").innerHTML = "Bairro*";
+            if(bairro.value == ""){
+                bairro.setCustomValidity("O campo Bairro é obrigatório");
+            }
+            return;
+        }
+        document.getElementById("labelBairro").innerHTML = "Bairro";
+    }
+}
+
 function ValidaNumero(){
     numero.setCustomValidity("");
 
@@ -467,6 +485,7 @@ buttonEnviar.onclick = function(){
     ValidaEstado();
     ValidaCidade();
     ValidaRua();
+    ValidaBairro();
     ValidaNumero();
     ValidaCEP();
     ValidaTelefone1();
@@ -544,6 +563,16 @@ rua.oninput = function(){
     }
 }
 
+bairro.oninput = function(){
+    ValidaBairro();
+    //Verificando se o valor do campo foi alterado do que está no BD
+    if(bairro.value != dados['bairro']){
+        buttonEnviar.removeAttribute("disabled");
+    }else{
+        buttonEnviar.setAttribute("disabled", "true");
+    }
+}
+
 numero.oninput = function(){
     ValidaNumero();
     //Verificando se o valor do campo foi alterado do que está no BD
@@ -615,6 +644,7 @@ async function RenderizarPagina(){
     estado.value = dados['estado'];
     cidade.value = dados['cidade'];
     rua.value = dados['rua'];
+    bairro.value = dados['bairro'];
     numero.value = dados['numero'];
     cep.value = dados['cep'];
     telefone1.value = dados['telefone1'];
@@ -624,42 +654,51 @@ async function RenderizarPagina(){
 
 //Recuperando o formulário dos Dados Pessoais
 const formDadosPessoais = document.getElementById("formDadosPessoais");
-formDadosPessoais.addEventListener("submit", function(event){
+formDadosPessoais.addEventListener("submit", async function(event){
     event.preventDefault();
 
-    //Criando o objeto do formulário que será mandado para o Servidor
-    let data = new FormData(formDadosPessoais);
-    let httpRequest = new XMLHttpRequest();
+    //Fechar a janela do Alterar Senha se ela estiver aberta claro
+    FecharJanela();
 
-    httpRequest.open("POST", "AlterarDadosPessoais/controllerConfiguracoes.php");
-    httpRequest.setRequestHeader("X-Content-Type-Options", "multipart/form-data");
-    httpRequest.send(data);
-    httpRequest.onreadystatechange = async function(){
-        if(this.readyState == 4){
-            if(this.status == 200){
-                if(this.response.includes("Access denied")){
-                    popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Ocorreu algum erro interno na requisição com o servidor");
-                }else if(this.response.includes("Não foi possível alterar os dados !")){
-                    popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", this.response);
-                }else if(this.response.includes("Fatal error")){
-                    popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Não foi possível realizar a operação");    
+    //Imprimindo o PopUp de confirmação para ter certeza de que o usuário vai querer cadastar/alterar sua Instituição de Ensino
+    await popUp.imprimirPopUpConfirmacao("../Pop-Ups/popUpConfirmacao.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Deseja mesmo Alterar seus Dados Pessoais ?");
+
+    const btnConfirmar = document.getElementById("buttonConfirmar");
+    btnConfirmar.addEventListener("confirmacao", function(){    
+        //Criando o objeto do formulário que será mandado para o Servidor
+        let data = new FormData(formDadosPessoais);
+        let httpRequest = new XMLHttpRequest();
+
+        httpRequest.open("POST", "AlterarDadosPessoais/controllerConfiguracoes.php");
+        httpRequest.setRequestHeader("X-Content-Type-Options", "multipart/form-data");
+        httpRequest.send(data);
+        httpRequest.onreadystatechange = async function(){
+            if(this.readyState == 4){
+                if(this.status == 200){
+                    if(this.response.includes("Access denied")){
+                        popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Ocorreu algum erro interno na requisição com o servidor");
+                    }else if(this.response.includes("Não foi possível alterar os dados !")){
+                        popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", this.response);
+                    }else if(this.response.includes("Fatal error")){
+                        popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Não foi possível realizar a operação");    
+                    }else{
+                        //Este else significa que tudo ocorreu bem na requisição e os Dados foram alterados
+                        popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", this.response);
+
+                        //Recuperando os novos dados do Usuário
+                        var json = await usuarioManager.buscarDadosUsuario("usuarioJson", "../Infra/ContaManager/UsuarioManager/controllerUsuarioManager.php");
+                        console.log(json);
+                        dados = JSON.parse(json);
+
+                        //Desativando o Button
+                        buttonEnviar.setAttribute("disabled", "true");
+                    }
                 }else{
-                    //Este else significa que tudo ocorreu bem na requisição e os Dados foram alterados
-                    popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", this.response);
-
-                    //Recuperando os novos dados do Usuário
-                    var json = await usuarioManager.buscarDadosUsuario("usuarioJson", "../Infra/ContaManager/UsuarioManager/controllerUsuarioManager.php");
-                    console.log(json);
-                    dados = JSON.parse(json);
-
-                    //Desativando o Button
-                    buttonEnviar.setAttribute("disabled", "true");
+                    popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Não foi possível terminar a requisição");
                 }
-            }else{
-                popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", "Não foi possível terminar a requisição");
             }
         }
-    }
+    });
 });
 
 //Recuperando o Button para alterar a Senha do Usuário
@@ -670,13 +709,19 @@ const btnEnviarSenha = document.getElementById("btnEnviarSenha");
 const formMudarSenha = document.getElementById("formMudarSenha");
 var segundaRequisicao = false;
 var primeiraTentativa1 = true;
-var restantePagina;
+var restantePagina = document.querySelectorAll("body>div:not(.divPopUp)");;
 var content;
 
 //Função executada ao clicar no Button Alterar Senha
 btnAlterarSenha.addEventListener("click", function(){
     //Fazendo a tela de Alteração de Senha aparecer
     divAlterarSenha.removeAttribute("hidden");
+    
+    //Garantindo que não há PopUp sendo mostrado
+    divPopUp.innerHTML = "";
+    restantePagina.forEach(element => {
+        element.classList.remove("restantePaginaPopUp"); 
+    });
 
     //Este Observer fica observando o input até seu valor ser mudado, ele apenas seta as configurações para verificar se o usuário clicou fora da tela de Alteração de Senha
     var observer = new MutationObserver(function(mutations) {
@@ -713,7 +758,7 @@ function SetaDocumentOnClick(){
 
     document.documentElement.onclick = function(event){
         if(event.target.id != "btnAlterarSenha" && !content.innerHTML.includes(event.target.parentNode.innerHTML) 
-            && event.target.id != "buttonXPopUp" && event.target.id != "buttonFechar"){
+            && event.target.id != "buttonXPopUp" && event.target.id != "buttonFechar" && event.target.id != "btnEnviar"){
             FecharJanela();
         }
     }

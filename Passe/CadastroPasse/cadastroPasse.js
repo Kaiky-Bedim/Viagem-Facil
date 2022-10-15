@@ -180,6 +180,7 @@ inputFabrica.onkeyup = function(){
 //Função que altera a logo da Empresa conforme o Form
 selectEmpresa.onchange = function(){
     var value = selectEmpresa.value;
+    imgLogoEmpresa.removeAttribute("style");
     if(value == "Maringá do Vale"){
         imgLogoEmpresa.setAttribute("src", "../Infra/img/LogosEmpresas/LOGO_MARINGA_DO_VALE.png");
     }else if(value == "Viação Jacareí"){
@@ -325,6 +326,7 @@ function LimparForm(){
     
     //Atribuindo ao input que tipo de Cadastro de Passe é
     document.getElementById("inputTipoCadastro").setAttribute("value", "Novo Passe");
+    imgLogoEmpresa.setAttribute("src", "");
 
     AlternaParaCadastrarNovoPasseForm();
 }

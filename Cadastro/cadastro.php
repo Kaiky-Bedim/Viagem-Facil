@@ -11,6 +11,7 @@ class Cadastro {
     private $estado;
     private $cidade;
     private $rua;
+    private $bairro;
     private $numero;
     private $cep;
     private $complemento;
@@ -20,7 +21,7 @@ class Cadastro {
 
     function __construct($nome, $email, $cpf,
                       $rg, $dataNascimento, $senha, $confirmSenha,
-                      $estado, $cidade, $rua, $numero,
+                      $estado, $cidade, $rua, $bairro, $numero,
                       $cep, $complemento, $telefone1, $telefone2){
 
         $this->nome = $nome;
@@ -33,6 +34,7 @@ class Cadastro {
         $this->estado = $estado;
         $this->cidade = $cidade;
         $this->rua = $rua;
+        $this->bairro = $bairro;
         $this->numero = $numero;
         $this->cep = $cep;
         $this->complemento = $complemento;
@@ -99,7 +101,7 @@ class Cadastro {
         $this->conexao = $con;
 
         $sql = "insert into DadosCadastrais values('".$this->cpf."', '".$this->rg."', '".$this->nome."', '".$this->dataNascimento."', '".$this->telefone1."', '".$this->telefone2."', '".$this->email."', 
-        '".$this->estado."', '".$this->cidade."', '".$this->rua."', '".$this->complemento."', ".$this->numero.", '".$this->cep."', null);";
+        '".$this->estado."', '".$this->cidade."', '".$this->rua."', '".$this->bairro."', '".$this->complemento."', ".$this->numero.", '".$this->cep."', null);";
         $resCadastro = mysqli_query($this->conexao->getConexao(), $sql);
 
         $sql = "insert into Senhas values (sha('".$this->cpf."'), sha('".$this->senha."'));";

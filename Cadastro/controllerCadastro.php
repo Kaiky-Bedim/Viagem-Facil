@@ -17,6 +17,7 @@ $confirmSenha = $_POST['ConfirmarSenha'];
 $estado = $_POST['Estado'];
 $cidade = $_POST['Cidade'];
 $rua = $_POST['Rua'];
+$bairro = $_POST['Bairro'];
 $numero = $_POST['Numero'];
 $cep = $_POST['CEP'];
 $complemento = $_POST['Complemento'];
@@ -26,7 +27,7 @@ $telefone2 = $_POST['Telefone2'];
 //Criando os Objetos necessários
 $con = new Conexao();
 $cadastro = new Cadastro($nome, $email, $cpf, $rg, $dataNascimento, $senha, $confirmSenha, $estado,
-                            $cidade, $rua, $numero, $cep, $complemento, $telefone1, $telefone2);
+                            $cidade, $rua, $bairro, $numero, $cep, $complemento, $telefone1, $telefone2);
 
 $cadastro->SetConexao($con);
 

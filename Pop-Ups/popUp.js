@@ -54,8 +54,9 @@ export class PopUp{
         })
     }
 
-    //Método responsável por imprimir o PopUp de Confirmação na tela
-    imprimirPopUpConfirmacao(pathHtml, pathCss, idDiv, mensagem){
+    //Método responsável por imprimir o PopUp de Confirmação na tela, o parâmetro transicao basicamente informa 
+    //se não haverá naoTemPopUpApos normal logo após o uso desse PopUp de Confirmação
+    imprimirPopUpConfirmacao(pathHtml, pathCss, idDiv, mensagem, naoTemPopUpApos){
         //Chama o html do PopUpConfirmacao e espera ele ser carregado para poder dar continuidade ao código
         return fetch(pathHtml).then(response => {
             return response.text();
@@ -110,6 +111,13 @@ export class PopUp{
 
                 //Disparando o evento para ser escutado pelo documento
                 btnConfirmar.dispatchEvent(confirmacao);
+
+                if(naoTemPopUpApos){
+                    document.getElementById(idDiv).innerHTML = "";
+                    restantePagina.forEach(element => {
+                        element.classList.remove("restantePaginaPopUp"); 
+                    });
+                }
             });
 
             return;

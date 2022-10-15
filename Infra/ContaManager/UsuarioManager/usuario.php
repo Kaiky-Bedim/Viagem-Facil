@@ -11,6 +11,7 @@ class Usuario implements JsonSerializable{
     private $estado;
     private $cidade;
     private $rua;
+    private $bairro;
     private $complemento;
     private $numero;
     private $cep;
@@ -43,6 +44,7 @@ class Usuario implements JsonSerializable{
             $this->estado = $row['Estado'];
             $this->cidade = $row['Cidade'];
             $this->rua = $row['Rua'];
+            $this->bairro = $row['Bairro'];
             $this->complemento = $row['Complemento'];
             $this->numero = $row['Numero'];
             $this->cep = $row['CEP'];
@@ -104,6 +106,10 @@ class Usuario implements JsonSerializable{
         return $this->rua;
     }
 
+    public function GetBairro(){
+        return $this->bairro;
+    }
+
     public function GetComplemento(){
         return $this->complemento;
     }
@@ -137,6 +143,7 @@ class Usuario implements JsonSerializable{
             'estado' => $this->GetEstado(),
             'cidade' => $this->GetCidade(),
             'rua' => $this->GetRua(),
+            'bairro' => $this->GetBairro(),
             'complemento' => $this->GetComplemento(),
             'numero' => $this->GetNumero(),
             'cep' => $this->GetCEP(),
