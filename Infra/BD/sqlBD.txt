@@ -76,7 +76,6 @@ CPFProprietario varchar(11) NOT NULL,
 Id_Percurso int,
 FOREIGN KEY (NumeroSerieCartao, EmpresaCartao) REFERENCES Cartao (NumeroSerie, Empresa),
 FOREIGN KEY (CPFProprietario) REFERENCES DadosCadastrais (CPF),
-FOREIGN KEY (Id_Percurso) REFERENCES Percursos (Id),
 CHECK (TipoMovimentacao <=> "Recarga" or TipoMovimentacao <=> "Utilização em ônibus")
 );
 

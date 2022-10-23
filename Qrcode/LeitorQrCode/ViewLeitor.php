@@ -1,4 +1,15 @@
-<!DOCTYPE html>
+<?php
+    require_once "../../Infra/BD/conexao.php";
+    $con = new Conexao();
+
+    $sql = "select * from percursos;";
+    $res = mysqli_query($con->getConexao(), $sql);
+    echo "<select name='select' id='txtPercuso'>";
+    while ($rows = mysqli_fetch_assoc($res)){
+        echo "<option value='".$rows['NumeroLinha']."'>Linha ".$rows['NumeroLinha']."</option>";
+    }
+    echo "</select>";
+?>
 <html>
   <head>
     <title>Instascan</title>
@@ -16,11 +27,12 @@
             }
         );
         scanner.addListener('scan', function(content) {
+            var Id_Percurso = document.getElementById('txtPercuso').value;
             var data = content.split("/");
             var numSerie = data[0];
             var nomeEmpresa = data[1];
 
-            var data = {'numSerie': numSerie, 'Empresa': nomeEmpresa};
+            var data = {'numSerie': numSerie, 'Empresa': nomeEmpresa, 'Id_Percurso': Id_Percurso};
             let httpRequest = new XMLHttpRequest();
             httpRequest.open("POST", "controllerLeitor.php");
             httpRequest.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
@@ -34,6 +46,7 @@
                 }
             }
         });
+
         Instascan.Camera.getCameras().then(cameras => 
         {
             if(cameras.length > 0){

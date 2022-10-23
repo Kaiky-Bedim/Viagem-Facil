@@ -125,20 +125,12 @@ class Leitor{
     }
 
     #PERCURSO
-    public function GerarPercurso(){
-        $numLinha = rand(100, 999);
-        $trecho = "Jacareí";
-        $veiculo = "Parati Quadrado";
-
-        $sql = "insert into Percursos (NumeroLinha, Trecho, Veiculo) values ('".$numLinha."', '".$trecho."', '".$veiculo."');";
-        $res = mysqli_query($this->conexao->getConexao(), $sql);
-        
-        $sql = "select MAX(Id) as id from Percursos";
+    public function PegarPercurso($id_Percurso){
+        $sql = "SELECT * FROM percursos where NumeroLinha = ".$id_Percurso.";";
         $res = mysqli_query($this->conexao->getConexao(), $sql);
 
         $dado = mysqli_fetch_assoc($res);
-        $id = $dado['id'];
-        
+        $id = $dado['NumeroLinha'];
         return $id;
     }
 
