@@ -13,8 +13,23 @@
             }
         );
         scanner.addListener('scan', function(content) {
-            
-            window.open(content, "_blank");
+            var data = content.split("/");
+            var numSerie = data[0];
+            var nomeEmpresa = data[1];
+
+            var data = {'numSerie': numSerie, 'Empresa': nomeEmpresa};
+            let httpRequest = new XMLHttpRequest();
+            httpRequest.open("POST", "controllerLeitor.php");
+            httpRequest.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+            httpRequest.send(JSON.stringify(data));
+            httpRequest.onreadystatechange = async function(){
+                if(this.readyState == 4){
+                    if(this.status == 200){
+                        var response = this.response;
+                        alert(response)
+                    }
+                }
+            }
         });
         Instascan.Camera.getCameras().then(cameras => 
         {

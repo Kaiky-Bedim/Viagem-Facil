@@ -282,11 +282,11 @@ function ClicaBtnLista(cont){
         
         //Formatao o nome da Empresa de forma a possibilitar o envio para o servidor
         cartaoEmpresa = formatador.FormataCaracterEspecialParaTable(cartaoEmpresa);
-        
+        var message = numSerie+"/"+cartaoEmpresa;
         divQrCode.innerHTML = "";
 
         new QRCode("qrcode", {
-            text: "http://localhost/Viagem-Facil/Qrcode/LeitorQrCode/controllerLeitor.php?NumSerie="+numSerie+"&Empresa="+cartaoEmpresa,
+            text: message,
             width: 306,
             height: 306,
             colorDark : "#000000",

@@ -13,9 +13,9 @@ $leitor = new Leitor();
 
 //Recuperando o CPF do Usuário logado
 $cpf = $_SESSION['cpf'];
-
-$numSerie = $_GET['NumSerie'];
-$empresaCartao = $_GET['Empresa'];
+$data = json_decode(file_get_contents('php://input'), true);
+$numSerie = $data['numSerie'];
+$empresaCartao = $data['Empresa'];
 
 //Convertendo os caracteres de Tabela para Caracteres Especiais novamente
 $empresaCartao = $formatador->FormatarTabelaParaCaracteresEspeciais($empresaCartao);
