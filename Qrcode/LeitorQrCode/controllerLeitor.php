@@ -16,7 +16,7 @@ $cpf = $_SESSION['cpf'];
 $data = json_decode(file_get_contents('php://input'), true);
 $numSerie = $data['numSerie'];
 $empresaCartao = $data['Empresa'];
-
+$idPercurso = $data['Id_Percurso'];
 //Convertendo os caracteres de Tabela para Caracteres Especiais novamente
 $empresaCartao = $formatador->FormatarTabelaParaCaracteresEspeciais($empresaCartao);
 
@@ -45,13 +45,12 @@ $resp = $leitor->DescontarPasse();
 
 if($resp == false){
     echo "Saldo Insuficiente!!!";
-    
 }else{
     echo "Passe Aprovado!!!";
 
-    $idPercurso = $leitor->GerarPercurso();
+    $id_Percurso = $leitor->PegarPercurso($idPercurso);
     #Falta a Movimentação
-    $leitor->GerarMovimentacao($idPercurso, $resp);
+    $leitor->GerarMovimentacao($id_Percurso, $resp);
 
 }
 
