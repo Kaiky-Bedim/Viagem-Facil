@@ -357,6 +357,7 @@ form.addEventListener("submit", function(event){
     httpRequest.onreadystatechange = function(){
         if(this.readyState == 4){
             if(this.status == 200){
+                console.log(this.response);
                 //Verificando todas as possíveis respostas do servidor para a Requisição
                 if(this.response == "Seu pedido para o cadastro do Cartão foi enviado com Sucesso"){
                     document.getElementById("inputAtualizaLista").value = "Desatualizada";

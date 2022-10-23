@@ -60,12 +60,7 @@ btnMostrarTodoHistorico.addEventListener("click", async function(){
             if(elemento){
                 if(elemento.getAttribute("aria-pressed") == "true"){
                     var numSerie = document.getElementById("divSerieExposta").innerText;
-                    var empresa = document.getElementById("imgLogoEmpresa").getAttribute("src");
-                    if(empresa.includes("MARINGA")){
-                        empresa = "Maringá do Vale";
-                    }else if(empresa.includes("VIAÇÃO")){
-                        empresa = "Viação Jacareí";
-                    }
+                    var empresa = document.getElementById("empresaMostrada").innerHTML;
         
                     //Recuperando um Json com todas as Movimentacoes de um Cartão específico do Usuário
                     var json = await movimentacoesManager.buscarDadosMovimentacoes("../Infra/ContaManager/MovimentacoesManager/controllerMovimentacoesManager.php", "movimentacaoJson", numSerie, empresa);
@@ -332,12 +327,7 @@ var observer = new MutationObserver(async function(mutations) {
                 }
     
                 var numSerie = document.getElementById("divSerieExposta").innerText;
-                var empresa = document.getElementById("imgLogoEmpresa").getAttribute("src");
-                if(empresa.includes("MARINGA")){
-                    empresa = "Maringá do Vale";
-                }else if(empresa.includes("VIAÇÃO")){
-                    empresa = "Viação Jacareí";
-                }
+                var empresa = document.getElementById("empresaMostrada").innerHTML;
     
                 //Recuperando um Json com todas as Movimentacoes de um Cartão específico do Usuário
                 var json = await movimentacoesManager.buscarDadosMovimentacoes("../Infra/ContaManager/MovimentacoesManager/controllerMovimentacoesManager.php", "movimentacaoJson", numSerie, empresa);

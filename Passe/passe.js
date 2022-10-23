@@ -296,6 +296,7 @@ async function ClicaBtnLista(cont){
         var pathImagemEmpresa = await empresasManager.buscarDadosEmpresas("PathImagem", "../Infra/EmpresaManager/controllerEmpresa.php", empresa);
         pathImagemEmpresa = "../Infra/img/LogosEmpresas/" + pathImagemEmpresa;
         document.getElementById("imgLogoEmpresa").setAttribute("src", pathImagemEmpresa);
+        document.getElementById("empresaMostrada").innerHTML = empresa;
 
         //Recuperando o Número de Série e o Número de Fábrica
         numSerieCartaoSelecionado = cartoes.numeroSerie[indice];
@@ -337,6 +338,7 @@ async function ClicaBtnLista(cont){
         divNenhumCartaoSelecionado.setAttribute("hidden", "true");
         cartaoExposto.removeAttribute("hidden");
     }else{
+        document.getElementById("empresaMostrada").innerHTML = "";
         cartaoExposto.setAttribute("hidden", "true");
         btnVisualizar.setAttribute("aria-pressed", "false");
         btnVisualizar.classList.remove("cartaoPresionado");
