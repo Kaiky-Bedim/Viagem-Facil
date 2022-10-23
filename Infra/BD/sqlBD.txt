@@ -88,8 +88,8 @@ Empresa varchar(30) NOT NULL
 );
 
 #Não removam estes inserts, são as empresas que possuímos
-insert into Empresas values("Maringá do Vale", 4.50, 2.25, 0.0, "../Infra/img/LogosEmpresas/LOGO_MARINGA_DO_VALE.png");
-insert into Empresas values("Viação Jacareí", 4.50, 2.25, 0.0, "../Infra/img/LogosEmpresas/LOGO_VIAÇÃO_JACAREÍ.png");
+insert into Empresas values("Maringá do Vale", 4.50, 2.25, 0.0, "LOGO_MARINGA_DO_VALE.png");
+insert into Empresas values("Viação Jacareí", 4.50, 2.25, 0.0, "LOGO_VIAÇÃO_JACAREÍ.png");
 
 #Não removam os dois insert abaixo, eles impedem a geração de ID's repetidos para os cartões dos Usuários
 insert into Identificadores values(1, "1500385", "390880200", "Maringá do Vale");

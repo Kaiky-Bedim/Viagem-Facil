@@ -1,7 +1,9 @@
 import { PopUp } from "../../Pop-Ups/popUp.js";
 import { UsuarioManager } from "../../Infra/ContaManager/UsuarioManager/usuarioManager.js"
+import { EmpresasManager } from "../../Infra/EmpresaManager/empresaManager.js";
 
 var usuarioManager = new UsuarioManager();
+var empresasManager = new EmpresasManager();
 var popUp = new PopUp();
 
 //Listener para ouvir quando o botão cadastrar novo Passe for clicado, abre a janela para o Cadastro de novo Passe
@@ -178,14 +180,12 @@ inputFabrica.onkeyup = function(){
 }
 
 //Função que altera a logo da Empresa conforme o Form
-selectEmpresa.onchange = function(){
+selectEmpresa.onchange = async function(){
     var value = selectEmpresa.value;
+    var pathImagemEmpresa = await empresasManager.buscarDadosEmpresas("PathImagem", "../Infra/EmpresaManager/controllerEmpresa.php", value);
+    pathImagemEmpresa = "../Infra/img/LogosEmpresas/" + pathImagemEmpresa;
+    imgLogoEmpresa.setAttribute("src", pathImagemEmpresa);
     imgLogoEmpresa.removeAttribute("style");
-    if(value == "Maringá do Vale"){
-        imgLogoEmpresa.setAttribute("src", "../Infra/img/LogosEmpresas/LOGO_MARINGA_DO_VALE.png");
-    }else if(value == "Viação Jacareí"){
-        imgLogoEmpresa.setAttribute("src", "../Infra/img/LogosEmpresas/LOGO_VIAÇÃO_JACAREÍ.png")
-    }
 }
 
 //Função que altera o tipo do Cartão entre Idoso, Estudantil e Comum

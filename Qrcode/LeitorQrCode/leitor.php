@@ -1,4 +1,5 @@
 <?php
+
 class Leitor{
     private $cpf;
     private $conexao;
@@ -74,27 +75,33 @@ class Leitor{
     }
 
     #DESCONTO
-    public function DescontarPasse(){
+    public function DescontarPasse($empresa){
         
         $sql = "select Saldo, TipoCartao from Cartao where CPFProprietario = '".$this->cpf."' and NumeroSerie = '".$this->numSerie."' and Empresa = '".$this->empresaCartao."';";
         $res = mysqli_query($this->conexao->getConexao(), $sql);
 
-        while ($dado = mysqli_fetch_assoc($res)){           
+        $empresa->GetDadosEmpresa($this->conexao, $this->empresaCartao);
+
+        while ($dado = mysqli_fetch_assoc($res)){
             $saldoAntigo = $dado["Saldo"];
             $tipoCartao = $dado["TipoCartao"];
         }
 
         if($tipoCartao == "Idoso"){
-            return true;
+            if($saldoAntigo < $empresa->GetDescontoIdoso()){
+                return false;
+            }else{
+                return true;
+            }
             
         //Estudantil sem dinheiro
-        }else if($tipoCartao == "Estudantil" && $saldoAntigo < 2.25){
+        }else if($tipoCartao == "Estudantil" && $saldoAntigo < $empresa->GetDescontoEstudantil()){
             return false;
             
         //Estudantil com dinheiro
-        }else if($tipoCartao == "Estudantil" && $saldoAntigo >= 2.25){
-            $saldoNovo = $saldoAntigo - 2.25;
-            $desconto = 2.25;
+        }else if($tipoCartao == "Estudantil" && $saldoAntigo >= $empresa->GetDescontoEstudantil()){
+            $saldoNovo = $saldoAntigo - $empresa->GetDescontoEstudantil();
+            $desconto = $empresa->GetDescontoEstudantil();
 
             $sql = "update Cartao set Saldo = '".$saldoNovo."' where CPFProprietario = '".$this->cpf."' and NumeroSerie = '".$this->numSerie."' and Empresa = '".$this->empresaCartao."';";
             $res = mysqli_query($this->conexao->getConexao(), $sql);
@@ -102,13 +109,13 @@ class Leitor{
             return $desconto;
 
         //Comum sem dinheiro
-        }else if($tipoCartao == "Comum" && $saldoAntigo < 4.50){
+        }else if($tipoCartao == "Comum" && $saldoAntigo < $empresa->GetDescontoComum()){
             return false;
 
         //Comum com dinheiro
         }else{
-            $saldoNovo = $saldoAntigo - 4.50;
-            $desconto = 4.50;
+            $saldoNovo = $saldoAntigo - $empresa->GetDescontoComum();
+            $desconto = $empresa->GetDescontoComum();
 
             $sql = "update Cartao set Saldo = '".$saldoNovo."' where CPFProprietario = '".$this->cpf."' and NumeroSerie = '".$this->numSerie."' and Empresa = '".$this->empresaCartao."';";
             $res = mysqli_query($this->conexao->getConexao(), $sql);

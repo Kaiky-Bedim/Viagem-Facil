@@ -2,6 +2,7 @@
 //Dando pal na hora de pegar a conexao
 require_once "../../Infra/BD/conexao.php";
 include "../../Infra/Formatador/formatador.php";
+include "../../Infra/EmpresaManager/empresa.php";
 include "leitor.php";
 
 session_start();
@@ -9,6 +10,7 @@ session_start();
 //Criando os Objetos que serão utilizados
 $con = new Conexao();
 $formatador = new Formatador();
+$empresa = new Empresa();
 $leitor = new Leitor();
 
 //Recuperando o CPF do Usuário logado
@@ -41,7 +43,7 @@ if($bloqueado == 1){
     return;
 }
 
-$resp = $leitor->DescontarPasse();
+$resp = $leitor->DescontarPasse($empresa);
 
 if($resp == false){
     echo "Saldo Insuficiente!!!";

@@ -1,6 +1,7 @@
 import { Autenticador } from "../Infra/Autenticacao/autenticador.js";
 import { Layout } from "../Layout/layout.js";
 import { PopUp } from "../Pop-Ups/popUp.js";
+import { EmpresasManager } from "../Infra/EmpresaManager/empresaManager.js";
 import { CartoesManager } from "../Infra/ContaManager/CartoesManager/cartoesManager.js";
 import { UsuarioManager } from "../Infra/ContaManager/UsuarioManager/usuarioManager.js";
 
@@ -9,6 +10,7 @@ var layout = new Layout();
 var cartoesManager = new CartoesManager();
 var usuarioManager = new UsuarioManager();
 var popUp = new PopUp();
+var empresasManager = new EmpresasManager();
 
 //Mátodo que garante a autenticação do nosso usuário
 autenticador.garantirAutenticacao("../Infra/Autenticacao/controllerAutenticacao.php", "../Login/login.html");
@@ -19,10 +21,12 @@ layout.carregarNavBar("../Layout/head.html", "../Layout/styleLayout.css");
 layout.carregarFoot("../Layout/foot.html", "../Layout/styleLayout.css");
 
 var qtdCartoes;
+var selectEmpresa = document.getElementById("selectEmpresa");
 
 //Função executada quando a página é carregada
 window.onload = function(){
     RenderizarPagina();
+    RecuperarEmpresasCadastradas();
 }
 
 async function RenderizarPagina(){
@@ -32,40 +36,19 @@ async function RenderizarPagina(){
     }else{
         document.getElementById("divSemCartao").setAttribute("hidden", "true");
         PrepararListaCartoes();
-        RecuperarEmpresasCadastradas();
     }
 }
 
 //Esta função recupera as empresas cadastradas no sistema e as disponibiliza no Form
-function RecuperarEmpresasCadastradas(){
-    //Realizando o Get com o Json
-    let httpRequest = new XMLHttpRequest();
-    httpRequest.open("GET", "CadastroPasse/controllerCadastroPasse.php");
-    httpRequest.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-    httpRequest.send(JSON.stringify(data));
-    httpRequest.onreadystatechange = function(){
-        if(this.readyState == 4){
-            if(this.status == 200  && !this.responseText.includes("Fatal error")){
-                popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", this.responseText);
-                //Atualizando os valores do Array Cartões
-                if(bloqueado == 0){
-                    cartoes.bloqueado[indice] = 1;
-                }else if(bloqueado == 1){
-                    cartoes.bloqueado[indice] = 0;
-                }
+async function RecuperarEmpresasCadastradas(){
+    var json = await empresasManager.buscarDadosEmpresas("Nome", "../Infra/EmpresaManager/controllerEmpresa.php");
+    var array = JSON.parse(json);
 
-                //Atualizando a lista em tempo real
-                if(paginaAtual < totalPaginas){
-                    var i = 5;
-                }else{
-                    var i = qtdCartoes - ((paginaAtual - 1) * 5);
-                }
-
-                PreencheLinhasTabela(paginaAtual, i);
-            }else{
-                popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", this.responseText);
-            }
-        }
+    for(var cont = 0; cont < array.length; cont++){
+        var optionNovo = document.createElement("option");
+        optionNovo.value = array[cont];
+        optionNovo.innerHTML = array[cont];
+        selectEmpresa.appendChild(optionNovo);
     }
 }
 
@@ -283,7 +266,7 @@ function PreencheLinhasTabela(pagina, linhas){
 }
 
 //Função executada quando um botão da lista é clicado
-function ClicaBtnLista(cont){
+async function ClicaBtnLista(cont){
     if(ultimoButtonClicado != undefined && ultimoButtonClicado.id != ("btnVisualizar" + cont)){
         ultimoButtonClicado.setAttribute("aria-pressed", "false");
         ultimoButtonClicado.classList.remove("cartaoPresionado");
@@ -294,9 +277,6 @@ function ClicaBtnLista(cont){
     if(btnVisualizar.getAttribute("aria-pressed") == "false"){
         btnVisualizar.setAttribute("aria-pressed", "true");
         btnVisualizar.classList.add("cartaoPresionado");
-
-        divNenhumCartaoSelecionado.setAttribute("hidden", "true");
-        cartaoExposto.removeAttribute("hidden");
 
         //Recuperando as informações do Nome e do CPF do usuário para mostrar no cartão
         usuarioManager.buscarDadosUsuario("cpf", "../Infra/ContaManager/UsuarioManager/controllerUsuarioManager.php")
@@ -313,11 +293,9 @@ function ClicaBtnLista(cont){
         
         //Recuperando e trocando o logo da empresa
         var empresa = cartoes.empresa[indice];
-        if(empresa == "Maringá do Vale"){
-            document.getElementById("imgLogoEmpresa").setAttribute("src", "../Infra/img/LogosEmpresas/LOGO_MARINGA_DO_VALE.png");
-        }else if(empresa == "Viação Jacareí"){
-            document.getElementById("imgLogoEmpresa").setAttribute("src", "../Infra/img/LogosEmpresas/LOGO_VIAÇÃO_JACAREÍ.png");
-        }
+        var pathImagemEmpresa = await empresasManager.buscarDadosEmpresas("PathImagem", "../Infra/EmpresaManager/controllerEmpresa.php", empresa);
+        pathImagemEmpresa = "../Infra/img/LogosEmpresas/" + pathImagemEmpresa;
+        document.getElementById("imgLogoEmpresa").setAttribute("src", pathImagemEmpresa);
 
         //Recuperando o Número de Série e o Número de Fábrica
         numSerieCartaoSelecionado = cartoes.numeroSerie[indice];
@@ -355,6 +333,9 @@ function ClicaBtnLista(cont){
 
         //Recuperando o valor do saldo do cartão
         document.getElementById("spanSaldo").innerHTML = "R$ " + parseFloat(cartoes.saldo[indice]).toFixed(2);
+
+        divNenhumCartaoSelecionado.setAttribute("hidden", "true");
+        cartaoExposto.removeAttribute("hidden");
     }else{
         cartaoExposto.setAttribute("hidden", "true");
         btnVisualizar.setAttribute("aria-pressed", "false");
