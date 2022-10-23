@@ -452,7 +452,7 @@ const preencherFormulario= (endereco) =>{
     document.getElementById('txtRua').value = endereco.logradouro;
     document.getElementById('txtCidade').value = endereco.localidade;
     document.getElementById('txtEstado').value = endereco.uf;
-    document.getElementById('txtComplemeto').value = endereco.complemento;
+    document.getElementById('txtBairro').value = endereco.bairro;
 }
 
 //Função para retornar para a tela de Login

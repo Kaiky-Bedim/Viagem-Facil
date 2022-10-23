@@ -403,28 +403,3 @@ btnAnterior.addEventListener("click", function(){
 function ResetaListaMostrada(){
     tblCartoes.innerHTML = "";
 }
-
-var map = L.map('map');
-var tileLayer = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', { attribution: "OSM"}).addTo(map);
-
-L.Routing.control({
-    waypoints: [
-        L.latLng(-23.2432, -45.8884),
-        L.latLng(-23.2179, -45.8915)
-    ],
-}).addTo(map);
-
-/*navigator.geolocation.getCurrentPosition(function(position) {
-    plot_map(position.coords.latitude, position.coords.longitude);
-});*/
-document.getElementById("teste").onclick = function() { 
-const teste2 = document.getElementsByClassName('leaflet-routing-alt')[0];
-const teste = document.getElementsByClassName('leaflet-routing-container');
-while(teste.length > 0){
-    teste[0].parentNode.removeChild(teste[0]);
-}
-    const teste3 = teste2.getElementsByTagName('h3')
-    const teste4 = teste3[0].innerHTML
-    const teste5 = teste4.split(',')
-    console.log(teste5[1]+"/"+teste5[0]);
-}

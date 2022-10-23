@@ -32,6 +32,40 @@ async function RenderizarPagina(){
     }else{
         document.getElementById("divSemCartao").setAttribute("hidden", "true");
         PrepararListaCartoes();
+        RecuperarEmpresasCadastradas();
+    }
+}
+
+//Esta função recupera as empresas cadastradas no sistema e as disponibiliza no Form
+function RecuperarEmpresasCadastradas(){
+    //Realizando o Get com o Json
+    let httpRequest = new XMLHttpRequest();
+    httpRequest.open("GET", "CadastroPasse/controllerCadastroPasse.php");
+    httpRequest.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+    httpRequest.send(JSON.stringify(data));
+    httpRequest.onreadystatechange = function(){
+        if(this.readyState == 4){
+            if(this.status == 200  && !this.responseText.includes("Fatal error")){
+                popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", this.responseText);
+                //Atualizando os valores do Array Cartões
+                if(bloqueado == 0){
+                    cartoes.bloqueado[indice] = 1;
+                }else if(bloqueado == 1){
+                    cartoes.bloqueado[indice] = 0;
+                }
+
+                //Atualizando a lista em tempo real
+                if(paginaAtual < totalPaginas){
+                    var i = 5;
+                }else{
+                    var i = qtdCartoes - ((paginaAtual - 1) * 5);
+                }
+
+                PreencheLinhasTabela(paginaAtual, i);
+            }else{
+                popUp.imprimirPopUp("../Pop-Ups/popUp.html", "../Pop-Ups/stylePopUp.css", "divPopUp", this.responseText);
+            }
+        }
     }
 }
 

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Resposta QRCode</title>
+
+        <link rel="stylesheet" type="text/css" href="../styleQrcode.css"/>
+        <link rel="stylesheet" type="text/css" href="../../Infra/bootstrap/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"/>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+    </head>
+    <body>
+         <!-- Abaixo está o HTML para a responsta do servidor ao uso do QRCode -->
+         <div class="container" style="padding: 50px;">
+            <div class="cor-form corpo" style="padding: 20px;">
+                <!-- Título se a operação funcionou ou não -->
+                <h1 class="titulo" id="titulo">Movimentação</h1>
+
+                <!-- Informações sobre o uso do QRCode -->
+                <div class="cor-info" style="margin-top: 20px;">
+                    <div class="row" style="padding: 20px;">
+                        <div class="col-6">
+                            <span class="margin" id="saldoAtual">Gay</span></br>
+                            <span class="margin" id="valorGasto">Gay</span></br>
+                            <span class="margin" id="percurso">Gay</span></br>
+                            <span class="margin" id="data">Gay</span>
+                        </div>
+                        <div class="col-6">
+                            <span class="margin" id="nome">Gay</span></br>
+                            <span class="margin" id="numeroSerie">Gay</span></br>
+                            <span class="margin" id="empresa">Gay</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+<script src="responseQRCode.js"></script>

@@ -43,6 +43,36 @@ class Leitor{
 
     #METODOS
 
+    //Este método garante que o cartão realmente existe no sistema
+    public function GaranteCartaoExiste(){
+        //Montando o SQL para garantir se existe este cartão no sistema
+        $sql = "select * from Cartao where CPFProprietario = '".$this->cpf."' and NumeroSerie = '".$this->numSerie."' and Empresa = '".$this->empresaCartao."';";
+        $res = mysqli_query($this->conexao->getConexao(), $sql);
+
+        //Recuperando se foi encontrado algum cartão com essas características
+        $existe = $res->num_rows;
+
+        //If para retornar true caso encontrado e false caso não encontrado
+        if($existe > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    //Este método garante que o cartão não está bloqueado para uso
+    public function GaranteCartaoNaoBloqueado(){
+        //Montando o SQL para recuperar a situação de Bloqueio do Cartão
+        $sql = "select Bloqueado from Cartao where CPFProprietario = '".$this->cpf."' and NumeroSerie = '".$this->numSerie."' and Empresa = '".$this->empresaCartao."';";
+        $res = mysqli_query($this->conexao->getConexao(), $sql);
+
+        //Recuperando efetivamente o status do Cartão
+        $dado = mysqli_fetch_assoc($res);
+        $bloqueado = $dado["Bloqueado"];
+
+        return $bloqueado;
+    }
+
     #DESCONTO
     public function DescontarPasse(){
         
@@ -85,28 +115,6 @@ class Leitor{
 
             return $desconto;
         }
-
-        /*if($saldoAntigo < 4.50){
-            $resp = false;
-            return $resp;
-
-        }else{
-        
-            if($tipoCartao == "Estudantil"){
-                $saldoNovo = $saldoAntigo - 2.25;
-                $desconto = 2.25;
-    
-            }else if($tipoCartao == "Comum"){
-                $saldoNovo = $saldoAntigo - 4.50;
-                $desconto = 4.50;
-    
-            }
-    
-            $sql = "update Cartao set Saldo = '".$saldoNovo."' where CPFProprietario = '".$this->cpf."' and NumeroSerie = '".$this->numSerie."' and Empresa = '".$this->empresaCartao."';";
-            $res = mysqli_query($this->conexao->getConexao(), $sql);
-
-            return $desconto;
-        }*/
     }
 
     #PERCURSO

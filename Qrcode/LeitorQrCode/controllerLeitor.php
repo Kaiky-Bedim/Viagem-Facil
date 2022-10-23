@@ -20,10 +20,26 @@ $empresaCartao = $data['Empresa'];
 //Convertendo os caracteres de Tabela para Caracteres Especiais novamente
 $empresaCartao = $formatador->FormatarTabelaParaCaracteresEspeciais($empresaCartao);
 
-$leitor->setCpf($cpf);
+//Setando os dados no objeto
 $leitor->setConexao($con);
+$leitor->setCpf($cpf);
 $leitor->setNumSerie($numSerie);
 $leitor->setEmpresaCartao($empresaCartao);
+
+//Verificando se o cartão existe mesmo no sistema
+if(!$leitor->GaranteCartaoExiste()){
+    echo "Cartão não encontrado no sistema";
+    return;
+}
+
+//Recuperando o status de bloqueado do Cartão
+$bloqueado = $leitor->GaranteCartaoNaoBloqueado();
+
+//Verificando se o cartão está bloqueado ou não no sistema
+if($bloqueado == 1){
+    echo "O Cartão está bloqueado e não pode ser utilizado";
+    return;
+}
 
 $resp = $leitor->DescontarPasse();
 
@@ -36,7 +52,7 @@ if($resp == false){
     $idPercurso = $leitor->GerarPercurso();
     #Falta a Movimentação
     $leitor->GerarMovimentacao($idPercurso, $resp);
-    
+
 }
 
 //Fechando a conexão do BD

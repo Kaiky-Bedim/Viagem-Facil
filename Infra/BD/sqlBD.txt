@@ -13,6 +13,14 @@ Nome varchar(50) NOT NULL,
 Cidade varchar(50) NOT NULL
 );
 
+create table Empresas(
+Nome varchar(50) PRIMARY KEY NOT NULL,
+DescontoComum double NOT NULL,
+DescontoEstudantil double NOT NULL,
+DescontoIdoso double NOT NULL,
+CaminhoLogoSistema varchar(200) NOT NULL
+);
+
 create table DadosCadastrais(
 CPF varchar(11) PRIMARY KEY NOT NULL,
 RG varchar(9) NOT NULL,
@@ -37,15 +45,15 @@ NumeroSerie varchar(7) NOT NULL,
 NumeroFabrica varchar(9) NOT NULL,
 TipoCartao varchar(50) NOT NULL,
 Situacao varchar(30) NOT NULL,
-Empresa varchar(30) NOT NULL,
+Empresa varchar(50) NOT NULL,
 Bloqueado boolean NOT NULL,
 CPFProprietario varchar(11) NOT NULL,
 Saldo double NOT NULL,
 DataExpedicao DATETIME NOT NULL,
 FOREIGN KEY (CPFProprietario) REFERENCES DadosCadastrais (CPF),
+FOREIGN KEY (Empresa) REFERENCES Empresas (Nome),
 CHECK (TipoCartao <=> "Comum" or TipoCartao <=> "Estudantil" or TipoCartao <=> "Idoso"),
 CHECK (Situacao <=> "Aprovado" or Situacao <=> "Reprovado" or Situacao <=> "Aguardando"),
-CHECK (Empresa <=> "Maringá do Vale" or Empresa <=> "Viação Jacareí"),
 CONSTRAINT AssinaturaCartao PRIMARY KEY(NumeroSerie, Empresa),
 CONSTRAINT NumerosCartao UNIQUE (NumeroFabrica, Empresa)
 );
@@ -79,6 +87,10 @@ NumeroFabrica varchar(9) NOT NULL,
 Empresa varchar(30) NOT NULL
 );
 
+#Não removam estes inserts, são as empresas que possuímos
+insert into Empresas values("Maringá do Vale", 4.50, 2.25, 0.0, "../Infra/img/LogosEmpresas/LOGO_MARINGA_DO_VALE.png");
+insert into Empresas values("Viação Jacareí", 4.50, 2.25, 0.0, "../Infra/img/LogosEmpresas/LOGO_VIAÇÃO_JACAREÍ.png");
+
 #Não removam os dois insert abaixo, eles impedem a geração de ID's repetidos para os cartões dos Usuários
 insert into Identificadores values(1, "1500385", "390880200", "Maringá do Vale");
 insert into Identificadores values(2, "7804500", "900120855", "Viação Jacareí");
@@ -88,6 +100,11 @@ insert into Percursos values (0, 308, "Bosque dos Eucaliptos", "Ônibus");
 insert into Percursos values (0, 307, "Morumbi", "Ônibus");
 insert into Percursos values (0, 240, "Novo Horizonte", "Ônibus");
 insert into Percursos values (0, 315, "Interlagos", "Ônibus");
+insert into Percursos values (0, 317, "Campo dos Alemães", "Ônibus");
+insert into Percursos values (0, 318, "Dom Pedro", "Ônibus");
+insert into Percursos values (0, 214, "Jardim Satélite", "Ônibus");
+insert into Percursos values (0, 313, "Colinas", "Ônibus");
+insert into Percursos values (0, 222, "Galo Branco", "Ônibus");
 
 #Não removam os inserts abaixo, eles cadastram algumas Instituições de Ensino para escolha do Usuário
 insert into InstituicoesEnsino values(0, "Colégio Univap - Centro", "São José dos Campos");
